@@ -1,0 +1,650 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基本数据结构  
+
+Bag  
+Stack  
+Queue  
+ListNode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本数据结构">
+<meta property="og:url" content="http://yoursite.com/2017/02/13/基本数据结构/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基本数据结构  
+
+Bag  
+Stack  
+Queue  
+ListNode">
+<meta property="og:updated_time" content="2017-02-13T07:19:01.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基本数据结构">
+<meta name="twitter:description" content="基本数据结构  
+
+Bag  
+Stack  
+Queue  
+ListNode">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/13/基本数据结构/"/>
+
+
+
+
+
+  <title> 基本数据结构 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/13/基本数据结构/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基本数据结构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T10:36:23+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>基本数据结构  </p>
+<ol>
+<li>Bag  </li>
+<li>Stack  </li>
+<li>Queue  </li>
+<li>ListNode  <a id="more"></a>
+<h1 id="Bag"><a href="#Bag" class="headerlink" title="Bag"></a>Bag</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   package Utils;</div><div class="line"></div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.NoSuchElementException;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/13.</div><div class="line"> */</div><div class="line">public class Queue&lt;Item&gt; implements Iterable&lt;Item&gt; &#123;</div><div class="line">    private int SIZE = 0;</div><div class="line">    private final Node root = new Node();</div><div class="line"></div><div class="line">    private class Node &#123;</div><div class="line">        Item item;</div><div class="line">        Node next = null;</div><div class="line"></div><div class="line">        public <span class="function"><span class="title">Node</span></span>() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Node(Item item) &#123;</div><div class="line">            this.item = item;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">size</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">head</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (root.next == null) throw new RuntimeException(<span class="string">"队列已空"</span>);</div><div class="line">        <span class="built_in">return</span> root.next.item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void enqueue(Item item) &#123;</div><div class="line">        <span class="keyword">if</span> (item == null) <span class="built_in">return</span>;</div><div class="line">        int N = SIZE;</div><div class="line">        Node temp = root;</div><div class="line">        <span class="keyword">while</span> (N-- &gt; 0) &#123;</div><div class="line">            temp = temp.next;</div><div class="line">        &#125;</div><div class="line">        temp.next = new Node(item);</div><div class="line">        SIZE++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">dequeue</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (SIZE == 0) throw new RuntimeException(<span class="string">"队列已空"</span>);</div><div class="line">        SIZE--;</div><div class="line">        Node temp = root.next;</div><div class="line">        Item item = temp.item;</div><div class="line">        root.next = temp.next;</div><div class="line">        <span class="built_in">return</span> item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean <span class="function"><span class="title">isEmpty</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE == 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;Item&gt; <span class="function"><span class="title">iterator</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> new Iterator&lt;Item&gt;() &#123;</div><div class="line">            int number = size();</div><div class="line">            Node itRoot = root;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public boolean <span class="function"><span class="title">hasNext</span></span>() &#123;</div><div class="line">                <span class="built_in">return</span> number &gt; 0;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public Item <span class="function"><span class="title">next</span></span>() &#123;</div><div class="line">                <span class="keyword">if</span> (!hasNext()) throw new NoSuchElementException();</div><div class="line">                itRoot = itRoot.next;</div><div class="line">                number--;</div><div class="line">                <span class="built_in">return</span> itRoot.item;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Stack-后进先出"><a href="#Stack-后进先出" class="headerlink" title="Stack:后进先出"></a>Stack:后进先出</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">package Utils;</div><div class="line"></div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.NoSuchElementException;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/13.</div><div class="line"> */</div><div class="line">public class Stack&lt;Item&gt; implements Iterable&lt;Item&gt; &#123;</div><div class="line">    private int SIZE = 0;</div><div class="line">    //定义了一个根节点，根节点指向的节点是栈顶元素</div><div class="line">    private final Node root = new Node();</div><div class="line"></div><div class="line">    private class Node &#123;</div><div class="line">        Item item;</div><div class="line">        Node next = null;</div><div class="line"></div><div class="line">        public <span class="function"><span class="title">Node</span></span>() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Node(Item item) &#123;</div><div class="line">            this.item = item;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">size</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //每次插入操作都是改变root的next的指向，调整root的next的指向为原来的栈顶元素</div><div class="line">    public void push(Item item) &#123;</div><div class="line">        <span class="keyword">if</span> (item == null) <span class="built_in">return</span>;</div><div class="line">        Node oldFirst = root.next;</div><div class="line">        root.next = new Node(item);</div><div class="line">        root.next.next = oldFirst;</div><div class="line">        SIZE++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">peek</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (root.next == null) throw new RuntimeException(<span class="string">"Stack is empty！"</span>);</div><div class="line">        <span class="built_in">return</span> root.next.item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">pop</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (SIZE == 0) throw new RuntimeException(<span class="string">"Stack is empty！"</span>);</div><div class="line">        SIZE--;</div><div class="line">        Node oldFirst = root.next;</div><div class="line">        Item item = oldFirst.item;</div><div class="line">        root.next = oldFirst.next;</div><div class="line">        <span class="built_in">return</span> item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean <span class="function"><span class="title">isEmpty</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE == 0 &amp;&amp; root.next == null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;Item&gt; <span class="function"><span class="title">iterator</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> new Iterator&lt;Item&gt;() &#123;</div><div class="line">            int number = size();</div><div class="line">            Node itRoot = root;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public boolean <span class="function"><span class="title">hasNext</span></span>() &#123;</div><div class="line">                <span class="built_in">return</span> number &gt; 0;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public Item <span class="function"><span class="title">next</span></span>() &#123;</div><div class="line">                <span class="keyword">if</span> (!hasNext()) throw new NoSuchElementException();</div><div class="line">                itRoot = itRoot.next;</div><div class="line">                number--;</div><div class="line">                <span class="built_in">return</span> itRoot.item;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Queue-先进先出"><a href="#Queue-先进先出" class="headerlink" title="Queue:先进先出"></a>Queue:先进先出</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">package Utils;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.NoSuchElementException;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/13.</div><div class="line"> */</div><div class="line">public class Queue&lt;Item&gt; implements Iterable&lt;Item&gt; &#123;</div><div class="line">    private int SIZE = 0;</div><div class="line">    private final Node root = new Node();</div><div class="line"></div><div class="line">    private class Node &#123;</div><div class="line">        Item item;</div><div class="line">        Node next = null;</div><div class="line"></div><div class="line">        public <span class="function"><span class="title">Node</span></span>() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Node(Item item) &#123;</div><div class="line">            this.item = item;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">size</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">head</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (root.next == null) throw new RuntimeException(<span class="string">"队列已空"</span>);</div><div class="line">        <span class="built_in">return</span> root.next.item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void enqueue(Item item) &#123;</div><div class="line">        <span class="keyword">if</span> (item == null) <span class="built_in">return</span>;</div><div class="line">        int N = SIZE;</div><div class="line">        Node temp = root;</div><div class="line">        <span class="keyword">while</span> (N-- &gt; 0) &#123;</div><div class="line">            temp = temp.next;</div><div class="line">        &#125;</div><div class="line">        temp.next = new Node(item);</div><div class="line">        SIZE++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Item <span class="function"><span class="title">dequeue</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (SIZE == 0) throw new RuntimeException(<span class="string">"队列已空"</span>);</div><div class="line">        SIZE--;</div><div class="line">        Node temp = root.next;</div><div class="line">        Item item = temp.item;</div><div class="line">        root.next = temp.next;</div><div class="line">        <span class="built_in">return</span> item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean <span class="function"><span class="title">isEmpty</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE == 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;Item&gt; <span class="function"><span class="title">iterator</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> new Iterator&lt;Item&gt;() &#123;</div><div class="line">            int number = size();</div><div class="line">            Node itRoot = root;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public boolean <span class="function"><span class="title">hasNext</span></span>() &#123;</div><div class="line">                <span class="built_in">return</span> number &gt; 0;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public Item <span class="function"><span class="title">next</span></span>() &#123;</div><div class="line">                <span class="keyword">if</span> (!hasNext()) throw new NoSuchElementException();</div><div class="line">                itRoot = itRoot.next;</div><div class="line">                number--;</div><div class="line">                <span class="built_in">return</span> itRoot.item;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="栈的简单应用：可以计算数学表达式的计算器-仅支持整数的加减乘除乘方阶乘以及括号运算"><a href="#栈的简单应用：可以计算数学表达式的计算器-仅支持整数的加减乘除乘方阶乘以及括号运算" class="headerlink" title="栈的简单应用：可以计算数学表达式的计算器,仅支持整数的加减乘除乘方阶乘以及括号运算"></a>栈的简单应用：可以计算数学表达式的计算器,仅支持整数的加减乘除乘方阶乘以及括号运算</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/8.</div><div class="line"> */</div><div class="line">public class Calculator &#123;</div><div class="line">    private String exprString;</div><div class="line">    private char[] calSignal = &#123;<span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'^'</span>, <span class="string">'!'</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'\n'</span>&#125;;</div><div class="line">    private int[] calSignal2 = &#123;0, 0, 1, 1, 2, 5, 4, -1, -2&#125;;</div><div class="line">    private char[][] priorityArray = new char[calSignal.length][calSignal.length];</div><div class="line">    //接收运算符</div><div class="line">    Stack&lt;Character&gt; ch = new Stack&lt;&gt;();</div><div class="line">    //接收运算数</div><div class="line">    Stack&lt;Integer&gt; <span class="keyword">in</span> = new Stack&lt;&gt;();</div><div class="line"></div><div class="line">    public Calculator(String exprString) &#123;</div><div class="line">        this.exprString = exprString;</div><div class="line">        char[] expr = getExprChar();</div><div class="line">        init();</div><div class="line">        calculating(expr);</div><div class="line">        System.out.println(in.top());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void calculating(char[] expr) &#123;</div><div class="line">        StringBuilder temp = new StringBuilder();</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; expr.length; ) &#123;</div><div class="line">            <span class="keyword">if</span> (isNumber(expr[i])) &#123;</div><div class="line">                temp.append(expr[i]);</div><div class="line">                i++;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">if</span> (temp.length() != 0) &#123;</div><div class="line">                    in.push(Integer.valueOf(temp.toString()));</div><div class="line">                    temp = temp.delete(0, temp.length());</div><div class="line">                &#125;</div><div class="line">                switch (orderBetween(ch.top(), expr[i])) &#123;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'&lt;'</span>:</div><div class="line">                        ch.push(expr[i]);</div><div class="line">                        i++;</div><div class="line">                        <span class="built_in">break</span>;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'='</span>:</div><div class="line">                        ch.pop();</div><div class="line">                        i++;</div><div class="line">                        <span class="built_in">break</span>;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'&gt;'</span>: &#123;</div><div class="line">                        char op = ch.pop();</div><div class="line">                        <span class="keyword">if</span> (<span class="string">'!'</span> == op) in.push(calcu(op, in.pop()));</div><div class="line">                        <span class="keyword">else</span> &#123;</div><div class="line">                            int pOpnd2 = in.pop();</div><div class="line">                            int pOpnd1 = in.pop();</div><div class="line">                            in.push((int) calcu(pOpnd1, op, pOpnd2));</div><div class="line">                        &#125;</div><div class="line">                        <span class="built_in">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">case</span> <span class="string">' '</span>:</div><div class="line">                        ch.push(expr[i]);</div><div class="line">                        i++;</div><div class="line">                        <span class="built_in">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private double calcu(int pOpnd1, char op, int pOpnd2) &#123;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'+'</span>) <span class="built_in">return</span> pOpnd1 + pOpnd2;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'-'</span>) <span class="built_in">return</span> pOpnd1 - pOpnd2;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'*'</span>) <span class="built_in">return</span> pOpnd1 * pOpnd2;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'/'</span>) <span class="built_in">return</span> pOpnd1 / pOpnd2;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'^'</span>) &#123;</div><div class="line">            int temp = pOpnd1;</div><div class="line">            <span class="keyword">while</span> (--pOpnd2 &gt; 0)</div><div class="line">                pOpnd1 = pOpnd1 * temp;</div><div class="line">            <span class="built_in">return</span> pOpnd1;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private Integer calcu(char op, Integer pop) &#123;</div><div class="line">        <span class="keyword">if</span> (pop == 0) <span class="built_in">return</span> 1;</div><div class="line">        <span class="keyword">if</span> (op == <span class="string">'!'</span>) &#123;</div><div class="line">            int N = pop;</div><div class="line">            <span class="keyword">while</span> (--N &gt; 1) &#123;</div><div class="line">                pop = pop * N;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> pop;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private char orderBetween(Character top, char exprSignal) &#123;</div><div class="line">        <span class="keyword">if</span> (top == null) <span class="built_in">return</span> <span class="string">' '</span>;</div><div class="line">        int i = calSignal.length - 1;</div><div class="line">        int topIndex = 0;</div><div class="line">        int curExprIndex = 0;</div><div class="line">        <span class="keyword">while</span> (i &gt; 0) &#123;</div><div class="line">            <span class="keyword">if</span> (top == calSignal[i]) topIndex = i;</div><div class="line">            <span class="keyword">if</span> (exprSignal == calSignal[i]) curExprIndex = i;</div><div class="line">            i--;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> priorityArray[topIndex][curExprIndex];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private boolean isNumber(char ch) &#123;</div><div class="line">        char[] num = &#123;<span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>&#125;;</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; num.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (num[i] == ch) &#123;</div><div class="line">                <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void <span class="function"><span class="title">init</span></span>() &#123;</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; priorityArray.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (int j = 0; j &lt; priorityArray[i].length; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (calSignal2[i] == 4 &amp;&amp; calSignal2[j] != -1 &amp;&amp; calSignal2[j] != -2) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">'&lt;'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] == -1 || (calSignal2[i] == 4 &amp;&amp; calSignal2[j] == -2) || (calSignal2[i] == -2 &amp;&amp; calSignal2[j] == -1)) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">' '</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] == 4 &amp;&amp; calSignal2[j] == -1 || (calSignal2[i] == -2 &amp;&amp; calSignal2[j] == -2)) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">'='</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] == 5 &amp;&amp; calSignal2[j] == 4) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">' '</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] == calSignal2[j]) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">'&gt;'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] &lt; calSignal2[j]) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">'&lt;'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (calSignal2[i] &gt; calSignal2[j]) &#123;</div><div class="line">                    priorityArray[i][j] = <span class="string">'&gt;'</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private char[] <span class="function"><span class="title">getExprChar</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> exprString.toCharArray();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        new Calculator(<span class="string">"(1+2^3!-4)*(5!-(6-(7-(89-0!))))\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="ListNode链表"><a href="#ListNode链表" class="headerlink" title="ListNode链表"></a>ListNode链表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div></pre></td><td class="code"><pre><div class="line">import java.util.Iterator;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/6.</div><div class="line"> */</div><div class="line">public class ListNode&lt;T&gt; implements Iterable&lt;T&gt; &#123;</div><div class="line">    private Node&lt;T&gt; head = new Node&lt;&gt;();</div><div class="line">    private Node&lt;T&gt; tailer = new Node&lt;&gt;();</div><div class="line">    private int SIZE = 0;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">size</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public <span class="function"><span class="title">ListNode</span></span>() &#123;</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void <span class="function"><span class="title">init</span></span>() &#123;</div><div class="line">        head.succ = tailer;</div><div class="line">        tailer.pre = head;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T get(int r) &#123;</div><div class="line">        <span class="keyword">if</span> (r &lt; 0 || r &gt; size() - 1) throw new RuntimeException(<span class="string">"秩输入非法"</span>);</div><div class="line">        Node&lt;T&gt; node = head.succ;</div><div class="line">        <span class="keyword">while</span> (r-- &gt; 0) &#123;</div><div class="line">            node = node.succ;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> node.t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;T&gt; <span class="function"><span class="title">iterator</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> new Iterator&lt;T&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public boolean <span class="function"><span class="title">hasNext</span></span>() &#123;</div><div class="line">                head = head.succ;</div><div class="line">                <span class="keyword">if</span> (head != null &amp;&amp; head.t != null) &#123;</div><div class="line">                    <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public T <span class="function"><span class="title">next</span></span>() &#123;</div><div class="line">                T t = head.t;</div><div class="line">                <span class="built_in">return</span> t;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class Node&lt;T&gt; &#123;</div><div class="line">        private T t;</div><div class="line">        Node&lt;T&gt; pre;</div><div class="line">        Node&lt;T&gt; succ;</div><div class="line"></div><div class="line">        public <span class="function"><span class="title">Node</span></span>() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Node(T t) &#123;</div><div class="line">            this.t = t;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void insertAsFirst(T t) &#123;</div><div class="line">        //存储首节点</div><div class="line">        Node temp = head.succ;</div><div class="line">        //插入目标节点</div><div class="line">        head.succ = new Node&lt;&gt;(t);</div><div class="line">        //设置前首节点的前继节点为插入的节点</div><div class="line">        temp.pre = head.succ;</div><div class="line">        //设置插入节点的后继节点为前首节点</div><div class="line">        head.succ.succ = temp;</div><div class="line">        //设置首节点的前继节点为头结点</div><div class="line">        head.succ.pre = head;</div><div class="line"></div><div class="line">        SIZE++;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void insertAsLast(T t) &#123;</div><div class="line">        SIZE++;</div><div class="line">        Node&lt;T&gt; temp = tailer.pre;</div><div class="line">        temp.succ = new Node&lt;&gt;(t);</div><div class="line">        temp.succ.succ = tailer;</div><div class="line">        temp.succ.pre = temp;</div><div class="line">        tailer.pre = temp.succ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T <span class="function"><span class="title">first</span></span>() &#123;</div><div class="line"></div><div class="line">        <span class="built_in">return</span> head.succ.t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T <span class="function"><span class="title">last</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tailer.pre.t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T remove(T t) &#123;</div><div class="line">        Node&lt;T&gt; aim = findNode(t, SIZE, tailer);</div><div class="line">        <span class="keyword">if</span> (aim == null)</div><div class="line">            <span class="built_in">return</span> null;</div><div class="line">        Node&lt;T&gt; pre = aim.pre;</div><div class="line">        Node&lt;T&gt; succ = aim.succ;</div><div class="line">        pre.succ = succ;</div><div class="line">        <span class="keyword">if</span> (succ != null)</div><div class="line">            succ.pre = pre;</div><div class="line">        SIZE--;</div><div class="line">        <span class="built_in">return</span> aim.t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void insertBefore(T aim, T t) &#123;</div><div class="line">        Node&lt;T&gt; aimNode = findNode(aim, SIZE, tailer);</div><div class="line">        <span class="keyword">if</span> (aimNode == null)</div><div class="line">            <span class="built_in">return</span>;</div><div class="line">        Node&lt;T&gt; temp = aimNode.pre;</div><div class="line">        temp.succ = new Node&lt;&gt;(t);</div><div class="line">        temp.succ.pre = temp;</div><div class="line">        temp.succ.succ = aimNode;</div><div class="line">        aimNode.pre = temp.succ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void insertAfter(T aim, T t) &#123;</div><div class="line">        Node&lt;T&gt; aimNode = findNode(aim, SIZE, tailer);</div><div class="line">        <span class="keyword">if</span> (aimNode == null)</div><div class="line">            <span class="built_in">return</span>;</div><div class="line">        Node&lt;T&gt; temp = aimNode.succ;</div><div class="line">        aimNode.succ = new Node&lt;&gt;(t);</div><div class="line">        aimNode.succ.pre = aimNode;</div><div class="line">        <span class="keyword">if</span> (temp != null)</div><div class="line">            temp.pre = aimNode.succ;</div><div class="line">        aimNode.succ.succ = temp;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private Node findNode(T t, int r, Node node) &#123;</div><div class="line">        node = node.pre;</div><div class="line">        <span class="keyword">while</span> (r-- &gt; 0) &#123;</div><div class="line">            <span class="keyword">if</span> (node.t == null) <span class="built_in">return</span> null;</div><div class="line">            <span class="keyword">if</span> (node.t.equals(t)) <span class="built_in">return</span> node;</div><div class="line">            node = node.pre;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private int <span class="function"><span class="title">deduplicate</span></span>() &#123;</div><div class="line">        <span class="keyword">if</span> (size() &lt; 2) <span class="built_in">return</span> 0;</div><div class="line">        int oldSize = SIZE;</div><div class="line">        Node&lt;T&gt; start = head.succ;</div><div class="line">        int r = 1;</div><div class="line">        <span class="keyword">while</span> (tailer != (start = start.succ)) &#123;</div><div class="line">            Node&lt;T&gt; temp = findNode(start.t, r, start);</div><div class="line">            <span class="keyword">if</span> (temp != null) &#123;</div><div class="line">                SIZE--;</div><div class="line">                remove(temp);</div><div class="line">            &#125; <span class="keyword">else</span> r++;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> oldSize - SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void remove(Node&lt;T&gt; temp) &#123;</div><div class="line">        Node&lt;T&gt; node = head.succ;</div><div class="line">        int N = SIZE;</div><div class="line">        <span class="keyword">while</span> (N-- &gt; 0) &#123;</div><div class="line">            <span class="keyword">if</span> (temp == node) &#123;</div><div class="line">                Node&lt;T&gt; pre = node.pre;</div><div class="line">                Node&lt;T&gt; succ = node.succ;</div><div class="line">                pre.succ = succ;</div><div class="line">                succ.pre = pre;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/13/UnionFind三步曲/" rel="prev" title="UnionFind三步曲">
+                UnionFind三步曲 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bag"><span class="nav-number">1.</span> <span class="nav-text">Bag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stack-后进先出"><span class="nav-number">2.</span> <span class="nav-text">Stack:后进先出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Queue-先进先出"><span class="nav-number">3.</span> <span class="nav-text">Queue:先进先出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈的简单应用：可以计算数学表达式的计算器-仅支持整数的加减乘除乘方阶乘以及括号运算"><span class="nav-number">4.</span> <span class="nav-text">栈的简单应用：可以计算数学表达式的计算器,仅支持整数的加减乘除乘方阶乘以及括号运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ListNode链表"><span class="nav-number">5.</span> <span class="nav-text">ListNode链表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

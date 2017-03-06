@@ -1,0 +1,1110 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Servlet与JSP学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet与JSP学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/02/13/Servlet与JSP学习笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Servlet与JSP学习笔记">
+<meta property="og:updated_time" content="2017-02-25T12:47:12.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet与JSP学习笔记">
+<meta name="twitter:description" content="Servlet与JSP学习笔记">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/13/Servlet与JSP学习笔记/"/>
+
+
+
+
+
+  <title> Servlet与JSP学习笔记 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/13/Servlet与JSP学习笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Servlet与JSP学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T20:54:12+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Servlet与JSP学习笔记</p>
+<a id="more"></a>
+<h1 id="第一章：web应用程序简介"><a href="#第一章：web应用程序简介" class="headerlink" title="第一章：web应用程序简介"></a>第一章：web应用程序简介</h1><h2 id="Web应用程序基础知识"><a href="#Web应用程序基础知识" class="headerlink" title="Web应用程序基础知识"></a>Web应用程序基础知识</h2><h3 id="关于HTML"><a href="#关于HTML" class="headerlink" title="关于HTML"></a>关于HTML</h3><p>HTML是以标签的方式来定义文件结构</p>
+<h3 id="URL、URN与URI"><a href="#URL、URN与URI" class="headerlink" title="URL、URN与URI"></a>URL、URN与URI</h3><p>URL:Uniform Resource Locator<br>URN:Uniform Resource Name<br>URI:Uniform Resource Identifier  </p>
+<h4 id="URL代表资源的地址信息"><a href="#URL代表资源的地址信息" class="headerlink" title="URL代表资源的地址信息"></a>URL代表资源的地址信息</h4><p>一般的URL格式为：&lt;协议&gt;:&lt;特定协议部分&gt;</p>
+<h4 id="URN代表某个资源独一无二的名称"><a href="#URN代表某个资源独一无二的名称" class="headerlink" title="URN代表某个资源独一无二的名称"></a>URN代表某个资源独一无二的名称</h4><h4 id="URI是URN和URL的超集"><a href="#URI是URN和URL的超集" class="headerlink" title="URI是URN和URL的超集"></a>URI是URN和URL的超集</h4><h3 id="关于HTTP"><a href="#关于HTTP" class="headerlink" title="关于HTTP"></a>关于HTTP</h3><p>这是一种通信协议，指架构在TCP/IP之上应用层的一种协议  </p>
+<p>有两个基本但极为重要的特性：<br>基于请求(Request)/响应(Response)的模型<br>无状态(Stateless)通信协议</p>
+<h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4><p>向服务器取得指定的资源，在发出GET请求时，必须一并告诉服务器所请求资源的URL以及一些标头(Header)信息。  </p>
+<h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4><p>在请求时发布(POST)信息给服务器</p>
+<h4 id="如何选用GET或者POST？"><a href="#如何选用GET或者POST？" class="headerlink" title="如何选用GET或者POST？"></a>如何选用GET或者POST？</h4><p>在需要传送大量数据、数据需要安全性、以及考虑到不提取缓存文件时使用POST，其它一般使用GET请求<br>注：<br>GET请求只是取得数据，不改变服务器的数据或状态<br>POST请求发送的数据，可能会影响服务器上的数据或者状态</p>
+<h3 id="有关URL编码"><a href="#有关URL编码" class="headerlink" title="有关URL编码"></a>有关URL编码</h3><p>对于保留字符以及中文字符出现在GET请求中时，需要使用URL编码进行重新编码</p>
+<h3 id="动态网页与静态网页"><a href="#动态网页与静态网页" class="headerlink" title="动态网页与静态网页"></a>动态网页与静态网页</h3><p>静态网页：请求服务器上的网页时，服务器不对页面做任何处理直接当做响应传送给浏览器<br>动态网页：在服务器响应之前，可能会根据客户端的请求参数、标头或者服务器上的状态，以程序的方式动态产生响应内容，再传回给用户</p>
+<h2 id="Servlet-JSP简介"><a href="#Servlet-JSP简介" class="headerlink" title="Servlet/JSP简介"></a>Servlet/JSP简介</h2><p>Web容器是Servlet/JSP唯一认得的HTTP服务器</p>
+<h3 id="何谓Web容器"><a href="#何谓Web容器" class="headerlink" title="何谓Web容器"></a>何谓Web容器</h3><p>Web容器是运行Servlet/JSP的HTTP服务器，只要写的Servlet/JSP符合Web容器的标准规范，Servlet/JSP就可以在各种不同厂商实现的Web容器上运行，而不需要关注底层真正的HTTP服务器是什么<br>Web容器介于实体HTTP服务器和Servlet之间，在容器中，真正负责请求、响应的是Servlet<br>顺序：浏览器-&gt;实体服务器-&gt;HTTP服务器程序-&gt;Web容器-&gt;Servlet</p>
+<h3 id="Servlet与JSP的关系"><a href="#Servlet与JSP的关系" class="headerlink" title="Servlet与JSP的关系"></a>Servlet与JSP的关系</h3><p>Servlet与JSP是一体两面的关系，JSP最终会被编译成Servlet执行</p>
+<h3 id="关于MVC-Model2"><a href="#关于MVC-Model2" class="headerlink" title="关于MVC/Model2"></a>关于MVC/Model2</h3><p>MVC:Model,View,Controller<br>Model2:HTTP请求发送到Controller上，然后Controller委托Model进行处理，同时转发View响应，View查询Model的状态，再由View发送最终的HTTP响应</p>
+<h1 id="第二章：编写与设置Servlet"><a href="#第二章：编写与设置Servlet" class="headerlink" title="第二章：编写与设置Servlet"></a>第二章：编写与设置Servlet</h1><h2 id="第一个Servlet"><a href="#第一个Servlet" class="headerlink" title="第一个Servlet"></a>第一个Servlet</h2><h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><h3 id="第一个Servlet程序"><a href="#第一个Servlet程序" class="headerlink" title="第一个Servlet程序"></a>第一个Servlet程序</h3><h2 id="在HelloServlet之后"><a href="#在HelloServlet之后" class="headerlink" title="在HelloServlet之后"></a>在HelloServlet之后</h2><h3 id="关于HttpServlet"><a href="#关于HttpServlet" class="headerlink" title="关于HttpServlet"></a>关于HttpServlet</h3><p>为什么HTTP请求为GET时会自动调用doGet()?  </p>
+<h3 id="使用-WebServlet"><a href="#使用-WebServlet" class="headerlink" title="使用@WebServlet"></a>使用@WebServlet</h3><p>只要在Servlet上设置@WebServlet标注即可设置请求的URL，如@WebServlet(“/hello.view”),则访问的URL为localhost:8080/hello.view,或者@WebServlet(urlPatterns = “/hello.view”)</p>
+<h3 id="使用web-xml"><a href="#使用web-xml" class="headerlink" title="使用web.xml"></a>使用web.xml</h3><p>在Java EE 6中的Servlet 3.0之前，必须在Web应用程序中的WEB-INF目录中，建立一个web.xml文件定义Servlet的相关信息，在Servlet3.0中，仍然可以这么做<br>格式：  </p>
+<pre><code>&lt;servlet&gt;  
+    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;cc.openhome.HelloServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;  
+    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/hello.view&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><p>web.xml会覆盖Servlet中的标注设置</p>
+<h3 id="文件组织与部署"><a href="#文件组织与部署" class="headerlink" title="文件组织与部署"></a>文件组织与部署</h3><pre><code>WEB-INF
+    web.xml
+    lib
+        xx.jar
+    classes
+other
+</code></pre><h2 id="进阶部署设置"><a href="#进阶部署设置" class="headerlink" title="进阶部署设置"></a>进阶部署设置</h2><p>路径映射：”/guest/<em>“<br>扩展映射：”\</em>.view”<br>环境根目录:<br>预设Servlet：”/“<br>完全匹配：严格匹配，如/hello.view  </p>
+<h1 id="请求与响应"><a href="#请求与响应" class="headerlink" title="请求与响应"></a>请求与响应</h1><h2 id="从容器到HttpServlet"><a href="#从容器到HttpServlet" class="headerlink" title="从容器到HttpServlet"></a>从容器到HttpServlet</h2><h3 id="Web容器做了什么"><a href="#Web容器做了什么" class="headerlink" title="Web容器做了什么"></a>Web容器做了什么</h3><p>有关HTTP请求的相关信息，如何变成相对应的JAVA对象呢？<br>重点：HttpServletRequest对象和HttpServletResponse对象</p>
+<h3 id="doXXX-方法"><a href="#doXXX-方法" class="headerlink" title="doXXX()方法"></a>doXXX()方法</h3><p>ServletRequest、ServletResponse和HttpServletRequest、HttpServletResponse，在处理HTTP请求时，需要先将前者强转成后者</p>
+<h2 id="关于HttpServletRequest"><a href="#关于HttpServletRequest" class="headerlink" title="关于HttpServletRequest"></a>关于HttpServletRequest</h2><h3 id="处理请求参数与标头"><a href="#处理请求参数与标头" class="headerlink" title="处理请求参数与标头"></a>处理请求参数与标头</h3><h4 id="取得请求参数"><a href="#取得请求参数" class="headerlink" title="取得请求参数"></a>取得请求参数</h4><ol>
+<li>getParameter(“name”)对应一个String  </li>
+<li>getParameterValues()对应一个String[]  </li>
+<li>getParameterMap()对应一个Map(String key,String[] values)  </li>
+</ol>
+<h4 id="取得标头-Header-信息"><a href="#取得标头-Header-信息" class="headerlink" title="取得标头(Header)信息"></a>取得标头(Header)信息</h4><ol>
+<li>getHeader():与getParameter(“name”)类似  </li>
+<li>getHeaders():与getParameterValues()类似  </li>
+<li>getHeaderNames():返回标头名称，以Enumeration返回</li>
+</ol>
+<h3 id="请求参数编码处理"><a href="#请求参数编码处理" class="headerlink" title="请求参数编码处理"></a>请求参数编码处理</h3><h4 id="POST请求编码处理"><a href="#POST请求编码处理" class="headerlink" title="POST请求编码处理"></a>POST请求编码处理</h4><pre><code>req.setCharacterEncoding(&quot;UTF-8&quot;);
+</code></pre><h4 id="GET请求参数编码处理"><a href="#GET请求参数编码处理" class="headerlink" title="GET请求参数编码处理"></a>GET请求参数编码处理</h4><pre><code>String name = req.getParameter(&quot;name&quot;);  
+String name = new String(name.getBytes(&quot;ISO-8859-1&quot;),&quot;UTF-8&quot;);
+</code></pre><h3 id="getReader-、getInputStream-读取Body内容"><a href="#getReader-、getInputStream-读取Body内容" class="headerlink" title="getReader()、getInputStream()读取Body内容"></a>getReader()、getInputStream()读取Body内容</h3><h3 id="getPart-、getParts取得上传文件"><a href="#getPart-、getParts取得上传文件" class="headerlink" title="getPart()、getParts取得上传文件"></a>getPart()、getParts取得上传文件</h3><p>getPart(),part.getInputStream()取得输入流进行读写<br>@MultipartConfig标注可用来设置Servlet处理上传文件的相关信息</p>
+<pre><code>@MultipartConfig可用属性如下：
+    fileSizeThreshold
+    location
+    maxFileSize
+    maxRequestSize
+</code></pre><h3 id="使用RequestDispatcher转发请求"><a href="#使用RequestDispatcher转发请求" class="headerlink" title="使用RequestDispatcher转发请求"></a>使用RequestDispatcher转发请求</h3><p>req.getRequestDispatcher(“”)可以获得对应的RequestDispatcher对象；  </p>
+<h4 id="使用include方法"><a href="#使用include方法" class="headerlink" title="使用include方法"></a>使用include方法</h4><p>可以将另一个Servlet的操作流程包括到目前Servlet操作流程之中</p>
+<h4 id="请求范围属性"><a href="#请求范围属性" class="headerlink" title="请求范围属性"></a>请求范围属性</h4><p>在转发请求的过程中，如果需要共享“对象”，则可以HttpServletRequest用以下方法</p>
+<pre><code>setAttribute():
+getAttribute():
+getAttributeNames():
+removeAttribute():
+</code></pre><h4 id="使用forward-方法"><a href="#使用forward-方法" class="headerlink" title="使用forward()方法"></a>使用forward()方法</h4><p>调用时同时传入请求与响应对象，表示将请求处理转发给别的Servlet  </p>
+<h2 id="关于HttpServletResponse"><a href="#关于HttpServletResponse" class="headerlink" title="关于HttpServletResponse"></a>关于HttpServletResponse</h2><pre><code>setContentType():
+getWriter():
+setHeader():
+addHeader():
+sendRedirect:
+getOutputStream:
+</code></pre><h3 id="设置标头、缓冲区"><a href="#设置标头、缓冲区" class="headerlink" title="设置标头、缓冲区"></a>设置标头、缓冲区</h3><pre><code>设置标头名称与值：
+    setHeader()
+    addHeader()
+</code></pre><h4 id="容器可以对响应进行缓冲"><a href="#容器可以对响应进行缓冲" class="headerlink" title="容器可以对响应进行缓冲"></a>容器可以对响应进行缓冲</h4><pre><code>getBufferSize()
+setBufferSize()
+isCommitted()
+reset()
+resetBuffer()
+flushBuffer()
+</code></pre><h3 id="使用getWriter-输出字符"><a href="#使用getWriter-输出字符" class="headerlink" title="使用getWriter()输出字符"></a>使用getWriter()输出字符</h3><h4 id="设置Locale"><a href="#设置Locale" class="headerlink" title="设置Locale"></a>设置Locale</h4><h4 id="使用setCharacterEncoding"><a href="#使用setCharacterEncoding" class="headerlink" title="使用setCharacterEncoding()"></a>使用setCharacterEncoding()</h4><h4 id="使用setContentType-中的charset-”UTF-8”"><a href="#使用setContentType-中的charset-”UTF-8”" class="headerlink" title="使用setContentType()中的charset=”UTF-8”"></a>使用setContentType()中的charset=”UTF-8”</h4><h3 id="使用getOutputStream-输出二进制字符"><a href="#使用getOutputStream-输出二进制字符" class="headerlink" title="使用getOutputStream()输出二进制字符"></a>使用getOutputStream()输出二进制字符</h3><h3 id="使用sendRedirect-、sendError"><a href="#使用sendRedirect-、sendError" class="headerlink" title="使用sendRedirect()、sendError"></a>使用sendRedirect()、sendError</h3><p>sendRedirect是重定向，注意区别于RequestDispatcher</p>
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="会话管理基本原理"><a href="#会话管理基本原理" class="headerlink" title="会话管理基本原理"></a>会话管理基本原理</h2><p>记得此次请求与之后请求间关系的方式，就被称为会话管理</p>
+<h3 id="使用隐藏域"><a href="#使用隐藏域" class="headerlink" title="使用隐藏域"></a>使用隐藏域</h3><h3 id="使用Cookie"><a href="#使用Cookie" class="headerlink" title="使用Cookie"></a>使用Cookie</h3><p>cookie是在浏览器存储信息的一种方式，服务器可以响应浏览器set-cookie标头，浏览器收到这个标头与数值后，会将它以文件的形式存储在计算机上<br>Cookie可以设定存活期限  </p>
+<pre><code>//设置Cookie
+Cookie cookie = new Cookie(&quot;user&quot;,&quot;caterpillar&quot;);
+cookie.setMaxAge(7*24*60*60);//单位为秒
+response.addCookie(cookie);
+
+//取得Cookie
+Cookie[] cookies = request.getCookies();
+</code></pre><h3 id="使用URL重写"><a href="#使用URL重写" class="headerlink" title="使用URL重写"></a>使用URL重写</h3><h2 id="HttpSession会话管理"><a href="#HttpSession会话管理" class="headerlink" title="HttpSession会话管理"></a>HttpSession会话管理</h2><h3 id="使用HttpSession"><a href="#使用HttpSession" class="headerlink" title="使用HttpSession"></a>使用HttpSession</h3><pre><code>HttpSession session = request.getSession();
+//常用方法
+session.setAttribute();
+session.getAttribute();
+//失效
+session.invalidate();
+</code></pre><h3 id="HttpSession会话管理原理"><a href="#HttpSession会话管理原理" class="headerlink" title="HttpSession会话管理原理"></a>HttpSession会话管理原理</h3><p>这项工作是由Web容器帮你执行<br>每个HttpSession对象都有特殊的SessionID，会使用Cookie存放在浏览器中，在tomcat中，Cookie的名称是JSESSIONID  </p>
+<pre><code>setMaxInactiveInterval()方法可以设置HttpSession在浏览器多久没有请求相应程序，HttpSession会自动失效，单位是秒
+</code></pre><p>修改SessionID、存储SessionID的Cookie存活期限等信息时，必须在web.xml中设定<br>另一个方式是实现ServletContextListener</p>
+<h3 id="HttpSession与URL重写"><a href="#HttpSession与URL重写" class="headerlink" title="HttpSession与URL重写"></a>HttpSession与URL重写</h3><p>使用response.encodeURL()函数</p>
+<h1 id="过滤器与监听器"><a href="#过滤器与监听器" class="headerlink" title="过滤器与监听器"></a>过滤器与监听器</h1><h2 id="Servlet进阶API"><a href="#Servlet进阶API" class="headerlink" title="Servlet进阶API"></a>Servlet进阶API</h2><h3 id="Servlet、ServletConfig与GenericServlet"><a href="#Servlet、ServletConfig与GenericServlet" class="headerlink" title="Servlet、ServletConfig与GenericServlet"></a>Servlet、ServletConfig与GenericServlet</h3><p>web容器启动后，会读取Servlet设置信息，将Servlet类加载并实例化，并为每个设置信息产生一个ServletConfig对象，而后调用Servlet接口的init()方法，并将产生的ServletConfig对象当做参数传入  </p>
+<h4 id="这个过程只会在创建Servlet实例后发生一次"><a href="#这个过程只会在创建Servlet实例后发生一次" class="headerlink" title="这个过程只会在创建Servlet实例后发生一次"></a>这个过程只会在创建Servlet实例后发生一次</h4><h4 id="ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig"><a href="#ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig" class="headerlink" title="ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig"></a>ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig</h4><p>GenericServlet的无参init可以由我们自由的覆盖使用，会被自动的调用</p>
+<h3 id="使用ServletConfig"><a href="#使用ServletConfig" class="headerlink" title="使用ServletConfig"></a>使用ServletConfig</h3><h3 id="使用ServletContext"><a href="#使用ServletContext" class="headerlink" title="使用ServletContext"></a>使用ServletContext</h3><p>ServletContext是整个应用程序的代表</p>
+<h4 id="getRequestDispatcher"><a href="#getRequestDispatcher" class="headerlink" title="getRequestDispatcher()"></a>getRequestDispatcher()</h4><h4 id="getResourcePaths"><a href="#getResourcePaths" class="headerlink" title="getResourcePaths()"></a>getResourcePaths()</h4><h4 id="getResourceAsStream"><a href="#getResourceAsStream" class="headerlink" title="getResourceAsStream()"></a>getResourceAsStream()</h4><h2 id="应用程序事件、监听器"><a href="#应用程序事件、监听器" class="headerlink" title="应用程序事件、监听器"></a>应用程序事件、监听器</h2><h3 id="ServletContext事件、监听器"><a href="#ServletContext事件、监听器" class="headerlink" title="ServletContext事件、监听器"></a>ServletContext事件、监听器</h3><h4 id="ServletContextListenr与ServletContextAttributeListener"><a href="#ServletContextListenr与ServletContextAttributeListener" class="headerlink" title="ServletContextListenr与ServletContextAttributeListener"></a>ServletContextListenr与ServletContextAttributeListener</h4><p>在整个Web应用程序生命周期，Servlet需共享的资料可以设置为ServletContext属性</p>
+<h4 id="getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性"><a href="#getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性" class="headerlink" title="getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性"></a>getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性</h4><h4 id="ServletContextAttributeListener是监听属性改变的监听器"><a href="#ServletContextAttributeListener是监听属性改变的监听器" class="headerlink" title="ServletContextAttributeListener是监听属性改变的监听器"></a>ServletContextAttributeListener是监听属性改变的监听器</h4><h3 id="HttpSession事件、监听器"><a href="#HttpSession事件、监听器" class="headerlink" title="HttpSession事件、监听器"></a>HttpSession事件、监听器</h3><ol>
+<li>HttpSessionListenr</li>
+<li>HttpSessionAttributeListener</li>
+<li>HttpSessiongBindingListener：如果有个即将加入HttpSession的属性对象，设置或删除时可收到HttpSession的通知，那么可以让该对象实现此接口</li>
+<li>HttpSessionActivationListener：“对象迁移监听器”，机会不会用到，序列化时会用到。</li>
+</ol>
+<h3 id="HttpServletRequest事件、监听器"><a href="#HttpServletRequest事件、监听器" class="headerlink" title="HttpServletRequest事件、监听器"></a>HttpServletRequest事件、监听器</h3><ol>
+<li>HttpServletRequestListenr</li>
+<li>HttpServletRequestAttributeListener</li>
+<li>AsyncListener</li>
+</ol>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>在容器调用Servlet的service()方法前，Servlet并不会知道有请求的到来，而在Servlet的service方法运行后，容器真正对浏览器进行HTTP响应之前，浏览器也不会知道Servlet真正的响应是什么。过滤器就是介于Servlet和浏览器之间的</p>
+<h3 id="过滤器的概念"><a href="#过滤器的概念" class="headerlink" title="过滤器的概念"></a>过滤器的概念</h3><h3 id="实现与设置过滤器"><a href="#实现与设置过滤器" class="headerlink" title="实现与设置过滤器"></a>实现与设置过滤器</h3><p>与Servlet类似，但是可以设置DisPatcherType的类型，表示接受比如forward还是include等转发来的请求</p>
+<h3 id="请求封装器"><a href="#请求封装器" class="headerlink" title="请求封装器"></a>请求封装器</h3><p>使用继承自HttpServletRequestWrapper进行封装，编写想要重新定义的方法</p>
+<h4 id="实现字符替换过滤器"><a href="#实现字符替换过滤器" class="headerlink" title="实现字符替换过滤器"></a>实现字符替换过滤器</h4><h4 id="实现编码设置过滤器"><a href="#实现编码设置过滤器" class="headerlink" title="实现编码设置过滤器"></a>实现编码设置过滤器</h4><h3 id="响应封装器"><a href="#响应封装器" class="headerlink" title="响应封装器"></a>响应封装器</h3><p>使用继承自HttpServletResponseWrapper进行封装，编写想要重新定义的方法</p>
+<h2 id="异步处理-略"><a href="#异步处理-略" class="headerlink" title="异步处理 略"></a>异步处理 略</h2><h1 id="使用JSP"><a href="#使用JSP" class="headerlink" title="使用JSP"></a>使用JSP</h1><h2 id="从JSP到Servlet"><a href="#从JSP到Servlet" class="headerlink" title="从JSP到Servlet"></a>从JSP到Servlet</h2><h3 id="JSP生命周期"><a href="#JSP生命周期" class="headerlink" title="JSP生命周期"></a>JSP生命周期</h3><p>init<br>service<br>destroy  </p>
+<h3 id="Servlet到JSP的简单转换"><a href="#Servlet到JSP的简单转换" class="headerlink" title="Servlet到JSP的简单转换"></a>Servlet到JSP的简单转换</h3><p>Servlet与JSP是一体两面的关系</p>
+<h3 id="指示元素"><a href="#指示元素" class="headerlink" title="指示元素"></a>指示元素</h3><pre><code>&lt;%@ 指示类型 [属性=&quot;值&quot;]*  %&gt;
+</code></pre><h4 id="三种常用指示类型"><a href="#三种常用指示类型" class="headerlink" title="三种常用指示类型"></a>三种常用指示类型</h4><ol>
+<li>page：告知容器如何转译目前的JSP网页</li>
+<li>include：告知容器将别的JSP页面包括进来进行转译</li>
+<li>taglib：告知容器如何转译这个页面中的标签库</li>
+</ol>
+<h4 id="page常用键值对"><a href="#page常用键值对" class="headerlink" title="page常用键值对"></a>page常用键值对</h4><ol>
+<li>import=：用来导入java包等</li>
+<li>contentType=：用来告知页面类型</li>
+<li>pageEncoding=：用来告知页面编码</li>
+</ol>
+<h4 id="include用来将另一个网页的内容加入进来转译"><a href="#include用来将另一个网页的内容加入进来转译" class="headerlink" title="include用来将另一个网页的内容加入进来转译"></a>include用来将另一个网页的内容加入进来转译</h4><p>这是在转译时期就决定转译后的Servlet的内容，<jsp:include>会生成一个独立的Servlet<br>可以在web.xml中统一默认的网页编码、内容类型、缓冲区大小等  </jsp:include></p>
+<pre><code>&lt;jsp-config&gt;
+    &lt;jsp-property-group&gt;
+        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+        &lt;page-encoding&gt;UTF-8&lt;/page-encoding&gt;
+        &lt;default-content-type&gt;text/html&lt;/default-content-type&gt;
+        &lt;buffer&gt;16kb&lt;/buffer&gt;
+    &lt;/jsp-property-group&gt;
+&lt;/jsp-config&gt;
+</code></pre><p>也可以声明指定的JSP开头与结尾要包括的网页</p>
+<pre><code>&lt;jsp-config&gt;
+    &lt;jsp-property-group&gt;
+        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+        &lt;include-prelude&gt;/WEB-INF/jspf/pre.jspf&lt;/include-prelude&gt;
+        &lt;include-coda&gt;/WEB-INF/jspf/pre.jspf&lt;/include-coda&gt;
+    &lt;/jsp-property-group&gt;
+&lt;/jsp-config&gt;
+</code></pre><p>忽略换行</p>
+<pre><code>&lt;jsp-config&gt;
+    &lt;jsp-property-group&gt;
+        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+        &lt;trim-directive-whitespaces&gt;true&lt;/trim-directive-whitespaces&gt;
+    &lt;/jsp-property-group&gt;
+&lt;/jsp-config&gt;
+</code></pre><h3 id="声明、Scriptlet与表达式元素"><a href="#声明、Scriptlet与表达式元素" class="headerlink" title="声明、Scriptlet与表达式元素"></a>声明、Scriptlet与表达式元素</h3><h4 id="声明元素的语法"><a href="#声明元素的语法" class="headerlink" title="声明元素的语法"></a>声明元素的语法</h4><pre><code>&lt;%! 类成员声明或方法声明%&gt;
+</code></pre><p>可能会有线程安全问题</p>
+<h4 id="定义jspInit-与jspDestroy-方法"><a href="#定义jspInit-与jspDestroy-方法" class="headerlink" title="定义jspInit()与jspDestroy()方法"></a>定义jspInit()与jspDestroy()方法</h4><pre><code>&lt;%! public void jspInit(){
+        //初始化动作
+    {
+    public void jspDestroy{
+        //结尾动作
+    }    
+%&gt;
+</code></pre><h4 id="Scriptlet元素"><a href="#Scriptlet元素" class="headerlink" title="Scriptlet元素"></a>Scriptlet元素</h4><pre><code>&lt;% Java 语句%&gt;
+</code></pre><h4 id="表达式元素"><a href="#表达式元素" class="headerlink" title="表达式元素"></a>表达式元素</h4><p>&lt;%= java表达式%&gt;<br>将表达式的运算结果直接输出为网页的一部分</p>
+<h3 id="注释元素"><a href="#注释元素" class="headerlink" title="注释元素"></a>注释元素</h3><pre><code>&lt;%
+    //
+    /* */
+%&gt;
+
+&lt;!-- --&gt;
+
+&lt;%-- --%&gt;这一种注释的内容会被完全忽略
+</code></pre><h3 id="隐式对象"><a href="#隐式对象" class="headerlink" title="隐式对象"></a>隐式对象</h3><ol>
+<li>out：对用JspWriter</li>
+<li>request：对应HttpServletRequest</li>
+<li>response：对应HttpServletResponse</li>
+<li>config：对用ServletConfig</li>
+<li>application：对应ServletContext</li>
+<li>session：对应HttpSession</li>
+<li>pageContext：对应PageContext，提供了JSP页面资源的封装，可以设置页面范围属性</li>
+<li>exception：对应Throwable对象</li>
+<li>page：对应this</li>
+</ol>
+<h4 id="只能在-lt-gt-或-lt-gt-之间使用"><a href="#只能在-lt-gt-或-lt-gt-之间使用" class="headerlink" title="只能在&lt;% %&gt;或&lt;%= %&gt;之间使用"></a>只能在&lt;% %&gt;或&lt;%= %&gt;之间使用</h4><h4 id="pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性"><a href="#pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性" class="headerlink" title="pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性"></a>pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性</h4><h3 id="6-1-7错误处理"><a href="#6-1-7错误处理" class="headerlink" title="6.1.7错误处理"></a>6.1.7错误处理</h3><p>错误可能发生在三个时候<br>JSP转换为Servlet源代码时<br>Servlet源代码进行编译时<br>Servlet载入容器进行服务但发生运行时错误时</p>
+<h4 id="可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面"><a href="#可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面" class="headerlink" title="可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面"></a>可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面</h4><p>error.jsp中的@page的isErrorPage属性设为”true”</p>
+<h4 id="可以再web-xml使用设置出现错误时自动转发到某个URL"><a href="#可以再web-xml使用设置出现错误时自动转发到某个URL" class="headerlink" title="可以再web.xml使用设置出现错误时自动转发到某个URL"></a>可以再web.xml使用<error-page>设置出现错误时自动转发到某个URL</error-page></h4><pre><code>&lt;error-page&gt;
+    &lt;exception-type&gt;java.lang.NullPointerException&lt;/exception-type&gt;
+    &lt;location&gt;/report.view.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre><h4 id="基于HTTP状态码转发至处理页面，则是搭配"><a href="#基于HTTP状态码转发至处理页面，则是搭配" class="headerlink" title="基于HTTP状态码转发至处理页面，则是搭配"></a>基于HTTP状态码转发至处理页面，则是搭配<error-code></error-code></h4><pre><code>&lt;error-page&gt;
+    &lt;error-code&gt;404&lt;/error-code&gt;
+    &lt;location&gt;/404.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre><h2 id="标准标签"><a href="#标准标签" class="headerlink" title="标准标签"></a>标准标签</h2><p>所有标准标签都是用jsp:作为前置</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><jsp:include><jsp:forward></jsp:forward></jsp:include></h3><p>相当于在Servlet执行了Dispatcher 的include方法或forward方法</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="  简介"></a><jsp:usebean> <jsp:setproperty> <jsp:getproperty>简介</jsp:getproperty></jsp:setproperty></jsp:usebean></h3><h4 id="lt-jsp-useBean"><a href="#lt-jsp-useBean" class="headerlink" title="&lt;jsp:useBean"></a>&lt;jsp:useBean</h4><p>用来搭配JavaBean元件的标准标签</p>
+<h4 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h4><ol>
+<li>必须实现Serializable接口  </li>
+<li>没有公开的类变量</li>
+<li>具有无参数的构造器</li>
+<li><p>具有公开的设值方法和取值方法  </p>
+<pre><code>&lt;jsp:useBean id=&quot;user&quot; class=&quot;cc.openhonm.User&quot;/&gt;id就是user对象的名称
+&lt;jsp:setProperty name=&quot;user&quot; property=&quot;*&quot;/&gt;
+&lt;jsp:getProperty name=&quot;user&quot; property=&quot;name&quot;/&gt;
+</code></pre></li>
+</ol>
+<h3 id="简介-1"><a href="#简介-1" class="headerlink" title="  简介"></a><jsp:usebean> <jsp:setproperty> <jsp:getproperty>简介</jsp:getproperty></jsp:setproperty></jsp:usebean></h3><h4 id="使用如果没有指定scope，则默认只会在page范围内查找user对象"><a href="#使用如果没有指定scope，则默认只会在page范围内查找user对象" class="headerlink" title="使用如果没有指定scope，则默认只会在page范围内查找user对象"></a>使用<jsp:usebean>如果没有指定scope，则默认只会在page范围内查找user对象</jsp:usebean></h4><h3 id="谈谈Model1"><a href="#谈谈Model1" class="headerlink" title="谈谈Model1"></a>谈谈Model1</h3><p>Model2包含更多的请求转发，分工更明确<br>Model1则更简明，但是任务会混杂在一起</p>
+<h3 id="XML格式标签"><a href="#XML格式标签" class="headerlink" title="XML格式标签"></a>XML格式标签</h3><h2 id="表达式语言EL"><a href="#表达式语言EL" class="headerlink" title="表达式语言EL"></a>表达式语言EL</h2><h3 id="EL简介"><a href="#EL简介" class="headerlink" title="EL简介"></a>EL简介</h3><p>${ 表达式}</p>
+<h4 id="可以再web-xml中设置决定不使用EL"><a href="#可以再web-xml中设置决定不使用EL" class="headerlink" title="可以再web.xml中设置决定不使用EL"></a>可以再web.xml中设置决定不使用EL</h4><pre><code>&lt;jsp-config&gt;
+    &lt;jsp-property-group&gt;
+        &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+        &lt;el-ignored&gt;true&lt;/el-ignored&gt;
+    &lt;/jsp-property-group&gt;
+&lt;/jsp-config&gt;
+</code></pre><p>使用page 元素设置也可以，会覆盖web.xml的设置</p>
+<h3 id="使用EL取得属性"><a href="#使用EL取得属性" class="headerlink" title="使用EL取得属性"></a>使用EL取得属性</h3><pre><code>${user.name}
+</code></pre><p>默认寻找属性的范围是page，Request，Session，application</p>
+<h4 id="点运算符与-运算符需要说明"><a href="#点运算符与-运算符需要说明" class="headerlink" title="点运算符与[]运算符需要说明"></a>点运算符与[]运算符需要说明</h4><ol>
+<li>如果使用.运算符，左边可以是JavaBean或Map对象</li>
+<li><p>如果使用[]运算符，左边可以是JavaBean、Map、数组或List对象</p>
+<p> ${user.name}<br> ${user[“name”]<br> //获取Map的值<br> ${login.user}<br> ${login[“user”]}</p>
+</li>
+</ol>
+<h3 id="EL运算符"><a href="#EL运算符" class="headerlink" title="EL运算符"></a>EL运算符</h3><ol>
+<li>+，-，*，/、div，%，mod</li>
+<li>and,or,not</li>
+<li>&lt;,&gt;,==,eq,!=,ne</li>
+</ol>
+<h3 id="自定义EL函数"><a href="#自定义EL函数" class="headerlink" title="自定义EL函数"></a>自定义EL函数</h3><h4 id="自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法"><a href="#自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法" class="headerlink" title="自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法"></a>自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法</h4><pre><code>${Util:length(requestScope.someList)}
+</code></pre><h4 id="必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为-tld"><a href="#必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为-tld" class="headerlink" title="必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为*.tld"></a>必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为*.tld</h4><h1 id="使用JSTL"><a href="#使用JSTL" class="headerlink" title="使用JSTL"></a>使用JSTL</h1><h2 id="JSTL简介"><a href="#JSTL简介" class="headerlink" title="JSTL简介"></a>JSTL简介</h2><h4 id="五大标签库"><a href="#五大标签库" class="headerlink" title="五大标签库"></a>五大标签库</h4><ol>
+<li>核心标签库</li>
+<li>I18N兼容格式标签库</li>
+<li>SQL标签库</li>
+<li>XML标签库</li>
+<li>函数标签库<h4 id="引入jstl"><a href="#引入jstl" class="headerlink" title="引入jstl"></a>引入jstl</h4> &lt;%taglib prefix=”c” uri=”<a href="http://java.sun.com/jsp/jstl/core&quot;%&gt;" target="_blank" rel="external">http://java.sun.com/jsp/jstl/core&quot;%&gt;</a></li>
+</ol>
+<h2 id="核心标签库"><a href="#核心标签库" class="headerlink" title="核心标签库"></a>核心标签库</h2><h3 id="流程处理标签"><a href="#流程处理标签" class="headerlink" title="流程处理标签"></a>流程处理标签</h3><h4 id="-1"><a href="#-1" class="headerlink" title=""></a><c:if></c:if></h4><h4 id="-2"><a href="#-2" class="headerlink" title=""></a><c:choose><c:when><c:otherwise></c:otherwise></c:when></c:choose></h4><pre><code>&lt;c:choose&gt;
+    &lt;c:when test=&quot;&quot;&gt;
+    &lt;/c:when&gt;
+    &lt;c:otherwise&gt;
+    &lt;/c:otherwise&gt;
+&lt;/c:choose&gt;
+</code></pre><h4 id="-3"><a href="#-3" class="headerlink" title=""></a><c:foreach var="" items=""></c:foreach></h4><p>var 代指每次遍历所得的对象的子元素<br>items代指需要遍历的对象<br>items可以是数组，Collection，Iterator、Enumeration、Map和字符串<br>如果是字符串，则必须以,分割</p>
+<h3 id="错误处理标签"><a href="#错误处理标签" class="headerlink" title="错误处理标签"></a>错误处理标签</h3><pre><code>&lt;c:catch var=&quot;error&quot;&gt;
+    ${param.a} + ${param.b} = ${param.a + param.b}
+&lt;/c:catch&gt;
+&lt;c:if test=&quot;${error != null}&quot;&gt;
+    ${error}
+&lt;/c:if&gt;
+</code></pre><h3 id="网页导入，重定向，URL处理标签"><a href="#网页导入，重定向，URL处理标签" class="headerlink" title="网页导入，重定向，URL处理标签"></a>网页导入，重定向，URL处理标签</h3><p><c:import>可以视作是<jsp:include>的加强版，可以再运行时动态的导入另一个网页，可以使用<c:param name="" value="">导入参数</c:param></jsp:include></c:import></p>
+<h4 id="也可以导入非目前Web应用中的网页-其中charEncoding指定编码"><a href="#也可以导入非目前Web应用中的网页-其中charEncoding指定编码" class="headerlink" title="也可以导入非目前Web应用中的网页 其中charEncoding指定编码"></a>也可以导入非目前Web应用中的网页 其中charEncoding指定编码</h4><p><c:redirect url=""><c:param name="" value="">：重定向标签</c:param></c:redirect></p>
+<h4 id="可以使用可以在用户关系Cookie功能时，自动用SessionID做URL重写"><a href="#可以使用可以在用户关系Cookie功能时，自动用SessionID做URL重写" class="headerlink" title="可以使用可以在用户关系Cookie功能时，自动用SessionID做URL重写"></a>可以使用<c:url value="">可以在用户关系Cookie功能时，自动用SessionID做URL重写</c:url></h4><h3 id="属性处理与输出标签"><a href="#属性处理与输出标签" class="headerlink" title="属性处理与输出标签"></a>属性处理与输出标签</h3><h4 id="相当于-lt-session-serAttribute-“login”-”user”-gt"><a href="#相当于-lt-session-serAttribute-“login”-”user”-gt" class="headerlink" title="相当于&lt;% session.serAttribute(“login”,”user”); %&gt;"></a><c:set var="login" value="user" scope="session">相当于&lt;% session.serAttribute(“login”,”user”); %&gt;</c:set></h4><pre><code>&lt;c:set var=&quot;login&quot; value=&quot;${user}&quot; scope=&quot;session&quot;&gt;相当于设置实例
+//也可以设置属性
+&lt;c:set var=&quot;login&quot; scope=&quot;session&quot;&gt;
+    www.baidu.com,www.sina.cn
+&lt;/c:set&gt;
+</code></pre><p>如果不设置scope，则会在page，Request，Session，application的范围内查找属性名，如果没找到，则会在page域内设置属性</p>
+<h4 id="移除标签"><a href="#移除标签" class="headerlink" title="移除标签"></a>移除标签<c:remove var="" scope=""></c:remove></h4><h4 id="设置JavaBean或Map对象的键值，必须使用target属性"><a href="#设置JavaBean或Map对象的键值，必须使用target属性" class="headerlink" title="设置JavaBean或Map对象的键值，必须使用target属性"></a>设置JavaBean或Map对象的键值，必须使用target属性</h4><c:set target="$(user)" property="name" value="${param.name" }="">
+
+<h4 id="-4"><a href="#-4" class="headerlink" title=""></a><c:out value="${param.message" 可以输出指定的文字=""></c:out></h4><p>此标签可以将角括号、单引号，双引号等字符用替代字符取代，避免输出html信息</p>
+<h2 id="I18N兼容格式标签库"><a href="#I18N兼容格式标签库" class="headerlink" title="I18N兼容格式标签库"></a>I18N兼容格式标签库</h2><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><h4 id="关于Java字符串"><a href="#关于Java字符串" class="headerlink" title="关于Java字符串"></a>关于Java字符串</h4><h4 id="关于ResourceBundle"><a href="#关于ResourceBundle" class="headerlink" title="关于ResourceBundle"></a>关于ResourceBundle</h4><p>可以准备一个.properties文件，必须放置在Classpath路径设置下，是键值对的形式</p>
+<pre><code>ResourceBundle res = ResourceBundle.getBundle(&quot;message&quot;);//取得文件
+</code></pre><p>无需设置message的路径，会自动寻找，并且不需要添加后缀名，会自动识别</p>
+<h3 id="信息标签"><a href="#信息标签" class="headerlink" title="信息标签"></a>信息标签</h3><pre><code>//引入此标签
+&lt;%@taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;
+</code></pre><h4 id="-5"><a href="#-5" class="headerlink" title=" "></a><fmt:bundle> <fmt:message></fmt:message></fmt:bundle></h4><pre><code>&lt;fmt:bundle basename=&quot;message1&quot;&gt;//basename放的是文件名
+&lt;h1&gt;&lt;fmt:message key=&quot;&quot;&gt;&lt;/h1&gt;//会在h1里面显示对应的key值
+//也可以使用&lt;fmt:setBundle&gt;设置路径
+&lt;fmt:setBundle basename=&quot;message2&quot;&gt;
+</code></pre><h4 id="如果有些部分必须动态决定，组可以使用占位符先代替"><a href="#如果有些部分必须动态决定，组可以使用占位符先代替" class="headerlink" title="如果有些部分必须动态决定，组可以使用占位符先代替"></a>如果有些部分必须动态决定，组可以使用占位符先代替</h4><pre><code>cc.openhome.forUser=Hi! {0}! It is {1,date,long} and {2,time,full}.
+</code></pre><p>其中{}中的内容就是占位符</p>
+<h4 id="设置占位符中真正的内容需要使用标签"><a href="#设置占位符中真正的内容需要使用标签" class="headerlink" title="设置占位符中真正的内容需要使用标签"></a>设置占位符中真正的内容需要使用<fmt:param>标签</fmt:param></h4><pre><code>&lt;fmt: param value=&quot;${param.username&quot;&gt;
+</code></pre><h3 id="地区标签"><a href="#地区标签" class="headerlink" title="地区标签"></a>地区标签</h3><p>决定信息文件的顺序如下：  </p>
+<ol>
+<li>使用指定的Locale对象取得信息文件</li>
+<li>根据浏览器Accept-Language标头指定的偏好地区顺序</li>
+<li>根据后备地区信息取得信息文件</li>
+<li>使用基础信息取得信息文件</li>
+</ol>
+<h4 id="可以设置地区偏好"><a href="#可以设置地区偏好" class="headerlink" title="可以设置地区偏好"></a><fmt:message fundle="${zh_CN}">可以设置地区偏好</fmt:message></h4><h4 id="可以设置请求对象的编码处理"><a href="#可以设置请求对象的编码处理" class="headerlink" title="可以设置请求对象的编码处理"></a><fmt:requestencoding>可以设置请求对象的编码处理</fmt:requestencoding></h4><h3 id="格式标签"><a href="#格式标签" class="headerlink" title="格式标签"></a>格式标签</h3><pre><code>&lt;fmt:formatDate type=&quot;date&quot; value=${now} pattern=&quot;dd.MM.yy&quot; dateStyle=&quot;full&quot;&gt;//pattern表示呈现的格式，dateStyle表示呈现的日期的长度偏好,type指定显示时间还是日期还是both，timeStyle用来指定时间的详细程度，有short，medium，long，full，default
+</code></pre><h4 id="默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同"><a href="#默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同" class="headerlink" title="默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同"></a><fmt:formatnumber>默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同</fmt:formatnumber></h4><h4 id="和用来解析日期"><a href="#和用来解析日期" class="headerlink" title="和用来解析日期"></a><fmt:parsenumber>和<fmt:parsedate>用来解析日期</fmt:parsedate></fmt:parsenumber></h4><h2 id="XMl标签库"><a href="#XMl标签库" class="headerlink" title="XMl标签库"></a>XMl标签库</h2><h3 id="XPath，XSTL基础"><a href="#XPath，XSTL基础" class="headerlink" title="XPath，XSTL基础"></a>XPath，XSTL基础</h3><h4 id="XPath路径表示"><a href="#XPath路径表示" class="headerlink" title="XPath路径表示"></a>XPath路径表示</h4><ol>
+<li>节点名称</li>
+<li>/：从根节点开始选择</li>
+<li>//从符合选择的目前节点开始选择</li>
+<li>.：选择目前节点</li>
+<li>..：选择目前节点的父节点</li>
+<li>@：选择属性</li>
+</ol>
+<h4 id="XSLT基础"><a href="#XSLT基础" class="headerlink" title="XSLT基础"></a>XSLT基础</h4><p>指XSL转换，将XML文件转换成另一份XML文件、HTML或XHTML的语言</p>
+<h3 id="解析，设置与输出标签"><a href="#解析，设置与输出标签" class="headerlink" title="解析，设置与输出标签"></a>解析，设置与输出标签</h3><pre><code>&lt;%@taglib prefix=&quot;x&quot; uri=&quot;http://java.sun.com/jsp/jstl/xml&quot; %&gt;
+
+&lt;c:import var=&quot;xml&quot; url=&quot;bookmarks.xml&quot; charEncoding=&quot;UTF-8&quot;/&gt;
+&lt;x:parse var=&quot;bookmarks&quot; doc=&quot;${xml}&quot;/&gt;
+//信息输出,select必须指定XPath表示式，以$作为开头
+&lt;x:out select=&quot;$bookmarks//bookmark[2]/title&quot;/&gt;
+&lt;x:out select=&quot;$pageScope:bookmarks//bookmark[2]/title&quot;/&gt;
+</code></pre><h3 id="流程处理标签-1"><a href="#流程处理标签-1" class="headerlink" title="流程处理标签"></a>流程处理标签</h3><ol>
+<li><x:if>只有在select指定元素存在时执行</x:if></li>
+<li><x:foreach></x:foreach></li>
+<li><x:choose></x:choose></li>
+<li><x:when></x:when></li>
+<li><x:otherwise>
+
+</x:otherwise></li>
+</ol>
+<h3 id="文件转换标签"><a href="#文件转换标签" class="headerlink" title="文件转换标签"></a>文件转换标签</h3><ol>
+<li><x:transform></x:transform></li>
+<li><x:param>
+
+</x:param></li>
+</ol>
+<h2 id="函数标签库"><a href="#函数标签库" class="headerlink" title="函数标签库"></a>函数标签库</h2><ol>
+<li>toLowerCase,toUpperCase</li>
+<li>substring,substringAfter,substringBefore</li>
+<li>trim</li>
+<li>replace</li>
+<li>startsWith,endsWith,contains,containsIgnoreCase</li>
+<li>indexOd</li>
+<li>split</li>
+<li>join</li>
+<li>escapeXML：替换XML字符</li>
+<li>length</li>
+</ol>
+<h4 id="使用方式-fn-function-引入方式与core库一样"><a href="#使用方式-fn-function-引入方式与core库一样" class="headerlink" title="使用方式:${fn:function()}引入方式与core库一样"></a>使用方式:${fn:function()}引入方式与core库一样</h4><h1 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h1><h2 id="Tag-File自定义标签"><a href="#Tag-File自定义标签" class="headerlink" title="Tag File自定义标签"></a>Tag File自定义标签</h2><h3 id="Tag-File简介"><a href="#Tag-File简介" class="headerlink" title="Tag File简介"></a>Tag File简介</h3><pre><code>&lt;%@tag description=&quot;显示错误信息的标签&quot; pageEncoding=&quot;UTF-8&quot; %&gt;
+&lt;%@taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
+&lt;c:if test=&quot;${requestScope.errors != null}&quot;&gt;
+    &lt;h1&gt;新增会员失败&lt;/h1&gt;
+    &lt;ul style=&apos;color:rgb(255,0,0)&apos;&gt;
+        &lt;c:forEach var=&quot;error&quot; items=&quot;${requestScope.errors}&quot;&gt;
+            &lt;li&gt;${error}&lt;/li&gt;
+        &lt;/c:forEach&gt;
+    &lt;/ul&gt;
+&lt;/c:if&gt;
+//注意定位到此文件
+&lt;%@taglib prefix=&quot;html&quot; uri=&quot;/WEB-INF/tags&quot; %&gt;
+</code></pre><p>uri指定在tags文件夹里面</p>
+<h3 id="处理标签属性与Body"><a href="#处理标签属性与Body" class="headerlink" title="处理标签属性与Body"></a>处理标签属性与Body</h3><pre><code>&lt;%@tag description=&quot;HTML 懒人标签&quot; pageEncoding=&quot;UTF-8&quot; %&gt;
+&lt;%@ attribute name=&quot;title&quot; %&gt;
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;${title}&lt;/title&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;jsp:doBody/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>tag的body里面的内容不允许出现scriptlet</p>
+<h3 id="TLD文件"><a href="#TLD文件" class="headerlink" title="TLD文件"></a>TLD文件</h3><p>将Tag File打包成JAR文件注意的点  </p>
+<ol>
+<li>*.tag文件必须放在JAR文件的META-iNF/tags文件夹或者子文件夹下</li>
+<li>要定义TLD文件</li>
+<li><p>TLD文件必须放在JAR文件的META-INF/TLDS文件夹下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd&quot;
+        version=&quot;2.1&quot;&gt;
+
+    &lt;tlib-version&gt;1.0&lt;/tlib-version&gt;
+    &lt;short-name&gt;html&lt;/short-name&gt;
+    &lt;uri&gt;http://openhome.cc/heml&lt;/uri&gt;
+    &lt;tag-file&gt;
+        &lt;name&gt;Header&lt;/name&gt;
+        &lt;path&gt;/WEB-INF/tags/Header.tag&lt;/path&gt;
+    &lt;/tag-file&gt;
+    &lt;tag-file&gt;
+        &lt;name&gt;Html&lt;/name&gt;
+        &lt;path&gt;/WEB-INF/tags/Html.tag&lt;/path&gt;
+    &lt;/tag-file&gt;
+    &lt;!-- Invoke &apos;Generate&apos; action to add tags or functions --&gt;
+&lt;/taglib&gt;
+</code></pre><h2 id="Simple-Tag-自定义标签"><a href="#Simple-Tag-自定义标签" class="headerlink" title="Simple Tag 自定义标签"></a>Simple Tag 自定义标签</h2><h3 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h3><p>需要继承SimpleTagSupport，重写doTag方法，并且执行getJspBody().invoke(null)方法</p>
+<h4 id="模仿JSTL的标签功能"><a href="#模仿JSTL的标签功能" class="headerlink" title="模仿JSTL的标签功能"></a>模仿JSTL的<c:if>标签功能</c:if></h4><p> public class IfTag extends SimpleTagSupport {</p>
+<pre><code>private boolean test;
+
+public void setTest(boolean test) {
+    this.test = test;
+}
+
+@Override
+public void doTag() throws JspException, IOException {
+    if (test) {
+        getJspBody().invoke(null);
+    }
+}
+</code></pre><p> }</p>
+<h4 id="为了让容器了解与标签IfTag标签处理器之间的关系，要定义一个TLD文件"><a href="#为了让容器了解与标签IfTag标签处理器之间的关系，要定义一个TLD文件" class="headerlink" title="为了让容器了解与标签IfTag标签处理器之间的关系，要定义一个TLD文件"></a>为了让容器了解<f:if>与标签IfTag标签处理器之间的关系，要定义一个TLD文件</f:if></h4><p> &lt;?xml version=”1.0” encoding=”ISO-8859-1”?&gt;</p>
+ <taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1"><br><br>     <tlib-version>1.0</tlib-version><br>     <short-name>f</short-name><br>     <uri><a href="http://openhome.cc/jstl/fake" target="_blank" rel="external">http://openhome.cc/jstl/fake</a></uri><br><br>     <tag><br>         <name>if</name><br>         <tag-class>com.li.SimpleTag.IfTag</tag-class><br>         <body-content>scriptless</body-content><br>         <attribute><br>             <name>test</name><br>             <required>true</required><br>             <rtexprvalue>true</rtexprvalue><br>             <type>boolean</type><br>         </attribute><br>     </tag><br> </taglib>
+
+</li>
+</ol>
+<h3 id="了解API架构与生命周期"><a href="#了解API架构与生命周期" class="headerlink" title="了解API架构与生命周期"></a>了解API架构与生命周期</h3><h4 id="处理步骤"><a href="#处理步骤" class="headerlink" title="处理步骤"></a>处理步骤</h4><ol>
+<li>创建自定义标签处理器实例</li>
+<li>调用标签处理器的setJspContext()方法设置PageContext实例</li>
+<li>如果是嵌套标签中的内层标签，则还会调用标签处理器的setParent()方法，并传入外层标签处理器的实例</li>
+<li>设置标签处理器属性</li>
+<li>调用标签处理器的setJspBody()设置JSPFragment实例</li>
+<li>调用标签处理器的doTag()方法</li>
+<li>销毁标签处理器实例</li>
+</ol>
+<h3 id="处理标签属性与Body-1"><a href="#处理标签属性与Body-1" class="headerlink" title="处理标签属性与Body"></a>处理标签属性与Body</h3><h4 id="模仿一个标签"><a href="#模仿一个标签" class="headerlink" title="模仿一个标签"></a>模仿一个<c:foreach>标签</c:foreach></h4><pre><code>public class ForEachTag extends SimpleTagSupport {
+    private String var;
+    private Collection items;
+
+    public void setVar(String var) {
+        this.var = var;
+    }
+
+    public void setItems(Collection items) {
+        this.items = items;
+    }
+
+    @Override
+    public void doTag() throws JspException, IOException {
+        for (Object o : items) {
+            this.getJspContext().setAttribute(var, o);
+            //多次调用invoke
+            this.getJspBody().invoke(null);
+            this.getJspContext().removeAttribute(var);
+        }
+    }
+}
+</code></pre><h4 id="TLD文件-1"><a href="#TLD文件-1" class="headerlink" title="TLD文件"></a>TLD文件</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd&quot;
+        version=&quot;2.1&quot;&gt;
+
+    &lt;tlib-version&gt;1.0&lt;/tlib-version&gt;
+    &lt;short-name&gt;forEach&lt;/short-name&gt;
+    &lt;uri&gt;http://openhome.cc/jstl/fake&lt;/uri&gt;
+    &lt;tag&gt;
+        &lt;name&gt;forEach&lt;/name&gt;
+        &lt;tag-class&gt;com.li.SimpleTag.ForEachTag&lt;/tag-class&gt;
+        &lt;body-content&gt;scriptless&lt;/body-content&gt;
+        &lt;attribute&gt;
+            &lt;name&gt;var&lt;/name&gt;
+            &lt;required&gt;true&lt;/required&gt;
+            &lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;
+            &lt;type&gt;java.lang.String&lt;/type&gt;
+        &lt;/attribute&gt;
+        &lt;attribute&gt;
+            &lt;name&gt;items&lt;/name&gt;
+            &lt;required&gt;true&lt;/required&gt;
+            &lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;
+            &lt;type&gt;java.util.Collection&lt;/type&gt;
+        &lt;/attribute&gt;
+    &lt;/tag&gt;
+
+    &lt;!-- Invoke &apos;Generate&apos; action to add tags or functions --&gt;
+
+&lt;/taglib&gt;
+</code></pre><h4 id="小写转成大写的标签"><a href="#小写转成大写的标签" class="headerlink" title="小写转成大写的标签"></a>小写转成大写的标签</h4><pre><code>public class ToUpperCaseTag extends SimpleTagSupport {
+    @Override
+    public void doTag() throws JspException, IOException {
+        StringWriter writer = new StringWriter();
+        this.getJspBody().invoke(writer);
+        String upper = writer.toString().toUpperCase();
+        this.getJspContext().getOut().print(upper);
+    }
+}
+</code></pre><h4 id="TLD文件略"><a href="#TLD文件略" class="headerlink" title="TLD文件略"></a>TLD文件略</h4><h3 id="与父标签沟通如"><a href="#与父标签沟通如" class="headerlink" title="与父标签沟通如"></a>与父标签沟通如<c:when><c:choose><c:otherwise></c:otherwise></c:choose></c:when></h3><h4 id="chooseTag"><a href="#chooseTag" class="headerlink" title="chooseTag"></a>chooseTag</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class ChooseTag extends SimpleTagSupport &#123;</div><div class="line">    private boolean matched;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Matched(boolean matched) &#123;</div><div class="line">        this.matched = matched;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean <span class="function"><span class="title">isMatched</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> matched;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void <span class="keyword">do</span>Tag() throws JspException, IOException &#123;</div><div class="line">        this.getJspBody().invoke(null);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="whenTag"><a href="#whenTag" class="headerlink" title="whenTag"></a>whenTag</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class WhenTag extends SimpleTagSupport &#123;</div><div class="line">    private boolean <span class="built_in">test</span>;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Test(boolean <span class="built_in">test</span>) &#123;</div><div class="line">        this.test = <span class="built_in">test</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void <span class="keyword">do</span>Tag() throws JspException, IOException &#123;</div><div class="line">        JspTag parent = getParent();</div><div class="line">        <span class="keyword">if</span> (!(parent instanceof ChooseTag)) &#123;</div><div class="line">            throw new JspTagException(<span class="string">"Must put it in choose tag"</span>);</div><div class="line">        &#125;</div><div class="line">        ChooseTag choose = (ChooseTag) parent;</div><div class="line">        <span class="keyword">if</span> (!choose.isMatched() &amp;&amp; <span class="built_in">test</span>) &#123;</div><div class="line">            choose.setMatched(<span class="literal">true</span>);</div><div class="line">            this.getJspBody().invoke(null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="otherwiseTag"><a href="#otherwiseTag" class="headerlink" title="otherwiseTag"></a>otherwiseTag</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class OtherwiseTag extends SimpleTagSupport &#123;</div><div class="line">    @Override</div><div class="line">    public void <span class="keyword">do</span>Tag() throws JspException, IOException &#123;</div><div class="line">        JspTag parent = getParent();</div><div class="line">        <span class="keyword">if</span> (!(parent instanceof ChooseTag))</div><div class="line">            throw new JspTagException(<span class="string">"Must put it in choose tag"</span>);</div><div class="line">        ChooseTag choose = (ChooseTag) parent;</div><div class="line">        <span class="keyword">if</span> (!choose.isMatched())</div><div class="line">            this.getJspBody().invoke(null);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TLD文件-2"><a href="#TLD文件-2" class="headerlink" title="TLD文件"></a>TLD文件</h3><p>只需要放在jar文件的META-INF的文件夹或者子文件夹都行</p>
+<h2 id="Tag自定义标签"><a href="#Tag自定义标签" class="headerlink" title="Tag自定义标签"></a>Tag自定义标签</h2><h3 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h3><p>需要继承TagSupport，重写doStartTag方法</p>
+<h3 id="了解架构与生命周期"><a href="#了解架构与生命周期" class="headerlink" title="了解架构与生命周期"></a>了解架构与生命周期</h3><ol>
+<li>尝试从标签池找到可用的标签对象，如果找到就直接使用，如果没找到就创建新的对象</li>
+<li>调用标签处理器的setPageContext方法设置PageContext实例</li>
+<li>如果是嵌套标签的内层标签，还会调用setParent方法，传入外层标签处理器的实例</li>
+<li>设置标签处理器的属性</li>
+<li>调用标签处理器的doStartTag方法并且依据不同的返回值决定是否执行Body或调用doAfterBody,doEndTag</li>
+<li>将标签处理器实例放置入标签池中以便再次使用</li>
+</ol>
+<h3 id="重复执行标签body"><a href="#重复执行标签body" class="headerlink" title="重复执行标签body"></a>重复执行标签body</h3><p>需要在doAfterBody方法中返回EVAL_BODY_AGAIN</p>
+<h4 id="doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次"><a href="#doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次" class="headerlink" title="doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次"></a>doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次</h4><p>暂略</p>
+<h3 id="处理Body运行的结果"><a href="#处理Body运行的结果" class="headerlink" title="处理Body运行的结果"></a>处理Body运行的结果</h3><h3 id="与父标签沟通"><a href="#与父标签沟通" class="headerlink" title="与父标签沟通"></a>与父标签沟通</h3></c:set>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/13/堆和堆排序/" rel="next" title="堆和堆排序">
+                <i class="fa fa-chevron-left"></i> 堆和堆排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/15/计算机网络/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章：web应用程序简介"><span class="nav-number">1.</span> <span class="nav-text">第一章：web应用程序简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">Web应用程序基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于HTML"><span class="nav-number">1.1.1.</span> <span class="nav-text">关于HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL、URN与URI"><span class="nav-number">1.1.2.</span> <span class="nav-text">URL、URN与URI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL代表资源的地址信息"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">URL代表资源的地址信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URN代表某个资源独一无二的名称"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">URN代表某个资源独一无二的名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URI是URN和URL的超集"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">URI是URN和URL的超集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于HTTP"><span class="nav-number">1.1.3.</span> <span class="nav-text">关于HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GET请求"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">GET请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POST请求"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">POST请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何选用GET或者POST？"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">如何选用GET或者POST？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有关URL编码"><span class="nav-number">1.1.4.</span> <span class="nav-text">有关URL编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态网页与静态网页"><span class="nav-number">1.1.5.</span> <span class="nav-text">动态网页与静态网页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet-JSP简介"><span class="nav-number">1.2.</span> <span class="nav-text">Servlet/JSP简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#何谓Web容器"><span class="nav-number">1.2.1.</span> <span class="nav-text">何谓Web容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet与JSP的关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">Servlet与JSP的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于MVC-Model2"><span class="nav-number">1.2.3.</span> <span class="nav-text">关于MVC/Model2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章：编写与设置Servlet"><span class="nav-number">2.</span> <span class="nav-text">第二章：编写与设置Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个Servlet"><span class="nav-number">2.1.</span> <span class="nav-text">第一个Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备开发环境"><span class="nav-number">2.1.1.</span> <span class="nav-text">准备开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个Servlet程序"><span class="nav-number">2.1.2.</span> <span class="nav-text">第一个Servlet程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在HelloServlet之后"><span class="nav-number">2.2.</span> <span class="nav-text">在HelloServlet之后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于HttpServlet"><span class="nav-number">2.2.1.</span> <span class="nav-text">关于HttpServlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-WebServlet"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用@WebServlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用web-xml"><span class="nav-number">2.2.3.</span> <span class="nav-text">使用web.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件组织与部署"><span class="nav-number">2.2.4.</span> <span class="nav-text">文件组织与部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶部署设置"><span class="nav-number">2.3.</span> <span class="nav-text">进阶部署设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请求与响应"><span class="nav-number">3.</span> <span class="nav-text">请求与响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从容器到HttpServlet"><span class="nav-number">3.1.</span> <span class="nav-text">从容器到HttpServlet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web容器做了什么"><span class="nav-number">3.1.1.</span> <span class="nav-text">Web容器做了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doXXX-方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">doXXX()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HttpServletRequest"><span class="nav-number">3.2.</span> <span class="nav-text">关于HttpServletRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理请求参数与标头"><span class="nav-number">3.2.1.</span> <span class="nav-text">处理请求参数与标头</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#取得请求参数"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">取得请求参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取得标头-Header-信息"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">取得标头(Header)信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求参数编码处理"><span class="nav-number">3.2.2.</span> <span class="nav-text">请求参数编码处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POST请求编码处理"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">POST请求编码处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GET请求参数编码处理"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">GET请求参数编码处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getReader-、getInputStream-读取Body内容"><span class="nav-number">3.2.3.</span> <span class="nav-text">getReader()、getInputStream()读取Body内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getPart-、getParts取得上传文件"><span class="nav-number">3.2.4.</span> <span class="nav-text">getPart()、getParts取得上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用RequestDispatcher转发请求"><span class="nav-number">3.2.5.</span> <span class="nav-text">使用RequestDispatcher转发请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用include方法"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">使用include方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求范围属性"><span class="nav-number">3.2.5.2.</span> <span class="nav-text">请求范围属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用forward-方法"><span class="nav-number">3.2.5.3.</span> <span class="nav-text">使用forward()方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HttpServletResponse"><span class="nav-number">3.3.</span> <span class="nav-text">关于HttpServletResponse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置标头、缓冲区"><span class="nav-number">3.3.1.</span> <span class="nav-text">设置标头、缓冲区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器可以对响应进行缓冲"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">容器可以对响应进行缓冲</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用getWriter-输出字符"><span class="nav-number">3.3.2.</span> <span class="nav-text">使用getWriter()输出字符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置Locale"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">设置Locale</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用setCharacterEncoding"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">使用setCharacterEncoding()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用setContentType-中的charset-”UTF-8”"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">使用setContentType()中的charset=”UTF-8”</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用getOutputStream-输出二进制字符"><span class="nav-number">3.3.3.</span> <span class="nav-text">使用getOutputStream()输出二进制字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用sendRedirect-、sendError"><span class="nav-number">3.3.4.</span> <span class="nav-text">使用sendRedirect()、sendError</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#会话管理"><span class="nav-number">4.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#会话管理基本原理"><span class="nav-number">4.1.</span> <span class="nav-text">会话管理基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用隐藏域"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用隐藏域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Cookie"><span class="nav-number">4.1.2.</span> <span class="nav-text">使用Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用URL重写"><span class="nav-number">4.1.3.</span> <span class="nav-text">使用URL重写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpSession会话管理"><span class="nav-number">4.2.</span> <span class="nav-text">HttpSession会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HttpSession"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用HttpSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSession会话管理原理"><span class="nav-number">4.2.2.</span> <span class="nav-text">HttpSession会话管理原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSession与URL重写"><span class="nav-number">4.2.3.</span> <span class="nav-text">HttpSession与URL重写</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#过滤器与监听器"><span class="nav-number">5.</span> <span class="nav-text">过滤器与监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet进阶API"><span class="nav-number">5.1.</span> <span class="nav-text">Servlet进阶API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet、ServletConfig与GenericServlet"><span class="nav-number">5.1.1.</span> <span class="nav-text">Servlet、ServletConfig与GenericServlet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这个过程只会在创建Servlet实例后发生一次"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">这个过程只会在创建Servlet实例后发生一次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">ServletConfig即每个Servlet设置的代表对象，容器会为每个Servlet设置信息产生一个Servlet及ServletConfig实例，GenericServlet同时实现了Servlet及ServletConfig</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用ServletConfig"><span class="nav-number">5.1.2.</span> <span class="nav-text">使用ServletConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用ServletContext"><span class="nav-number">5.1.3.</span> <span class="nav-text">使用ServletContext</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getRequestDispatcher"><span class="nav-number">5.1.3.1.</span> <span class="nav-text">getRequestDispatcher()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getResourcePaths"><span class="nav-number">5.1.3.2.</span> <span class="nav-text">getResourcePaths()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getResourceAsStream"><span class="nav-number">5.1.3.3.</span> <span class="nav-text">getResourceAsStream()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序事件、监听器"><span class="nav-number">5.2.</span> <span class="nav-text">应用程序事件、监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext事件、监听器"><span class="nav-number">5.2.1.</span> <span class="nav-text">ServletContext事件、监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletContextListenr与ServletContextAttributeListener"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">ServletContextListenr与ServletContextAttributeListener</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">getSessionCookieConfig取得SessionCookieConfig可以设置Name等属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletContextAttributeListener是监听属性改变的监听器"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">ServletContextAttributeListener是监听属性改变的监听器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSession事件、监听器"><span class="nav-number">5.2.2.</span> <span class="nav-text">HttpSession事件、监听器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpServletRequest事件、监听器"><span class="nav-number">5.2.3.</span> <span class="nav-text">HttpServletRequest事件、监听器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器"><span class="nav-number">5.3.</span> <span class="nav-text">过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器的概念"><span class="nav-number">5.3.1.</span> <span class="nav-text">过滤器的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现与设置过滤器"><span class="nav-number">5.3.2.</span> <span class="nav-text">实现与设置过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求封装器"><span class="nav-number">5.3.3.</span> <span class="nav-text">请求封装器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现字符替换过滤器"><span class="nav-number">5.3.3.1.</span> <span class="nav-text">实现字符替换过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现编码设置过滤器"><span class="nav-number">5.3.3.2.</span> <span class="nav-text">实现编码设置过滤器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应封装器"><span class="nav-number">5.3.4.</span> <span class="nav-text">响应封装器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步处理-略"><span class="nav-number">5.4.</span> <span class="nav-text">异步处理 略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用JSP"><span class="nav-number">6.</span> <span class="nav-text">使用JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从JSP到Servlet"><span class="nav-number">6.1.</span> <span class="nav-text">从JSP到Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSP生命周期"><span class="nav-number">6.1.1.</span> <span class="nav-text">JSP生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet到JSP的简单转换"><span class="nav-number">6.1.2.</span> <span class="nav-text">Servlet到JSP的简单转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指示元素"><span class="nav-number">6.1.3.</span> <span class="nav-text">指示元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三种常用指示类型"><span class="nav-number">6.1.3.1.</span> <span class="nav-text">三种常用指示类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#page常用键值对"><span class="nav-number">6.1.3.2.</span> <span class="nav-text">page常用键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#include用来将另一个网页的内容加入进来转译"><span class="nav-number">6.1.3.3.</span> <span class="nav-text">include用来将另一个网页的内容加入进来转译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明、Scriptlet与表达式元素"><span class="nav-number">6.1.4.</span> <span class="nav-text">声明、Scriptlet与表达式元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明元素的语法"><span class="nav-number">6.1.4.1.</span> <span class="nav-text">声明元素的语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义jspInit-与jspDestroy-方法"><span class="nav-number">6.1.4.2.</span> <span class="nav-text">定义jspInit()与jspDestroy()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scriptlet元素"><span class="nav-number">6.1.4.3.</span> <span class="nav-text">Scriptlet元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式元素"><span class="nav-number">6.1.4.4.</span> <span class="nav-text">表达式元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释元素"><span class="nav-number">6.1.5.</span> <span class="nav-text">注释元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式对象"><span class="nav-number">6.1.6.</span> <span class="nav-text">隐式对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#只能在-lt-gt-或-lt-gt-之间使用"><span class="nav-number">6.1.6.1.</span> <span class="nav-text">只能在<% %>或<%= %>之间使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性"><span class="nav-number">6.1.6.2.</span> <span class="nav-text">pageContext可以用来取得所有的隐式对象，并且可以设置页面范围属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-7错误处理"><span class="nav-number">6.1.7.</span> <span class="nav-text">6.1.7错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面"><span class="nav-number">6.1.7.1.</span> <span class="nav-text">可以自定义运行时异常发生时的处理页面，只要使用page指示元素时，设置errorPage属性来指定错误处理的JSP页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以再web-xml使用设置出现错误时自动转发到某个URL"><span class="nav-number">6.1.7.2.</span> <span class="nav-text">可以再web.xml使用设置出现错误时自动转发到某个URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于HTTP状态码转发至处理页面，则是搭配"><span class="nav-number">6.1.7.3.</span> <span class="nav-text">基于HTTP状态码转发至处理页面，则是搭配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准标签"><span class="nav-number">6.2.</span> <span class="nav-text">标准标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">6.2.2.</span> <span class="nav-text">  简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-jsp-useBean"><span class="nav-number">6.2.2.1.</span> <span class="nav-text"><jsp:useBean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaBean"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">JavaBean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">  简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用如果没有指定scope，则默认只会在page范围内查找user对象"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">使用如果没有指定scope，则默认只会在page范围内查找user对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谈谈Model1"><span class="nav-number">6.2.4.</span> <span class="nav-text">谈谈Model1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML格式标签"><span class="nav-number">6.2.5.</span> <span class="nav-text">XML格式标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式语言EL"><span class="nav-number">6.3.</span> <span class="nav-text">表达式语言EL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EL简介"><span class="nav-number">6.3.1.</span> <span class="nav-text">EL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以再web-xml中设置决定不使用EL"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">可以再web.xml中设置决定不使用EL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用EL取得属性"><span class="nav-number">6.3.2.</span> <span class="nav-text">使用EL取得属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#点运算符与-运算符需要说明"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">点运算符与[]运算符需要说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EL运算符"><span class="nav-number">6.3.3.</span> <span class="nav-text">EL运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义EL函数"><span class="nav-number">6.3.4.</span> <span class="nav-text">自定义EL函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法"><span class="nav-number">6.3.4.1.</span> <span class="nav-text">自定义EL函数的第一步是编写类，它必须是个公开类，想调用的方法必须是公开的、静态的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为-tld"><span class="nav-number">6.3.4.2.</span> <span class="nav-text">必须编写一个标签程序库描述TLD文件，这个文件是个XML文件，后缀为*.tld</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用JSTL"><span class="nav-number">7.</span> <span class="nav-text">使用JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL简介"><span class="nav-number">7.1.</span> <span class="nav-text">JSTL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#五大标签库"><span class="nav-number">7.1.0.1.</span> <span class="nav-text">五大标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入jstl"><span class="nav-number">7.1.0.2.</span> <span class="nav-text">引入jstl</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心标签库"><span class="nav-number">7.2.</span> <span class="nav-text">核心标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程处理标签"><span class="nav-number">7.2.1.</span> <span class="nav-text">流程处理标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#-1"><span class="nav-number">7.2.1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-2"><span class="nav-number">7.2.1.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-3"><span class="nav-number">7.2.1.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理标签"><span class="nav-number">7.2.2.</span> <span class="nav-text">错误处理标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页导入，重定向，URL处理标签"><span class="nav-number">7.2.3.</span> <span class="nav-text">网页导入，重定向，URL处理标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#也可以导入非目前Web应用中的网页-其中charEncoding指定编码"><span class="nav-number">7.2.3.1.</span> <span class="nav-text">也可以导入非目前Web应用中的网页 其中charEncoding指定编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以使用可以在用户关系Cookie功能时，自动用SessionID做URL重写"><span class="nav-number">7.2.3.2.</span> <span class="nav-text">可以使用可以在用户关系Cookie功能时，自动用SessionID做URL重写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性处理与输出标签"><span class="nav-number">7.2.4.</span> <span class="nav-text">属性处理与输出标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相当于-lt-session-serAttribute-“login”-”user”-gt"><span class="nav-number">7.2.4.1.</span> <span class="nav-text">相当于<% session.serAttribute(“login”,”user”); %></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移除标签"><span class="nav-number">7.2.4.2.</span> <span class="nav-text">移除标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置JavaBean或Map对象的键值，必须使用target属性"><span class="nav-number">7.2.4.3.</span> <span class="nav-text">设置JavaBean或Map对象的键值，必须使用target属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-4"><span class="nav-number">7.2.4.4.</span> <span class="nav-text"></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I18N兼容格式标签库"><span class="nav-number">7.3.</span> <span class="nav-text">I18N兼容格式标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础"><span class="nav-number">7.3.0.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于Java字符串"><span class="nav-number">7.3.0.2.</span> <span class="nav-text">关于Java字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于ResourceBundle"><span class="nav-number">7.3.0.3.</span> <span class="nav-text">关于ResourceBundle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息标签"><span class="nav-number">7.3.1.</span> <span class="nav-text">信息标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#-5"><span class="nav-number">7.3.1.1.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果有些部分必须动态决定，组可以使用占位符先代替"><span class="nav-number">7.3.1.2.</span> <span class="nav-text">如果有些部分必须动态决定，组可以使用占位符先代替</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置占位符中真正的内容需要使用标签"><span class="nav-number">7.3.1.3.</span> <span class="nav-text">设置占位符中真正的内容需要使用标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地区标签"><span class="nav-number">7.3.2.</span> <span class="nav-text">地区标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以设置地区偏好"><span class="nav-number">7.3.2.1.</span> <span class="nav-text">可以设置地区偏好</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以设置请求对象的编码处理"><span class="nav-number">7.3.2.2.</span> <span class="nav-text">可以设置请求对象的编码处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式标签"><span class="nav-number">7.3.3.</span> <span class="nav-text">格式标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同"><span class="nav-number">7.3.3.1.</span> <span class="nav-text">默认用来格式化数字，指定currency时，数字按货币进行格式化，currencySymbol可以用来指定货币，type指定percent时，数字按照百分比格式化，也可以指定pattern属性，与DecimalFormat的说明相同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#和用来解析日期"><span class="nav-number">7.3.3.2.</span> <span class="nav-text">和用来解析日期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMl标签库"><span class="nav-number">7.4.</span> <span class="nav-text">XMl标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XPath，XSTL基础"><span class="nav-number">7.4.1.</span> <span class="nav-text">XPath，XSTL基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XPath路径表示"><span class="nav-number">7.4.1.1.</span> <span class="nav-text">XPath路径表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XSLT基础"><span class="nav-number">7.4.1.2.</span> <span class="nav-text">XSLT基础</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析，设置与输出标签"><span class="nav-number">7.4.2.</span> <span class="nav-text">解析，设置与输出标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程处理标签-1"><span class="nav-number">7.4.3.</span> <span class="nav-text">流程处理标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件转换标签"><span class="nav-number">7.4.4.</span> <span class="nav-text">文件转换标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数标签库"><span class="nav-number">7.5.</span> <span class="nav-text">函数标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方式-fn-function-引入方式与core库一样"><span class="nav-number">7.5.0.1.</span> <span class="nav-text">使用方式:${fn:function()}引入方式与core库一样</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义标签"><span class="nav-number">8.</span> <span class="nav-text">自定义标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tag-File自定义标签"><span class="nav-number">8.1.</span> <span class="nav-text">Tag File自定义标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tag-File简介"><span class="nav-number">8.1.1.</span> <span class="nav-text">Tag File简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理标签属性与Body"><span class="nav-number">8.1.2.</span> <span class="nav-text">处理标签属性与Body</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TLD文件"><span class="nav-number">8.1.3.</span> <span class="nav-text">TLD文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Tag-自定义标签"><span class="nav-number">8.2.</span> <span class="nav-text">Simple Tag 自定义标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-2"><span class="nav-number">8.2.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模仿JSTL的标签功能"><span class="nav-number">8.2.1.1.</span> <span class="nav-text">模仿JSTL的标签功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为了让容器了解与标签IfTag标签处理器之间的关系，要定义一个TLD文件"><span class="nav-number">8.2.1.2.</span> <span class="nav-text">为了让容器了解与标签IfTag标签处理器之间的关系，要定义一个TLD文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解API架构与生命周期"><span class="nav-number">8.2.2.</span> <span class="nav-text">了解API架构与生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理步骤"><span class="nav-number">8.2.2.1.</span> <span class="nav-text">处理步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理标签属性与Body-1"><span class="nav-number">8.2.3.</span> <span class="nav-text">处理标签属性与Body</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模仿一个标签"><span class="nav-number">8.2.3.1.</span> <span class="nav-text">模仿一个标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLD文件-1"><span class="nav-number">8.2.3.2.</span> <span class="nav-text">TLD文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小写转成大写的标签"><span class="nav-number">8.2.3.3.</span> <span class="nav-text">小写转成大写的标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLD文件略"><span class="nav-number">8.2.3.4.</span> <span class="nav-text">TLD文件略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与父标签沟通如"><span class="nav-number">8.2.4.</span> <span class="nav-text">与父标签沟通如</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chooseTag"><span class="nav-number">8.2.4.1.</span> <span class="nav-text">chooseTag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whenTag"><span class="nav-number">8.2.4.2.</span> <span class="nav-text">whenTag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#otherwiseTag"><span class="nav-number">8.2.4.3.</span> <span class="nav-text">otherwiseTag</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TLD文件-2"><span class="nav-number">8.2.5.</span> <span class="nav-text">TLD文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tag自定义标签"><span class="nav-number">8.3.</span> <span class="nav-text">Tag自定义标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-3"><span class="nav-number">8.3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解架构与生命周期"><span class="nav-number">8.3.2.</span> <span class="nav-text">了解架构与生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复执行标签body"><span class="nav-number">8.3.3.</span> <span class="nav-text">重复执行标签body</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次"><span class="nav-number">8.3.3.1.</span> <span class="nav-text">doStartTag已经处理过一次Body的内容，doAfterBody开始的是第二次</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理Body运行的结果"><span class="nav-number">8.3.4.</span> <span class="nav-text">处理Body运行的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与父标签沟通"><span class="nav-number">8.3.5.</span> <span class="nav-text">与父标签沟通</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

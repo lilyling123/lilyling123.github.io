@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="无向图的抽象定义
+构建无向图  
+图的搜索的抽象定义
+深度优先搜索  
+广度优先搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无向图与遍历无向图">
+<meta property="og:url" content="http://yoursite.com/2017/02/25/无向图/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="无向图的抽象定义
+构建无向图  
+图的搜索的抽象定义
+深度优先搜索  
+广度优先搜索">
+<meta property="og:updated_time" content="2017-02-25T12:09:18.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无向图与遍历无向图">
+<meta name="twitter:description" content="无向图的抽象定义
+构建无向图  
+图的搜索的抽象定义
+深度优先搜索  
+广度优先搜索">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/25/无向图/"/>
+
+
+
+
+
+  <title> 无向图与遍历无向图 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/25/无向图/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                无向图与遍历无向图
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-25T19:59:51+08:00">
+                2017-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>无向图的抽象定义</li>
+<li>构建无向图  </li>
+<li>图的搜索的抽象定义</li>
+<li>深度优先搜索  </li>
+<li>广度优先搜索<a id="more"></a>
+<h2 id="无向图的抽象定义以及操作图的常用静态方法"><a href="#无向图的抽象定义以及操作图的常用静态方法" class="headerlink" title="无向图的抽象定义以及操作图的常用静态方法"></a>无向图的抽象定义以及操作图的常用静态方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public abstract class Graph &#123;</div><div class="line"></div><div class="line">    //返回顶点数</div><div class="line">    public abstract int V();</div><div class="line"></div><div class="line">    //返回边数</div><div class="line">    public abstract int E();</div><div class="line"></div><div class="line">    //返回顶点的相邻顶点的集合</div><div class="line">    public Iterable&lt;Integer&gt; adj(int t) &#123;</div><div class="line">        <span class="built_in">return</span> null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    static int degree(Graph G, Integer v) &#123;</div><div class="line">        int degree = 0;</div><div class="line">        <span class="keyword">for</span> (int w : G.adj(v)) &#123;</div><div class="line">            degree++;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> degree;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static int maxDegree(Graph G) &#123;</div><div class="line">        int max = 0;</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; G.V(); i++) &#123;</div><div class="line">            <span class="keyword">for</span> (int w : G.adj(i)) &#123;</div><div class="line">                max = degree(G, w);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> max;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static double avgDegree(Graph G) &#123;</div><div class="line">        <span class="built_in">return</span> 2.0 * G.E() / G.V();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static int numberOfSelfLoops(Graph G) &#123;</div><div class="line">        int count = 0;</div><div class="line">        <span class="keyword">for</span> (int v = 0; v &lt; G.V(); v++) &#123;</div><div class="line">            <span class="keyword">for</span> (int w : G.adj(v)) &#123;</div><div class="line">                <span class="keyword">if</span> (v == w) count++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> count;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构"><a href="#构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构" class="headerlink" title="构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构"></a>构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/*</div><div class="line">* 使用的是邻接表数组表示法</div><div class="line">* 使用的是数组构建图，数组的第一个数字表示图的顶点数,此后每两个数字构成一条边</div><div class="line"> */</div><div class="line">public class UnDiGraph extends Graph&#123;</div><div class="line">    //记录顶点数</div><div class="line">    private final int V;</div><div class="line">    //记录边数</div><div class="line">    private int E;</div><div class="line">    //邻接表数组</div><div class="line">    private Bag&lt;Integer&gt;[] adj;</div><div class="line"></div><div class="line">    private UnDiGraph(int v) &#123;</div><div class="line">        this.V = v;</div><div class="line">        this.E = 0;</div><div class="line">        adj = new Bag[v];</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; V; i++) &#123;</div><div class="line">            adj[i] = new Bag&lt;&gt;();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public UnDiGraph(int[] <span class="keyword">in</span>) &#123;</div><div class="line">        this(<span class="keyword">in</span>[0]);</div><div class="line">        <span class="keyword">if</span> (in.length &lt; 1 || (in.length-1) % 2 != 0) throw new RuntimeException(<span class="string">"构建数组输入错误"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (int i = 2; i &lt; in.length; i = i + 2) &#123;</div><div class="line">            addEdge(<span class="keyword">in</span>[i - 1], <span class="keyword">in</span>[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">V</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> V;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">E</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> E;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void addEdge(int v, int w) &#123;</div><div class="line">        adj[v].add(w);</div><div class="line">        adj[w].add(v);</div><div class="line">        E++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterable&lt;Integer&gt; adj(int v) &#123;</div><div class="line">        <span class="built_in">return</span> adj[v];</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        UnDiGraph ud = new UnDiGraph(new int[]&#123;5, 0, 1, 1, 2, 2, 3, 3, 4, 0, 4&#125;);</div><div class="line">        Iterable&lt;Integer&gt; it = ud.adj(0);</div><div class="line">        Iterator&lt;Integer&gt; ite = it.iterator();</div><div class="line">        <span class="keyword">while</span> (ite.hasNext())</div><div class="line">            System.out.println(ite.next());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="图的搜索的抽象定义"><a href="#图的搜索的抽象定义" class="headerlink" title="图的搜索的抽象定义"></a>图的搜索的抽象定义</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public abstract class Search &#123;</div><div class="line">    //寻找和起点s连通的所有顶点</div><div class="line">    public Search(Graph G,int s) &#123;</div><div class="line">    &#125;</div><div class="line">    //v和s是连通的吗</div><div class="line">    public abstract boolean marked(int v);</div><div class="line">    //与s连通的总顶点数</div><div class="line">    public abstract int count();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class DepthFirstSearch &#123;</div><div class="line">    //顶点标识数组，标记顶点是否被访问过</div><div class="line">    private boolean[] marked;</div><div class="line">    //与顶点s连接的顶点数</div><div class="line">    private int count;</div><div class="line"></div><div class="line">    public DepthFirstSearch(Graph G, int s) &#123;</div><div class="line">        super(G, s);</div><div class="line">        marked = new boolean[G.V()];</div><div class="line">        dfs(G, s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void dfs(Graph g, int v) &#123;</div><div class="line">        marked[v] = <span class="literal">true</span>;</div><div class="line">        count++;</div><div class="line">        <span class="keyword">for</span> (int w : g.adj(v)) &#123;</div><div class="line">            <span class="keyword">if</span> (!marked[w]) dfs(g, w);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public boolean marked(int v) &#123;</div><div class="line">        <span class="built_in">return</span> marked[v];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int <span class="function"><span class="title">count</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> count;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class WidthFirstSearch extends Search &#123;</div><div class="line">    //顶点标识数组，标记顶点是否被访问过</div><div class="line">    private boolean[] marked;</div><div class="line">    //与顶点s连接的顶点数</div><div class="line">    private int count;</div><div class="line">    //使用一个队列使未访问过的顶点依次入队</div><div class="line">    private Queue&lt;Integer&gt; pq;</div><div class="line"></div><div class="line">    public WidthFirstSearch(Graph G, int s) &#123;</div><div class="line">        super(G, s);</div><div class="line">        pq = new Queue&lt;&gt;();</div><div class="line">        pq.enqueue(s);</div><div class="line">        <span class="keyword">while</span> (!pq.isEmpty()) &#123;</div><div class="line">            count++;</div><div class="line">            int v = pq.dequeue();</div><div class="line">            <span class="keyword">if</span> (!marked[v])</div><div class="line">                wfs(G, v);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void wfs(Graph g, int v) &#123;</div><div class="line">        marked[v] = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (int w : g.adj(v)) &#123;</div><div class="line">            <span class="keyword">if</span> (!marked[w])</div><div class="line">                pq.enqueue(w);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean marked(int v) &#123;</div><div class="line">        <span class="built_in">return</span> marked[v];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int <span class="function"><span class="title">count</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> count;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/25/红黑树/" rel="next" title="红黑树">
+                <i class="fa fa-chevron-left"></i> 红黑树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/25/无向图的路径、环、子图和符号图/" rel="prev" title="无向图的路径查找、环查找、子图以及符号图的实现">
+                无向图的路径查找、环查找、子图以及符号图的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#无向图的抽象定义以及操作图的常用静态方法"><span class="nav-number">1.</span> <span class="nav-text">无向图的抽象定义以及操作图的常用静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构"><span class="nav-number">2.</span> <span class="nav-text">构建无向图：使用的Bag是之前实现过的一种简单的、无序的、可迭代的线性数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的搜索的抽象定义"><span class="nav-number">3.</span> <span class="nav-text">图的搜索的抽象定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">4.</span> <span class="nav-text">深度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">5.</span> <span class="nav-text">广度优先搜索</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
