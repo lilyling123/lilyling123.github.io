@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="构建有向图  
+深度优先搜索
+有向图的环的检测  
+有向图的深度优先遍历次序
+有向图的联通性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有向图、有向图的遍历算法以及拓扑排序">
+<meta property="og:url" content="http://yoursite.com/2017/03/07/最小生成树/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="构建有向图  
+深度优先搜索
+有向图的环的检测  
+有向图的深度优先遍历次序
+有向图的联通性">
+<meta property="og:updated_time" content="2017-03-07T02:48:18.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有向图、有向图的遍历算法以及拓扑排序">
+<meta name="twitter:description" content="构建有向图  
+深度优先搜索
+有向图的环的检测  
+有向图的深度优先遍历次序
+有向图的联通性">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/07/最小生成树/"/>
+
+
+
+
+
+  <title> 有向图、有向图的遍历算法以及拓扑排序 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/最小生成树/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                有向图、有向图的遍历算法以及拓扑排序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T10:13:29+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>构建有向图  </li>
+<li>深度优先搜索</li>
+<li>有向图的环的检测  </li>
+<li>有向图的深度优先遍历次序</li>
+<li>有向图的联通性<a id="more"></a>
+</li>
+</ol>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>贪心算法就是选择当前顶点的权重最小的边，即走向为局部情况最有利的状况</p>
+<h2 id="加权无向图"><a href="#加权无向图" class="headerlink" title="加权无向图"></a>加权无向图</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/19.</div><div class="line"> */</div><div class="line">public class EdgeWeightedGraph &#123;</div><div class="line">    private final int V;</div><div class="line">    private int E;</div><div class="line">    private Bag&lt;Edge&gt;[] adj;</div><div class="line"></div><div class="line">    public EdgeWeightedGraph(int V) &#123;</div><div class="line">        this.V = V;</div><div class="line">        adj = new Bag[V];</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; V; i++) &#123;</div><div class="line">            adj[i] = new Bag&lt;&gt;();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //数组<span class="keyword">in</span>的0位表示该图的顶点数，此后每两个数字配对形成一条边，并且权重为响应的weight数组中的值</div><div class="line">    public EdgeWeightedGraph(int[] <span class="keyword">in</span>, double[] weight) &#123;</div><div class="line">        this(<span class="keyword">in</span>[0]);</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; weight.length; i++) &#123;</div><div class="line">            int n = 2 * i + 1;</div><div class="line">            Edge e = new Edge(<span class="keyword">in</span>[n], <span class="keyword">in</span>[n + 1], weight[i]);</div><div class="line">            addEdge(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void addEdge(Edge e) &#123;</div><div class="line">        int v = e.either();</div><div class="line">        int w = e.other(v);</div><div class="line">        adj[v].add(e);</div><div class="line">        adj[w].add(e);</div><div class="line">        E++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">V</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> V;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">E</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> E;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterable&lt;Edge&gt; adj(int v) &#123;</div><div class="line">        <span class="built_in">return</span> adj[v];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterable&lt;Edge&gt; <span class="function"><span class="title">edges</span></span>() &#123;</div><div class="line">        Bag&lt;Edge&gt; b = new Bag&lt;&gt;();</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (int v = 0; v &lt; V; v++) &#123;</div><div class="line">            <span class="keyword">for</span> (Edge e : adj[v])</div><div class="line">                <span class="keyword">if</span> (e.other(v) &gt; v)</div><div class="line">                    b.add(e);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> b;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</div><div class="line">        StringBuilder sb = new StringBuilder();</div><div class="line">        sb.append(<span class="string">"&#123;"</span>);</div><div class="line">        Iterator&lt;Edge&gt; it = edges().iterator();</div><div class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">            Edge e = it.next();</div><div class="line">            sb.append(e.either() + <span class="string">"--"</span> + e.other(e.either()) + <span class="string">":"</span> + e.weight() + <span class="string">" ,"</span>);</div><div class="line">        &#125;</div><div class="line">        sb.append(<span class="string">"&#125;"</span>);</div><div class="line">        <span class="keyword">if</span> (sb.length() &gt; 2)</div><div class="line">            sb.replace(sb.lastIndexOf(<span class="string">","</span>), sb.lastIndexOf(<span class="string">","</span>) + 1, <span class="string">""</span>);</div><div class="line"></div><div class="line">        <span class="built_in">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[] <span class="keyword">in</span> = new int[]&#123;3, 0, 1, 1, 2&#125;;</div><div class="line">        double[] weight = new double[]&#123;0.5, 1.2&#125;;</div><div class="line">        EdgeWeightedGraph ewg = new EdgeWeightedGraph(<span class="keyword">in</span>, weight);</div><div class="line">        System.out.println(ewg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Prim算法的延时实现"><a href="#Prim算法的延时实现" class="headerlink" title="Prim算法的延时实现"></a>Prim算法的延时实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/19.</div><div class="line"> * 优先级队列</div><div class="line"> */	</div><div class="line">public class LazyPrimMST &#123;</div><div class="line">    private boolean[] marked;//记录顶点是否已经被访问过</div><div class="line">    private Queue&lt;Edge&gt; mst;//存储最小生成树的边</div><div class="line">    private M<span class="keyword">in</span>PQ&lt;Edge&gt; pq;//存储横切边</div><div class="line"></div><div class="line">    public LazyPrimMST(EdgeWeightedGraph G) &#123;</div><div class="line">        marked = new boolean[G.V()];</div><div class="line">        pq = new M<span class="keyword">in</span>PQ&lt;&gt;();</div><div class="line">        mst = new Queue&lt;&gt;();</div><div class="line">        visit(G, 0);</div><div class="line">        <span class="keyword">while</span> (!pq.isEmpty()) &#123;</div><div class="line">            //每轮循环都会从pq中取出一条权重最小的边，因此循环可退出</div><div class="line">            Edge e = pq.delM<span class="keyword">in</span>();</div><div class="line">            int v = e.either();</div><div class="line">            int w = e.other(v);</div><div class="line">            //跳过失效的边</div><div class="line">            <span class="keyword">if</span> (marked[v] &amp;&amp; marked[w]) <span class="built_in">continue</span>;</div><div class="line">            mst.enqueue(e);</div><div class="line">            //访问未被访问过的顶点</div><div class="line">            <span class="keyword">if</span> (!marked[v]) visit(G, v);</div><div class="line">            <span class="keyword">if</span> (!marked[w]) visit(G, w);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void visit(EdgeWeightedGraph g, int v) &#123;</div><div class="line">        //标记顶点已经被访问过</div><div class="line">        marked[v] = <span class="literal">true</span>;</div><div class="line">        //将未失效的边加入pq</div><div class="line">        <span class="keyword">for</span> (Edge e : g.adj(v)) &#123;</div><div class="line">            <span class="keyword">if</span> (!marked[e.other(v)])</div><div class="line">                pq.insert(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterable&lt;Edge&gt; <span class="function"><span class="title">edges</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> mst;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public double <span class="function"><span class="title">weight</span></span>() &#123;</div><div class="line">        double weight = 0.0;</div><div class="line">        <span class="keyword">for</span> (Edge e : edges()) &#123;</div><div class="line">            weight += e.weight();</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> weight;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Prim算法的即时实现"><a href="#Prim算法的即时实现" class="headerlink" title="Prim算法的即时实现"></a>Prim算法的即时实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/2/20.</div><div class="line"> * 使用了索引优先级队列</div><div class="line"> */</div><div class="line">public class PrimMST &#123;</div><div class="line">    //通往该顶点的边</div><div class="line">    private Edge[] edgeTo;</div><div class="line">    //通往该顶点的边的权重</div><div class="line">    private double[] distTo;</div><div class="line">    //顶点访问数组</div><div class="line">    private boolean[] marked;</div><div class="line">    private Queue&lt;Edge&gt; mst;</div><div class="line">    private IndexM<span class="keyword">in</span>PQ&lt;Double&gt; pq;</div><div class="line"></div><div class="line">    public PrimMST(EdgeWeightedGraph G) &#123;</div><div class="line">        edgeTo = new Edge[G.V()];</div><div class="line">        distTo = new double[G.V()];</div><div class="line">        marked = new boolean[G.V()];</div><div class="line">        mst = new Queue&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; G.V(); i++) &#123;</div><div class="line">            distTo[i] = Double.POSITIVE_INFINITY;</div><div class="line">        &#125;</div><div class="line">        pq = new IndexM<span class="keyword">in</span>PQ&lt;&gt;(G.V());</div><div class="line">        distTo[0] = 0.0;</div><div class="line">        pq.insert(0, distTo[0]);</div><div class="line">        <span class="keyword">while</span> (!pq.isEmpty())</div><div class="line">            visit(G, pq.delM<span class="keyword">in</span>());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">	*	可以想象，由起始顶点出发，逐步构建一颗树，每次只在优先队列中保存每个非树顶点w与树中顶点连接起来的权重最小的那条边.</div><div class="line">	*	w与树中其他顶点的连接边迟早都是要失效的，所以没有必要保存它们，因而极大地提升了效率</div><div class="line">	*/</div><div class="line">    private void visit(EdgeWeightedGraph g, int v) &#123;</div><div class="line">        marked[v] = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (Edge e : g.adj(v)) &#123;</div><div class="line">            int w = e.other(v);</div><div class="line">            <span class="keyword">if</span> (marked[w]) <span class="built_in">continue</span>;</div><div class="line">            <span class="keyword">if</span> (e.weight() &lt; distTo[w]) &#123;</div><div class="line">                edgeTo[w] = e;</div><div class="line">                distTo[w] = e.weight();</div><div class="line">                <span class="keyword">if</span> (pq.contains(w)) pq.change(w, distTo[w]);</div><div class="line">                <span class="keyword">else</span>                pq.insert(w, distTo[w]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterable&lt;Edge&gt; <span class="function"><span class="title">edges</span></span>() &#123;</div><div class="line">        <span class="keyword">for</span> (int i = 1; i &lt; edgeTo.length; i++) &#123;</div><div class="line">            mst.enqueue(edgeTo[i]);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> mst;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public double <span class="function"><span class="title">weight</span></span>() &#123;</div><div class="line">        double weight = 0.0;</div><div class="line">        <span class="keyword">for</span> (Edge e : edges()) &#123;</div><div class="line">            weight += e.weight();</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">return</span> weight;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/07/有向图及其遍历算法和拓扑排序/" rel="next" title="有向图、有向图的遍历算法以及拓扑排序">
+                <i class="fa fa-chevron-left"></i> 有向图、有向图的遍历算法以及拓扑排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/07/MyBatis学习笔记/" rel="prev" title="MyBatis学习笔记">
+                MyBatis学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法"><span class="nav-number">1.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加权无向图"><span class="nav-number">2.</span> <span class="nav-text">加权无向图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim算法的延时实现"><span class="nav-number">3.</span> <span class="nav-text">Prim算法的延时实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim算法的即时实现"><span class="nav-number">4.</span> <span class="nav-text">Prim算法的即时实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal算法"><span class="nav-number">5.</span> <span class="nav-text">Kruskal算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
