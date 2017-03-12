@@ -1,0 +1,834 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Spring事务管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring事务管理">
+<meta property="og:url" content="http://yoursite.com/2017/03/08/spring事务管理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Spring事务管理">
+<meta property="og:updated_time" content="2017-03-08T13:07:02.868Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring事务管理">
+<meta name="twitter:description" content="Spring事务管理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/08/spring事务管理/"/>
+
+
+
+
+
+  <title> Spring事务管理 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/spring事务管理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring事务管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T20:24:20+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Spring事务管理<br><a id="more"></a></p>
+<h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><h2 id="回顾事务"><a href="#回顾事务" class="headerlink" title="回顾事务"></a>回顾事务</h2><pre><code>事务：一组业务操作ABCD，要么全部成功，要么全部不成功。
+特性：ACID
+    原子性：整体
+    一致性：完成
+    隔离性：并发
+    持久性：结果
+隔离问题：
+脏读：一个事务读到另一个事务没有提交的数据
+不可重复读：一个事务读到另一个事务已提交的数据（update）
+虚读(幻读)：一个事务读到另一个事务已提交的数据（insert）
+</code></pre><h2 id="事务管理介绍"><a href="#事务管理介绍" class="headerlink" title="事务管理介绍"></a>事务管理介绍</h2><h3 id="导入jar包"><a href="#导入jar包" class="headerlink" title="导入jar包"></a>导入jar包</h3><p>spring-tx</p>
+<h3 id="三个顶级接口"><a href="#三个顶级接口" class="headerlink" title="三个顶级接口"></a>三个顶级接口</h3><pre><code>PlatformTransactionManager  平台事务管理器，spring要管理事务，必须使用事务管理器
+    进行事务配置时，必须配置事务管理器。
+TransactionDefinition：事务详情（事务定义、事务属性），spring用于确定事务具体详情，
+    例如：隔离级别、是否只读、超时时间 等
+    进行事务配置时，必须配置详情。spring将配置项封装到该对象实例。
+TransactionStatus：事务状态，spring用于记录当前事务运行状态。例如：是否有保存点，事务是否完成。
+    spring底层根据状态进行相应操作。
+</code></pre><h3 id="2-2-3-PlatformTransactionManager-事务管理器"><a href="#2-2-3-PlatformTransactionManager-事务管理器" class="headerlink" title="2.2.3    PlatformTransactionManager  事务管理器"></a>2.2.3    PlatformTransactionManager  事务管理器</h3><h4 id="导入jar包-1"><a href="#导入jar包-1" class="headerlink" title="导入jar包"></a>导入jar包</h4><p>spring-jdbc<br>spring-orm整合Hibernate<br>spring-tx</p>
+<h4 id="常见的事务管理"><a href="#常见的事务管理" class="headerlink" title="常见的事务管理"></a>常见的事务管理</h4><ol>
+<li>DataSourceTransactionManager  ，jdbc开发时事务管理器，采用JdbcTemplate</li>
+<li>HibernateTransactionManager，hibernate开发时事务管理器，整合hibernate<h4 id="api详解"><a href="#api详解" class="headerlink" title="api详解"></a>api详解</h4> TransactionStatus getTransaction(TransactionDefinition definition) ，事务管理器 通过“事务详情”，获得“事务状态”，从而管理事务。<br> void commit(TransactionStatus status)  根据状态提交<br> void rollback(TransactionStatus status) 根据状态回滚<h4 id="事务传播"><a href="#事务传播" class="headerlink" title="事务传播"></a>事务传播</h4> PROPAGATION_REQUIRED , required , 必须  【默认值】<pre><code>支持当前事务，A如果有事务，B将使用该事务。
+如果A没有事务，B将创建一个新的事务。
+</code></pre> PROPAGATION_SUPPORTS ，supports ，支持<pre><code>支持当前事务，A如果有事务，B将使用该事务。
+如果A没有事务，B将以非事务执行。
+</code></pre> PROPAGATION_MANDATORY，mandatory ，强制<pre><code>支持当前事务，A如果有事务，B将使用该事务。
+如果A没有事务，B将抛异常。
+</code></pre> PROPAGATION_REQUIRES_NEW ， requires_new ，必须新的<pre><code>如果A有事务，将A的事务挂起，B创建一个新的事务
+如果A没有事务，B创建一个新的事务
+</code></pre> PROPAGATION_NOT_SUPPORTED ，not_supported ,不支持<pre><code>如果A有事务，将A的事务挂起，B将以非事务执行
+如果A没有事务，B将以非事务执行
+</code></pre> PROPAGATION_NEVER ，never，从不<pre><code>如果A有事务，B将抛异常
+如果A没有事务，B将以非事务执行
+</code></pre> PROPAGATION_NESTED ，nested ，嵌套<pre><code>A和B底层采用保存点机制，形成嵌套事务。
+</code></pre></li>
+</ol>
+<h2 id="案例：转账"><a href="#案例：转账" class="headerlink" title="案例：转账"></a>案例：转账</h2><h3 id="搭建环境：没有事务"><a href="#搭建环境：没有事务" class="headerlink" title="搭建环境：没有事务"></a>搭建环境：没有事务</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><pre><code>create database transatiomana;
+use transatiomana;
+create table account(
+  id int primary key auto_increment,
+  username varchar(50),
+  money int
+);
+insert into account(username,money) values(&apos;jack&apos;,&apos;10000&apos;);
+insert into account(username,money) values(&apos;rose&apos;,&apos;10000&apos;);
+</code></pre><h4 id="导入jar包-2"><a href="#导入jar包-2" class="headerlink" title="导入jar包"></a>导入jar包</h4><pre><code>核心：4+1
+aop ： 4 (aop联盟、spring aop、aspectj规范、spring aspect)
+数据库：2  （jdbc/tx）
+驱动：mysql
+连接池：c3p0
+</code></pre><h4 id="dao层"><a href="#dao层" class="headerlink" title="dao层"></a>dao层</h4><pre><code>public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+    @Override
+    public void out(String outer, Integer money) {
+        this.getJdbcTemplate().update(&quot;update account set money = money - ? where username = ?&quot;, money,outer);
+    }
+    @Override
+    public void in(String inner, Integer money) {
+        this.getJdbcTemplate().update(&quot;update account set money = money + ? where username = ?&quot;, money,inner);
+    }
+}
+</code></pre><h4 id="service层"><a href="#service层" class="headerlink" title="service层"></a>service层</h4><pre><code>public class AccountServiceImpl implements AccountService {
+    private AccountDao accountDao;
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+    @Override
+    public void transfer(String outer, String inner, Integer money) {
+        accountDao.out(outer, money);
+        //异常
+        //int i = 1/0;
+        accountDao.in(inner, money);
+    }
+
+}
+</code></pre><h4 id="spring配置"><a href="#spring配置" class="headerlink" title="spring配置"></a>spring配置</h4><pre><code>&lt;!-- 1 datasource --&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql://localhost:3306/ee19_spring_day03&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;user&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;password&quot; value=&quot;1234&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 2 dao  --&gt;
+&lt;bean id=&quot;accountDao&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 3 service --&gt;
+&lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.impl.AccountServiceImpl&quot;&gt;
+    &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>@Test
+public void demo01(){
+    String xmlPath = &quot;applicationContext.xml&quot;;
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
+    AccountService accountService =  (AccountService) applicationContext.getBean(&quot;accountService&quot;);
+    accountService.transfer(&quot;jack&quot;, &quot;rose&quot;, 1000);
+}
+</code></pre><h3 id="手动管理事务"><a href="#手动管理事务" class="headerlink" title="手动管理事务"></a>手动管理事务</h3><pre><code>spring底层使用 TransactionTemplate 事务模板进行操作。
+操作
+1.service 需要获得 TransactionTemplate 
+2.spring 配置模板，并注入给service
+3.模板需要注入事务管理器
+4.配置事务管理器：DataSourceTransactionManager ，需要注入DataSource
+</code></pre><h4 id="修改service"><a href="#修改service" class="headerlink" title="修改service"></a>修改service</h4><pre><code>//需要spring注入模板
+private TransactionTemplate transactionTemplate;
+public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+    this.transactionTemplate = transactionTemplate;
+}
+@Override
+public void transfer(final String outer,final String inner,final Integer money) {
+    transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+
+        @Override
+        protected void doInTransactionWithoutResult(TransactionStatus arg0) {
+            accountDao.out(outer, money);
+            //异常
+            //int i = 1/0;
+            accountDao.in(inner, money);
+        }
+    });
+}
+</code></pre><h4 id="修改spring配置"><a href="#修改spring配置" class="headerlink" title="修改spring配置"></a>修改spring配置</h4><pre><code>&lt;!-- 3 service --&gt;
+&lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.impl.AccountServiceImpl&quot;&gt;
+    &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;transactionTemplate&quot; ref=&quot;transactionTemplate&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 4 创建模板 --&gt;
+&lt;bean id=&quot;transactionTemplate&quot; class=&quot;org.springframework.transaction.support.TransactionTemplate&quot;&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;txManager&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 5 配置事务管理器 ,管理器需要事务，事务从Connection获得，连接从连接池DataSource获得 --&gt;
+&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h3 id="2-3-3-工厂bean-生成代理：半自动"><a href="#2-3-3-工厂bean-生成代理：半自动" class="headerlink" title="2.3.3    工厂bean 生成代理：半自动"></a>2.3.3    工厂bean 生成代理：半自动</h3><pre><code>spring提供 管理事务的代理工厂bean TransactionProxyFactoryBean
+1.getBean() 获得代理对象
+2.spring 配置一个代理
+</code></pre><h4 id="spring配置-1"><a href="#spring配置-1" class="headerlink" title="spring配置"></a>spring配置</h4><pre><code>&lt;!-- 4 service 代理对象 
+    4.1 proxyInterfaces 接口 
+    4.2 target 目标类
+    4.3 transactionManager 事务管理器
+    4.4 transactionAttributes 事务属性（事务详情）
+        prop.key ：确定哪些方法使用当前事务配置
+        prop.text:用于配置事务详情
+            格式：PROPAGATION,ISOLATION,readOnly,-Exception,+Exception
+                传播行为        隔离级别    是否只读        异常回滚        异常提交
+            例如：
+                &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&lt;/prop&gt; 默认传播行为，和隔离级别
+                &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly&lt;/prop&gt; 只读
+                &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT,+java.lang.ArithmeticException&lt;/prop&gt;  有异常扔提交
+--&gt;
+&lt;bean id=&quot;proxyAccountService&quot; class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;
+    &lt;property name=&quot;proxyInterfaces&quot; value=&quot;com.itheima.service.AccountService&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;target&quot; ref=&quot;accountService&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;txManager&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;transactionAttributes&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 5 事务管理器 --&gt;
+&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><pre><code>public class TestAPP{
+    @Test
+    public void demo1(){
+        String xmlPath = &quot;applicationContext.xml&quot;;
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
+        //注意在此处获取的是proxyAccountService
+        AccountService accountService = (AccountService) applicationContext.getBean(&quot;proxyAccountService&quot;);
+        accountService.transfer(&quot;jack&quot;,&quot;rose&quot;,1000);
+
+}
+</code></pre><h3 id="AOP配置基于xml"><a href="#AOP配置基于xml" class="headerlink" title="AOP配置基于xml"></a>AOP配置基于xml</h3><pre><code>&lt;!-- 4 事务管理 --&gt;
+&lt;!-- 4.1 事务管理器 --&gt;
+&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 4.2 事务详情（事务通知）  ， 在aop筛选基础上，对ABC三个确定使用什么样的事务。例如：AC读写、B只读 等
+    &lt;tx:attributes&gt; 用于配置事务详情（属性属性）
+        &lt;tx:method name=&quot;&quot;/&gt; 详情具体配置
+            propagation 传播行为 ， REQUIRED：必须；REQUIRES_NEW:必须是新的
+            isolation 隔离级别
+--&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;txManager&quot;&gt;
+    &lt;tx:attributes&gt;
+        &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot; isolation=&quot;DEFAULT&quot;/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+&lt;!-- 4.3 AOP编程，目标类有ABCD（4个连接点），切入点表达式 确定增强的连接器，从而获得切入点：ABC --&gt;
+&lt;aop:config&gt;
+    &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut=&quot;execution(* com.itheima.service..*.*(..))&quot;/&gt;
+&lt;/aop:config&gt;
+</code></pre><h3 id="AOP配置基于注解"><a href="#AOP配置基于注解" class="headerlink" title="AOP配置基于注解"></a>AOP配置基于注解</h3><pre><code>&lt;!-- 4 事务管理 --&gt;
+&lt;!-- 4.1 事务管理器 --&gt;
+&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 4.2 将管理器交予spring 
+    * transaction-manager 配置事务管理器
+    * proxy-target-class
+        true ： 底层强制使用cglib 代理
+--&gt;
+&lt;tx:annotation-driven transaction-manager=&quot;txManager&quot;/&gt;
+</code></pre><hr>
+<h4 id="service"><a href="#service" class="headerlink" title="service"></a>service</h4><p>类名上加上@Transactional,如@Transactional(propagation=Propagation.REQUIRED , isolation = Isolation.DEFAULT)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/08/Spring学习笔记2/" rel="next" title="Spring学习笔记1">
+                <i class="fa fa-chevron-left"></i> Spring学习笔记1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事务管理"><span class="nav-number">1.</span> <span class="nav-text">事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾事务"><span class="nav-number">1.1.</span> <span class="nav-text">回顾事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务管理介绍"><span class="nav-number">1.2.</span> <span class="nav-text">事务管理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入jar包"><span class="nav-number">1.2.1.</span> <span class="nav-text">导入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个顶级接口"><span class="nav-number">1.2.2.</span> <span class="nav-text">三个顶级接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-PlatformTransactionManager-事务管理器"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.2.3    PlatformTransactionManager  事务管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入jar包-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">导入jar包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的事务管理"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">常见的事务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#api详解"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">api详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务传播"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">事务传播</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例：转账"><span class="nav-number">1.3.</span> <span class="nav-text">案例：转账</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建环境：没有事务"><span class="nav-number">1.3.1.</span> <span class="nav-text">搭建环境：没有事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入jar包-2"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">导入jar包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dao层"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">dao层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#service层"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spring配置"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">spring配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动管理事务"><span class="nav-number">1.3.2.</span> <span class="nav-text">手动管理事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改service"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">修改service</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改spring配置"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">修改spring配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-工厂bean-生成代理：半自动"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3.3    工厂bean 生成代理：半自动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#spring配置-1"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">spring配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-1"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP配置基于xml"><span class="nav-number">1.3.4.</span> <span class="nav-text">AOP配置基于xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP配置基于注解"><span class="nav-number">1.3.5.</span> <span class="nav-text">AOP配置基于注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#service"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">service</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
