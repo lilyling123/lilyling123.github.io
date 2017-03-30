@@ -1,0 +1,690 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="FastBFS入门详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FastBFS入门详解">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/FastBFS入门详解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="FastBFS入门详解">
+<meta property="og:updated_time" content="2017-03-15T08:17:56.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FastBFS入门详解">
+<meta name="twitter:description" content="FastBFS入门详解">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/14/FastBFS入门详解/"/>
+
+
+
+
+
+  <title> FastBFS入门详解 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/FastBFS入门详解/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                FastBFS入门详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T23:01:59+08:00">
+                2017-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>FastBFS入门详解<br><a id="more"></a> </p>
+<h1 id="把fastDFS以及依赖包都上传到linux系统"><a href="#把fastDFS以及依赖包都上传到linux系统" class="headerlink" title="把fastDFS以及依赖包都上传到linux系统"></a>把fastDFS以及依赖包都上传到linux系统</h1><h1 id="安装FastDFS之前，先安装libevent工具包"><a href="#安装FastDFS之前，先安装libevent工具包" class="headerlink" title="安装FastDFS之前，先安装libevent工具包"></a>安装FastDFS之前，先安装libevent工具包</h1><p>apt-get install libevent</p>
+<h1 id="安装libfastcommonV1-0-7工具包"><a href="#安装libfastcommonV1-0-7工具包" class="headerlink" title="安装libfastcommonV1.0.7工具包"></a>安装libfastcommonV1.0.7工具包</h1><ol>
+<li>解压缩:tar -zxf xxx  </li>
+<li>./make.sh  </li>
+<li>./make.sh install  </li>
+<li>把/usr/lib64/libfastcommon.so文件向/usr/lib/下复制一份</li>
+</ol>
+<h1 id="安装Tracker服务"><a href="#安装Tracker服务" class="headerlink" title="安装Tracker服务"></a>安装Tracker服务</h1><ol>
+<li>解压缩  </li>
+<li>./make.sh  </li>
+<li>./make.sh install<br>安装后在/usr/bin/目录下有以fdfs开头的文件都是编译出来的。<br>配置文件都放到/etc/fdfs文件夹</li>
+<li>把/root/FastDFS/conf目录下的所有的配置文件都复制到/etc/fdfs下。  </li>
+<li>配置tracker服务。修改/root/FastDFS/conf/tracker.conf文件:将文件中的base_path换成一个真实存在的路径名。  </li>
+<li>启动tracker: /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf<br>重启使用命令：/usr/bin/fdfs_trackerd  /etc/fdfs/tracker.conf restart</li>
+</ol>
+<h1 id="安装storage服务"><a href="#安装storage服务" class="headerlink" title="安装storage服务"></a>安装storage服务</h1><ol>
+<li>如果是在不同的服务器安装，第四步的1~4需要重新执行。  </li>
+<li>配置storage服务。修改/root/FastDFS/conf/storage.conf文件：将base_path换成一个真实存在的路径名,store_path0也要换成真实存在的路径名,将tracker_server的ip换成服务器的ip地址   </li>
+<li>启动storage服务。<br>/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</li>
+</ol>
+<h1 id="测试服务"><a href="#测试服务" class="headerlink" title="测试服务"></a>测试服务</h1><ol>
+<li>修改配置文件/etc/fdfs/client.conf:将base_path换成一个真实存在的路径名，将tracker_server的ip换成服务器的ip地址  </li>
+<li>测试<br>/usr/bin/fdfs_test /etc/fdfs/client.conf upload anti-steal.jpg</li>
+</ol>
+<h1 id="搭建nginx提供http服务"><a href="#搭建nginx提供http服务" class="headerlink" title="搭建nginx提供http服务"></a>搭建nginx提供http服务</h1><p><strong>可以使用官方提供的nginx插件。要使用nginx插件需要重新编译。fastdfs-nginx-module_v1.16.tar.gz</strong>  </p>
+<ol>
+<li>解压插件压缩包  </li>
+<li>修改/root/fastdfs-nginx-module/src/config文件，把其中的local去掉。  </li>
+<li>对nginx重新config   </li>
+<li>make  </li>
+<li>make install  </li>
+<li>把/root/fastdfs-nginx-module/src/mod_fastdfs.conf文件复制到/etc/fdfs目录下。：将tracker_server的ip换成服务器的ip地址    </li>
+<li>nginx的配置  </li>
+<li>将libfdfsclient.so拷贝至/usr/lib下<br>cp /usr/lib64/libfdfsclient.so /usr/lib/</li>
+<li><p>启动nginx:./</p>
+<pre><code>nginx的配置  
+在nginx的配置文件中添加一个Server：
+server {
+    listen       80;
+    server_name  192.168.101.3;
+
+    location /group1/M00/{
+            #root /home/FastDFS/fdfs_storage/data;
+            ngx_fastdfs_module;
+    }
+}
+对nginx重新config
+./configure \
+--prefix=/usr/local/nginx \
+--pid-path=/var/run/nginx/nginx.pid \
+-lock-path=/var/lock/nginx.lock \
+--error-log-path=/var/log/nginx/error.log \
+--http-log-path=/var/log/nginx/access.log \
+--with-http_gzip_static_module \
+--http-client-body-temp-path=/var/temp/nginx/client \
+--http-proxy-temp-path=/var/temp/nginx/proxy \
+--http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
+--http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
+--http-scgi-temp-path=/var/temp/nginx/scgi \
+--add-module=/root/fastdfs-nginx-module/src
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/08/spring事务管理/" rel="next" title="Spring事务管理">
+                <i class="fa fa-chevron-left"></i> Spring事务管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/15/redis集群/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#把fastDFS以及依赖包都上传到linux系统"><span class="nav-number">1.</span> <span class="nav-text">把fastDFS以及依赖包都上传到linux系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装FastDFS之前，先安装libevent工具包"><span class="nav-number">2.</span> <span class="nav-text">安装FastDFS之前，先安装libevent工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装libfastcommonV1-0-7工具包"><span class="nav-number">3.</span> <span class="nav-text">安装libfastcommonV1.0.7工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Tracker服务"><span class="nav-number">4.</span> <span class="nav-text">安装Tracker服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装storage服务"><span class="nav-number">5.</span> <span class="nav-text">安装storage服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试服务"><span class="nav-number">6.</span> <span class="nav-text">测试服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建nginx提供http服务"><span class="nav-number">7.</span> <span class="nav-text">搭建nginx提供http服务</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

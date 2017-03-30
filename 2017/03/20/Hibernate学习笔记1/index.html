@@ -1,0 +1,854 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Hibernate学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/Hibernate学习笔记1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hibernate学习笔记">
+<meta property="og:updated_time" content="2017-03-21T11:10:56.884Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate学习笔记">
+<meta name="twitter:description" content="Hibernate学习笔记">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/Hibernate学习笔记1/"/>
+
+
+
+
+
+  <title> Hibernate学习笔记 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/Hibernate学习笔记1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hibernate学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-20T19:42:53+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Hibernate学习笔记<br><a id="more"></a> </p>
+<h1 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h1><h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><p>导入jar包<br>创建数据库和表<br>编写核心配置文件（hibernate.cfg.xml）–&gt; 配置获得链接等参数<br>编写映射文件 hibernate mapping(*.hbm.xml)<br>使用api测试  </p>
+<h2 id="数据库和表"><a href="#数据库和表" class="headerlink" title="数据库和表"></a>数据库和表</h2><pre><code>create database h_day01_db;
+use h_day01_db;
+create table t_user(
+  id int auto_increment primary key,
+  username varchar(50),
+  password varchar(30)
+);
+</code></pre><h2 id="导入jar包"><a href="#导入jar包" class="headerlink" title="导入jar包"></a>导入jar包</h2><p> hibernate 4 建议注解开发，hibernate 4 对 3 不兼容。<br>主要有antlr，commons，dom4j，Hibernate-jpa，Hibernate3，javassist，jta，mysql-connector，slf4j</p>
+<h2 id="编写JavaBean-映射文件"><a href="#编写JavaBean-映射文件" class="headerlink" title="编写JavaBean + 映射文件"></a>编写JavaBean + 映射文件</h2><p>这两个必须放到同层目录下</p>
+<h3 id="User对象"><a href="#User对象" class="headerlink" title="User对象"></a>User对象</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class User &#123;</div><div class="line">    private Integer id;</div><div class="line">    private String username;</div><div class="line">    private String password;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> <span class="string">"User&#123;"</span> +</div><div class="line">                <span class="string">"id="</span> + id +</div><div class="line">                <span class="string">", username='"</span> + username + <span class="string">'\'</span><span class="string">' +</span></div><div class="line">                ", password='<span class="string">" + password + '\'' +</span></div><div class="line">                '&#125;';</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setId(Integer id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getUsername() &#123;</div><div class="line">        return username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setUsername(String username) &#123;</div><div class="line">        this.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getPassword() &#123;</div><div class="line">        return password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setPassword(String password) &#123;</div><div class="line">        this.password = password;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="User-hbm-xml文件"><a href="#User-hbm-xml文件" class="headerlink" title="User.hbm.xml文件"></a>User.hbm.xml文件</h3><pre><code>&lt;!DOCTYPE hibernate-mapping PUBLIC 
+    &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;
+    &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt;
+&lt;hibernate-mapping&gt;
+    &lt;class name=&quot;com.lily.domain.User&quot; table=&quot;t_user&quot;&gt;
+        &lt;!-- 主键 --&gt;
+        &lt;id name=&quot;uid&quot;&gt;
+            &lt;!-- 固定值：主键生成策略 --&gt;
+            &lt;generator class=&quot;native&quot;&gt;&lt;/generator&gt;
+        &lt;/id&gt;
+
+        &lt;!-- 普通属性 --&gt;
+        &lt;property name=&quot;username&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;password&quot;&gt;&lt;/property&gt;
+
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;
+</code></pre><h2 id="编写核心配置文件"><a href="#编写核心配置文件" class="headerlink" title="编写核心配置文件"></a>编写核心配置文件</h2><p>必须放到classes的目录下，即放在src的根目录下即可</p>
+<pre><code>&lt;!DOCTYPE hibernate-configuration PUBLIC
+    &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;
+    &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;
+&lt;hibernate-configuration&gt;
+    &lt;!-- SessionFactory，相当于之前学习连接池配置 --&gt;
+    &lt;session-factory&gt;
+        &lt;!-- 1 基本4项 --&gt;
+        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://hibernate&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.password&quot;&gt;123&lt;/property&gt;
+
+        &lt;!-- 添加映射文件 --&gt;
+        &lt;mapping resource=&quot;com/lily/domain/User.hbm.xml&quot;/&gt;
+    &lt;/session-factory&gt;
+
+&lt;/hibernate-configuration&gt;
+</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>@Test
+public void demo01(){
+    User user = new User();
+    user.setUsername(&quot;轮子哥&quot;);
+    user.setPassword(&quot;1234&quot;);
+    //1 加载配置文件获得核心配置对象
+    Configuration config = new Configuration().configure();
+    //2 获得工厂 SessionFactory，相当于连接池
+    SessionFactory factory = config.buildSessionFactory();
+    //3获得会话session，相当于链接Connection
+    Session session = factory.openSession();
+    //4 开启事务
+    Transaction transaction = session.beginTransaction();
+
+    //操作
+    session.save(user);
+
+    //5 提交事务 | 回滚事务
+    transaction.commit();
+    //6 释放资源--关闭session
+    session.close();
+    //7 释放资源--关闭工厂factory
+    factory.close();
+}
+</code></pre><h2 id="常见异常：Unknown-entity："><a href="#常见异常：Unknown-entity：" class="headerlink" title="常见异常：Unknown entity："></a>常见异常：Unknown entity：</h2><p>解决方案：<br>    将映射文件添加到核心配置文件中  hbm.xml  –&gt; hibernate.cfg.xml</p>
+<h1 id="API详解"><a href="#API详解" class="headerlink" title="API详解"></a>API详解</h1><h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>PO：persistent object ，用于与数据库交互数据。–dao层  （JavaBean + hbm ）<br>BO：Business object 业务数据对象。–service层<br>VO：Value Object 值对象。–web层<br>开发中：直接使用JavaBean 描述三个对象。</p>
+<h2 id="Configuration-配置对象"><a href="#Configuration-配置对象" class="headerlink" title="Configuration 配置对象"></a>Configuration 配置对象</h2><h3 id="hibernate-核心配置文件种类"><a href="#hibernate-核心配置文件种类" class="headerlink" title="hibernate 核心配置文件种类"></a>hibernate 核心配置文件种类</h3><p>hibernate.cfg.xml 通常使用xml配置文件，可以配置内容更丰富。<br>hibernate.properties 用于配置key/value 形式的内容，key不能重复的。配置有很多的局限性。一般不用。<br>参考文件：hibernate-distribution-3.6.10.Final\project\etc\ hibernate.properties  </p>
+<hr>
+<h4 id="提供构造-new-Configuration-hibernate将自动加载-hibernate-properties文件"><a href="#提供构造-new-Configuration-hibernate将自动加载-hibernate-properties文件" class="headerlink" title="提供构造  new Configuration() hibernate将自动加载 hibernate.properties文件"></a>提供构造  new Configuration() hibernate将自动加载 hibernate.properties文件</h4><p>hibernate.properties文件必须存放在类路径（src）下</p>
+<h4 id="提供方法-configure-将加载src下的hibernate-cfg-xml"><a href="#提供方法-configure-将加载src下的hibernate-cfg-xml" class="headerlink" title="提供方法 configure() 将加载src下的hibernate.cfg.xml"></a>提供方法 configure() 将加载src下的hibernate.cfg.xml</h4><h4 id="扩展api"><a href="#扩展api" class="headerlink" title="扩展api"></a>扩展api</h4><pre><code>configure(String) 加载指定目录下的 xml文件
+</code></pre><h4 id="手动加载配置文件"><a href="#手动加载配置文件" class="headerlink" title="手动加载配置文件"></a>手动加载配置文件</h4><pre><code>// 手动加载指定的配置文件
+config.addResource(&quot;com/itheima/a_hello/User.hbm.xml&quot;);
+
+// 手动加载指定类，对应的映射文件 User--&gt; User.hbm.xml
+config.addClass(User.class);
+</code></pre><h2 id="SessionFactory工厂"><a href="#SessionFactory工厂" class="headerlink" title="SessionFactory工厂"></a>SessionFactory工厂</h2><h3 id="SessionFactory-相当于java-web连接池，用于管理所有session"><a href="#SessionFactory-相当于java-web连接池，用于管理所有session" class="headerlink" title="SessionFactory 相当于java web连接池，用于管理所有session"></a>SessionFactory 相当于java web连接池，用于管理所有session</h3><p>获得方式：config.buildSessionFactory();<br>sessionFactory hibernate缓存配置信息 （数据库配置信息、映射文件，预定义HQL语句 等）<br>SessionFactory线程安全，可以是成员变量，多个线程同时访问时，不会出现线程并发访问问题。<br>提供api：  </p>
+<pre><code>//打开一个新的会话 session
+factory.openSession();
+//获得当前线程中绑定的会话session
+factory.getCurrentSession();
+hibernate支持，将创建的session绑定到本地线程中，底层使用ThreadLocal，在程序之间共享session。
+    1.必须在hibernate.cfg.xml 配置    
+    &lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;
+    2.如果提交或回滚事务，底层将自动关闭session
+</code></pre><h2 id="Session-会话"><a href="#Session-会话" class="headerlink" title="Session 会话"></a>Session 会话</h2><h3 id="Session-相当于-JDBC的-Connection-–-会话"><a href="#Session-相当于-JDBC的-Connection-–-会话" class="headerlink" title="Session 相当于 JDBC的 Connection – 会话"></a>Session 相当于 JDBC的 Connection – 会话</h3><h3 id="通过session操作PO对象-–增删改查"><a href="#通过session操作PO对象-–增删改查" class="headerlink" title="通过session操作PO对象 –增删改查"></a>通过session操作PO对象 –增删改查</h3><h3 id="session单线程，线程不安全，不能编写成成员变量。"><a href="#session单线程，线程不安全，不能编写成成员变量。" class="headerlink" title="session单线程，线程不安全，不能编写成成员变量。"></a>session单线程，线程不安全，不能编写成成员变量。</h3><h3 id="session-api"><a href="#session-api" class="headerlink" title="session api"></a>session api</h3><pre><code>save 保存
+update 更新
+delete 删除
+get 通过id查询，如果没有 null
+load 通过id查询，如果没有抛异常
+createQuery(&quot;hql&quot;)  获得Query对象
+createCriteria(Class) 获得Criteria对象
+</code></pre><h2 id="Transaction-事务"><a href="#Transaction-事务" class="headerlink" title="Transaction 事务"></a>Transaction 事务</h2><p>开启事务 beginTransaction()<br>获得事务 getTransaction()  </p>
+<p>提交事务：commit()<br>回滚事务：rollback()  </p>
+<pre><code>try{
+   //开启
+   //session操作
+   //提交
+} catch(e){
+   //回滚
+}
+扩展：不需要手动的管理事务，之后所有的事务管理都交予spring。
+</code></pre><h2 id="Query对象"><a href="#Query对象" class="headerlink" title="Query对象"></a>Query对象</h2><p>hibernate执行hql语句<br>hql语句：hibernate提供面向对象查询语句，使用对象（类）和属性进行查询。区分大小写。<br>获得 session.createQuery(“hql”)<br>方法：  </p>
+<pre><code>list()  查询所有
+uniqueResult() 获得一个结果。如果没有查询到返回null，如果查询多条抛异常。
+
+setFirstResult(int) 分页，开始索引数startIndex
+setMaxResults(int) 分页，每页显示个数 pageSize
+</code></pre><h2 id="Criteria对象"><a href="#Criteria对象" class="headerlink" title="Criteria对象"></a>Criteria对象</h2><p>QBC（query by criteria），hibernate提供纯面向对象查询语言，提供直接使用PO对象进行操作。<br>获得方式：Criteria criteria = session.createCriteria(User.class);<br>条件  </p>
+<pre><code>criteria.add(Restrictions.eq(&quot;username&quot;, &quot;tom&quot;));
+//        Restrictions.gt(propertyName, value)        大于
+//        Restrictions.ge(propertyName, value)    大于等于
+//        Restrictions.lt(propertyName, value)    小于
+//        Restrictions.le(propertyName, value)    小于等于
+//        Restrictions.like(propertyName, value)    模糊查询，注意：模糊查询值需要使用 % 
+</code></pre><h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class HbUtils &#123;</div><div class="line">	// 会话工厂，整个程序只有一份。</div><div class="line">	private static SessionFactory factory;</div><div class="line">	static&#123;</div><div class="line">		//1 加载配置</div><div class="line">		Configuration config = new Configuration().configure();</div><div class="line">		//2 获得工厂</div><div class="line">		factory = config.buildSessionFactory();</div><div class="line">		//3 关闭虚拟机时,释放SessionFactory</div><div class="line">		Runtime.getRuntime().addShutdownHook(new Thread(new <span class="function"><span class="title">Runnable</span></span>() &#123;</div><div class="line">			@Override</div><div class="line">			public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">				System.out.println(<span class="string">"虚拟机关闭!释放资源"</span>);</div><div class="line">				sf.close();</div><div class="line">			&#125;</div><div class="line">		&#125;));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 获得一个新的session</div><div class="line">	 * @<span class="built_in">return</span></div><div class="line">	 */</div><div class="line">	public static Session <span class="function"><span class="title">openSession</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> factory.openSession();</div><div class="line">	&#125;</div><div class="line">	/**</div><div class="line">	 * 获得当前线程中绑定session</div><div class="line">	 * * 注意：必须配置</div><div class="line">	 * @<span class="built_in">return</span></div><div class="line">	 */</div><div class="line">	public static Session <span class="function"><span class="title">getCurrentSession</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> factory.getCurrentSession();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="核心配置文件详解"><a href="#核心配置文件详解" class="headerlink" title="核心配置文件详解"></a>核心配置文件详解</h1><h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><pre><code>&lt;!-- SessionFactory，相当于之前学习连接池配置 --&gt;
+&lt;session-factory&gt;
+    &lt;!-- 1 基本4项 --&gt;
+    &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql:///h_day01_db&lt;/property&gt;
+    &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;
+    &lt;property name=&quot;hibernate.connection.password&quot;&gt;1234&lt;/property&gt;
+
+    &lt;!-- 2 与本地线程绑定 --&gt;
+    &lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;
+
+     &lt;!-- 3 方言：为不同的数据库，不同的版本，生成sql语句（DQL查询语句）提供依据 
+         * mysql 字符串 varchar
+         * orcale 字符串 varchar2
+     --&gt;
+     &lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5Dialect&lt;/property&gt;
+
+    &lt;!-- 4 sql语句 --&gt;
+    &lt;!-- 显示sql语句 --&gt;
+    &lt;property name=&quot;hibernate.show_sql&quot;&gt;true&lt;/property&gt;
+    &lt;property name=&quot;hibernate.format_sql&quot;&gt;true&lt;/property&gt;
+
+    &lt;!-- 5 自动创建表（了解） ，学习中使用，开发不使用的。
+        * 开发中DBA 先创建表，之后根据表生产 PO类
+        * 取值：
+        update：
+            如果表不存在，将创建表。
+            如果表已经存在，通过hbm映射文件更新表（添加）。（映射文件必须是数据库对应）
+                表中的列可以多，不负责删除。
+        create ：如果表存在，先删除，再创建。程序结束时，之前创建的表不删除。【】
+        create-drop：与create几乎一样。如果factory.close()执行，将在JVM关闭同时，将创建的表删除了。(测试)
+        validate：校验 hbm映射文件 和 表的列是否对应，如果对应正常执行，如果不对应抛出异常。(测试)
+    --&gt;
+    &lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;create&lt;/property&gt;
+
+    &lt;!-- 6 java web 6.0 存放一个问题
+        * BeanFactory 空指针异常
+            异常提示：org.hibernate.HibernateException: Unable to get the default Bean Validation factory
+        * 解决方案：取消bean校验
+    --&gt;
+    &lt;property name=&quot;javax.persistence.validation.mode&quot;&gt;none&lt;/property&gt;
+
+    &lt;!-- 添加映射文件 
+        &lt;mapping &gt;添加映射文件
+            resource 设置 xml配置文件 （addResource(xml)）
+            class 配置类 (addClass(User.class)) 配置的是全限定类名
+    --&gt;
+    &lt;mapping  resource=&quot;com/itheima/a_hello/User.hbm.xml&quot;/&gt;
+&lt;/session-factory&gt;
+</code></pre><h1 id="Hibernate中持久化类"><a href="#Hibernate中持久化类" class="headerlink" title="Hibernate中持久化类"></a>Hibernate中持久化类</h1><h2 id="编写规则"><a href="#编写规则" class="headerlink" title="编写规则"></a>编写规则</h2><p>提供一个无参数 public访问控制符的构造器<br>提供一个标识属性，映射数据表主键字段<br>所有属性提供public访问控制符的 set  get 方法(javaBean)<br>标识属性应尽量使用基本数据类型的包装类型<br>不要用final修饰实体 （将无法生成代理对象进行优化）  </p>
+<h2 id="持久化对象的唯一标识-OID"><a href="#持久化对象的唯一标识-OID" class="headerlink" title="持久化对象的唯一标识 OID"></a>持久化对象的唯一标识 OID</h2><p>Java按地址区分同一个类的不同对象.<br>关系数据库用主键区分同一条记录<br>Hibernate使用OID来建立内存中的对象和数据库中记录的对应关系<br>结论: 对象的OID和数据库的表的主键对应。为保证OID的唯一性，应该让Hibernate来为OID赋值  </p>
+<h2 id="区分自然主键和代理主键"><a href="#区分自然主键和代理主键" class="headerlink" title="区分自然主键和代理主键"></a>区分自然主键和代理主键</h2><p>主键需要具备: 不为空/不能重复/不能改变<br>自然主键:    在业务中,某个属性符合主键的三个要求.那么该属性可以作为主键列.<br>代理主键:     在业务中,不存符合以上3个条件的属性,那么就增加一个没有意义的列.作为主键.</p>
+<h2 id="基本数据与包装类型"><a href="#基本数据与包装类型" class="headerlink" title="基本数据与包装类型"></a>基本数据与包装类型</h2><p>基本数据类型和包装类型对应hibernate的映射类型相同<br>基本类型无法表达null、数字类型的默认值为0。<br>包装类默认值是null。当对于默认值有业务意义的时候需要使用包装类。  </p>
+<h2 id="类型对应"><a href="#类型对应" class="headerlink" title="类型对应"></a>类型对应</h2><p>Byte-byte这种样对应，符合驼峰命名法，如BigDecimal-big_decimal</p>
+<h2 id="普通属性"><a href="#普通属性" class="headerlink" title="普通属性"></a>普通属性</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;hibernate-mapping&gt; </div><div class="line">	package 用于配置PO类所在包</div><div class="line">			例如： package=<span class="string">"com.lily.domain"</span></div><div class="line">	&lt;class&gt; 配置 PO类 和 表 之间对应关系</div><div class="line">		name：PO类全限定类名</div><div class="line">			例如：name=<span class="string">"com.lily.domain.Person"</span></div><div class="line">			如果配置 package，name的取值可以是简单类名 name=<span class="string">"Person"</span></div><div class="line">		table : 数据库对应的表名</div><div class="line">		dynamic-insert=<span class="string">"false"</span> 是否支持动态生成insert语句</div><div class="line">		dynamic-update=<span class="string">"false"</span> 是否支持动态生成update语句</div><div class="line">			如果设置<span class="literal">true</span>，hibernate底层将判断提供数据是否为null，如果为null，insert或update语句将没有此项。</div><div class="line">	普通字段</div><div class="line">		&lt;property&gt;</div><div class="line">			name : PO类的属性</div><div class="line">			column : 表中的列名，默认name的值相同</div><div class="line">			<span class="built_in">type</span>:表中列的类型。默认hibernate自己通过getter获得类型，一般情况不用设置</div><div class="line">				取值1： hibernate类型</div><div class="line">					string 字符串</div><div class="line">					<span class="built_in">integer</span> 整形</div><div class="line">				取值2： java类型 （全限定类名）</div><div class="line">					java.lang.String 字符串</div><div class="line">				取值3：数据库类型</div><div class="line">					varchar(长度) 字符串</div><div class="line">					int 整形</div><div class="line">					&lt;property name=<span class="string">"birthday"</span>&gt;</div><div class="line">				 		&lt;column name=<span class="string">"birthday"</span> sql-type=<span class="string">"datetime"</span>&gt;&lt;/column&gt;</div><div class="line">				 	&lt;/property&gt;</div><div class="line">				 	javabean 一般使用类型 java.util.Date</div><div class="line">				 	jdbc规范提供3中</div><div class="line">				 		java类型				mysql类型</div><div class="line">				 		java.sql.Date			date</div><div class="line">				 		java.sql.time			time</div><div class="line">				 		java.sql.timestamp	timestamp</div><div class="line">				 		null					datetime</div><div class="line">				 		</div><div class="line">				 		以上三个类型都是java.util.Date子类</div><div class="line">				 		</div><div class="line">			length : 列的长度。默认值：255</div><div class="line">			not-null : 是否为null</div><div class="line">			unique : 是否唯一</div><div class="line">			access：设置映射使用PO类属性或字段</div><div class="line">				property : 使用PO类属性，必须提供setter、getter方法</div><div class="line">				field : 使用PO类字段，一般很少使用。</div><div class="line">			insert 生成insert语句时，是否使用当前字段。</div><div class="line">			update 生成update语句时，是否使用当前字段。</div><div class="line">				默认情况：hibernate生成insert或update语句，使用配置文件所有项</div><div class="line">	注意：配置文件如果使用关键字，列名必须使用重音符</div></pre></td></tr></table></figure>
+<h2 id="主键-在xxx-hbm-xml文件中进行配置"><a href="#主键-在xxx-hbm-xml文件中进行配置" class="headerlink" title="主键:在xxx.hbm.xml文件中进行配置"></a>主键:在xxx.hbm.xml文件中进行配置</h2><pre><code>主键 
+        &lt;id&gt;配置主键
+            name:属性名称
+            access=&quot;&quot; 设置使用属性还是字段
+            column=&quot;&quot;  表的列名
+            length=&quot;&quot;  长度
+            type=&quot;&quot; 类型
+        &lt;generator&gt; class属性用于设置主键生成策略
+            1.increment 由hibernate自己维护自动增长
+                底层通过先查询max值，再+1策略
+                不建议使用，存在线程并发问题
+            2.identity hibernate底层采用数据库本身自动增长列
+                例如：mysql auto_increment
+            3.sequence hibernate底层采用数据库序列
+                例如：oracle 提供序列
+            4.hilo 
+                &lt;/generator&gt;
+            5.native 根据底层数据库的能力选择 identity、sequence 或者 hilo 中的一个。【】
+            ##以上策略使用整形，long, short 或者 int 类型
+            6.uuid 采用字符串唯一值【】
+            ##以上策略 代理主键，有hibernate维护。
+            7.assigned 自然主键，由程序自己维护。【】
+</code></pre><h2 id="常用配置文件格式"><a href="#常用配置文件格式" class="headerlink" title="常用配置文件格式"></a>常用配置文件格式</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;
+        &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;
+
+&lt;hibernate-configuration&gt;
+    &lt;session-factory name=&quot;foo&quot;&gt;
+        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.password&quot;&gt;123&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hib_day01&lt;/property&gt;
+        &lt;!--操作数据库时，回向控制台打印语句--&gt;
+        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;
+        &lt;!--向控制台打印语句时，会将sql语句格式化--&gt;
+        &lt;property name=&quot;format_sql&quot;&gt;true&lt;/property&gt;
+        &lt;!--是否自动生成表结构--&gt;
+        &lt;property name=&quot;hbm2ddl.auto&quot;&gt;update&lt;/property&gt;
+
+        &lt;property name=&quot;org.hibernate.dialect.MySQLDialect&quot;&gt;&lt;/property&gt;
+
+        &lt;!--事务--&gt;
+        &lt;property name=&quot;hibernate.connection.autocommit&quot;&gt;true&lt;/property&gt;
+
+        &lt;mapping resource=&quot;com/lily/domain/Customer.hbm.xml&quot;/&gt;
+        &lt;mapping resource=&quot;com/lily/domain/Order.hbm.xml&quot;/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/15/redis集群/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/20/MyBatis逆向工程/" rel="prev" title="MyBatis逆向工程">
+                MyBatis逆向工程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#入门案例"><span class="nav-number">1.</span> <span class="nav-text">入门案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要流程"><span class="nav-number">1.1.</span> <span class="nav-text">主要流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库和表"><span class="nav-number">1.2.</span> <span class="nav-text">数据库和表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入jar包"><span class="nav-number">1.3.</span> <span class="nav-text">导入jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写JavaBean-映射文件"><span class="nav-number">1.4.</span> <span class="nav-text">编写JavaBean + 映射文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User对象"><span class="nav-number">1.4.1.</span> <span class="nav-text">User对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-hbm-xml文件"><span class="nav-number">1.4.2.</span> <span class="nav-text">User.hbm.xml文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写核心配置文件"><span class="nav-number">1.5.</span> <span class="nav-text">编写核心配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.6.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见异常：Unknown-entity："><span class="nav-number">1.7.</span> <span class="nav-text">常见异常：Unknown entity：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API详解"><span class="nav-number">2.</span> <span class="nav-text">API详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#体系结构"><span class="nav-number">2.1.</span> <span class="nav-text">体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration-配置对象"><span class="nav-number">2.2.</span> <span class="nav-text">Configuration 配置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hibernate-核心配置文件种类"><span class="nav-number">2.2.1.</span> <span class="nav-text">hibernate 核心配置文件种类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提供构造-new-Configuration-hibernate将自动加载-hibernate-properties文件"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">提供构造  new Configuration() hibernate将自动加载 hibernate.properties文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供方法-configure-将加载src下的hibernate-cfg-xml"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">提供方法 configure() 将加载src下的hibernate.cfg.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展api"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">扩展api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手动加载配置文件"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">手动加载配置文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SessionFactory工厂"><span class="nav-number">2.3.</span> <span class="nav-text">SessionFactory工厂</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SessionFactory-相当于java-web连接池，用于管理所有session"><span class="nav-number">2.3.1.</span> <span class="nav-text">SessionFactory 相当于java web连接池，用于管理所有session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-会话"><span class="nav-number">2.4.</span> <span class="nav-text">Session 会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-相当于-JDBC的-Connection-–-会话"><span class="nav-number">2.4.1.</span> <span class="nav-text">Session 相当于 JDBC的 Connection – 会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过session操作PO对象-–增删改查"><span class="nav-number">2.4.2.</span> <span class="nav-text">通过session操作PO对象 –增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session单线程，线程不安全，不能编写成成员变量。"><span class="nav-number">2.4.3.</span> <span class="nav-text">session单线程，线程不安全，不能编写成成员变量。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session-api"><span class="nav-number">2.4.4.</span> <span class="nav-text">session api</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction-事务"><span class="nav-number">2.5.</span> <span class="nav-text">Transaction 事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query对象"><span class="nav-number">2.6.</span> <span class="nav-text">Query对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Criteria对象"><span class="nav-number">2.7.</span> <span class="nav-text">Criteria对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具类"><span class="nav-number">2.8.</span> <span class="nav-text">工具类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心配置文件详解"><span class="nav-number">3.</span> <span class="nav-text">核心配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">3.1.</span> <span class="nav-text">详细配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hibernate中持久化类"><span class="nav-number">4.</span> <span class="nav-text">Hibernate中持久化类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写规则"><span class="nav-number">4.1.</span> <span class="nav-text">编写规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化对象的唯一标识-OID"><span class="nav-number">4.2.</span> <span class="nav-text">持久化对象的唯一标识 OID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区分自然主键和代理主键"><span class="nav-number">4.3.</span> <span class="nav-text">区分自然主键和代理主键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据与包装类型"><span class="nav-number">4.4.</span> <span class="nav-text">基本数据与包装类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型对应"><span class="nav-number">4.5.</span> <span class="nav-text">类型对应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#普通属性"><span class="nav-number">4.6.</span> <span class="nav-text">普通属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键-在xxx-hbm-xml文件中进行配置"><span class="nav-number">4.7.</span> <span class="nav-text">主键:在xxx.hbm.xml文件中进行配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用配置文件格式"><span class="nav-number">4.8.</span> <span class="nav-text">常用配置文件格式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="掀起Spring的盖头来Spring之崛起敏捷与轻量级
+Spring框架概述基于pojo的轻量级开发理念组成整个Spring框架的各种服务实现被划分到了多个相互独立却又相互以来的模块中  
+core模块整个框架的基础，提供了一个IOC实现，实现了依赖注入的方式管理对象之间的关系，还包括各种看框架内部使用的各种工具类
+AOP模块提供了一个AOP框架，采用Proxy模式构建，与IOC容器相结合
+数据访">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/03/22/spring揭秘读书笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="掀起Spring的盖头来Spring之崛起敏捷与轻量级
+Spring框架概述基于pojo的轻量级开发理念组成整个Spring框架的各种服务实现被划分到了多个相互独立却又相互以来的模块中  
+core模块整个框架的基础，提供了一个IOC实现，实现了依赖注入的方式管理对象之间的关系，还包括各种看框架内部使用的各种工具类
+AOP模块提供了一个AOP框架，采用Proxy模式构建，与IOC容器相结合
+数据访">
+<meta property="og:updated_time" content="2017-03-23T12:26:02.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="掀起Spring的盖头来Spring之崛起敏捷与轻量级
+Spring框架概述基于pojo的轻量级开发理念组成整个Spring框架的各种服务实现被划分到了多个相互独立却又相互以来的模块中  
+core模块整个框架的基础，提供了一个IOC实现，实现了依赖注入的方式管理对象之间的关系，还包括各种看框架内部使用的各种工具类
+AOP模块提供了一个AOP框架，采用Proxy模式构建，与IOC容器相结合
+数据访">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/22/spring揭秘读书笔记/"/>
+
+
+
+
+
+  <title>  | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/spring揭秘读书笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T19:21:36+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="掀起Spring的盖头来"><a href="#掀起Spring的盖头来" class="headerlink" title="掀起Spring的盖头来"></a>掀起Spring的盖头来</h1><h2 id="Spring之崛起"><a href="#Spring之崛起" class="headerlink" title="Spring之崛起"></a>Spring之崛起</h2><p>敏捷与轻量级</p>
+<h2 id="Spring框架概述"><a href="#Spring框架概述" class="headerlink" title="Spring框架概述"></a>Spring框架概述</h2><p>基于pojo的轻量级开发理念<br>组成整个Spring框架的各种服务实现被划分到了多个相互独立却又相互以来的模块中  </p>
+<h3 id="core模块"><a href="#core模块" class="headerlink" title="core模块"></a>core模块</h3><p>整个框架的基础，提供了一个IOC实现，实现了依赖注入的方式管理对象之间的关系，还包括各种看框架内部使用的各种工具类</p>
+<h3 id="AOP模块"><a href="#AOP模块" class="headerlink" title="AOP模块"></a>AOP模块</h3><p>提供了一个AOP框架，采用Proxy模式构建，与IOC容器相结合</p>
+<h3 id="数据访问和事务管理的抽象和集成服务"><a href="#数据访问和事务管理的抽象和集成服务" class="headerlink" title="数据访问和事务管理的抽象和集成服务"></a>数据访问和事务管理的抽象和集成服务</h3><p>为jdbc提供了最佳实践，对大量的ORM产品提供了形式统一的继承支持</p>
+<h3 id="remoting框架"><a href="#remoting框架" class="headerlink" title="remoting框架"></a>remoting框架</h3><h3 id="web模块"><a href="#web模块" class="headerlink" title="web模块"></a>web模块</h3><h2 id="Spring大观园"><a href="#Spring大观园" class="headerlink" title="Spring大观园"></a>Spring大观园</h2><h1 id="IoC的基本概念"><a href="#IoC的基本概念" class="headerlink" title="IoC的基本概念"></a>IoC的基本概念</h1><h2 id="我们的理念是：让别人为你服务"><a href="#我们的理念是：让别人为你服务" class="headerlink" title="我们的理念是：让别人为你服务"></a>我们的理念是：让别人为你服务</h2><p>解决需要自己主动获取对象的耦合  </p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>被注入对象和依赖对象由IoC Service Provider统一管理</p>
+<h2 id="手语、呼喊、还是心有灵犀"><a href="#手语、呼喊、还是心有灵犀" class="headerlink" title="手语、呼喊、还是心有灵犀"></a>手语、呼喊、还是心有灵犀</h2><h3 id="构造方法注入"><a href="#构造方法注入" class="headerlink" title="构造方法注入"></a>构造方法注入</h3><p>在构造方法中创建依赖对象</p>
+<h3 id="setter方法注入"><a href="#setter方法注入" class="headerlink" title="setter方法注入"></a>setter方法注入</h3><p>使用setter方法注入</p>
+<h3 id="接口注入"><a href="#接口注入" class="headerlink" title="接口注入"></a>接口注入</h3><p>实现某个接口</p>
+<h2 id="IoC的附加值"><a href="#IoC的附加值" class="headerlink" title="IoC的附加值"></a>IoC的附加值</h2><p>解耦了某种绑定关系</p>
+<h1 id="掌管大局的IoC-Service-Provider"><a href="#掌管大局的IoC-Service-Provider" class="headerlink" title="掌管大局的IoC Service Provider"></a>掌管大局的IoC Service Provider</h1><h2 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h2><h3 id="业务对象的构建管理"><a href="#业务对象的构建管理" class="headerlink" title="业务对象的构建管理"></a>业务对象的构建管理</h3><p>需要将对象的构建逻辑从客户端对象那里剥离出来</p>
+<h3 id="业务对象的依赖绑定"><a href="#业务对象的依赖绑定" class="headerlink" title="业务对象的依赖绑定"></a>业务对象的依赖绑定</h3><p>保证每个业务对象在使用的时候，可以处于就绪状态</p>
+<h2 id="如何管理对象间的依赖关系"><a href="#如何管理对象间的依赖关系" class="headerlink" title="如何管理对象间的依赖关系"></a>如何管理对象间的依赖关系</h2><p>需要知道自己所管理的和掌握的被注入对象和依赖对象之间的对应关系</p>
+<h3 id="直接编码方式"><a href="#直接编码方式" class="headerlink" title="直接编码方式"></a>直接编码方式</h3><p>使用程序编码的方式将被注入对象和依赖对象注册到容器中，显示的表明他们之间的依赖关系</p>
+<h3 id="配置文件方式"><a href="#配置文件方式" class="headerlink" title="配置文件方式"></a>配置文件方式</h3><p>最常用的是XML文件来管理对象注册和对象间依赖关系</p>
+<h3 id="元数据方式"><a href="#元数据方式" class="headerlink" title="元数据方式"></a>元数据方式</h3><p>基于注解<br>可以算作编码方式的一种特殊情况</p>
+<h1 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h1><p><strong>BeanFactory</strong><br>基础类型IoC容器，提供完整的IoC服务支持，默认使用延迟初始化策略<br><strong>ApplicationContext</strong>在BeanFactory基础上构建，是比较高级的容器实现，提供了一些高级特性，比如事件发布、国际化信息支持。在容器启动之后，默认全部初始化并绑定完成</p>
+<h2 id="拥有BeanFactory之后的生活"><a href="#拥有BeanFactory之后的生活" class="headerlink" title="拥有BeanFactory之后的生活"></a>拥有BeanFactory之后的生活</h2><p>系统和业务逻辑并没有发生变化，但是对象之间的依赖关系的解决方式改变了</p>
+<h2 id="BeanFactory的对象注册与依赖绑定方式"><a href="#BeanFactory的对象注册与依赖绑定方式" class="headerlink" title="BeanFactory的对象注册与依赖绑定方式"></a>BeanFactory的对象注册与依赖绑定方式</h2><h3 id="直接编码方式-1"><a href="#直接编码方式-1" class="headerlink" title="直接编码方式"></a>直接编码方式</h3><h3 id="外部文件配置方式"><a href="#外部文件配置方式" class="headerlink" title="外部文件配置方式"></a>外部文件配置方式</h3><h4 id="Properties文件"><a href="#Properties文件" class="headerlink" title="Properties文件"></a>Properties文件</h4><p>BeanDefinitionReader</p>
+<h4 id="XML文件"><a href="#XML文件" class="headerlink" title="XML文件"></a>XML文件</h4><h3 id="注解方式"><a href="#注解方式" class="headerlink" title="注解方式"></a>注解方式</h3><p>@Autowired和@Component  </p>
+<p><context:component-scan></context:component-scan></p>
+<h2 id="BeanFactory的XML之旅"><a href="#BeanFactory的XML之旅" class="headerlink" title="BeanFactory的XML之旅"></a>BeanFactory的XML之旅</h2><h3 id="和"><a href="#和" class="headerlink" title="和"></a><beans\>和<bean\></bean\></beans\></h3><p>DTD与XSD<br>并没有本质区别</p>
+<h4 id="beans"><a href="#beans" class="headerlink" title="beans"></a>beans</h4><p>是xml配置文件中最顶层的元素，可以包括若干个<description\><bean\><import\><alias\><br>属性<br>default-lazy-inti：是否延迟初始化<br>default-autowire：标志全体bean使用哪一种方式默认绑定<br>default-dependency-check：依赖检查<br>default-init-method：统一指定初始化方法名<br>default-destroy-methon：指定统一销毁方法<br><strong><description\><import\><alias\></alias\></import\></description\></strong><br>分别是描述，导入其他xml和起别名的作用<br><strong><bean\></bean\></strong><br>对象与bean元素一一对应<br>属性<br>id：bean的唯一标识<br>name：起别名<br>class：指定其类型</alias\></import\></bean\></description\></p>
+<h3 id="Help-Me，Help-You"><a href="#Help-Me，Help-You" class="headerlink" title="Help Me，Help You"></a>Help Me，Help You</h3><h4 id="构造方法注入-1"><a href="#构造方法注入-1" class="headerlink" title="构造方法注入"></a>构造方法注入</h4><p>需要配置constructor-arg,ref为引用类型，value为普通类型<br>type可以指定构造函数参数的类型<br>index 可以指定构造函数中参数的顺序</p>
+<h4 id="setter方法注入-1"><a href="#setter方法注入-1" class="headerlink" title="setter方法注入"></a>setter方法注入</h4><p>property元素，name对应字段值，value对应普通类型值，ref对应引用类型值</p>
+<h4 id="可用的配置项"><a href="#可用的配置项" class="headerlink" title="可用的配置项"></a>可用的配置项</h4><p>包括<br>bean：内部bean，可以防止被外部使用<br>ref：引用容器中其他的对象的实例<br>idref<br>value：适用于注入原始类和包装类以及String<br>null：注入null<br>list：可以有序的为当前对象注入以collection形式声明的依赖<br>set：可以无序的为当前对象注入以set形式声明的依赖<br>map：对应map对象，内嵌了entry元素。是一种键值对的形式<br>props：简化后的map，键值必须都是String  </p>
+<h4 id="depends-on"><a href="#depends-on" class="headerlink" title="depends-on"></a>depends-on</h4><p>描述了一种非显示的依赖关系</p>
+<h4 id="autowire"><a href="#autowire" class="headerlink" title="autowire"></a>autowire</h4><p>5种自动绑定模式：no，byName，byType，constructor，autodetect</p>
+<h4 id="dependency-check"><a href="#dependency-check" class="headerlink" title="dependency-check"></a>dependency-check</h4><p>四种类型，none，simple，object，all</p>
+<h4 id="lazy-init"><a href="#lazy-init" class="headerlink" title="lazy-init"></a>lazy-init</h4><h3 id="继承？我也会"><a href="#继承？我也会" class="headerlink" title="继承？我也会"></a>继承？我也会</h3><p>parent属性可以显式的表明这种继承关系<br>配合abstract可以实现模板设计模式</p>
+<h3 id="bean的scope"><a href="#bean的scope" class="headerlink" title="bean的scope"></a>bean的scope</h3><p>该对象的存活时间<br>类型：singleton，prototype，Request，session，global session<br>singleton与单例模式不同</p>
+<h3 id="工厂方法与FactoryBean"><a href="#工厂方法与FactoryBean" class="headerlink" title="工厂方法与FactoryBean"></a>工厂方法与FactoryBean</h3><p>适用于使用第三方类库</p>
+<h4 id="静态工厂方法"><a href="#静态工厂方法" class="headerlink" title="静态工厂方法"></a>静态工厂方法</h4><p>需借助factory-method方法来创建实例</p>
+<h4 id="非静态工厂方法"><a href="#非静态工厂方法" class="headerlink" title="非静态工厂方法"></a>非静态工厂方法</h4><p>需使用factory-bean引入工厂bean，然后指明factory-method</p>
+<h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h3><p>需要类继承FactoryBean接口，是spring提供的专门的接口</p>
+<h3 id="偷梁换柱"><a href="#偷梁换柱" class="headerlink" title="偷梁换柱"></a>偷梁换柱</h3><p>每次要去的新的实例</p>
+<h4 id="方法注入"><a href="#方法注入" class="headerlink" title="方法注入"></a>方法注入</h4><p>在依赖的对象中配置<lookup-method name="getNewsBean" bean="newsBean" \=""><br>即表明在getNewsBean方法中每次注入的都是新的实例</lookup-method></p>
+<h4 id="殊途同归"><a href="#殊途同归" class="headerlink" title="殊途同归"></a>殊途同归</h4><p>使用BeanFactoryAware接口，需要改配置文件<br>使用ObjectFactoryCreatingFactoryBean需要改配置文件  </p>
+<h4 id="方法替换"><a href="#方法替换" class="headerlink" title="方法替换"></a>方法替换</h4><replaced-method name="getAndPersistNews" replacer="providerReplacer">
+
+<h2 id="容器背后的秘密"><a href="#容器背后的秘密" class="headerlink" title="容器背后的秘密"></a>容器背后的秘密</h2><h3 id="战略性观望"><a href="#战略性观望" class="headerlink" title="战略性观望"></a>战略性观望</h3><h4 id="容器启动阶段"><a href="#容器启动阶段" class="headerlink" title="容器启动阶段"></a>容器启动阶段</h4><p>首先加载Configuration MetaData</p>
+<h4 id="Bean实例化阶段"><a href="#Bean实例化阶段" class="headerlink" title="Bean实例化阶段"></a>Bean实例化阶段</h4><h3 id="插手容器的启动"><a href="#插手容器的启动" class="headerlink" title="插手容器的启动"></a>插手容器的启动</h3><p>BeanFactoryPostProcessor的容器扩展机制，允许我们在容器实例化相应的对象之前，对注册到容器的BeanDefinition所保存的信息做相应的修改。<br>PropertyPlaceholderConfigurer：用于占位符，例如数据库的配置<br>PropertyOverrideConfigurer：替换某些信息<br>CustomEditorConfigurer：辅助性的，对BeanDefinition没有做任何变动   </p>
+<h3 id="了解bean的一生"><a href="#了解bean的一生" class="headerlink" title="了解bean的一生"></a>了解bean的一生</h3><p>对象的实例化默认是延迟初始化的，只有调用getBean才会被初始化，同样其依赖的对象同时被初始化。</p>
+<h4 id="Bean的实例化与BeanWrapper"><a href="#Bean的实例化与BeanWrapper" class="headerlink" title="Bean的实例化与BeanWrapper"></a>Bean的实例化与BeanWrapper</h4><p>容器在内部实现的时候，采用策略模式来决定采用何种方式初始化bean实例<br>首先返回的是BeanWrapper的实例，然后在BeanWrapper中设置各种字段值   </p>
+<h4 id="各色的Aware接口"><a href="#各色的Aware接口" class="headerlink" title="各色的Aware接口"></a>各色的Aware接口</h4><p>BeanNameAware<br>BeanClassloaderAware<br>BeanFactoryAware<br>ResourceLoaderAware<br>ApplicationEventPublisherAware：会将自身注入当前对象<br>MessageSourceAware<br>ApplicationContextAware：会将自身注入当前对象</p>
+<h4 id="BeanPostProcessor"><a href="#BeanPostProcessor" class="headerlink" title="BeanPostProcessor"></a>BeanPostProcessor</h4><p>Bean-PostProcessor是存在于对象实例化阶段，而BeanFactoryPostProcessor则是存在于容器启动阶段<br>Spring的AOP则更多地使用BeanPostProcessor来为对象生成相应的代理对象，如org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator<br>在对象实例化的前后可以做一些事情</p>
+<h4 id="InitializingBean和init-method"><a href="#InitializingBean和init-method" class="headerlink" title="InitializingBean和init-method"></a>InitializingBean和init-method</h4><p>org.springframework.beans.factory.InitializingBean是容器内部广泛使用的一个对象生<br>命周期标识接口</p>
+<h4 id="DisposableBean与destroy-method"><a href="#DisposableBean与destroy-method" class="headerlink" title="DisposableBean与destroy-method"></a>DisposableBean与destroy-method</h4><p>DisposableBean和destroy-method为对象提供了执行自定义销毁逻辑的机会</p>
+<h1 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h1><p>FileSystemXmlApplicationContext：在默认情况下，从文件系统加载bean定义以及相关资源的ApplicationContext实现<br>ClassPathXmlApplicationContext：在默认情况下，从Classpath加载bean定义以及相关资源的ApplicationContext实现<br>XmlWebApplicationContext：Spring提供的用于Web应用程序的ApplicationContext实现，我们将在第六部分更多地接触到它</p>
+<h2 id="统一资源加载策略"><a href="#统一资源加载策略" class="headerlink" title="统一资源加载策略"></a>统一资源加载策略</h2><h3 id="Spring中的Resource"><a href="#Spring中的Resource" class="headerlink" title="Spring中的Resource"></a>Spring中的Resource</h3><pre><code>BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(&quot;...&quot;));
+</code></pre><p>其中ClassPathResource就是Resource的一个特定类型的实现，代表的是位于Classpath中的资源</p>
+<h3 id="ResourceLoader，“更广义的URL”"><a href="#ResourceLoader，“更广义的URL”" class="headerlink" title="ResourceLoader，“更广义的URL”"></a>ResourceLoader，“更广义的URL”</h3><pre><code>public interface ResourceLoader {
+    String CLASSPATH_URL_PREFIX = ResourceUtils.CLASSPATH_URL_PREFIX;
+    Resource getResource(String location);
+    ClassLoader getClassLoader();
+}
+</code></pre><h4 id="可用的ResourceLoader"><a href="#可用的ResourceLoader" class="headerlink" title="可用的ResourceLoader"></a>可用的ResourceLoader</h4><p>DefaultResourceLoader<br>(1) 首先检查资源路径是否以classpath:前缀打头，如果是，则尝试构造ClassPathResource类<br>型资源并返回。<br>(2) 否则，(a) 尝试通过URL，根据资源路径来定位资源，如果没有抛出MalformedURLException，<br>有则会构造UrlResource类型的资源并返回；(b)如果还是无法根据资源路径定位指定的资源，则委派<br>getResourceByPath(String) 方法来定位， DefaultResourceLoader 的getResourceByPath(String)方法默认实现逻辑是，构造ClassPathResource类型的资源并返回。  </p>
+<p>FileSystemResourceLoader  </p>
+<pre><code>public void testResourceTypesWithFileSystemResourceLoader()
+{
+    ResourceLoader resourceLoader = new FileSystemResourceLoader();
+    Resource fileResource = resourceLoader.getResource(&quot;D:/spring21site/README&quot;);
+    assertTrue(fileResource instanceof FileSystemResource);
+    assertTrue(fileResource.exists());
+    Resource urlResource = resourceLoader.getResource(&quot;file:D:/spring21site/README&quot;);
+    assertTrue(urlResource instanceof UrlResource); 15
+}
+</code></pre><h2 id="国际化信息支持"><a href="#国际化信息支持" class="headerlink" title="国际化信息支持"></a>国际化信息支持</h2><h2 id="容器内部事件发布"><a href="#容器内部事件发布" class="headerlink" title="容器内部事件发布"></a>容器内部事件发布</h2><h2 id="多配置模块加载的简化"><a href="#多配置模块加载的简化" class="headerlink" title="多配置模块加载的简化"></a>多配置模块加载的简化</h2></replaced-method>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/21/操作系统/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/28/java设计模式/" rel="prev" title="java设计模式简介">
+                java设计模式简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#掀起Spring的盖头来"><span class="nav-number">1.</span> <span class="nav-text">掀起Spring的盖头来</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring之崛起"><span class="nav-number">1.1.</span> <span class="nav-text">Spring之崛起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring框架概述"><span class="nav-number">1.2.</span> <span class="nav-text">Spring框架概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#core模块"><span class="nav-number">1.2.1.</span> <span class="nav-text">core模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP模块"><span class="nav-number">1.2.2.</span> <span class="nav-text">AOP模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据访问和事务管理的抽象和集成服务"><span class="nav-number">1.2.3.</span> <span class="nav-text">数据访问和事务管理的抽象和集成服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remoting框架"><span class="nav-number">1.2.4.</span> <span class="nav-text">remoting框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web模块"><span class="nav-number">1.2.5.</span> <span class="nav-text">web模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring大观园"><span class="nav-number">1.3.</span> <span class="nav-text">Spring大观园</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IoC的基本概念"><span class="nav-number">2.</span> <span class="nav-text">IoC的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我们的理念是：让别人为你服务"><span class="nav-number">2.1.</span> <span class="nav-text">我们的理念是：让别人为你服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">2.1.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手语、呼喊、还是心有灵犀"><span class="nav-number">2.2.</span> <span class="nav-text">手语、呼喊、还是心有灵犀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法注入"><span class="nav-number">2.2.1.</span> <span class="nav-text">构造方法注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setter方法注入"><span class="nav-number">2.2.2.</span> <span class="nav-text">setter方法注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口注入"><span class="nav-number">2.2.3.</span> <span class="nav-text">接口注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoC的附加值"><span class="nav-number">2.3.</span> <span class="nav-text">IoC的附加值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#掌管大局的IoC-Service-Provider"><span class="nav-number">3.</span> <span class="nav-text">掌管大局的IoC Service Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#职责"><span class="nav-number">3.1.</span> <span class="nav-text">职责</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务对象的构建管理"><span class="nav-number">3.1.1.</span> <span class="nav-text">业务对象的构建管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务对象的依赖绑定"><span class="nav-number">3.1.2.</span> <span class="nav-text">业务对象的依赖绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何管理对象间的依赖关系"><span class="nav-number">3.2.</span> <span class="nav-text">如何管理对象间的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接编码方式"><span class="nav-number">3.2.1.</span> <span class="nav-text">直接编码方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件方式"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置文件方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据方式"><span class="nav-number">3.2.3.</span> <span class="nav-text">元数据方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BeanFactory"><span class="nav-number">4.</span> <span class="nav-text">BeanFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拥有BeanFactory之后的生活"><span class="nav-number">4.1.</span> <span class="nav-text">拥有BeanFactory之后的生活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory的对象注册与依赖绑定方式"><span class="nav-number">4.2.</span> <span class="nav-text">BeanFactory的对象注册与依赖绑定方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接编码方式-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">直接编码方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部文件配置方式"><span class="nav-number">4.2.2.</span> <span class="nav-text">外部文件配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Properties文件"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">Properties文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML文件"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">XML文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解方式"><span class="nav-number">4.2.3.</span> <span class="nav-text">注解方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory的XML之旅"><span class="nav-number">4.3.</span> <span class="nav-text">BeanFactory的XML之旅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#和"><span class="nav-number">4.3.1.</span> <span class="nav-text">和</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#beans"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">beans</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Me，Help-You"><span class="nav-number">4.3.2.</span> <span class="nav-text">Help Me，Help You</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造方法注入-1"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">构造方法注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setter方法注入-1"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">setter方法注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可用的配置项"><span class="nav-number">4.3.2.3.</span> <span class="nav-text">可用的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#depends-on"><span class="nav-number">4.3.2.4.</span> <span class="nav-text">depends-on</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#autowire"><span class="nav-number">4.3.2.5.</span> <span class="nav-text">autowire</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dependency-check"><span class="nav-number">4.3.2.6.</span> <span class="nav-text">dependency-check</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lazy-init"><span class="nav-number">4.3.2.7.</span> <span class="nav-text">lazy-init</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承？我也会"><span class="nav-number">4.3.3.</span> <span class="nav-text">继承？我也会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的scope"><span class="nav-number">4.3.4.</span> <span class="nav-text">bean的scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法与FactoryBean"><span class="nav-number">4.3.5.</span> <span class="nav-text">工厂方法与FactoryBean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态工厂方法"><span class="nav-number">4.3.5.1.</span> <span class="nav-text">静态工厂方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非静态工厂方法"><span class="nav-number">4.3.5.2.</span> <span class="nav-text">非静态工厂方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FactoryBean"><span class="nav-number">4.3.6.</span> <span class="nav-text">FactoryBean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偷梁换柱"><span class="nav-number">4.3.7.</span> <span class="nav-text">偷梁换柱</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法注入"><span class="nav-number">4.3.7.1.</span> <span class="nav-text">方法注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#殊途同归"><span class="nav-number">4.3.7.2.</span> <span class="nav-text">殊途同归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法替换"><span class="nav-number">4.3.7.3.</span> <span class="nav-text">方法替换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器背后的秘密"><span class="nav-number">4.4.</span> <span class="nav-text">容器背后的秘密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#战略性观望"><span class="nav-number">4.4.1.</span> <span class="nav-text">战略性观望</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器启动阶段"><span class="nav-number">4.4.1.1.</span> <span class="nav-text">容器启动阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean实例化阶段"><span class="nav-number">4.4.1.2.</span> <span class="nav-text">Bean实例化阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插手容器的启动"><span class="nav-number">4.4.2.</span> <span class="nav-text">插手容器的启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解bean的一生"><span class="nav-number">4.4.3.</span> <span class="nav-text">了解bean的一生</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的实例化与BeanWrapper"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">Bean的实例化与BeanWrapper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各色的Aware接口"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">各色的Aware接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BeanPostProcessor"><span class="nav-number">4.4.3.3.</span> <span class="nav-text">BeanPostProcessor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InitializingBean和init-method"><span class="nav-number">4.4.3.4.</span> <span class="nav-text">InitializingBean和init-method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DisposableBean与destroy-method"><span class="nav-number">4.4.3.5.</span> <span class="nav-text">DisposableBean与destroy-method</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ApplicationContext"><span class="nav-number">5.</span> <span class="nav-text">ApplicationContext</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#统一资源加载策略"><span class="nav-number">5.1.</span> <span class="nav-text">统一资源加载策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring中的Resource"><span class="nav-number">5.1.1.</span> <span class="nav-text">Spring中的Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResourceLoader，“更广义的URL”"><span class="nav-number">5.1.2.</span> <span class="nav-text">ResourceLoader，“更广义的URL”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可用的ResourceLoader"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">可用的ResourceLoader</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际化信息支持"><span class="nav-number">5.2.</span> <span class="nav-text">国际化信息支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器内部事件发布"><span class="nav-number">5.3.</span> <span class="nav-text">容器内部事件发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多配置模块加载的简化"><span class="nav-number">5.4.</span> <span class="nav-text">多配置模块加载的简化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
