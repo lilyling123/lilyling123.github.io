@@ -100,7 +100,25 @@
 <meta property="og:image" content="http://i.imgur.com/6iYnFgF.jpg">
 <meta property="og:image" content="http://i.imgur.com/0OmstJz.jpg">
 <meta property="og:image" content="http://yoursite.com/img/opSystem/forth/1.jpg">
-<meta property="og:updated_time" content="2017-03-30T09:02:33.259Z">
+<meta property="og:image" content="http://i.imgur.com/vl6oxdi.jpg">
+<meta property="og:image" content="http://i.imgur.com/ifkpI4v.jpg">
+<meta property="og:image" content="http://i.imgur.com/kiLLuu6.jpg">
+<meta property="og:image" content="http://i.imgur.com/XM6g4tn.jpg">
+<meta property="og:image" content="http://i.imgur.com/6CmUVag.jpg">
+<meta property="og:image" content="http://i.imgur.com/QRMKEIh.jpg">
+<meta property="og:image" content="http://i.imgur.com/EZuWkXa.jpg">
+<meta property="og:image" content="http://i.imgur.com/uNs6069.jpg">
+<meta property="og:image" content="http://i.imgur.com/gHeUaSg.jpg">
+<meta property="og:image" content="http://i.imgur.com/06aIUmm.jpg">
+<meta property="og:image" content="http://i.imgur.com/fwqMmfW.jpg">
+<meta property="og:image" content="http://i.imgur.com/AjKr58E.jpg">
+<meta property="og:image" content="http://i.imgur.com/o03xMIo.jpg">
+<meta property="og:image" content="http://i.imgur.com/OKGbAYs.jpg">
+<meta property="og:image" content="http://i.imgur.com/Eb0yzM5.jpg">
+<meta property="og:image" content="http://i.imgur.com/kA8DNSC.jpg">
+<meta property="og:image" content="http://i.imgur.com/MI0JAbj.jpg">
+<meta property="og:image" content="http://i.imgur.com/0nN34dY.jpg">
+<meta property="og:updated_time" content="2017-04-02T06:44:37.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统">
 <meta name="twitter:description" content="操作系统">
@@ -331,21 +349,19 @@
 puts(&quot;hello world&quot;); return 0; 
 }
 </code></pre><hr>
-<ol>
-<li>用户告诉操作系统执行helloworld程序(如何告知？)  </li>
-<li>操作系统：找到helloworld程序的相关信息，检查其类型是否是可执行文件；并通过程序首部信息，确定代码和数据在可执行文件中的位置并计算出对应的磁盘块地址（文件格式？）   </li>
-<li>操作系统：创建一个新的进程，并将helloworld可执行文件映射到该进程结构，表示由该进程执行helloworld程序  </li>
-<li>操作系统：为helloworld程序设置CPU上下文环境，并跳到程序开始处（假设调度程序选中hello程序）  </li>
-<li>执行helloworld程序的第一条指令，发生缺页异常  </li>
-<li>操作系统：分配一页物理内存，并将代码从磁盘读入内存，然后继续执行helloworld程序   </li>
-<li>helloworld程序执行puts函数（系统调用），在显示器上写一字符串   </li>
-<li>操作系统：找到要将字符串送往的显示设备，通常设备是由一个进程控制的，所以，操作系统将要写的字符串送给该进程  </li>
-<li>操作系统：控制设备的进程告诉设备的窗口系统它要显示字符串，窗口系统确定这是一个合法的操作，然后将字符串转换成像素，将像素写入设备的存储映像区  </li>
-<li>视频硬件将像素转换成显示器可接收的一组控制/数据信号  </li>
-<li>显示器解释信号，激发液晶屏  </li>
-<li>OK！！！我们在屏幕上看到了“hello world”</li>
-</ol>
-<h3 id="从上述步骤中得到了什么"><a href="#从上述步骤中得到了什么" class="headerlink" title="从上述步骤中得到了什么"></a>从上述步骤中得到了什么</h3><p>os进程与用户程序的切换  </p>
+<pre><code>1. 用户告诉操作系统执行helloworld程序(如何告知？)  
+2. 操作系统：找到helloworld程序的相关信息，检查其类型是否是可执行文件；并通过程序首部信息，确定代码和数据在可执行文件中的位置并计算出对应的磁盘块地址（文件格式？）   
+3. 操作系统：创建一个新的进程，并将helloworld可执行文件映射到该进程结构，表示由该进程执行helloworld程序  
+4. 操作系统：为helloworld程序设置CPU上下文环境，并跳到程序开始处（假设调度程序选中hello程序）  
+5. 执行helloworld程序的第一条指令，发生缺页异常  
+6. 操作系统：分配一页物理内存，并将代码从磁盘读入内存，然后继续执行helloworld程序   
+7. helloworld程序执行puts函数（系统调用），在显示器上写一字符串   
+8. 操作系统：找到要将字符串送往的显示设备，通常设备是由一个进程控制的，所以，操作系统将要写的字符串送给该进程  
+9. 操作系统：控制设备的进程告诉设备的窗口系统它要显示字符串，窗口系统确定这是一个合法的操作，然后将字符串转换成像素，将像素写入设备的存储映像区  
+10. 视频硬件将像素转换成显示器可接收的一组控制/数据信号  
+11. 显示器解释信号，激发液晶屏  
+12. OK！！！我们在屏幕上看到了“hello world”
+</code></pre><h3 id="从上述步骤中得到了什么"><a href="#从上述步骤中得到了什么" class="headerlink" title="从上述步骤中得到了什么"></a>从上述步骤中得到了什么</h3><p>os进程与用户程序的切换  </p>
 <h3 id="换个角度看用户程序的执行"><a href="#换个角度看用户程序的执行" class="headerlink" title="换个角度看用户程序的执行"></a>换个角度看用户程序的执行</h3><h2 id="操作系统的定义与作用"><a href="#操作系统的定义与作用" class="headerlink" title="操作系统的定义与作用"></a>操作系统的定义与作用</h2><h3 id="操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——"><a href="#操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——" class="headerlink" title="操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——"></a>操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——</h3><ul>
 <li>它们能以尽量有效、合理的方式组织和管理计算机的软硬件资源  </li>
 <li>合理地组织计算机的工作 流程，控制程序的执行并向用户提供各种服务功能  </li>
@@ -357,28 +373,25 @@ puts(&quot;hello world&quot;); return 0;
 如果不公平、不合理，则可能会产生问题？
 </code></pre><p>  方便使用：</p>
 <pre><code>两种角度：用户界面 与 编程接口
-</code></pre><h3 id="三个作用"><a href="#三个作用" class="headerlink" title="三个作用"></a>三个作用</h3><h4 id="资源的管理者"><a href="#资源的管理者" class="headerlink" title="资源的管理者"></a>资源的管理者</h4><p>自底向上 硬件资源：软件资源：<br><strong>怎样管理资源</strong>  </p>
-<p>  跟踪记录资源的使用状况，如：哪些资源空闲，分配给谁使用，允许使用多长时间等<br>  确定资源分配策略——算法：静态分配策略，动态分配策略<br>  实施资源的分配和回收<br>  提高资源利用率<br>  保护资源的使用<br>  协调多个进程对资源请求的冲突</p>
+</code></pre><h3 id="三个作用"><a href="#三个作用" class="headerlink" title="三个作用"></a>三个作用</h3><h4 id="资源的管理者"><a href="#资源的管理者" class="headerlink" title="资源的管理者"></a>资源的管理者</h4><p>自底向上 硬件资源：软件资源：<br><strong>怎样管理资源</strong><br><pre><br>跟踪记录资源的使用状况，如：哪些资源空闲，分配给谁使用，允许使用多长时间等<br>确定资源分配策略——算法：静态分配策略，动态分配策略<br>实施资源的分配和回收<br>提高资源利用率<br>保护资源的使用<br>协调多个进程对资源请求的冲突<br></pre><br><strong>五大基本功能</strong>  </p>
+<p>  进程/线程管理（CPU管理）</p>
+<pre><code>进程线程状态、控制、同步互斥、通信、调度、……
+</code></pre><p>  存储管理</p>
+<pre><code>分配/回收、地址转换、存储保护、内存扩充、……
+</code></pre><p>  文件管理</p>
+<pre><code>文件目录、文件操作、磁盘空间、文件存取控制、……
+</code></pre><p>  设备管理</p>
+<pre><code>设备驱动、分配回收、缓冲技术、……
+</code></pre><p>  用户接口</p>
+<pre><code>系统命令、编程接口
+</code></pre><h4 id="各种系统服务的提供者"><a href="#各种系统服务的提供者" class="headerlink" title="各种系统服务的提供者"></a>各种系统服务的提供者</h4><p>  在操作系统之上，从用户角度来看：</p>
+<pre><code>操作系统为用户提供了一组功能强大、方便易用的命令或系统调用
+</code></pre><p>  典型的服务</p>
+<pre><code>进程的创建、执行；文件和目录的操作；I/O设备的使用；各类统计信息；……
+</code></pre><h4 id="对硬件机器的扩展"><a href="#对硬件机器的扩展" class="headerlink" title="对硬件机器的扩展"></a>对硬件机器的扩展</h4><p>  操作系统在应用程序与硬件之间建立了一个等价的扩展机器（虚拟机）<br>  对硬件抽象，提高可移植性；比底层硬件更容易编程</p>
 </li>
 </ul>
-<p><strong>五大基本功能</strong>  </p>
-<pre><code>进程/线程管理（CPU管理）
-    进程线程状态、控制、同步互斥、通信、调度、……
-存储管理
-    分配/回收、地址转换、存储保护、内存扩充、……
-文件管理
-    文件目录、文件操作、磁盘空间、文件存取控制、……
-设备管理
-    设备驱动、分配回收、缓冲技术、……
-用户接口
-    系统命令、编程接口
-</code></pre><h4 id="各种系统服务的提供者"><a href="#各种系统服务的提供者" class="headerlink" title="各种系统服务的提供者"></a>各种系统服务的提供者</h4><pre><code>在操作系统之上，从用户角度来看：
-    操作系统为用户提供了一组功能强大、方便易用的命令或系统调用
-典型的服务
-    进程的创建、执行；文件和目录的操作；I/O设备的使用；各类统计信息；……
-</code></pre><h4 id="对硬件机器的扩展"><a href="#对硬件机器的扩展" class="headerlink" title="对硬件机器的扩展"></a>对硬件机器的扩展</h4><pre><code>操作系统在应用程序与硬件之间建立了一个等价的扩展机器（虚拟机）  
-对硬件抽象，提高可移植性；比底层硬件更容易编程
-</code></pre><p>由面向底层变成了面向操作系统编程</p>
+<p>由面向底层变成了面向操作系统编程</p>
 <h2 id="操作系统的主要特征"><a href="#操作系统的主要特征" class="headerlink" title="操作系统的主要特征"></a>操作系统的主要特征</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>并发(concurrency)：指处理多个同时性活动的能力  </p>
 <pre><code>由于并发将会引发很多的问题：
     活动切换、保护、相互依赖的活动间的同步
@@ -725,19 +738,19 @@ Interrupt    来自I/O设备、其他硬件部件    异步            总是返
 7. C语言过程返回至汇编代码
 8. 汇编语言过程开始运行新的当前进程
 </code></pre><h2 id="重点-1"><a href="#重点-1" class="headerlink" title="重点"></a>重点</h2><pre><code>理解计算机系统的保护机制
-    掌握处理器状态
-     掌握特权指令与非特权指令
- 掌握中断/异常机制
-     掌握中断/异常的基本概念
-     理解中断/异常机制的工作原理
- 掌握系统调用机制
-    掌握系统调用设计原理
-    掌握系统调用执行过程
+    掌握处理器状态
+    掌握特权指令与非特权指令
+掌握中断/异常机制
+    掌握中断/异常的基本概念
+    理解中断/异常机制的工作原理
+掌握系统调用机制
+    掌握系统调用设计原理
+    掌握系统调用执行过程
 </code></pre><hr>
 <pre><code>重点阅读教材
     第1章相关内容：1.3、1.6
     第2章 第52页 图2-5及说明该图思路的段落
-重点概念
+重点概念
     CPU状态 内核态/用户态 特权指令/非特权指令
     中断 异常 中断响应 中断向量 中断处理程序
     系统调用 陷入指令 系统调用号 系统调用表
@@ -1302,7 +1315,751 @@ Linux2.6CFS调度器：完全公平调度算法
 先来先服务 短作业优先 最高相应比优先
 时间片轮转 最高优先级 多级队列反馈
 吞吐量 周转时间 响应时间
-</code></pre>
+</code></pre><h1 id="同步机制1"><a href="#同步机制1" class="headerlink" title="同步机制1"></a>同步机制1</h1><h2 id="进程的并发执行"><a href="#进程的并发执行" class="headerlink" title="进程的并发执行"></a>进程的并发执行</h2><p>进程的并发执行<br>进程互斥<br>进程同步<br>信号量及PV操作<br>经典的IPC问题</p>
+<h3 id="进程并发执行"><a href="#进程并发执行" class="headerlink" title="进程并发执行"></a>进程并发执行</h3><h4 id="从进程的特征触发"><a href="#从进程的特征触发" class="headerlink" title="从进程的特征触发"></a>从进程的特征触发</h4><pre><code>并发
+    进程的执行是间断性的
+    进程的相对执行速度不可预测
+共享
+    进程/线程之间的制约性
+不确定性
+    进程执行的结果与其执行的相对速度有关，是不确定的
+</code></pre><p>####与时间有关的错误  ####<br>两个进程的关键活动出现了交叉  </p>
+<h3 id="并发执行过程分析"><a href="#并发执行过程分析" class="headerlink" title="并发执行过程分析"></a>并发执行过程分析</h3><pre><code>当前状态 (3,4,...,m) 2 2 (1,2)
+可能的执行（假设g,c,p为get,copy,put的一次循环）
+g,c,p (4,5,...,m) 3 3 (1,2,3) 正确
+g,p,c (4,5,...,m) 3 3 (1,2,2) 错误
+c,g,p (4,5,...,m) 3 2 (1,2,2) 错误
+c,p,g (4,5,...,m) 3 2 (1,2,2) 错误
+p,c,g (4,5,...,m) 3 2 (1,2,2) 错误
+p,g,c (4,5,...,m) 3 3 (1,2,2) 错误
+</code></pre><h3 id="进程前趋图"><a href="#进程前趋图" class="headerlink" title="进程前趋图"></a>进程前趋图</h3><p><img src="http://i.imgur.com/vl6oxdi.jpg" alt=""></p>
+<h2 id="进程互斥"><a href="#进程互斥" class="headerlink" title="进程互斥"></a>进程互斥</h2><h3 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h3><p>两个或多个进程读写某些共享数据，而最后的结果取决于进程运行的精确时序</p>
+<h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><pre><code>由于各进程要求使用共享资源（变量、文件等），而这些资源需要排他性使用
+各进程之间竞争使用这些资源
+    —— 这一关系称为进程互斥
+
+临界资源：critical resource
+    系统中某些资源一次只允许一个进程使用，称这样的资源为临界资源或互斥资源或共享变量
+
+临界区(互斥区)：critical section(region)
+    各个进程中对某个临界资源（共享变量）实施操作的程序片段
+</code></pre><h3 id="临界区的使用原则"><a href="#临界区的使用原则" class="headerlink" title="临界区的使用原则"></a>临界区的使用原则</h3><pre><code>没有进程在临界区时，想进入临界区的进程可进入
+不允许两个进程同时处于其临界区中
+临界区外运行的进程不得阻塞其他进程进入临界区
+不得使进程无限期等待进入临界区
+</code></pre><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code>软件方案
+    Dekker解法、Peterson解法
+硬件方案
+    屏蔽中断、TSL(XCHG)指令
+</code></pre><h2 id="软件解决方案"><a href="#软件解决方案" class="headerlink" title="软件解决方案"></a>软件解决方案</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><pre><code>P:
+    … …
+    while (free) ;
+    free = true;
+    临界区
+    free = false;
+    … …
+Q: 
+    … … 
+    while (free) ;
+     free = true; 
+    临界区 
+    free = false;
+     … …
+</code></pre><hr>
+<pre><code>free: 临界区空闲标志
+true: 有进程在临界区 
+false:无进程在临界区
+初值：free为false
+</code></pre><h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><pre><code>P:
+    … …
+    while (not turn) ;
+    临界区
+    turn = false;
+    … …
+Q:
+    … …
+    while (turn) ;
+    临界区
+    turn = true;
+    … …
+</code></pre><hr>
+<pre><code>turn: 谁进临界区的标志 
+true: P进程进临界区 
+false: Q进程进临界区
+初值任意
+</code></pre><h3 id="解法3"><a href="#解法3" class="headerlink" title="解法3"></a>解法3</h3><pre><code>P:
+    … …
+    pturn = true;
+    while (qturn) ;
+    临界区
+    pturn = false;
+    … …
+
+Q:
+    … …
+    qturn = true;
+    while (pturn) ;
+    临界区
+    qturn = false;
+    … …
+</code></pre><hr>
+<pre><code>pturn, qturn: 初值为false
+P进入临界区的条件: pturn∧ not qturn
+Q进入临界区的条件: not pturn∧ qturn
+</code></pre><p>死锁问题</p>
+<h3 id="解法4：DEKKER算法"><a href="#解法4：DEKKER算法" class="headerlink" title="解法4：DEKKER算法"></a>解法4：DEKKER算法</h3><pre><code>P:
+    … …
+    pturn = true;
+    while (qturn) {
+        if (turn == 2) {
+            pturn = false;
+            while (turn == 2);
+            pturn = true;
+            } }
+    临界区
+    turn = 2;
+    pturn = false;
+    … …
+
+Q:
+… …
+qturn = true;
+while (pturn) {
+    if (turn == 1) {
+        qturn = false;
+        while (turn == 1);
+        qturn = true;
+    } }
+临界区
+turn = 1;
+qturn = false;
+… …
+</code></pre><h3 id="解法5：PETTERSON算法"><a href="#解法5：PETTERSON算法" class="headerlink" title="解法5：PETTERSON算法"></a>解法5：PETTERSON算法</h3><pre><code>Peterson算法解决了互斥访问的问题，而且克服了强制轮流法的缺点，可以完全正常地工作（1981）
+</code></pre><hr>
+<pre><code>进程i：
+    … …
+    enter_region ( i );
+    临界区
+    leave_region ( i );
+</code></pre><h2 id="进程互斥的硬件解决方法"><a href="#进程互斥的硬件解决方法" class="headerlink" title="进程互斥的硬件解决方法"></a>进程互斥的硬件解决方法</h2><h3 id="中断屏蔽方法"><a href="#中断屏蔽方法" class="headerlink" title="中断屏蔽方法"></a>中断屏蔽方法</h3><pre><code>“开关中断”指令
+执行“关中断”指令
+    临界区操作
+执行“开中断”指令
+</code></pre><hr>
+<pre><code>简单，高效
+代价高，限制CPU并发能力（临界区大小）
+不适用于多处理器
+适用于操作系统本身，不适于用户进程
+</code></pre><h3 id="“测试并加锁”指令"><a href="#“测试并加锁”指令" class="headerlink" title="“测试并加锁”指令"></a>“测试并加锁”指令</h3><p>TSL指令：TEST AND SET LOCK    </p>
+<pre><code>复制锁到寄存器并将锁置1
+判断寄存器内容是否是零？
+若不是零，跳转到enter_region
+返回调用者，进入了临界区
+
+在锁中置0
+返回调用者
+</code></pre><h3 id="交换指令"><a href="#交换指令" class="headerlink" title="交换指令"></a>交换指令</h3><pre><code>给寄存器中置1 
+交换寄存器与锁变量的内容 
+判断寄存器内容是否是零？ 
+若不是零，跳转到enter_region 
+返回调用者，进入了临界区
+
+在锁中置0
+返回调用者
+</code></pre><h2 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h2><pre><code>软件方法
+    编程技巧
+硬件方法
+忙等待(busy waiting)
+    进程在得到临界区访问权之前，持续测试而不做其他事情
+    自旋锁 Spin lock (多处理器 √)
+优先级反转（倒置）
+</code></pre><h2 id="进程的同步"><a href="#进程的同步" class="headerlink" title="进程的同步"></a>进程的同步</h2><pre><code>进程同步：synchronization
+    指系统中多个进程中发生的事件存在某种时序关系，需要相互合作，共同完成一项任务
+</code></pre><hr>
+<pre><code>具体地说，一个进程运行到某一点时，要求另一伙伴进程为它提供消息，在未获得消息之前，该进程进入阻塞态，获得消息后被唤醒进入就绪态
+</code></pre><h3 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><pre><code>问题描述：
+    一个或多个生产者生产某种类型的数据放置在缓冲区中
+    有消费者从缓冲区中取数据，每次取一项
+    只能有一个生产者或消费者对缓冲区进行操作
+</code></pre><h4 id="要解决的问题："><a href="#要解决的问题：" class="headerlink" title="要解决的问题："></a>要解决的问题：</h4><pre><code>当缓冲区已满时，生产者不会继续向其中添加数据；
+当缓冲区为空时，消费者不会从中移走数据
+生产者和消费者不能同时操作
+</code></pre><h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><pre><code>避免忙等待
+睡眠 与 唤醒 操作(原语)
+</code></pre><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>#define N 100
+int count=0;
+void producer(void)
+{ int item;
+    while(TRUE) {
+        item=produce_item();
+        if(count==N) sleep();
+        insert_item(item);
+        count=count+1;
+        if(count==1)
+        wakeup(consumer);
+    }
+}
+</code></pre><hr>
+<pre><code>void consumer(void)
+{
+    int item;
+    while(TRUE) {
+        if(count==0) sleep();
+        item=remove_item();
+        count=count-1;
+        if(count==N-1)
+        wakeup(producer);
+        consume_item(item);
+    }
+}
+</code></pre><p>没有完全解决问题</p>
+<h3 id="其他例子"><a href="#其他例子" class="headerlink" title="其他例子"></a>其他例子</h3><p><img src="http://i.imgur.com/ifkpI4v.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/kiLLuu6.jpg" alt=""></p>
+<h2 id="信号量及P、V操作"><a href="#信号量及P、V操作" class="headerlink" title="信号量及P、V操作"></a>信号量及P、V操作</h2><pre><code>一个特殊变量
+用于进程间传递信息的一个整数值
+定义如下：
+struc semaphore
+{
+    int count;
+    queueType queue;
+}
+信号量说明：semaphore s;
+对信号量可以实施的操作：初始化、P和V（P、V分别是荷兰语的test(proberen)和increment(verhogen)）
+</code></pre><h3 id="P，V操作定义"><a href="#P，V操作定义" class="headerlink" title="P，V操作定义"></a>P，V操作定义</h3><pre><code>P(s)
+{
+    s.count --;
+    if (s.count &lt; 0)
+{
+    该进程状态置为阻塞状态；
+    将该进程插入相应的等待队列s.queue末尾；
+    重新调度；
+}
+}
+</code></pre><p>down, semWait</p>
+<hr>
+<pre><code>V(s)
+{
+    s.count ++;
+    if (s.count &lt; = 0)
+{
+    唤醒相应等待队列s.queue中等待的一个进程；
+    改变其状态为就绪态，并将其插入就绪队列；
+}
+}
+</code></pre><p>up, semSignal</p>
+<h4 id="有关说明"><a href="#有关说明" class="headerlink" title="有关说明"></a>有关说明</h4><pre><code>P、V操作为原语操作(primitive or atomic action)
+
+在信号量上定义了三个操作
+    初始化(非负数)、P操作、V操作
+
+最初提出的是二元信号量（解决互斥）
+    之后，推广到一般信号量（多值）或计数信号量（解决同步）
+</code></pre><h3 id="PV操作解决进行间互斥问题"><a href="#PV操作解决进行间互斥问题" class="headerlink" title="PV操作解决进行间互斥问题"></a>PV操作解决进行间互斥问题</h3><pre><code>分析并发进程的关键活动，划定临界区
+设置信号量 mutex，初值为1
+在临界区前实施 P(mutex)
+在临界区之后实施 V(mutex)
+</code></pre><p><img src="http://i.imgur.com/XM6g4tn.jpg" alt=""></p>
+<h2 id="生产者消费者问题-1"><a href="#生产者消费者问题-1" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><h3 id="用信号量的解法"><a href="#用信号量的解法" class="headerlink" title="用信号量的解法"></a>用信号量的解法</h3><pre><code>void producer(void) 
+{ int item; 
+    while(TRUE) 
+    { item=produce_item();
+         P(&amp;empty); 
+        P(&amp;mutex); 
+        insert_item(item);
+         V(&amp;mutex);
+         V(&amp;full); 
+    } }
+</code></pre><hr>
+<pre><code>void consumer(void)
+{ int item;
+    while(TRUE) {
+        P(&amp;full);
+        P(&amp;mutex);
+        item=remove_item();
+        V(&amp;mutex);
+        V(&amp;empty);
+        consume_item(item);
+}
+}
+</code></pre><hr>
+<pre><code>#define N 100 /* 缓冲区个数 */
+typedef int semaphore; /* 信号量是一种特殊的整型数据 */
+semaphore mutex =1; /* 互斥信号量：控制对临界区的访问 */
+semaphore empty =N; /* 空缓冲区个数 */
+semaphore full = 0; /* 满缓冲区个数 */
+</code></pre><h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><pre><code>思考：
+若颠倒两个P操作的顺序？
+思考：
+若颠倒两个V操作的顺序？
+</code></pre><h2 id="读者写者问题"><a href="#读者写者问题" class="headerlink" title="读者写者问题"></a>读者写者问题</h2><h3 id="信号量解法"><a href="#信号量解法" class="headerlink" title="信号量解法"></a>信号量解法</h3><pre><code>问题描述：
+    多个进程共享一个数据区，这些进程分为两组：
+        读者进程：只读数据区中的数据
+        写者进程：只往数据区写数据
+
+要求满足条件：
+    允许多个读者同时执行读操作
+    不允许多个写者同时操作
+    不允许读者、写者同时操作
+</code></pre><h3 id="第一类问题，读者优先"><a href="#第一类问题，读者优先" class="headerlink" title="第一类问题，读者优先"></a>第一类问题，读者优先</h3><pre><code>如果读者执行：
+    无其他读者、写者，该读者可以读
+    若已有写者等，但有其他读者正在读，则该读者也可以读
+    若有写者正在写，该读者必须等
+
+如果写者执行：
+    无其他读者、写者，该写者可以写
+    若有读者正在读，该写者等待
+    若有其他写者正在写，该写者等待
+</code></pre><h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><pre><code>void reader(void)
+{
+    while (TRUE) {
+    ……
+    P (w);//第一个读者做
+    读操作
+    V(w);//最后一个读者做
+    ……
+}
+}
+</code></pre><hr>
+<pre><code>void writer(void)
+{
+    while (TRUE) {
+    ……
+    P(w);
+    写操作
+    V(w);
+    ……
+}
+}
+</code></pre><p>解决不了多个同时读</p>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><pre><code>void reader(void)
+{
+while (TRUE) {
+    P(mutex);
+    rc = rc + 1;
+    if (rc == 1) P (w);//Rc也需要保护
+    V(mutex);
+
+    读操作
+
+    P(mutex);
+    rc = rc - 1;
+    if (rc == 0) V(w);
+    V(mutex);
+    其他操作
+}
+</code></pre><hr>
+<pre><code>void writer(void)
+{
+while (TRUE) {
+……
+P(w);
+
+写操作
+
+V(w);
+}
+}
+</code></pre><h3 id="LINUX提供的读写锁"><a href="#LINUX提供的读写锁" class="headerlink" title="LINUX提供的读写锁"></a>LINUX提供的读写锁</h3><pre><code>应用场景
+    如果每个执行实体对临界区的访问或者是读或者是写共享变量，但是它们都不会既读又写时，读写锁是最好的选择
+
+实例：Linux的IPX路由代码中使用了读-写锁，用ipx_routes_lock的读-写锁保护IPX路由表的并发访问
+</code></pre><hr>
+<pre><code>要通过查找路由表实现包转发的程序需要请求读锁；
+
+需要添加和删除路由表中入口的程序必须获取写锁（由于通过读路由表的情况比更新路由表的情况多得多，使用读-写锁提高了性能）
+</code></pre><h2 id="重点-3"><a href="#重点-3" class="headerlink" title="重点"></a>重点</h2><pre><code>基本概念
+    竞争条件、临界区
+    进程同步、进程互斥
+    自旋锁（忙等待）
+信号量、PV操作
+经典问题模型及解决方案
+    生产者-消费者问题、读者-写者问题
+</code></pre><h3 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h3><pre><code>重点阅读教材
+第2章相关内容：2.3.1~2.3.5，2.5.2
+
+重点概念
+竞争条件 与时间有关的错误 忙等待
+临界资源 临界区 进程互斥 进程同步
+信号量 P、V操作 锁 自旋锁
+生产者消费者问题 读者写者问题
+</code></pre><h1 id="同步互斥机制2"><a href="#同步互斥机制2" class="headerlink" title="同步互斥机制2"></a>同步互斥机制2</h1><h2 id="管程的基本概念"><a href="#管程的基本概念" class="headerlink" title="管程的基本概念"></a>管程的基本概念</h2><pre><code>管程monitor
+进程间通信
+    Inter-Process Communication
+典型操作系统的IPC机制
+</code></pre><h3 id="为什么会出现管程"><a href="#为什么会出现管程" class="headerlink" title="为什么会出现管程"></a>为什么会出现管程</h3><pre><code>问题：
+    信号量机制的不足：程序编写困难、易出错  
+解决：
+    Brinch Hansen(1973) 
+    Hoare（1974）
+方案：
+    在程序设计语言中引入管程成分 
+    一种高级同步机制
+</code></pre><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><pre><code>是一个特殊的模块
+有一个名字
+由关于共享资源的数据结构及在其上操作的一组过程组成
+
+进程与管程
+进程只能通过调用管程中的过程来间接地访问管程中的数据结构
+</code></pre><h3 id="有什么保证"><a href="#有什么保证" class="headerlink" title="有什么保证"></a>有什么保证</h3><pre><code>互斥
+    管程是互斥进入的
+        ——为了保证管程中数据结构的数据完整性
+管程的互斥性是由编译器负责保证的
+
+同步
+    管程中设置条件变量及等待/唤醒操作以解决同步问题
+    可以让一个进程或线程在条件变量上等待（此时，应先释放管程的使用权），也可以通过发送信号将等待在条件变量上的进程或线程唤醒
+</code></pre><h3 id="会遇到什么问题"><a href="#会遇到什么问题" class="headerlink" title="会遇到什么问题"></a>会遇到什么问题</h3><pre><code>设问：
+    是否会出现这样一种场景，有多个进程同时在管程中出现？
+场景场景：
+    当一个进入管程的进程执行等待操作时，它应当释放管程的互斥权
+
+    当后面进入管程的进程执行唤醒操作时（例如P唤醒Q），管程中便存在两个同时处于活动状态的进程
+
+如何解决？
+    三种处理方法：
+        P等待Q执行
+        Q等待P继续执行
+        规定唤醒操作为管程中最后一个可执行的操作
+</code></pre><h2 id="Hoare管程"><a href="#Hoare管程" class="headerlink" title="Hoare管程"></a>Hoare管程</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><pre><code>因为管程是互斥进入的，所以当一个进程试图进入一个已被占用的管程时，应当在管程的入口处等待
+    为此，管程的入口处设置一个进程等待队列，称作入口等待队列
+如果进程P唤醒进程Q，则P等待Q执行；如果进程Q执行中又唤醒进程R，则Q等待R执行；……，如此，在管程内部可能会出现多个等待进程
+    在管程内需要设置一个进程等待队列，称为紧急等待队列，紧急等待队列的优先级高于入口等待队列的优先级
+</code></pre><h3 id="条件变量的实现"><a href="#条件变量的实现" class="headerlink" title="条件变量的实现"></a>条件变量的实现</h3><pre><code>条件变量——在管程内部说明和使用的一种特殊类型的变量
+var c:condition;
+对于条件变量，可以执行wait和signal操作
+</code></pre><hr>
+<pre><code>wait(c)：
+    如果紧急等待队列非空，则唤醒第一个等待者；否则释放管程的互斥权，执行此操作的进程进入c链末尾
+signal(c)：
+    如果c链为空，则相当于空操作，执行此操作的进程继续执行；否则唤醒第一个等待者，执行此操作的进程进入紧急等待队列的末尾
+</code></pre><h2 id="管程的实现"><a href="#管程的实现" class="headerlink" title="管程的实现"></a>管程的实现</h2><pre><code>管程实现的两个主要途径：
+    * 直接构造 → 效率高
+    * 间接构造
+        → 用某种已经实现的同步机制去构造
+</code></pre><h3 id="管程解决生产者消费者问题"><a href="#管程解决生产者消费者问题" class="headerlink" title="管程解决生产者消费者问题"></a>管程解决生产者消费者问题</h3><h4 id="生产者消费者"><a href="#生产者消费者" class="headerlink" title="生产者消费者"></a>生产者消费者</h4><pre><code>procedure producer;
+begin
+    while true do
+    begin
+        item = produce_item;
+        ProducerConsumer.insert(item);
+    end
+end;
+procedure consumer;
+begin
+    while true do
+    begin
+        item=ProducerConsumer.remove;
+        consume_item(item);
+    end
+end;
+</code></pre><h4 id="管程的实现-1"><a href="#管程的实现-1" class="headerlink" title="管程的实现"></a>管程的实现</h4><pre><code>monitor ProducerConsumer
+    condition full, empty;
+    integer count;
+    procedure insert (item: integer);
+    begin
+        if count == N then wait(full);
+        insert_item(item); count++;
+        if count ==1 then signal(empty);
+    end;
+
+    function remove: integer;
+    begin
+        if count ==0 then wait(empty);
+        remove = remove_item; count--;
+        if count==N-1 then signal(full);
+    end;
+    count:=0;
+end monitor;
+</code></pre><h3 id="java有类似管程的机制"><a href="#java有类似管程的机制" class="headerlink" title="java有类似管程的机制"></a>java有类似管程的机制</h3><h2 id="MESA管程"><a href="#MESA管程" class="headerlink" title="MESA管程"></a>MESA管程</h2><pre><code>Lampson和Redell，Mesa语言（1980）
+Hoare管程的一个缺点
+    两次额外的进程切换
+解决：
+    signal → notify
+    notify：当一个正在管程中的进程执行notify(x)时，它使得x条件队列得到通知，发信号的进程继续执行
+</code></pre><h3 id="使用NOTIFY要注意的问题"><a href="#使用NOTIFY要注意的问题" class="headerlink" title="使用NOTIFY要注意的问题"></a>使用NOTIFY要注意的问题</h3><pre><code>notify的结果：位于条件队列头的进程在将来合适的时候且当处理器可用时恢复执行
+
+由于不能保证在它之前没有其他进程进入管程，因而这个进程必须重新检查条件
+→ 用while循环取代if语句
+
+导致对条件变量至少多一次额外的检测（但不再有额外的进程切换），并且对等待进程在notify之后何时运行没有任何限制
+</code></pre><h3 id="解决生产者消费者问题"><a href="#解决生产者消费者问题" class="headerlink" title="解决生产者消费者问题"></a>解决生产者消费者问题</h3><h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><pre><code>对notify的一个很有用的改进
+    给每个条件原语关联一个监视计时器，不论是否被通知，一个等待时间超时的进程将被设为就绪态
+    当该进程被调度执行时，会再次检查相关条件，如果条件满足则继续执行
+
+超时可以防止如下情况的发生：
+    当某些进程在产生相关条件的信号之前失败时，等待该条件的进程就会被无限制地推迟执行而处于饥饿状态
+</code></pre><h3 id="引入BROADCAST"><a href="#引入BROADCAST" class="headerlink" title="引入BROADCAST"></a>引入BROADCAST</h3><pre><code>broadcast：使所有在该条件上等待的进程都被释放并进入就绪队列
+
+    当一个进程不知道有多少进程将被激活时，这种方式是非常方便的
+        例子：生产者/消费者问题中，假设insert和remove函数都适用于可变长度的字符块，此时，如果一个生产者往缓冲区中添加了一批字符，它不需要知道每个正在等待的消费者准备消耗多少字符，而仅仅执行一个broadcast，所有正在等待的进程都得到通知并再次尝试运行
+
+当一个进程难以准确判定将激活哪个进程时，也可使用广播
+</code></pre><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><pre><code>Mesa管程优于Hoare管程之处在于Mesa管程错误比较少
+在Mesa管程中，由于每个过程 在收到信号后都重新检查管程变量，并且由于使用了while结构，一个进程不正确的broadcast广播或发信号notify，不会导致收到信号的程序出错
+    收到信号的程序将检查相关的变量，如果期望的条件没有满足，它会重新继续等待
+</code></pre><h3 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h3><pre><code>管程：抽象数据类型
+    有一个明确定义的操作集合，通过它且只有通过它才能操纵该数据类型的实例
+实现管程结构必须保证下面几点：
+    （1）只能通过管程的某个过程才能访问资源；
+    （2）管程是互斥的，某个时刻只能有一个进程或线程调用管程中的过程
+条件变量：为提供进程与其他进程通信或同步而引入
+     wait/signal 或 wait/notify 或 wait/broadcast
+</code></pre><h2 id="PTHREAD中的同步机制"><a href="#PTHREAD中的同步机制" class="headerlink" title="PTHREAD中的同步机制"></a>PTHREAD中的同步机制</h2><p><img src="http://i.imgur.com/6CmUVag.jpg" alt=""></p>
+<h3 id="生产者消费者问题-2"><a href="#生产者消费者问题-2" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h3><p><img src="http://i.imgur.com/QRMKEIh.jpg" alt=""><br>实现的是mesa管程的语义</p>
+<h3 id="cond-wait"><a href="#cond-wait" class="headerlink" title="cond_wait"></a>cond_wait</h3><pre><code>pthread_cond_wait的执行分解为三个主要动作：
+    1、解锁
+    2、等待
+        当收到一个解除等待的信号（pthread_cond_signal或者pthread_cond_broad_cast）之后，pthread_cond_wait马上需要做的动作是：
+    3、上锁
+</code></pre><h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><h3 id="为什么需要通信机制？"><a href="#为什么需要通信机制？" class="headerlink" title="为什么需要通信机制？"></a>为什么需要通信机制？</h3><pre><code>信号量及管程的不足
+不适用多处理器情况
+
+进程通信机制
+    消息传递send &amp; receive原语
+
+适用于：分布式系统、基于共享内存的多处理机系统、单处理机系统
+可以解决进程间的同步问题、通信问题
+</code></pre><h3 id="基本通信方式"><a href="#基本通信方式" class="headerlink" title="基本通信方式"></a>基本通信方式</h3><pre><code>消息传递
+共享内存
+管道
+套接字
+远程过程调用
+</code></pre><h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><p><img src="http://i.imgur.com/EZuWkXa.jpg" alt=""></p>
+<h4 id="PV操作的实现send"><a href="#PV操作的实现send" class="headerlink" title="PV操作的实现send"></a>PV操作的实现send</h4><p><img src="http://i.imgur.com/uNs6069.jpg" alt=""></p>
+<p>###共享内存 ###<br><img src="http://i.imgur.com/gHeUaSg.jpg" alt=""></p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p><img src="http://i.imgur.com/06aIUmm.jpg" alt=""></p>
+<h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><h3 id="远程过程调用"><a href="#远程过程调用" class="headerlink" title="远程过程调用"></a>远程过程调用</h3><h2 id="典型操作系统中的IPC机制"><a href="#典型操作系统中的IPC机制" class="headerlink" title="典型操作系统中的IPC机制"></a>典型操作系统中的IPC机制</h2><h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><pre><code>UNIX
+    管道、消息队列、共享内存、信号量、信号、套接字
+
+Linux
+    管道、消息队列、共享内存、信号量、信号、套接字
+
+    内核同步机制：原子操作、自旋锁、读写锁、信号量、屏障、BKL
+
+Windows
+    同步对象：互斥对象、事件对象、信号量对象
+
+    临界区对象
+
+    互锁变量
+
+    套接字、文件映射、管道、命名管道、邮件槽、剪贴板、动态数据交换、对象连接与嵌入、动态链接库、远程过程调用
+</code></pre><h3 id="Linux的进程通信机制"><a href="#Linux的进程通信机制" class="headerlink" title="Linux的进程通信机制"></a>Linux的进程通信机制</h3><p><img src="http://i.imgur.com/fwqMmfW.jpg" alt=""></p>
+<h4 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h4><pre><code>不可分割，在执行完之前不会被其他任务或事件中断
+常用于实现资源的引用计数
+atomic_t
+</code></pre><hr>
+<pre><code>typedef struct { volatile int counter; } 
+
+atomic_t;
+原子操作API包括：
+atomic_read(atomic_t * v);
+atomic_set(atomic_t * v, int i);
+void atomic_add(int i, atomic_t *v);
+int atomic_sub_and_test(int i, atomic_t *v);
+void atomic_inc(atomic_t *v);
+int atomic_add_return(int i, atomic_t *v);
+</code></pre><h4 id="屏障：栅栏"><a href="#屏障：栅栏" class="headerlink" title="屏障：栅栏"></a>屏障：栅栏</h4><pre><code>一种同步机制(又称栅栏、关卡)
+ 用于对一组线程进行协调
+应用场景
+一组线程协同完成一项任务，需要所有线程都到达一个汇合点后再一起向前推进
+</code></pre><h2 id="重点-4"><a href="#重点-4" class="headerlink" title="重点"></a>重点</h2><pre><code>管程
+    如何保证互斥
+    如何保证同步——条件变量及wait/signal
+    Hoare管程
+    MESA管程
+进程间通信
+    消息传递、共享内存、管道
+Pthread中的同步机制
+Linux的IPC机制
+</code></pre><h3 id="重点阅读和概念"><a href="#重点阅读和概念" class="headerlink" title="重点阅读和概念"></a>重点阅读和概念</h3><pre><code>重点阅读教材
+第2章相关内容：2.3.6~2.3.9
+</code></pre><hr>
+<pre><code>管程 Hoare管程 Mesa管程
+条件变量 wait/signal
+Pthread中的互斥锁与条件变量
+共享内存 消息传递 管道
+Linux：原子操作 屏障 读写锁
+</code></pre><h1 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h1><h2 id="基本概念：地址重定位"><a href="#基本概念：地址重定位" class="headerlink" title="基本概念：地址重定位"></a>基本概念：地址重定位</h2><h3 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h3><pre><code>程序装载到内存才可以运行
+    通常，程序以可执行文件格式保存在磁盘上
+
+多道程序设计模型
+    允许多个程序同时进入内存
+
+每个进程有自己的地址空间
+    一个进程执行时不能访问另一个进程的地址空间
+    进程不能执行不适合的操作
+</code></pre><h3 id="需要解决的问题"><a href="#需要解决的问题" class="headerlink" title="需要解决的问题"></a>需要解决的问题</h3><pre><code>多个进程与物理内存交互的问题  
+包括合理分配内存等等
+</code></pre><h3 id="进程地址空间-1"><a href="#进程地址空间-1" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><pre><code>内核地址空间  
+用户地址空间：栈，堆，数据段，代码段，其他内容：共享库，内存映射文件
+</code></pre><h3 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h3><pre><code>进程中的地址不是最终的物理地址
+在进程运行前无法计算出物理地址
+    因为：不能确定进程被加载到内存什么地方
+</code></pre><hr>
+<pre><code>需要***地址重定位***的支持
+也是地址转换、地址变换、地址翻译、地址映射
+</code></pre><h3 id="地址重定位"><a href="#地址重定位" class="headerlink" title="地址重定位"></a>地址重定位</h3><h4 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h4><pre><code>逻辑地址（相对地址，虚拟地址）
+    用户程序经过编译、汇编后形成目标代码，目标代码通常采用相对地址的形式，其首地址为0，其余地址都相对于首地址而编址
+    不能用逻辑地址在内存中读取信息
+</code></pre><h4 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h4><pre><code>物理地址（绝对地址，实地址）
+内存中存储单元的地址 可直接寻址
+</code></pre><h4 id="地址重定位-1"><a href="#地址重定位-1" class="headerlink" title="地址重定位"></a>地址重定位</h4><pre><code>为了保证CPU执行指令时可正确访问内存单元，需要将用户程序中的逻辑地址转换为运行时可由机器直接寻址的物理地址，这一过程称为地址重定位
+</code></pre><h3 id="静态重定位与动态重定位"><a href="#静态重定位与动态重定位" class="headerlink" title="静态重定位与动态重定位"></a>静态重定位与动态重定位</h3><pre><code>静态重定位： 当用户程序加载到内存时，一次性实现逻辑地址到物理地址的转换
+
+ 一般可以由软件完成
+</code></pre><hr>
+<pre><code>动态重定位：
+     在进程执行过程中进行地址变换
+         → → 即逐条指令执行时完成地址转换 
+需要硬件部件支持
+</code></pre><h4 id="动态重定位实现"><a href="#动态重定位实现" class="headerlink" title="动态重定位实现"></a>动态重定位实现</h4><p><img src="http://i.imgur.com/AjKr58E.jpg" alt=""></p>
+<h2 id="物理内存管理"><a href="#物理内存管理" class="headerlink" title="物理内存管理"></a>物理内存管理</h2><h3 id="空闲内存管理"><a href="#空闲内存管理" class="headerlink" title="空闲内存管理"></a>空闲内存管理</h3><pre><code>等长划分与不等长划分：
+    每一块称为分配单元
+
+数据结构
+    位图
+    每个分配单元对应于位图中的一位，0表示空闲，1表示占用（或者相反）
+空闲区表、已分配区表
+    表中每一项记录了空闲区（或已分配区）的起始地址、长度、标志
+空闲块链表
+</code></pre><h3 id="内存分配算法"><a href="#内存分配算法" class="headerlink" title="内存分配算法"></a>内存分配算法</h3><pre><code>首次适配 first fit
+    在空闲区表中找到第一个满足进程要求的空闲区
+下次适配 next fit
+    从上次找到的空闲区处接着查找
+最佳适配 best fit
+    查找整个空闲区表，找到能够满足进程要求的最小空闲区
+最差适配 worst fit
+    总是分配满足进程要求的最大空闲区
+
+找到空闲区之后：
+    将该空闲区分为两部分，一部分供进程使用，另一部分形成新的空闲区
+</code></pre><h3 id="回收问题"><a href="#回收问题" class="headerlink" title="回收问题"></a>回收问题</h3><pre><code>内存回收算法
+    当某一块归还后，前后空闲空间合并，修改内存空闲区表
+    四种情况
+        上相邻、下相邻、上下都相邻、上下都不相邻
+</code></pre><h2 id="伙伴系统"><a href="#伙伴系统" class="headerlink" title="伙伴系统"></a>伙伴系统</h2><pre><code>一种经典的内存分配方案
+主要思想：将内存按2的幂进行划分，组成若干空闲块链表；查找该链表找到能满足进程需求的最佳匹配块
+算法：
+    首先将整个可用空间看作一块： 2^U
+    假设进程申请的空间大小为 s，如果满足
+        2^U-1 &lt; s &lt;= 2^U，则分配整个块
+    否则，将块划分为两个大小相等的伙伴，大小为2U-1
+    一直划分下去直到产生大于或等于 s 的最小块
+</code></pre><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="http://i.imgur.com/o03xMIo.jpg" alt=""></p>
+<h2 id="基本内存管理方案"><a href="#基本内存管理方案" class="headerlink" title="基本内存管理方案"></a>基本内存管理方案</h2><pre><code>整个进程进入内存中一片连续区域
+</code></pre><h3 id="单一连续区"><a href="#单一连续区" class="headerlink" title="单一连续区"></a>单一连续区</h3><pre><code>特点：一段时间内只有一个进程在内存
+简单，内存利用率低
+</code></pre><h3 id="固定分区"><a href="#固定分区" class="headerlink" title="固定分区"></a>固定分区</h3><pre><code>把内存空间分割成若干区域，称为分区
+每个分区的大小可以相同也可以不同
+分区大小固定不变
+每个分区装一个且只能装一个进程
+</code></pre><h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p>容易产生较长的排队队列<br>基本不用</p>
+<h3 id="可变分区"><a href="#可变分区" class="headerlink" title="可变分区"></a>可变分区</h3><pre><code>根据进程的需要，把内存空闲空间分割出一个分区，分配给该进程
+剩余部分成为新的空闲区
+</code></pre><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>容易产生碎片化，可能导致内存利用率下降</p>
+<h4 id="碎片问题解决"><a href="#碎片问题解决" class="headerlink" title="碎片问题解决"></a>碎片问题解决</h4><pre><code>碎片 → 很小的、不易利用的空闲区
+        → 导致内存利用率下降
+解决方案 → 紧缩技术（memory compaction）
+    在内存移动程序，将所有小的空闲区合并为较大的空闲区
+    又称：压缩技术，紧致技术，搬家技术
+紧缩时要考虑的问题
+    系统开销 ？ 移动时机 ？
+</code></pre><h3 id="页式"><a href="#页式" class="headerlink" title="页式"></a>页式</h3><pre><code>设计思想
+    用户进程地址空间被划分为大小相等的部分，称为页（page）或页面，从0开始编号
+    内存空间按同样大小划分为大小相等的区域，称为页框（page frame），从0开始编号；也称为物理页面，页帧，内存块
+    内存分配（规则）
+        以页为单位进行分配，并按进程需要的页数来分配；逻辑上相邻的页，物理上不一定相邻
+典型页面尺寸：4K 或 4M
+</code></pre><h4 id="管理方案"><a href="#管理方案" class="headerlink" title="管理方案"></a>管理方案</h4><pre><code>划分是由系统自动完成的，对用户是透明的
+逻辑地址
+    页号 页内地址
+</code></pre><p><img src="http://i.imgur.com/OKGbAYs.jpg" alt=""></p>
+<h4 id="内存分配过程"><a href="#内存分配过程" class="headerlink" title="内存分配过程"></a>内存分配过程</h4><p><img src="http://i.imgur.com/Eb0yzM5.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/kA8DNSC.jpg" alt=""></p>
+<h4 id="相关数据结构及地址转换"><a href="#相关数据结构及地址转换" class="headerlink" title="相关数据结构及地址转换"></a>相关数据结构及地址转换</h4><pre><code>页表
+    页表项：记录了逻辑页号与页框号的对应关系
+    每个进程一个页表，存放在内存
+    页表起始地址保存在何处？
+
+空闲内存管理
+
+地址转换（硬件支持）
+    CPU取到逻辑地址，自动划分为页号和页内地址；用页号查页表，得到页框号，再与页内偏移拼接成为物理地址
+</code></pre><p>产生内碎片</p>
+<h3 id="段式"><a href="#段式" class="headerlink" title="段式"></a>段式</h3><pre><code>设计思想
+    用户进程地址空间：按程序自身的逻辑关系划分为若干个程序段，每个程序段都有一个段名
+
+    内存空间被动态划分为若干长度不相同的区域，称为物理段，每个物理段由起始地址和长度确定
+
+    内存分配（规则）：以段为单位进行分配，每段在内存中占据连续空间，但各段之间可以不相邻
+
+    逻辑地址 段号 段内地址：不能自动划分，必须显式给出
+</code></pre><p>使用段表进行映射</p>
+<h4 id="相关数据结构及地址转换-1"><a href="#相关数据结构及地址转换-1" class="headerlink" title="相关数据结构及地址转换"></a>相关数据结构及地址转换</h4><pre><code>段表
+    每项记录了段号、段首地址和段长度之间的关系
+    每个进程一个段表，存放在内存
+    段表起始地址保存在何处？
+
+物理内存管理
+
+地址转换（硬件）
+    CPU取到逻辑地址，用段号查段表，得到该段在内存的起始地址，与段内偏移地址计算出物理地址
+</code></pre><h3 id="段页式"><a href="#段页式" class="headerlink" title="段页式"></a>段页式</h3><pre><code>产生背景
+    综合页式、段式方案的优点，克服二者的缺点
+设计思想
+用户进程划分：
+    先按段划分，每一段再按页面划分
+逻辑地址：
+    段号    段内地址
+        页号    页内地址
+内存划分：同页式存储管理方案
+内存分配：以页为单位进行分配
+</code></pre><hr>
+<pre><code>数据结构及有关操作
+    段表：记录了每一段的页表始址和页表长度
+    页表：记录了逻辑页号与页框号的对应关系
+        每一段有一张页表，一个进程有多个页表
+    空闲区管理：同页式管理
+    内存分配、回收：同页式管理
+地址转换
+    段号    段内地址
+        页号    页内地址
+</code></pre><h2 id="交换技术（Swapping）"><a href="#交换技术（Swapping）" class="headerlink" title="交换技术（Swapping）"></a>交换技术（Swapping）</h2><h3 id="内存不足时如何管理"><a href="#内存不足时如何管理" class="headerlink" title="内存不足时如何管理"></a>内存不足时如何管理</h3><p>如何解决在较小的内存空间运行较大的进程呢？</p>
+<h3 id="内存“扩充”技术"><a href="#内存“扩充”技术" class="headerlink" title="内存“扩充”技术"></a>内存“扩充”技术</h3><pre><code>内存紧缩技术（例如：可变分区）
+覆盖技术 overlaying
+交换技术 swapping
+虚拟存储技术 virtual memory
+</code></pre><h3 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h3><p>主要用于早期的操作系统</p>
+<pre><code>解决的问题 → 程序大小超过物理内存总和
+程序执行过程中，程序的不同部分在内存中相互替代
+    → 按照其自身的逻辑结构，将那些不会同时执行的程序段共享同一块内存区域
+    → 要求程序各模块之间有明确的调用结构
+
+程序员声明覆盖结构，操作系统完成自动覆盖
+</code></pre><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><img src="http://i.imgur.com/MI0JAbj.jpg" alt=""></p>
+<h3 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h3><pre><code>设计思想
+    内存空间紧张时，系统将内存中某些进程暂时移到外存，把外存中某些进程换进内存，占据前者所占用的区域（进程在内存与磁盘之间的动态调度）
+
+讨论：实现时遇到的问题
+    进程的哪些内容要交换到磁盘？会遇到什么困难？
+    在磁盘的什么位置保存被换出的进程？
+    交换时机？
+    如何选择被换出的进程？
+    如何处理进程空间增长？
+</code></pre><h4 id="关于讨论的问题"><a href="#关于讨论的问题" class="headerlink" title="关于讨论的问题"></a>关于讨论的问题</h4><pre><code>运行时创建或修改的内容：栈和堆
+
+交换区：
+    一般系统会指定一块特殊的磁盘区域作为交换空间（swap space），包含连续的磁道，操作系统可以使用底层的磁盘读写操作对其高效访问
+
+何时需发生交换？
+    只要不用就换出（很少再用）；内存空间不够或有不够的危险时换出
+    与调度器结合使用
+
+考虑进程的各种属性；不应换出处于等待I/O状态的进程
+</code></pre><hr>
+<p>预留出一些空间用于增长<br><img src="http://i.imgur.com/0nN34dY.jpg" alt=""></p>
+
       
     </div>
 
@@ -1449,7 +2206,7 @@ Linux2.6CFS调度器：完全公平调度算法
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统概述"><span class="nav-number">1.</span> <span class="nav-text">操作系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统做了什么？"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统做了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从上述步骤中得到了什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">从上述步骤中得到了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换个角度看用户程序的执行"><span class="nav-number">1.1.2.</span> <span class="nav-text">换个角度看用户程序的执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的定义与作用"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的定义与作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——"><span class="nav-number">1.2.1.</span> <span class="nav-text">操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个关键词"><span class="nav-number">1.2.2.</span> <span class="nav-text">几个关键词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个作用"><span class="nav-number">1.2.3.</span> <span class="nav-text">三个作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#资源的管理者"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">资源的管理者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种系统服务的提供者"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">各种系统服务的提供者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对硬件机器的扩展"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">对硬件机器的扩展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的主要特征"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享"><span class="nav-number">1.3.2.</span> <span class="nav-text">共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟"><span class="nav-number">1.3.3.</span> <span class="nav-text">虚拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机"><span class="nav-number">1.3.4.</span> <span class="nav-text">随机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型操作系统的架构"><span class="nav-number">1.4.</span> <span class="nav-text">典型操作系统的架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows架构"><span class="nav-number">1.4.1.</span> <span class="nav-text">Windows架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIX架构"><span class="nav-number">1.4.2.</span> <span class="nav-text">UNIX架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux内核组间"><span class="nav-number">1.4.3.</span> <span class="nav-text">linux内核组间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的分类"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的发展历程"><span class="nav-number">1.5.1.</span> <span class="nav-text">操作系统的发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">目标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统操作系统的分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">传统操作系统的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批处理操作系统"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">批处理操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分时系统"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">分时系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过操作系统"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">通过操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实时操作系统"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">实时操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个人计算机操作系统"><span class="nav-number">1.5.2.5.</span> <span class="nav-text">个人计算机操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络操作系统"><span class="nav-number">1.5.2.6.</span> <span class="nav-text">网络操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式操作系统"><span class="nav-number">1.5.2.7.</span> <span class="nav-text">分布式操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌入式操作系统"><span class="nav-number">1.5.2.8.</span> <span class="nav-text">嵌入式操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能卡操作系统"><span class="nav-number">1.5.2.9.</span> <span class="nav-text">智能卡操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.6.</span> <span class="nav-text">重点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统原理"><span class="nav-number">2.</span> <span class="nav-text">操作系统原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器状态"><span class="nav-number">2.1.</span> <span class="nav-text">处理器状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">2.1.1.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#控制和状态寄存器"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">控制和状态寄存器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的需求，保护"><span class="nav-number">2.1.2.</span> <span class="nav-text">操作系统的需求，保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器的状态"><span class="nav-number">2.1.3.</span> <span class="nav-text">处理器的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特权指令和非特权指令"><span class="nav-number">2.1.4.</span> <span class="nav-text">特权指令和非特权指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.1.5.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU状态之间的转换"><span class="nav-number">2.1.6.</span> <span class="nav-text">CPU状态之间的转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断和异常机制"><span class="nav-number">2.2.</span> <span class="nav-text">中断和异常机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">2.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么引入中断与异常"><span class="nav-number">2.2.2.</span> <span class="nav-text">为什么引入中断与异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">2.2.3.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">2.3.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断响应"><span class="nav-number">2.3.1.</span> <span class="nav-text">中断响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#过程示意"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">过程示意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中断向量表"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">中断向量表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">2.3.2.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断处理程序"><span class="nav-number">2.3.3.</span> <span class="nav-text">中断处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">2.3.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例：x86处理器"><span class="nav-number">2.4.</span> <span class="nav-text">实例：x86处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x86处理器对中断的支持"><span class="nav-number">2.5.</span> <span class="nav-text">x86处理器对中断的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用机制"><span class="nav-number">2.6.</span> <span class="nav-text">系统调用机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.6.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型系统调用"><span class="nav-number">2.6.2.</span> <span class="nav-text">典型系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用机制的设计"><span class="nav-number">2.6.3.</span> <span class="nav-text">系统调用机制的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递过程问题"><span class="nav-number">2.6.4.</span> <span class="nav-text">参数传递过程问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行过程"><span class="nav-number">2.6.5.</span> <span class="nav-text">执行过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于x86处理器的linux的系统调用实现"><span class="nav-number">2.7.</span> <span class="nav-text">基于x86处理器的linux的系统调用实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程-1"><span class="nav-number">2.7.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用执行流程"><span class="nav-number">2.7.2.</span> <span class="nav-text">调用执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OS底层工作步骤"><span class="nav-number">2.7.3.</span> <span class="nav-text">OS底层工作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-1"><span class="nav-number">2.8.</span> <span class="nav-text">重点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程-线程模型"><span class="nav-number">3.</span> <span class="nav-text">进程/线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多道程序设计"><span class="nav-number">3.1.1.</span> <span class="nav-text">多道程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发环境与并发程序"><span class="nav-number">3.1.2.</span> <span class="nav-text">并发环境与并发程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的定义"><span class="nav-number">3.1.3.</span> <span class="nav-text">进程的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程控制块PCB"><span class="nav-number">3.1.4.</span> <span class="nav-text">进程控制块PCB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux：task-struct"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">Linux：task_struct</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态及状态转换"><span class="nav-number">3.2.</span> <span class="nav-text">进程状态及状态转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">3.2.1.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三状态模型以及状态转换"><span class="nav-number">3.2.2.</span> <span class="nav-text">三状态模型以及状态转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他状态"><span class="nav-number">3.2.3.</span> <span class="nav-text">其他状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五状态进程模型"><span class="nav-number">3.2.4.</span> <span class="nav-text">五状态进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七状态进程模型"><span class="nav-number">3.2.5.</span> <span class="nav-text">七状态进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux状态示意图"><span class="nav-number">3.2.6.</span> <span class="nav-text">linux状态示意图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程队列"><span class="nav-number">3.2.7.</span> <span class="nav-text">进程队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五状态进程的队列模型"><span class="nav-number">3.2.8.</span> <span class="nav-text">五状态进程的队列模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的创建"><span class="nav-number">3.3.1.</span> <span class="nav-text">进程的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的撤销"><span class="nav-number">3.3.2.</span> <span class="nav-text">进程的撤销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞"><span class="nav-number">3.3.3.</span> <span class="nav-text">进程阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix的几个进程控制操作"><span class="nav-number">3.3.4.</span> <span class="nav-text">Unix的几个进程控制操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unix的FORK-的实现"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">Unix的FORK()的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入理解进程概念"><span class="nav-number">3.4.</span> <span class="nav-text">深入理解进程概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于进程的讨论"><span class="nav-number">3.4.1.</span> <span class="nav-text">关于进程的讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">3.4.2.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程地址空间"><span class="nav-number">3.4.3.</span> <span class="nav-text">进程地址空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-1"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程地址空间图示"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">进程地址空间图示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程映像"><span class="nav-number">3.4.4.</span> <span class="nav-text">进程映像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.4.5.</span> <span class="nav-text">上下文切换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的引入"><span class="nav-number">3.5.</span> <span class="nav-text">线程的引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么在进程中再派生线程？"><span class="nav-number">3.5.1.</span> <span class="nav-text">为什么在进程中再派生线程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型的应用"><span class="nav-number">3.5.2.</span> <span class="nav-text">典型的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果没有线程"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">如果没有线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web服务器"><span class="nav-number">3.5.2.2.</span> <span class="nav-text">web服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开销的考虑"><span class="nav-number">3.5.2.3.</span> <span class="nav-text">开销的考虑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程"><span class="nav-number">3.5.3.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的基本概念"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">线程的基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的属性"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">线程的属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程机制的实现"><span class="nav-number">3.6.</span> <span class="nav-text">线程机制的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户级线程"><span class="nav-number">3.6.1.</span> <span class="nav-text">用户级线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POSIX线程库"><span class="nav-number">3.6.1.1.</span> <span class="nav-text">POSIX线程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结-2"><span class="nav-number">3.6.1.2.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心级线程"><span class="nav-number">3.6.2.</span> <span class="nav-text">核心级线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合模型"><span class="nav-number">3.6.3.</span> <span class="nav-text">混合模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点小结"><span class="nav-number">3.7.</span> <span class="nav-text">重点小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器调度"><span class="nav-number">4.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念-1"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是处理器调度"><span class="nav-number">4.1.1.</span> <span class="nav-text">什么是处理器调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要解决的三个问题"><span class="nav-number">4.1.2.</span> <span class="nav-text">要解决的三个问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度的时机"><span class="nav-number">4.1.3.</span> <span class="nav-text">调度的时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时机"><span class="nav-number">4.1.3.1.</span> <span class="nav-text">时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程切换"><span class="nav-number">4.1.3.2.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体步骤"><span class="nav-number">4.1.3.3.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开销"><span class="nav-number">4.1.3.4.</span> <span class="nav-text">开销</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法的设计"><span class="nav-number">4.1.4.</span> <span class="nav-text">调度算法的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#衡量指标"><span class="nav-number">4.1.4.1.</span> <span class="nav-text">衡量指标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计调度算法要考虑的几个问题"><span class="nav-number">4.2.</span> <span class="nav-text">设计调度算法要考虑的几个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程优先级"><span class="nav-number">4.2.1.</span> <span class="nav-text">进程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程就绪队列组织"><span class="nav-number">4.2.2.</span> <span class="nav-text">进程就绪队列组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抢占与非抢占"><span class="nav-number">4.2.3.</span> <span class="nav-text">抢占与非抢占</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO密集型与CPU密集型进程"><span class="nav-number">4.2.4.</span> <span class="nav-text">IO密集型与CPU密集型进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间片"><span class="nav-number">4.2.5.</span> <span class="nav-text">时间片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批处理系统的调度算法"><span class="nav-number">4.3.</span> <span class="nav-text">批处理系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先来先服务"><span class="nav-number">4.3.1.</span> <span class="nav-text">先来先服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#短作业优先"><span class="nav-number">4.3.2.</span> <span class="nav-text">短作业优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最高相应比优先HRRN"><span class="nav-number">4.3.3.</span> <span class="nav-text">最高相应比优先HRRN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式系统的调度算法"><span class="nav-number">4.4.</span> <span class="nav-text">交互式系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#轮转调度"><span class="nav-number">4.4.1.</span> <span class="nav-text">轮转调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟轮转法"><span class="nav-number">4.4.2.</span> <span class="nav-text">虚拟轮转法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最高优先级调度"><span class="nav-number">4.4.3.</span> <span class="nav-text">最高优先级调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级反转"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">优先级反转</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多级反馈队列调度算法、各种调度算法小结等"><span class="nav-number">4.5.</span> <span class="nav-text">多级反馈队列调度算法、各种调度算法小结等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多级反馈队列调度算法"><span class="nav-number">4.5.1.</span> <span class="nav-text">多级反馈队列调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-3"><span class="nav-number">4.5.2.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多处理器调度算法设计"><span class="nav-number">4.5.3.</span> <span class="nav-text">多处理器调度算法设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型操作系统的调度算法"><span class="nav-number">4.6.</span> <span class="nav-text">典型操作系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LINUX调度算法的发展历史"><span class="nav-number">4.6.1.</span> <span class="nav-text">LINUX调度算法的发展历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows线程调度"><span class="nav-number">4.6.2.</span> <span class="nav-text">Windows线程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的时间配额"><span class="nav-number">4.6.3.</span> <span class="nav-text">线程的时间配额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度策略"><span class="nav-number">4.6.4.</span> <span class="nav-text">调度策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抢占"><span class="nav-number">4.6.4.1.</span> <span class="nav-text">抢占</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间配额用完"><span class="nav-number">4.6.4.2.</span> <span class="nav-text">时间配额用完</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程优先级与时间配额调整"><span class="nav-number">4.6.5.</span> <span class="nav-text">线程优先级与时间配额调整</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程优先级提升"><span class="nav-number">4.6.5.1.</span> <span class="nav-text">线程优先级提升</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-2"><span class="nav-number">4.7.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本讲重点"><span class="nav-number">4.7.1.</span> <span class="nav-text">本讲重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要求"><span class="nav-number">4.7.2.</span> <span class="nav-text">要求</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统概述"><span class="nav-number">1.</span> <span class="nav-text">操作系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统做了什么？"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统做了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从上述步骤中得到了什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">从上述步骤中得到了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换个角度看用户程序的执行"><span class="nav-number">1.1.2.</span> <span class="nav-text">换个角度看用户程序的执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的定义与作用"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的定义与作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——"><span class="nav-number">1.2.1.</span> <span class="nav-text">操作系统是计算机系统中的一个系统软件，是一些程序模块的集合——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个关键词"><span class="nav-number">1.2.2.</span> <span class="nav-text">几个关键词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个作用"><span class="nav-number">1.2.3.</span> <span class="nav-text">三个作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#资源的管理者"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">资源的管理者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种系统服务的提供者"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">各种系统服务的提供者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对硬件机器的扩展"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">对硬件机器的扩展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的主要特征"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享"><span class="nav-number">1.3.2.</span> <span class="nav-text">共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟"><span class="nav-number">1.3.3.</span> <span class="nav-text">虚拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机"><span class="nav-number">1.3.4.</span> <span class="nav-text">随机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型操作系统的架构"><span class="nav-number">1.4.</span> <span class="nav-text">典型操作系统的架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows架构"><span class="nav-number">1.4.1.</span> <span class="nav-text">Windows架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIX架构"><span class="nav-number">1.4.2.</span> <span class="nav-text">UNIX架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux内核组间"><span class="nav-number">1.4.3.</span> <span class="nav-text">linux内核组间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的分类"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的发展历程"><span class="nav-number">1.5.1.</span> <span class="nav-text">操作系统的发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">目标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统操作系统的分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">传统操作系统的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批处理操作系统"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">批处理操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分时系统"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">分时系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过操作系统"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">通过操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实时操作系统"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">实时操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个人计算机操作系统"><span class="nav-number">1.5.2.5.</span> <span class="nav-text">个人计算机操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络操作系统"><span class="nav-number">1.5.2.6.</span> <span class="nav-text">网络操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式操作系统"><span class="nav-number">1.5.2.7.</span> <span class="nav-text">分布式操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌入式操作系统"><span class="nav-number">1.5.2.8.</span> <span class="nav-text">嵌入式操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能卡操作系统"><span class="nav-number">1.5.2.9.</span> <span class="nav-text">智能卡操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.6.</span> <span class="nav-text">重点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统原理"><span class="nav-number">2.</span> <span class="nav-text">操作系统原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器状态"><span class="nav-number">2.1.</span> <span class="nav-text">处理器状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">2.1.1.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#控制和状态寄存器"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">控制和状态寄存器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的需求，保护"><span class="nav-number">2.1.2.</span> <span class="nav-text">操作系统的需求，保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器的状态"><span class="nav-number">2.1.3.</span> <span class="nav-text">处理器的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特权指令和非特权指令"><span class="nav-number">2.1.4.</span> <span class="nav-text">特权指令和非特权指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.1.5.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU状态之间的转换"><span class="nav-number">2.1.6.</span> <span class="nav-text">CPU状态之间的转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断和异常机制"><span class="nav-number">2.2.</span> <span class="nav-text">中断和异常机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">2.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么引入中断与异常"><span class="nav-number">2.2.2.</span> <span class="nav-text">为什么引入中断与异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">2.2.3.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">2.3.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断响应"><span class="nav-number">2.3.1.</span> <span class="nav-text">中断响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#过程示意"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">过程示意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中断向量表"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">中断向量表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">2.3.2.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断处理程序"><span class="nav-number">2.3.3.</span> <span class="nav-text">中断处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">2.3.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例：x86处理器"><span class="nav-number">2.4.</span> <span class="nav-text">实例：x86处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x86处理器对中断的支持"><span class="nav-number">2.5.</span> <span class="nav-text">x86处理器对中断的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用机制"><span class="nav-number">2.6.</span> <span class="nav-text">系统调用机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.6.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型系统调用"><span class="nav-number">2.6.2.</span> <span class="nav-text">典型系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用机制的设计"><span class="nav-number">2.6.3.</span> <span class="nav-text">系统调用机制的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递过程问题"><span class="nav-number">2.6.4.</span> <span class="nav-text">参数传递过程问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行过程"><span class="nav-number">2.6.5.</span> <span class="nav-text">执行过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于x86处理器的linux的系统调用实现"><span class="nav-number">2.7.</span> <span class="nav-text">基于x86处理器的linux的系统调用实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程-1"><span class="nav-number">2.7.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用执行流程"><span class="nav-number">2.7.2.</span> <span class="nav-text">调用执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OS底层工作步骤"><span class="nav-number">2.7.3.</span> <span class="nav-text">OS底层工作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-1"><span class="nav-number">2.8.</span> <span class="nav-text">重点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程-线程模型"><span class="nav-number">3.</span> <span class="nav-text">进程/线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多道程序设计"><span class="nav-number">3.1.1.</span> <span class="nav-text">多道程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发环境与并发程序"><span class="nav-number">3.1.2.</span> <span class="nav-text">并发环境与并发程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的定义"><span class="nav-number">3.1.3.</span> <span class="nav-text">进程的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程控制块PCB"><span class="nav-number">3.1.4.</span> <span class="nav-text">进程控制块PCB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux：task-struct"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">Linux：task_struct</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态及状态转换"><span class="nav-number">3.2.</span> <span class="nav-text">进程状态及状态转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">3.2.1.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三状态模型以及状态转换"><span class="nav-number">3.2.2.</span> <span class="nav-text">三状态模型以及状态转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他状态"><span class="nav-number">3.2.3.</span> <span class="nav-text">其他状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五状态进程模型"><span class="nav-number">3.2.4.</span> <span class="nav-text">五状态进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七状态进程模型"><span class="nav-number">3.2.5.</span> <span class="nav-text">七状态进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux状态示意图"><span class="nav-number">3.2.6.</span> <span class="nav-text">linux状态示意图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程队列"><span class="nav-number">3.2.7.</span> <span class="nav-text">进程队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五状态进程的队列模型"><span class="nav-number">3.2.8.</span> <span class="nav-text">五状态进程的队列模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的创建"><span class="nav-number">3.3.1.</span> <span class="nav-text">进程的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的撤销"><span class="nav-number">3.3.2.</span> <span class="nav-text">进程的撤销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞"><span class="nav-number">3.3.3.</span> <span class="nav-text">进程阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix的几个进程控制操作"><span class="nav-number">3.3.4.</span> <span class="nav-text">Unix的几个进程控制操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unix的FORK-的实现"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">Unix的FORK()的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入理解进程概念"><span class="nav-number">3.4.</span> <span class="nav-text">深入理解进程概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于进程的讨论"><span class="nav-number">3.4.1.</span> <span class="nav-text">关于进程的讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">3.4.2.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程地址空间"><span class="nav-number">3.4.3.</span> <span class="nav-text">进程地址空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-1"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程地址空间图示"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">进程地址空间图示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程映像"><span class="nav-number">3.4.4.</span> <span class="nav-text">进程映像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.4.5.</span> <span class="nav-text">上下文切换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的引入"><span class="nav-number">3.5.</span> <span class="nav-text">线程的引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么在进程中再派生线程？"><span class="nav-number">3.5.1.</span> <span class="nav-text">为什么在进程中再派生线程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型的应用"><span class="nav-number">3.5.2.</span> <span class="nav-text">典型的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果没有线程"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">如果没有线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web服务器"><span class="nav-number">3.5.2.2.</span> <span class="nav-text">web服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开销的考虑"><span class="nav-number">3.5.2.3.</span> <span class="nav-text">开销的考虑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程"><span class="nav-number">3.5.3.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的基本概念"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">线程的基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的属性"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">线程的属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程机制的实现"><span class="nav-number">3.6.</span> <span class="nav-text">线程机制的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户级线程"><span class="nav-number">3.6.1.</span> <span class="nav-text">用户级线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POSIX线程库"><span class="nav-number">3.6.1.1.</span> <span class="nav-text">POSIX线程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结-2"><span class="nav-number">3.6.1.2.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心级线程"><span class="nav-number">3.6.2.</span> <span class="nav-text">核心级线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合模型"><span class="nav-number">3.6.3.</span> <span class="nav-text">混合模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点小结"><span class="nav-number">3.7.</span> <span class="nav-text">重点小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器调度"><span class="nav-number">4.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念-1"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是处理器调度"><span class="nav-number">4.1.1.</span> <span class="nav-text">什么是处理器调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要解决的三个问题"><span class="nav-number">4.1.2.</span> <span class="nav-text">要解决的三个问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度的时机"><span class="nav-number">4.1.3.</span> <span class="nav-text">调度的时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时机"><span class="nav-number">4.1.3.1.</span> <span class="nav-text">时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程切换"><span class="nav-number">4.1.3.2.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体步骤"><span class="nav-number">4.1.3.3.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开销"><span class="nav-number">4.1.3.4.</span> <span class="nav-text">开销</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法的设计"><span class="nav-number">4.1.4.</span> <span class="nav-text">调度算法的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#衡量指标"><span class="nav-number">4.1.4.1.</span> <span class="nav-text">衡量指标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计调度算法要考虑的几个问题"><span class="nav-number">4.2.</span> <span class="nav-text">设计调度算法要考虑的几个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程优先级"><span class="nav-number">4.2.1.</span> <span class="nav-text">进程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程就绪队列组织"><span class="nav-number">4.2.2.</span> <span class="nav-text">进程就绪队列组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抢占与非抢占"><span class="nav-number">4.2.3.</span> <span class="nav-text">抢占与非抢占</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO密集型与CPU密集型进程"><span class="nav-number">4.2.4.</span> <span class="nav-text">IO密集型与CPU密集型进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间片"><span class="nav-number">4.2.5.</span> <span class="nav-text">时间片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批处理系统的调度算法"><span class="nav-number">4.3.</span> <span class="nav-text">批处理系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先来先服务"><span class="nav-number">4.3.1.</span> <span class="nav-text">先来先服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#短作业优先"><span class="nav-number">4.3.2.</span> <span class="nav-text">短作业优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最高相应比优先HRRN"><span class="nav-number">4.3.3.</span> <span class="nav-text">最高相应比优先HRRN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式系统的调度算法"><span class="nav-number">4.4.</span> <span class="nav-text">交互式系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#轮转调度"><span class="nav-number">4.4.1.</span> <span class="nav-text">轮转调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟轮转法"><span class="nav-number">4.4.2.</span> <span class="nav-text">虚拟轮转法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最高优先级调度"><span class="nav-number">4.4.3.</span> <span class="nav-text">最高优先级调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级反转"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">优先级反转</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多级反馈队列调度算法、各种调度算法小结等"><span class="nav-number">4.5.</span> <span class="nav-text">多级反馈队列调度算法、各种调度算法小结等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多级反馈队列调度算法"><span class="nav-number">4.5.1.</span> <span class="nav-text">多级反馈队列调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-3"><span class="nav-number">4.5.2.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多处理器调度算法设计"><span class="nav-number">4.5.3.</span> <span class="nav-text">多处理器调度算法设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型操作系统的调度算法"><span class="nav-number">4.6.</span> <span class="nav-text">典型操作系统的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LINUX调度算法的发展历史"><span class="nav-number">4.6.1.</span> <span class="nav-text">LINUX调度算法的发展历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows线程调度"><span class="nav-number">4.6.2.</span> <span class="nav-text">Windows线程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的时间配额"><span class="nav-number">4.6.3.</span> <span class="nav-text">线程的时间配额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度策略"><span class="nav-number">4.6.4.</span> <span class="nav-text">调度策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抢占"><span class="nav-number">4.6.4.1.</span> <span class="nav-text">抢占</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间配额用完"><span class="nav-number">4.6.4.2.</span> <span class="nav-text">时间配额用完</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程优先级与时间配额调整"><span class="nav-number">4.6.5.</span> <span class="nav-text">线程优先级与时间配额调整</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程优先级提升"><span class="nav-number">4.6.5.1.</span> <span class="nav-text">线程优先级提升</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-2"><span class="nav-number">4.7.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本讲重点"><span class="nav-number">4.7.1.</span> <span class="nav-text">本讲重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要求"><span class="nav-number">4.7.2.</span> <span class="nav-text">要求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步机制1"><span class="nav-number">5.</span> <span class="nav-text">同步机制1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的并发执行"><span class="nav-number">5.1.</span> <span class="nav-text">进程的并发执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程并发执行"><span class="nav-number">5.1.1.</span> <span class="nav-text">进程并发执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从进程的特征触发"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">从进程的特征触发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发执行过程分析"><span class="nav-number">5.1.2.</span> <span class="nav-text">并发执行过程分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程前趋图"><span class="nav-number">5.1.3.</span> <span class="nav-text">进程前趋图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程互斥"><span class="nav-number">5.2.</span> <span class="nav-text">进程互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#竞争条件"><span class="nav-number">5.2.1.</span> <span class="nav-text">竞争条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-2"><span class="nav-number">5.2.2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区的使用原则"><span class="nav-number">5.2.3.</span> <span class="nav-text">临界区的使用原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">5.2.4.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件解决方案"><span class="nav-number">5.3.</span> <span class="nav-text">软件解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解法1"><span class="nav-number">5.3.1.</span> <span class="nav-text">解法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法2"><span class="nav-number">5.3.2.</span> <span class="nav-text">解法2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法3"><span class="nav-number">5.3.3.</span> <span class="nav-text">解法3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法4：DEKKER算法"><span class="nav-number">5.3.4.</span> <span class="nav-text">解法4：DEKKER算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法5：PETTERSON算法"><span class="nav-number">5.3.5.</span> <span class="nav-text">解法5：PETTERSON算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程互斥的硬件解决方法"><span class="nav-number">5.4.</span> <span class="nav-text">进程互斥的硬件解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断屏蔽方法"><span class="nav-number">5.4.1.</span> <span class="nav-text">中断屏蔽方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“测试并加锁”指令"><span class="nav-number">5.4.2.</span> <span class="nav-text">“测试并加锁”指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换指令"><span class="nav-number">5.4.3.</span> <span class="nav-text">交换指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结-4"><span class="nav-number">5.5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的同步"><span class="nav-number">5.6.</span> <span class="nav-text">进程的同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者消费者问题"><span class="nav-number">5.6.1.</span> <span class="nav-text">生产者消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">5.6.1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要解决的问题："><span class="nav-number">5.6.1.2.</span> <span class="nav-text">要解决的问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">5.6.1.3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">5.6.1.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他例子"><span class="nav-number">5.6.2.</span> <span class="nav-text">其他例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量及P、V操作"><span class="nav-number">5.7.</span> <span class="nav-text">信号量及P、V操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P，V操作定义"><span class="nav-number">5.7.1.</span> <span class="nav-text">P，V操作定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有关说明"><span class="nav-number">5.7.1.1.</span> <span class="nav-text">有关说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PV操作解决进行间互斥问题"><span class="nav-number">5.7.2.</span> <span class="nav-text">PV操作解决进行间互斥问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者消费者问题-1"><span class="nav-number">5.8.</span> <span class="nav-text">生产者消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用信号量的解法"><span class="nav-number">5.8.1.</span> <span class="nav-text">用信号量的解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论"><span class="nav-number">5.8.2.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读者写者问题"><span class="nav-number">5.9.</span> <span class="nav-text">读者写者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量解法"><span class="nav-number">5.9.1.</span> <span class="nav-text">信号量解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类问题，读者优先"><span class="nav-number">5.9.2.</span> <span class="nav-text">第一类问题，读者优先</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解法"><span class="nav-number">5.9.2.1.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化"><span class="nav-number">5.9.2.2.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINUX提供的读写锁"><span class="nav-number">5.9.3.</span> <span class="nav-text">LINUX提供的读写锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-3"><span class="nav-number">5.10.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#要求-1"><span class="nav-number">5.10.1.</span> <span class="nav-text">要求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步互斥机制2"><span class="nav-number">6.</span> <span class="nav-text">同步互斥机制2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管程的基本概念"><span class="nav-number">6.1.</span> <span class="nav-text">管程的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会出现管程"><span class="nav-number">6.1.1.</span> <span class="nav-text">为什么会出现管程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">6.1.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有什么保证"><span class="nav-number">6.1.3.</span> <span class="nav-text">有什么保证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会遇到什么问题"><span class="nav-number">6.1.4.</span> <span class="nav-text">会遇到什么问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hoare管程"><span class="nav-number">6.2.</span> <span class="nav-text">Hoare管程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">6.2.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量的实现"><span class="nav-number">6.2.2.</span> <span class="nav-text">条件变量的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管程的实现"><span class="nav-number">6.3.</span> <span class="nav-text">管程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管程解决生产者消费者问题"><span class="nav-number">6.3.1.</span> <span class="nav-text">管程解决生产者消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者消费者"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">生产者消费者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管程的实现-1"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">管程的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java有类似管程的机制"><span class="nav-number">6.3.2.</span> <span class="nav-text">java有类似管程的机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MESA管程"><span class="nav-number">6.4.</span> <span class="nav-text">MESA管程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用NOTIFY要注意的问题"><span class="nav-number">6.4.1.</span> <span class="nav-text">使用NOTIFY要注意的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决生产者消费者问题"><span class="nav-number">6.4.2.</span> <span class="nav-text">解决生产者消费者问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进"><span class="nav-number">6.4.3.</span> <span class="nav-text">改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入BROADCAST"><span class="nav-number">6.4.4.</span> <span class="nav-text">引入BROADCAST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较"><span class="nav-number">6.4.5.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-5"><span class="nav-number">6.4.6.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PTHREAD中的同步机制"><span class="nav-number">6.5.</span> <span class="nav-text">PTHREAD中的同步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者消费者问题-2"><span class="nav-number">6.5.1.</span> <span class="nav-text">生产者消费者问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cond-wait"><span class="nav-number">6.5.2.</span> <span class="nav-text">cond_wait</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">6.6.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要通信机制？"><span class="nav-number">6.6.1.</span> <span class="nav-text">为什么需要通信机制？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本通信方式"><span class="nav-number">6.6.2.</span> <span class="nav-text">基本通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息传递"><span class="nav-number">6.6.3.</span> <span class="nav-text">消息传递</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PV操作的实现send"><span class="nav-number">6.6.3.1.</span> <span class="nav-text">PV操作的实现send</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道"><span class="nav-number">6.6.4.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字"><span class="nav-number">6.6.5.</span> <span class="nav-text">套接字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程过程调用"><span class="nav-number">6.6.6.</span> <span class="nav-text">远程过程调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型操作系统中的IPC机制"><span class="nav-number">6.7.</span> <span class="nav-text">典型操作系统中的IPC机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-2"><span class="nav-number">6.7.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的进程通信机制"><span class="nav-number">6.7.2.</span> <span class="nav-text">Linux的进程通信机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原子操作"><span class="nav-number">6.7.2.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#屏障：栅栏"><span class="nav-number">6.7.2.2.</span> <span class="nav-text">屏障：栅栏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-4"><span class="nav-number">6.8.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重点阅读和概念"><span class="nav-number">6.8.1.</span> <span class="nav-text">重点阅读和概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储管理"><span class="nav-number">7.</span> <span class="nav-text">存储管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念：地址重定位"><span class="nav-number">7.1.</span> <span class="nav-text">基本概念：地址重定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本内容"><span class="nav-number">7.1.1.</span> <span class="nav-text">基本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要解决的问题"><span class="nav-number">7.1.2.</span> <span class="nav-text">需要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程地址空间-1"><span class="nav-number">7.1.3.</span> <span class="nav-text">进程地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-1"><span class="nav-number">7.1.4.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址重定位"><span class="nav-number">7.1.5.</span> <span class="nav-text">地址重定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑地址"><span class="nav-number">7.1.5.1.</span> <span class="nav-text">逻辑地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#物理地址"><span class="nav-number">7.1.5.2.</span> <span class="nav-text">物理地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地址重定位-1"><span class="nav-number">7.1.5.3.</span> <span class="nav-text">地址重定位</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态重定位与动态重定位"><span class="nav-number">7.1.6.</span> <span class="nav-text">静态重定位与动态重定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态重定位实现"><span class="nav-number">7.1.6.1.</span> <span class="nav-text">动态重定位实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理内存管理"><span class="nav-number">7.2.</span> <span class="nav-text">物理内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲内存管理"><span class="nav-number">7.2.1.</span> <span class="nav-text">空闲内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配算法"><span class="nav-number">7.2.2.</span> <span class="nav-text">内存分配算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收问题"><span class="nav-number">7.2.3.</span> <span class="nav-text">回收问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统"><span class="nav-number">7.3.</span> <span class="nav-text">伙伴系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">7.3.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本内存管理方案"><span class="nav-number">7.4.</span> <span class="nav-text">基本内存管理方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一连续区"><span class="nav-number">7.4.1.</span> <span class="nav-text">单一连续区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定分区"><span class="nav-number">7.4.2.</span> <span class="nav-text">固定分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#案例"><span class="nav-number">7.4.2.1.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变分区"><span class="nav-number">7.4.3.</span> <span class="nav-text">可变分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">7.4.3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#碎片问题解决"><span class="nav-number">7.4.3.2.</span> <span class="nav-text">碎片问题解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页式"><span class="nav-number">7.4.4.</span> <span class="nav-text">页式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理方案"><span class="nav-number">7.4.4.1.</span> <span class="nav-text">管理方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存分配过程"><span class="nav-number">7.4.4.2.</span> <span class="nav-text">内存分配过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关数据结构及地址转换"><span class="nav-number">7.4.4.3.</span> <span class="nav-text">相关数据结构及地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段式"><span class="nav-number">7.4.5.</span> <span class="nav-text">段式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相关数据结构及地址转换-1"><span class="nav-number">7.4.5.1.</span> <span class="nav-text">相关数据结构及地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段页式"><span class="nav-number">7.4.6.</span> <span class="nav-text">段页式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换技术（Swapping）"><span class="nav-number">7.5.</span> <span class="nav-text">交换技术（Swapping）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存不足时如何管理"><span class="nav-number">7.5.1.</span> <span class="nav-text">内存不足时如何管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存“扩充”技术"><span class="nav-number">7.5.2.</span> <span class="nav-text">内存“扩充”技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖技术"><span class="nav-number">7.5.3.</span> <span class="nav-text">覆盖技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">7.5.3.1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换技术"><span class="nav-number">7.5.4.</span> <span class="nav-text">交换技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于讨论的问题"><span class="nav-number">7.5.4.1.</span> <span class="nav-text">关于讨论的问题</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
