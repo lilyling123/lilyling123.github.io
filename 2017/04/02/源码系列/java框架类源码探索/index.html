@@ -1,0 +1,705 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="java框架类源码探索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java框架类源码探索">
+<meta property="og:url" content="http://yoursite.com/2017/04/02/源码系列/java框架类源码探索/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="java框架类源码探索">
+<meta property="og:image" content="http://i.imgur.com/dtFTS9Z.jpg">
+<meta property="og:image" content="http://i.imgur.com/XbmKVg8.jpg">
+<meta property="og:image" content="http://i.imgur.com/hzJFacY.jpg">
+<meta property="og:image" content="http://i.imgur.com/dtGGaNS.jpg">
+<meta property="og:image" content="http://i.imgur.com/CUIOPX8.jpg">
+<meta property="og:image" content="http://i.imgur.com/x6u6XBK.jpg">
+<meta property="og:image" content="http://i.imgur.com/0e0t9U6.jpg">
+<meta property="og:image" content="http://i.imgur.com/mxO07mR.jpg">
+<meta property="og:updated_time" content="2017-04-02T13:57:56.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java框架类源码探索">
+<meta name="twitter:description" content="java框架类源码探索">
+<meta name="twitter:image" content="http://i.imgur.com/dtFTS9Z.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/02/源码系列/java框架类源码探索/"/>
+
+
+
+
+
+  <title> java框架类源码探索 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/02/源码系列/java框架类源码探索/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java框架类源码探索
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-02T18:48:15+08:00">
+                2017-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>java框架类源码探索<br><a id="more"></a> </p>
+<h1 id="视图与简介"><a href="#视图与简介" class="headerlink" title="视图与简介"></a>视图与简介</h1><h2 id="关系视图"><a href="#关系视图" class="headerlink" title="关系视图"></a>关系视图</h2><p><img src="http://i.imgur.com/dtFTS9Z.jpg" alt=""></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h3><p>迭代器模式的接口，凡是实现了此接口的类都会提供一个迭代器，并且可以使用forEach</p>
+<pre><code>Iterator&lt;T&gt; iterator();
+</code></pre><h3 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h3><p><img src="http://i.imgur.com/XbmKVg8.jpg" alt=""><br>提供一个迭代器，可以将集合迭代，如何实现取决于具体的类，主要方法如下：</p>
+<pre><code>boolean hasNext();//是否还有下一个元素
+E next();//指针指向并返回下一个元素
+default void remove() {
+    throw new UnsupportedOperationException(&quot;remove&quot;);
+}            //提供了默认的实现
+</code></pre><h3 id="ListIterator"><a href="#ListIterator" class="headerlink" title="ListIterator"></a>ListIterator</h3><p><img src="http://i.imgur.com/hzJFacY.jpg" alt=""><br>提供一个可以改变指向的迭代器，只有List相关类实现了此接口，继承了Iterator的所有方法</p>
+<hr>
+<pre><code>boolean hasPrevious();    //是否还有上一个元素
+E previous();                //返回上一个元素
+int nextIndex();            //返回下一个元素下标
+int previousIndex();        //返回上一个元素下标
+void remove();            //移除当前元素，有可能发生异常
+void set(E e);            //重新设置当前元素
+void add(E e);            //在当前元素后面添加一个新元素
+</code></pre><h3 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h3><p><img src="http://i.imgur.com/dtGGaNS.jpg" alt=""></p>
+<h4 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h4><pre><code>boolean add(E e);                            //用于添加一个元素
+boolean remove(Object o);                    //用于删除一个指定元素
+boolean contains(Object o);                    //用于查询是否包含一个指定元素
+boolean containsAll(Collection&lt;?&gt; c)    ;        //用于查询是否包含一组元素
+boolean addAll(Collection&lt;? extends E&gt; c);    //用于添加一组元素
+boolean removeAll(Collection&lt;?&gt; c);            //用于移除一组元素
+boolean retainAll(Collection&lt;?&gt; c);            //用于移除c中不包含的元素（并集）
+</code></pre><h4 id="功能型"><a href="#功能型" class="headerlink" title="功能型"></a>功能型</h4><pre><code>int size();                //用于查询Collection中的元素个数
+boolean isEmpty();        //用于查询Collection是否为空
+Iterator&lt;E&gt; iterator();    //提供一个Collection的迭代器
+</code></pre><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><pre><code>Object[] toArray();            //用于将Collection转换为数组
+&lt;T&gt; T[] toArray(T[] a);        //用于将Collection转换为指定类型的数组
+void clear();                    //清空Collection
+boolean equals(Object o);    //判断Collection相等
+int hashCode();                //定义Collection的hashCode
+</code></pre><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p><img src="http://i.imgur.com/CUIOPX8.jpg" alt=""></p>
+<h4 id="增删改查-1"><a href="#增删改查-1" class="headerlink" title="增删改查"></a>增删改查</h4><pre><code>V get(Object key);                                //获取键为key的值
+V put(K key, V value);                            //加入一个键值对
+void putAll(Map&lt;? extends K, ? extends V&gt; m);    //放入一个Map类型的数据
+V remove(Object key);                            //删除一个指定key的元素
+void clear();                                        //清空
+boolean containsKey(Object key);                    //是否包含某个key
+boolean containsValue(Object value);                //是否包含某个value
+</code></pre><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><pre><code>int size();                                        //返回map规模
+boolean isEmpty();                                //返回map是否为空
+</code></pre><h4 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h4><pre><code>Set&lt;K&gt; keySet();                                //返回map的Key的Set集合
+Collection&lt;V&gt; values();                            //返回map的Value的Collection集合
+Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet();                //返回map中的键值对set集合
+</code></pre><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><pre><code>同时提供一系列用于不同的并且有默认实现的方法，此处暂且忽略
+</code></pre><h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p><img src="http://i.imgur.com/x6u6XBK.jpg" alt=""><br>继承了Collection的所有的方法，并且有一些自己的方法，在此只介绍自己的特有的方法</p>
+<hr>
+<h4 id="增删改查-2"><a href="#增删改查-2" class="headerlink" title="增删改查"></a>增删改查</h4><pre><code>boolean addAll(int index, Collection&lt;? extends E&gt; c);    //用于添加一组元素
+E get(int index);                                        //查询指定下标的元素
+E set(int index, E element);                            //将指定下标的元素设为E，并且返回之前的元素
+void add(int index, E element);                        //在指定下标添加一个元素,后面元素全部后移
+E remove(int index);                                    //移除指定下标的元素
+int indexOf(Object o);                                //查找指定元素的位置
+int lastIndexOf(Object o);                                //从后向前查找指定元素的位置
+</code></pre><h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><pre><code>ListIterator&lt;E&gt; listIterator();                //提供了一个迭代器
+ListIterator&lt;E&gt; listIterator(int index);        //根据index提供一个迭代器
+List&lt;E&gt; subList(int fromIndex, int toIndex);//返回 List 在 fromIndex 与 toIndex 范围内的子集，注意是左闭右开
+</code></pre><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><img src="http://i.imgur.com/0e0t9U6.jpg" alt=""><br>与Collection接口内容完全一致，此处不再介绍</p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p><img src="http://i.imgur.com/mxO07mR.jpg" alt=""></p>
+<pre><code>boolean add(E e);    //添加一个元素
+boolean offer(E e);    //添加一个元素
+E remove();            //从队首移除一个元素，并返回
+E poll();                //从队首移除一个元素，并返回
+E element();            //返回队首元素，不删除
+E peek();            //返回队首元素，不删除
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/java设计模式/" rel="next" title="java设计模式简介">
+                <i class="fa fa-chevron-left"></i> java设计模式简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/02/源码系列/ArrayList源码详解/" rel="prev" title="ArrayList源码详解">
+                ArrayList源码详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#视图与简介"><span class="nav-number">1.</span> <span class="nav-text">视图与简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系视图"><span class="nav-number">1.1.</span> <span class="nav-text">关系视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterable"><span class="nav-number">1.2.1.</span> <span class="nav-text">Iterable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator"><span class="nav-number">1.2.2.</span> <span class="nav-text">Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListIterator"><span class="nav-number">1.2.3.</span> <span class="nav-text">ListIterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection"><span class="nav-number">1.2.4.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增删改查"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">增删改查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能型"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">功能型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">1.2.5.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增删改查-1"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">增删改查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他-1"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">1.2.6.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增删改查-2"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">增删改查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能-1"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">1.2.7.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">1.2.8.</span> <span class="nav-text">Queue</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
