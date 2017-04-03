@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="FastBFS入门详解">
+<meta name="description" content="java设计模式简介">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FastBFS入门详解">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/FastBFS入门详解/index.html">
+<meta property="og:title" content="java设计模式简介">
+<meta property="og:url" content="http://yoursite.com/2017/03/28/基础课程系列/java设计模式/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FastBFS入门详解">
-<meta property="og:updated_time" content="2017-03-15T08:17:56.856Z">
+<meta property="og:description" content="java设计模式简介">
+<meta property="og:updated_time" content="2017-03-28T13:34:01.298Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FastBFS入门详解">
-<meta name="twitter:description" content="FastBFS入门详解">
+<meta name="twitter:title" content="java设计模式简介">
+<meta name="twitter:description" content="java设计模式简介">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/14/FastBFS入门详解/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/28/基础课程系列/java设计模式/"/>
 
 
 
 
 
-  <title> FastBFS入门详解 | Hexo </title>
+  <title> java设计模式简介 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -240,7 +240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/FastBFS入门详解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/基础课程系列/java设计模式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="lily">
@@ -264,7 +264,7 @@
             
             
               
-                FastBFS入门详解
+                java设计模式简介
               
             
           </h1>
@@ -279,8 +279,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T23:01:59+08:00">
-                2017-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-28T21:32:39+08:00">
+                2017-03-28
               </time>
             
 
@@ -315,70 +315,32 @@
       
 
       
-        <p>FastBFS入门详解<br><a id="more"></a> </p>
-<h1 id="把fastDFS以及依赖包都上传到linux系统"><a href="#把fastDFS以及依赖包都上传到linux系统" class="headerlink" title="把fastDFS以及依赖包都上传到linux系统"></a>把fastDFS以及依赖包都上传到linux系统</h1><h1 id="安装FastDFS之前，先安装libevent工具包"><a href="#安装FastDFS之前，先安装libevent工具包" class="headerlink" title="安装FastDFS之前，先安装libevent工具包"></a>安装FastDFS之前，先安装libevent工具包</h1><p>apt-get install libevent</p>
-<h1 id="安装libfastcommonV1-0-7工具包"><a href="#安装libfastcommonV1-0-7工具包" class="headerlink" title="安装libfastcommonV1.0.7工具包"></a>安装libfastcommonV1.0.7工具包</h1><ol>
-<li>解压缩:tar -zxf xxx  </li>
-<li>./make.sh  </li>
-<li>./make.sh install  </li>
-<li>把/usr/lib64/libfastcommon.so文件向/usr/lib/下复制一份</li>
-</ol>
-<h1 id="安装Tracker服务"><a href="#安装Tracker服务" class="headerlink" title="安装Tracker服务"></a>安装Tracker服务</h1><ol>
-<li>解压缩  </li>
-<li>./make.sh  </li>
-<li>./make.sh install<br>安装后在/usr/bin/目录下有以fdfs开头的文件都是编译出来的。<br>配置文件都放到/etc/fdfs文件夹</li>
-<li>把/root/FastDFS/conf目录下的所有的配置文件都复制到/etc/fdfs下。  </li>
-<li>配置tracker服务。修改/root/FastDFS/conf/tracker.conf文件:将文件中的base_path换成一个真实存在的路径名。  </li>
-<li>启动tracker: /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf<br>重启使用命令：/usr/bin/fdfs_trackerd  /etc/fdfs/tracker.conf restart</li>
-</ol>
-<h1 id="安装storage服务"><a href="#安装storage服务" class="headerlink" title="安装storage服务"></a>安装storage服务</h1><ol>
-<li>如果是在不同的服务器安装，第四步的1~4需要重新执行。  </li>
-<li>配置storage服务。修改/root/FastDFS/conf/storage.conf文件：将base_path换成一个真实存在的路径名,store_path0也要换成真实存在的路径名,将tracker_server的ip换成服务器的ip地址   </li>
-<li>启动storage服务。<br>/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</li>
-</ol>
-<h1 id="测试服务"><a href="#测试服务" class="headerlink" title="测试服务"></a>测试服务</h1><ol>
-<li>修改配置文件/etc/fdfs/client.conf:将base_path换成一个真实存在的路径名，将tracker_server的ip换成服务器的ip地址  </li>
-<li>测试<br>/usr/bin/fdfs_test /etc/fdfs/client.conf upload anti-steal.jpg</li>
-</ol>
-<h1 id="搭建nginx提供http服务"><a href="#搭建nginx提供http服务" class="headerlink" title="搭建nginx提供http服务"></a>搭建nginx提供http服务</h1><p><strong>可以使用官方提供的nginx插件。要使用nginx插件需要重新编译。fastdfs-nginx-module_v1.16.tar.gz</strong>  </p>
-<ol>
-<li>解压插件压缩包  </li>
-<li>修改/root/fastdfs-nginx-module/src/config文件，把其中的local去掉。  </li>
-<li>对nginx重新config   </li>
-<li>make  </li>
-<li>make install  </li>
-<li>把/root/fastdfs-nginx-module/src/mod_fastdfs.conf文件复制到/etc/fdfs目录下。：将tracker_server的ip换成服务器的ip地址    </li>
-<li>nginx的配置  </li>
-<li>将libfdfsclient.so拷贝至/usr/lib下<br>cp /usr/lib64/libfdfsclient.so /usr/lib/</li>
-<li><p>启动nginx:./</p>
-<pre><code>nginx的配置  
-在nginx的配置文件中添加一个Server：
-server {
-    listen       80;
-    server_name  192.168.101.3;
-
-    location /group1/M00/{
-            #root /home/FastDFS/fdfs_storage/data;
-            ngx_fastdfs_module;
-    }
-}
-对nginx重新config
-./configure \
---prefix=/usr/local/nginx \
---pid-path=/var/run/nginx/nginx.pid \
--lock-path=/var/lock/nginx.lock \
---error-log-path=/var/log/nginx/error.log \
---http-log-path=/var/log/nginx/access.log \
---with-http_gzip_static_module \
---http-client-body-temp-path=/var/temp/nginx/client \
---http-proxy-temp-path=/var/temp/nginx/proxy \
---http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
---http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
---http-scgi-temp-path=/var/temp/nginx/scgi \
---add-module=/root/fastdfs-nginx-module/src
-</code></pre></li>
-</ol>
-
+        <p>java设计模式简介<br><a id="more"></a></p>
+<h1 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h1><pre><code>1、抽象工厂模式(Abstract factory pattern): 提供一个接口, 用于创建相关或依赖对象的家族, 而不需要指定具体类.
+2、生成器模式(Builder pattern): 使用生成器模式封装一个产品的构造过程, 并允许按步骤构造. 将一个复杂对象的构建与它的表示分离, 使得同样的构建过程可以创建不同的表示.
+3、工厂模式(factory method pattern): 定义了一个创建对象的接口, 但由子类决定要实例化的类是哪一个. 工厂方法让类把实例化推迟到子类.
+4、原型模式(prototype pattern): 当创建给定类的实例过程很昂贵或很复杂时, 就使用原形模式.
+5、单例了模式(Singleton pattern): 确保一个类只有一个实例, 并提供全局访问点.
+6、多例模式(Multition pattern): 在一个解决方案中结合两个或多个模式, 以解决一般或重复发生的问题.
+</code></pre><h1 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h1><pre><code>1、适配器模式(Adapter pattern): 将一个类的接口, 转换成客户期望的另一个接口. 适配器让原本接口不兼容的类可以合作无间. 对象适配器使用组合, 类适配器使用多重继承.
+2、桥接模式(Bridge pattern): 使用桥接模式通过将实现和抽象放在两个不同的类层次中而使它们可以独立改变.
+3、组合模式(composite pattern): 允许你将对象组合成树形结构来表现&quot;整体/部分&quot;层次结构. 组合能让客户以一致的方式处理个别对象以及对象组合.
+4、装饰者模式(decorator pattern): 动态地将责任附加到对象上, 若要扩展功能, 装饰者提供了比继承更有弹性的替代方案.
+5、外观模式(facade pattern): 提供了一个统一的接口, 用来访问子系统中的一群接口. 外观定义了一个高层接口, 让子系统更容易使用.
+6、亨元模式(Flyweight Pattern): 如想让某个类的一个实例能用来提供许多&quot;虚拟实例&quot;, 就使用蝇量模式.
+7、代理模式(Proxy pattern): 为另一个对象提供一个替身或占位符以控制对这个对象的访问.
+</code></pre><h1 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h1><pre><code>1、责任链模式(Chain of responsibility pattern): 通过责任链模式, 你可以为某个请求创建一个对象链. 每个对象依序检查此请求并对其进行处理或者将它传给链中的下一个对象.
+2、命令模式(Command pattern): 将&quot;请求&quot;封闭成对象, 以便使用不同的请求,队列或者日志来参数化其他对象. 命令模式也支持可撤销的操作.
+3、解释器模式(Interpreter pattern): 使用解释器模式为语言创建解释器.
+4、迭代器模式(iterator pattern): 提供一种方法顺序访问一个聚合对象中的各个元素, 而又不暴露其内部的表示.
+5、中介者模式(Mediator pattern) : 使用中介者模式来集中相关对象之间复杂的沟通和控制方式.
+6、备忘录模式(Memento pattern): 当你需要让对象返回之前的状态时(例如, 你的用户请求&quot;撤销&quot;), 你使用备忘录模式.
+7、观察者模式(observer pattern): 在对象之间定义一对多的依赖, 这样一来, 当一个对象改变状态, 依赖它的对象都会收到通知, 并自动更新.
+8、状态模式(State pattern): 允许对象在内部状态改变时改变它的行为, 对象看起来好象改了它的类.
+9、策略模式(strategy pattern): 定义了算法族, 分别封闭起来, 让它们之间可以互相替换, 此模式让算法的变化独立于使用算法的客户.
+10、模板方法模式(Template pattern): 在一个方法中定义一个算法的骨架, 而将一些步骤延迟到子类中. 模板方法使得子类可以在不改变算法结构的情况下, 重新定义算法中的某些步骤.
+11、访问者模式(visitor pattern): 当你想要为一个对象的组合增加新的能力, 且封装并不重要时, 就使用访问者模式.
+</code></pre>
       
     </div>
 
@@ -404,8 +366,8 @@ server {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/08/SSM系列/spring事务管理/" rel="next" title="Spring事务管理">
-                <i class="fa fa-chevron-left"></i> Spring事务管理
+              <a href="/2017/03/22/SSM系列/spring揭秘读书笔记/" rel="next" title="spring揭秘">
+                <i class="fa fa-chevron-left"></i> spring揭秘
               </a>
             
           </div>
@@ -414,8 +376,8 @@ server {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/redis集群/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/02/源码系列/java框架类源码探索/" rel="prev" title="java框架类源码探索">
+                java框架类源码探索 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -525,7 +487,7 @@ server {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#把fastDFS以及依赖包都上传到linux系统"><span class="nav-number">1.</span> <span class="nav-text">把fastDFS以及依赖包都上传到linux系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装FastDFS之前，先安装libevent工具包"><span class="nav-number">2.</span> <span class="nav-text">安装FastDFS之前，先安装libevent工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装libfastcommonV1-0-7工具包"><span class="nav-number">3.</span> <span class="nav-text">安装libfastcommonV1.0.7工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Tracker服务"><span class="nav-number">4.</span> <span class="nav-text">安装Tracker服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装storage服务"><span class="nav-number">5.</span> <span class="nav-text">安装storage服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试服务"><span class="nav-number">6.</span> <span class="nav-text">测试服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建nginx提供http服务"><span class="nav-number">7.</span> <span class="nav-text">搭建nginx提供http服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型模式"><span class="nav-number">1.</span> <span class="nav-text">创建型模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型模式"><span class="nav-number">2.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行为型模式"><span class="nav-number">3.</span> <span class="nav-text">行为型模式</span></a></li></ol></div>
             
 
           </div>

@@ -1,0 +1,784 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="此文简述了使用MyBatis的简单操作，包括配置文件，导入jar包，增删改查操作，映射关系查询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/07/SSM系列/MyBatis学习笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="此文简述了使用MyBatis的简单操作，包括配置文件，导入jar包，增删改查操作，映射关系查询">
+<meta property="og:updated_time" content="2017-03-12T12:13:58.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis学习笔记">
+<meta name="twitter:description" content="此文简述了使用MyBatis的简单操作，包括配置文件，导入jar包，增删改查操作，映射关系查询">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/07/SSM系列/MyBatis学习笔记/"/>
+
+
+
+
+
+  <title> MyBatis学习笔记 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/SSM系列/MyBatis学习笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MyBatis学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T16:24:40+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>此文简述了使用MyBatis的简单操作，包括配置文件，导入jar包，增删改查操作，映射关系查询<br><a id="more"></a>  </p>
+<h1 id="MyBatis实现的增删改查"><a href="#MyBatis实现的增删改查" class="headerlink" title="MyBatis实现的增删改查"></a>MyBatis实现的增删改查</h1><p>首先新建一个java普通项目或者JavaWeb项目均可</p>
+<h2 id="配置开发环境和全局xml"><a href="#配置开发环境和全局xml" class="headerlink" title="配置开发环境和全局xml"></a>配置开发环境和全局xml</h2><h3 id="jar包"><a href="#jar包" class="headerlink" title="jar包"></a>jar包</h3><p>全部的jar包包括:  </p>
+<ul>
+<li>asm</li>
+<li>cglib</li>
+<li>commons-logging</li>
+<li>javaassist</li>
+<li>log4j</li>
+<li>log4j-api</li>
+<li>log4j-sore</li>
+<li>mybatis</li>
+<li>mysql</li>
+<li>ojdbc14</li>
+<li>slf4j-api</li>
+<li>slf4j-log4j12<h3 id="全局文件，全部放在src文件下面"><a href="#全局文件，全部放在src文件下面" class="headerlink" title="全局文件，全部放在src文件下面"></a>全局文件，全部放在src文件下面</h3><h4 id="db-properties文件"><a href="#db-properties文件" class="headerlink" title="db.properties文件"></a>db.properties文件</h4>  db.driver=com.mysql.jdbc.Driver<br>  db.url=jdbc:mysql://localhost:3306/mblog?useUnicode=true&amp;characterEncoding=utf8<br>  db.username=root<br>  db.password=123<h4 id="mybatis-config-xml"><a href="#mybatis-config-xml" class="headerlink" title="mybatis-config.xml"></a>mybatis-config.xml</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</div><div class="line">&lt;!DOCTYPE configuration</div><div class="line">        PUBLIC <span class="string">"-//mybatis.org//DTD Config 3.0//EN"</span></div><div class="line">        <span class="string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;!-- 通过properties标签，读取java配置文件的内容 --&gt;</div><div class="line">    &lt;properties resource=<span class="string">"db.properties"</span>/&gt;</div><div class="line"></div><div class="line">    &lt;!-- 定义别名 --&gt;</div><div class="line">    &lt;<span class="built_in">type</span>Aliases&gt;</div><div class="line">        &lt;!-- 单个定义别名 --&gt;</div><div class="line">        &lt;<span class="built_in">type</span>Alias <span class="built_in">type</span>=<span class="string">"com.lily.domain.User"</span> <span class="built_in">alias</span>=<span class="string">"user"</span>/&gt;</div><div class="line"></div><div class="line">        &lt;!-- 批量定义别名（推荐） --&gt;</div><div class="line">        &lt;!-- [name]：指定批量定义别名的类包，别名为类名（首字母大小写都可） --&gt;</div><div class="line">        &lt;package name=<span class="string">"com.lily.domain"</span>/&gt;</div><div class="line">    &lt;/<span class="built_in">type</span>Aliases&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;!--配置mybatis的环境信息--&gt;</div><div class="line">    &lt;environments default=<span class="string">"development"</span>&gt;</div><div class="line">        &lt;environment id=<span class="string">"development"</span>&gt;</div><div class="line">            &lt;!--配置JDBC事务控制，由mybatis进行管理--&gt;</div><div class="line">            &lt;transactionManager <span class="built_in">type</span>=<span class="string">"JDBC"</span>/&gt;</div><div class="line">            &lt;!--配置数据源，采用dbcp连接池--&gt;</div><div class="line">            &lt;dataSource <span class="built_in">type</span>=<span class="string">"POOLED"</span>&gt;</div><div class="line">                &lt;property name=<span class="string">"driver"</span> value=<span class="string">"<span class="variable">$&#123;db.driver&#125;</span>"</span>/&gt;</div><div class="line">                &lt;property name=<span class="string">"url"</span> value=<span class="string">"<span class="variable">$&#123;db.url&#125;</span>"</span>/&gt;</div><div class="line">                &lt;property name=<span class="string">"username"</span> value=<span class="string">"<span class="variable">$&#123;db.username&#125;</span>"</span>/&gt;</div><div class="line">                &lt;property name=<span class="string">"password"</span> value=<span class="string">"<span class="variable">$&#123;db.password&#125;</span>"</span>/&gt;</div><div class="line">            &lt;/dataSource&gt;</div><div class="line">        &lt;/environment&gt;</div><div class="line">    &lt;/environments&gt;</div><div class="line">    &lt;mappers&gt;</div><div class="line">        &lt;mapper resource=<span class="string">"com/lily/domain/User.xml"</span>/&gt;</div><div class="line">        &lt;mapper resource=<span class="string">"com/lily/mapper/UserMapper.xml"</span>/&gt;</div><div class="line">    &lt;/mappers&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="实体类的编写、实体类xml文件和数据库的配置"><a href="#实体类的编写、实体类xml文件和数据库的配置" class="headerlink" title="实体类的编写、实体类xml文件和数据库的配置"></a>实体类的编写、实体类xml文件和数据库的配置</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/3/5.</div><div class="line"> */</div><div class="line">public class User &#123;</div><div class="line">    private int id;</div><div class="line">    private String username;</div><div class="line">    private String password;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getUsername</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Username(String username) &#123;</div><div class="line">        this.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getPassword</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Password(String password) &#123;</div><div class="line">        this.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int <span class="function"><span class="title">getId</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> id;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Id(int id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> <span class="string">"User&#123;"</span> +</div><div class="line">                <span class="string">"id="</span> + id +</div><div class="line">                <span class="string">", username='"</span> + username + <span class="string">'\'</span><span class="string">' +</span></div><div class="line">                ", password='<span class="string">" + password + '\'' +</span></div><div class="line">                '&#125;';</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="实体类Mapping-xml文件"><a href="#实体类Mapping-xml文件" class="headerlink" title="实体类Mapping.xml文件"></a>实体类Mapping.xml文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</div><div class="line">&lt;!DOCTYPE mapper</div><div class="line">        PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></div><div class="line">        <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</div><div class="line">&lt;!--</div><div class="line">	namespace：命名空间，它的作用就是对SQL进行分类化管理，可以理解为SQL隔离</div><div class="line">	注意：使用mapper代理开发时，namespace有特殊且重要的作用</div><div class="line"> --&gt;</div><div class="line">&lt;mapper namespace=<span class="string">"test"</span>&gt;</div><div class="line"></div><div class="line">    &lt;!-- 根据用户ID，查询用户信息 --&gt;</div><div class="line">    &lt;!--</div><div class="line">        [id]：statement的id，要求在命名空间内唯一</div><div class="line">        [parameterType]：入参的java类型</div><div class="line">        [resultType]：查询出的单条结果集对应的java类型</div><div class="line">        [<span class="comment">#&#123;&#125;]： 表示一个占位符?</span></div><div class="line">        [<span class="comment">#&#123;id&#125;]：表示该占位符待接收参数的名称为id。注意：如果参数为简单类型时，#&#123;&#125;里面的参数名称可以是任意定义</span></div><div class="line">     --&gt;</div><div class="line">    &lt;select id=<span class="string">"findUserById"</span> parameterType=<span class="string">"int"</span> resultType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        SELECT * FROM USER WHERE id = <span class="comment">#&#123;id&#125;</span></div><div class="line">    &lt;/select&gt;</div><div class="line"></div><div class="line">    &lt;!-- 根据用户名称模糊查询用户信息列表 --&gt;</div><div class="line">    &lt;!--</div><div class="line">            [<span class="variable">$&#123;&#125;</span>]：表示拼接SQL字符串</div><div class="line">             [<span class="variable">$&#123;value&#125;</span>]：表示要拼接的是简单类型参数。</div><div class="line">             注意：</div><div class="line">            1、如果参数为简单类型时，<span class="variable">$&#123;&#125;</span>里面的参数名称必须为value</div><div class="line">            2、<span class="variable">$&#123;&#125;</span>会引起SQL注入，一般情况下不推荐使用。但是有些场景必须使用<span class="variable">$&#123;&#125;</span>，比如order by <span class="variable">$&#123;colname&#125;</span></div><div class="line">    --&gt;</div><div class="line">    &lt;select id=<span class="string">"findUsersByName"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        SELECT * FROM USER WHERE username LIKE <span class="string">'%$&#123;value&#125;%'</span></div><div class="line">    &lt;/select&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;!-- 添加用户 --&gt;</div><div class="line">    &lt;!-- 如果主键的值是通过MySQL自增机制生成的，那么我们此处不需要再显示的给ID赋值 --&gt;</div><div class="line">    &lt;insert id=<span class="string">"insertUser"</span> parameterType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        INSERT INTO USER(username,password) VALUES (<span class="comment">#&#123;username&#125;,#&#123;password&#125;)</span></div><div class="line">    &lt;/insert&gt;</div><div class="line">    &lt;!-- 添加用户之自增主键返回（selectKey方式） --&gt;</div><div class="line">    &lt;!--</div><div class="line">            [selectKey标签]：通过select查询来生成主键</div><div class="line">            [keyProperty]：指定存放生成主键的属性</div><div class="line">            [resultType]：生成主键所对应的Java类型</div><div class="line">            [order]：指定该查询主键SQL语句的执行顺序，相对于insert语句</div><div class="line">            [last_insert_id]：MySQL的函数，要配合insert语句一起使用</div><div class="line">    --&gt;</div><div class="line">    &lt;insert id=<span class="string">"insertUser2"</span> parameterType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        &lt;selectKey keyProperty=<span class="string">"id"</span> resultType=<span class="string">"int"</span> order=<span class="string">"AFTER"</span>&gt;</div><div class="line">            SELECT LAST_INSERT_ID()</div><div class="line">        &lt;/selectKey&gt;</div><div class="line">        INSERT INTO USER(username,password) VALUES (<span class="comment">#&#123;username&#125;,#&#123;password&#125;)</span></div><div class="line">    &lt;/insert&gt;</div><div class="line">    &lt;!-- 添加用户之UUID主键返回 --&gt;</div><div class="line">    &lt;!--</div><div class="line">        [uuid]：MySQL的函数，生成的主键是35位的字符串，所以使用它时要修改id的类型为字符类型</div><div class="line">        注意：</div><div class="line">            1、此时order采用BEFORE，因为需要先生成出主键，再执行insert语句</div><div class="line">            2、显式的给ID赋值</div><div class="line">    --&gt;</div><div class="line">    &lt;insert id=<span class="string">"insertUser3"</span> parameterType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        &lt;selectKey keyProperty=<span class="string">"id"</span> resultType=<span class="string">"string"</span> order=<span class="string">"BEFORE"</span>&gt;</div><div class="line">            SELECT UUID()</div><div class="line">        &lt;/selectKey&gt;</div><div class="line">        INSERT INTO USER(id,username,password) VALUES (<span class="comment">#&#123;id&#125;,#&#123;username&#125;,#&#123;password&#125;)</span></div><div class="line">    &lt;/insert&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;!-- 根据ID删除用户 --&gt;</div><div class="line">    &lt;delete id=<span class="string">"deleteUser"</span> parameterType=<span class="string">"int"</span>&gt;</div><div class="line">        DELETE FROM USER WHERE id= <span class="comment">#&#123;id&#125;</span></div><div class="line">    &lt;/delete&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;!-- 根据传入的用户信息修改用户 --&gt;</div><div class="line">    &lt;update id=<span class="string">"updateUser"</span> parameterType=<span class="string">"com.lily.domain.User"</span>&gt;</div><div class="line">        UPDATE USER SET username = <span class="comment">#&#123;username&#125;,password=#&#123;password&#125; WHERE id=#&#123;id&#125;</span></div><div class="line">    &lt;/update&gt;</div><div class="line"></div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<h3 id="数据库字段和信息的插入"><a href="#数据库字段和信息的插入" class="headerlink" title="数据库字段和信息的插入"></a>数据库字段和信息的插入</h3><pre><code>create database mblog;
+use mblog;
+CREATE TABLE user(id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(20), age INT);
+INSERT INTO users(username, age) VALUES(&apos;jack&apos;, 27);
+INSERT INTO users(username, age) VALUES(&apos;rose&apos;, 27);
+</code></pre><h2 id="编写测试类"><a href="#编写测试类" class="headerlink" title="编写测试类"></a>编写测试类</h2><h3 id="定义UserDao接口"><a href="#定义UserDao接口" class="headerlink" title="定义UserDao接口"></a>定义UserDao接口</h3><pre><code>public interface UserDao {
+    User findUserById(Integer id);
+
+    List&lt;User&gt; findUserByName(String name);
+
+    void insertUser(User user);
+
+    void insertUser2(User user);
+
+    void deleteUser(int id);
+
+    User updateUser(User user);
+}
+</code></pre><h3 id="UserDao的实现"><a href="#UserDao的实现" class="headerlink" title="UserDao的实现"></a>UserDao的实现</h3><p>注：MyBatis默认是开启了事务的，所以在完成插入，删除，更新等操作后，必须commit提交，否则此次操作将失败<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/3/5.</div><div class="line"> */</div><div class="line">public class UserDaoImpl implements UserDao &#123;</div><div class="line">    private static SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    public UserDaoImpl(SqlSessionFactory sqlSessionFactory) &#123;</div><div class="line">        this.sqlSessionFactory = sqlSessionFactory;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public User findUserById(Integer id) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line"></div><div class="line">        User user = sqlSession.selectOne(<span class="string">"findUserById"</span>, id);</div><div class="line"></div><div class="line">        <span class="built_in">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;User&gt; findUserByName(String name) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line"></div><div class="line">        List&lt;User&gt; userList = sqlSession.selectList(<span class="string">"findUsersByName"</span>, name);</div><div class="line"></div><div class="line">        <span class="built_in">return</span> userList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public void insertUser(User user) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line">        sqlSession.insert(<span class="string">"insertUser"</span>, user);</div><div class="line">        //默认是开启了事务的，如果此处不提交事务，则插入是失败的</div><div class="line">        sqlSession.commit();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public void insertUser2(User user) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line">        sqlSession.insert(<span class="string">"test.insertUser2"</span>, user);</div><div class="line">        //默认是开启了事务的，如果此处不提交事务，则插入是失败的</div><div class="line">        sqlSession.commit();</div><div class="line">        sqlSession.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void deleteUser(int id) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line">        sqlSession.insert(<span class="string">"test.deleteUser"</span>, id);</div><div class="line"></div><div class="line">        sqlSession.commit();</div><div class="line">        sqlSession.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public User updateUser(User user) &#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line">        sqlSession.update(<span class="string">"test.updateUser"</span>, user);</div><div class="line"></div><div class="line">        sqlSession.commit();</div><div class="line">        sqlSession.close();</div><div class="line">        <span class="built_in">return</span> user;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="编写测试类-1"><a href="#编写测试类-1" class="headerlink" title="编写测试类"></a>编写测试类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lily_ling on 2017/3/5.</div><div class="line"> */</div><div class="line">public class MyBatisTest &#123;</div><div class="line">    private static SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    static &#123;</div><div class="line">        String resource = <span class="string">"mybatis-config.xml"</span>;</div><div class="line">        InputStream inputStream = null;</div><div class="line">        try &#123;</div><div class="line">            inputStream = Resources.getResourceAsStream(resource);</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);</div><div class="line">    &#125;</div><div class="line">	@Test</div><div class="line">    public void findUserById() throws IOException &#123;</div><div class="line">        UserDao userDao = new UserDaoImpl(sqlSessionFactory);</div><div class="line">        User user = userDao.findUserById(4);</div><div class="line">        System.out.println(user);</div><div class="line">    &#125;</div><div class="line">	@Test</div><div class="line">    public void findUserByName() throws IOException &#123;</div><div class="line">        UserDao userDao = new UserDaoImpl(sqlSessionFactory);</div><div class="line">        List&lt;User&gt; userList = userDao.findUserByName(<span class="string">"l"</span>);</div><div class="line">        System.out.println(userList);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void insertUser() throws IOException &#123;</div><div class="line">        UserDao userDao = new UserDaoImpl(sqlSessionFactory);</div><div class="line">        User u = new User();</div><div class="line">        u.setUsername(<span class="string">"zhanglihua"</span>);</div><div class="line">        u.setPassword(<span class="string">"999999"</span>);</div><div class="line">        userDao.insertUser(u);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void insertUser2() throws IOException &#123;</div><div class="line">        UserDao userDao = new UserDaoImpl(sqlSessionFactory);</div><div class="line">        User u = new User();</div><div class="line">        u.setUsername(<span class="string">"zhanglihua4"</span>);</div><div class="line">        u.setPassword(<span class="string">"999999"</span>);</div><div class="line"></div><div class="line">        userDao.deleteUser(9);</div><div class="line"></div><div class="line">        System.out.println(u.getId());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="MyBatis实现的一对一的关系映射查询"><a href="#MyBatis实现的一对一的关系映射查询" class="headerlink" title="MyBatis实现的一对一的关系映射查询"></a>MyBatis实现的一对一的关系映射查询</h1><h2 id="建立数据库"><a href="#建立数据库" class="headerlink" title="建立数据库"></a>建立数据库</h2><p>数据库的表包括，stus(sid,sname)，teachers(tid,tname)，lessons(lid,lname,tid)，chose(sid,lid)，card(sid,num)<br>其中每个学生只有一个card，每个老师可能会上两门课以上，每个学生可能选择若干门课，每门课可能有若干学生选择<br>这个是一对一、一对多、多对多共同的数据库</p>
+<h3 id="建立对应的实体类，有五个，普通字段名与表中的列名保持一致"><a href="#建立对应的实体类，有五个，普通字段名与表中的列名保持一致" class="headerlink" title="建立对应的实体类，有五个，普通字段名与表中的列名保持一致"></a>建立对应的实体类，有五个，普通字段名与表中的列名保持一致</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class Student &#123;</div><div class="line">    private Integer sid;</div><div class="line">    private String sname;</div><div class="line">	//一个学生能选多门课</div><div class="line">    private List&lt;Lesson&gt; lessons;</div><div class="line"></div><div class="line">    public List&lt;Lesson&gt; <span class="function"><span class="title">getLessons</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lessons;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lessons(List&lt;Lesson&gt; lessons) &#123;</div><div class="line">        this.lessons = lessons;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> <span class="string">"Student&#123;"</span> +</div><div class="line">                <span class="string">"sid="</span> + sid +</div><div class="line">                <span class="string">", sname='"</span> + sname + <span class="string">'\'</span><span class="string">' +</span></div><div class="line">                '&#125;<span class="string">';</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer getSid() &#123;</div><div class="line">        return sid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setSid(Integer sid) &#123;</div><div class="line">        this.sid = sid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getSname() &#123;</div><div class="line">        return sname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setSname(String sname) &#123;</div><div class="line">        this.sname = sname;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class Teacher &#123;</div><div class="line">    private Integer tid;</div><div class="line">    private String tname;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getTid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tid(Integer tid) &#123;</div><div class="line">        this.tid = tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getTname</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tname(String tname) &#123;</div><div class="line">        this.tname = tname;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class Lesson &#123;</div><div class="line">    private Integer lid;</div><div class="line">    private String lname;</div><div class="line">    private Integer tid;</div><div class="line">	//一门课有多个学生</div><div class="line">    private List&lt;Student&gt; students;</div><div class="line"></div><div class="line">    public List&lt;Student&gt; <span class="function"><span class="title">getStudents</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> students;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Students(List&lt;Student&gt; students) &#123;</div><div class="line">        this.students = students;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getTid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tid(Integer tid) &#123;</div><div class="line">        this.tid = tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getLid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lid(Integer lid) &#123;</div><div class="line">        this.lid = lid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getLname</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lname(String lname) &#123;</div><div class="line">        this.lname = lname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> <span class="string">"Lesson&#123;"</span> +</div><div class="line">                <span class="string">"lid="</span> + lid +</div><div class="line">                <span class="string">", lname='"</span> + lname + <span class="string">'\'</span><span class="string">' +</span></div><div class="line">                ", tid=" + tid +</div><div class="line">                '&#125;<span class="string">';</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class Chose &#123;</div><div class="line">    private Integer sid;</div><div class="line">    private Integer lid;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getSid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> sid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Sid(Integer sid) &#123;</div><div class="line">        this.sid = sid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getLid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lid(Integer lid) &#123;</div><div class="line">        this.lid = lid;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class Card &#123;</div><div class="line">    private Integer cid;</div><div class="line">    private Integer num;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getCid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> cid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Cid(Integer cid) &#123;</div><div class="line">        this.cid = cid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getNum</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> num;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Num(Integer num) &#123;</div><div class="line">        this.num = num;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="业务：查找学生的card"><a href="#业务：查找学生的card" class="headerlink" title="业务：查找学生的card"></a>业务：查找学生的card</h3><h3 id="环境和上面的一致"><a href="#环境和上面的一致" class="headerlink" title="环境和上面的一致"></a>环境和上面的一致</h3><h3 id="编写实体类"><a href="#编写实体类" class="headerlink" title="编写实体类"></a>编写实体类</h3><hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class StuCard &#123;</div><div class="line">    private Integer cid;</div><div class="line">    private Integer num;</div><div class="line">    private Student student;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getCid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> cid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Cid(Integer cid) &#123;</div><div class="line">        this.cid = cid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getNum</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> num;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Num(Integer num) &#123;</div><div class="line">        this.num = num;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Student <span class="function"><span class="title">getStudent</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> student;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Student(Student student) &#123;</div><div class="line">        this.student = student;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="编写Mapper"><a href="#编写Mapper" class="headerlink" title="编写Mapper"></a>编写Mapper</h3><p>注意：使用了association将card和student对象连接在一起，同时property表示StuCard的字段，cid表示相应的列名，javaType表示对应的对象，然后将获得的数据注入到student对象中，同时记得在SQLConfigMapper的最后面追加这个Mapper的全路径</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;!--
+    namespace：命名空间，它的作用就是对SQL进行分类化管理，可以理解为SQL隔离
+    注意：使用mapper代理开发时，namespace有特殊且重要的作用
+ --&gt;
+&lt;mapper namespace=&quot;stuCard&quot;&gt;
+    &lt;!--一对一关系查询--&gt;
+    &lt;select id=&quot;findStudentWithCard&quot; parameterType=&quot;java.lang.Integer&quot; resultMap=&quot;StuCardMap&quot;&gt;
+        SELECT * FROM stus,card WHERE stus.sid=#{id} AND stus.sid=card.cid
+    &lt;/select&gt;
+
+    &lt;resultMap id=&quot;StuCardMap&quot; type=&quot;com.lily.po.StuCard&quot;&gt;
+        &lt;id column=&quot;cid&quot; property=&quot;cid&quot;&gt;&lt;/id&gt;
+        &lt;result column=&quot;num&quot; property=&quot;num&quot;&gt;&lt;/result&gt;
+        &lt;association property=&quot;student&quot; column=&quot;cid&quot; javaType=&quot;com.lily.po.Student&quot;&gt;
+            &lt;id column=&quot;sid&quot; property=&quot;sid&quot;&gt;&lt;/id&gt;
+            &lt;result column=&quot;sname&quot; property=&quot;sname&quot;&gt;&lt;/result&gt;
+        &lt;/association&gt;
+    &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre><h3 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h3><p>注意：sqlSessionFactory和上面的一样</p>
+<pre><code>@Test
+public void findStudentWithCard() {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+
+    StuCard s = sqlSession.selectOne(&quot;stuCard.findStudentWithCard&quot;, 1);
+
+    System.out.println(s.getNum());
+}
+</code></pre><h1 id="MyBatis实现的一对多的关系映射查询"><a href="#MyBatis实现的一对多的关系映射查询" class="headerlink" title="MyBatis实现的一对多的关系映射查询"></a>MyBatis实现的一对多的关系映射查询</h1><h2 id="业务：查找某个老师上的课，是一对多"><a href="#业务：查找某个老师上的课，是一对多" class="headerlink" title="业务：查找某个老师上的课，是一对多"></a>业务：查找某个老师上的课，是一对多</h2><h3 id="环境沿用上面的"><a href="#环境沿用上面的" class="headerlink" title="环境沿用上面的"></a>环境沿用上面的</h3><h3 id="编写实体类-1"><a href="#编写实体类-1" class="headerlink" title="编写实体类"></a>编写实体类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class TeacherAndLesson &#123;</div><div class="line">    private Integer tid;</div><div class="line">    private String tname;</div><div class="line">    private List&lt;Lesson&gt; lessons;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getTid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tid(Integer tid) &#123;</div><div class="line">        this.tid = tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getTname</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tname(String tname) &#123;</div><div class="line">        this.tname = tname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public List&lt;Lesson&gt; <span class="function"><span class="title">getLessons</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lessons;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lessons(List&lt;Lesson&gt; lessons) &#123;</div><div class="line">        this.lessons = lessons;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="编写mapper"><a href="#编写mapper" class="headerlink" title="编写mapper"></a>编写mapper</h3><p>注：此处使用了collection标签，property代表TeacherAndLesson中的属性，Lesson代表具体类型，tid代表约束</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;!--
+    namespace：命名空间，它的作用就是对SQL进行分类化管理，可以理解为SQL隔离
+    注意：使用mapper代理开发时，namespace有特殊且重要的作用
+ --&gt;
+&lt;mapper namespace=&quot;teacherMap&quot;&gt;
+    &lt;!--一对多关系查询--&gt;
+    &lt;select id=&quot;findTeacherWithLesson&quot; parameterType=&quot;java.lang.Integer&quot; resultMap=&quot;TeacherLessonMap&quot;&gt;
+        SELECT * FROM teachers,lessons WHERE teachers.tid=#{id} AND lessons.tid=teachers.tid
+    &lt;/select&gt;
+    &lt;resultMap id=&quot;TeacherLessonMap&quot; type=&quot;com.lily.po.TeacherAndLesson&quot;&gt;
+        &lt;id column=&quot;tid&quot; property=&quot;tid&quot;&gt;&lt;/id&gt;
+        &lt;result column=&quot;tname&quot; property=&quot;tname&quot;&gt;&lt;/result&gt;
+        &lt;collection property=&quot;lessons&quot; ofType=&quot;com.lily.po.Lesson&quot; column=&quot;tid&quot;&gt;
+            &lt;id column=&quot;lid&quot; property=&quot;lid&quot;&gt;&lt;/id&gt;
+            &lt;result column=&quot;lname&quot; property=&quot;lname&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;tid&quot; property=&quot;tid&quot;&gt;&lt;/result&gt;
+        &lt;/collection&gt;
+    &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>public void findTeacherWithLesson() {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+
+    TeacherAndLesson s = sqlSession.selectOne(&quot;teacherMap.findTeacherWithLesson&quot;, 101);
+    for (Lesson l : s.getLessons())
+        System.out.println(l.getLname());
+}
+</code></pre><h1 id="MyBatis实现的多对多的关系映射查询"><a href="#MyBatis实现的多对多的关系映射查询" class="headerlink" title="MyBatis实现的多对多的关系映射查询"></a>MyBatis实现的多对多的关系映射查询</h1><h2 id="业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多"><a href="#业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多" class="headerlink" title="业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多"></a>业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多</h2><h3 id="环境沿用上面的-1"><a href="#环境沿用上面的-1" class="headerlink" title="环境沿用上面的"></a>环境沿用上面的</h3><h3 id="编写实体类-2"><a href="#编写实体类-2" class="headerlink" title="编写实体类"></a>编写实体类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class CallTable &#123;</div><div class="line">    private Integer tid;</div><div class="line">    private String tname;</div><div class="line">    private List&lt;Lesson&gt; lessons;</div><div class="line"></div><div class="line">    public Integer <span class="function"><span class="title">getTid</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tid(Integer tid) &#123;</div><div class="line">        this.tid = tid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String <span class="function"><span class="title">getTname</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> tname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Tname(String tname) &#123;</div><div class="line">        this.tname = tname;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public List&lt;Lesson&gt; <span class="function"><span class="title">getLessons</span></span>() &#123;</div><div class="line">        <span class="built_in">return</span> lessons;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void <span class="built_in">set</span>Lessons(List&lt;Lesson&gt; lessons) &#123;</div><div class="line">        this.lessons = lessons;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="编写mapper-1"><a href="#编写mapper-1" class="headerlink" title="编写mapper"></a>编写mapper</h3><p>注：此处使用了嵌套的collection标签进行注入</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;!--
+    namespace：命名空间，它的作用就是对SQL进行分类化管理，可以理解为SQL隔离
+    注意：使用mapper代理开发时，namespace有特殊且重要的作用
+ --&gt;
+&lt;mapper namespace=&quot;teacherCallTable&quot;&gt;
+    &lt;!--一对多关系查询--&gt;
+    &lt;select id=&quot;findCallTableOfTeacher&quot; parameterType=&quot;java.lang.Integer&quot; resultMap=&quot;CallTableOfTeacherMap&quot;&gt;
+        SELECT * FROM teachers,lessons,stus,chose WHERE teachers.tid=#{id} AND lessons.tid=teachers.tid AND chose.lid=lessons.lid AND stus.sid=chose.sid
+    &lt;/select&gt;
+    &lt;resultMap id=&quot;CallTableOfTeacherMap&quot; type=&quot;com.lily.po.CallTable&quot;&gt;
+        &lt;id column=&quot;tid&quot; property=&quot;tid&quot;&gt;&lt;/id&gt;
+        &lt;result column=&quot;tname&quot; property=&quot;tname&quot;&gt;&lt;/result&gt;
+        &lt;collection property=&quot;lessons&quot; ofType=&quot;com.lily.po.Lesson&quot; column=&quot;tid&quot;&gt;
+            &lt;id column=&quot;lid&quot; property=&quot;lid&quot;&gt;&lt;/id&gt;
+            &lt;result column=&quot;lname&quot; property=&quot;lname&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;tid&quot; property=&quot;tid&quot;&gt;&lt;/result&gt;
+            &lt;collection property=&quot;students&quot; ofType=&quot;com.lily.po.Student&quot; column=&quot;sid&quot;&gt;
+                &lt;id column=&quot;sid&quot; property=&quot;sid&quot;&gt;&lt;/id&gt;
+                &lt;result column=&quot;sname&quot; property=&quot;sname&quot;&gt;&lt;/result&gt;
+            &lt;/collection&gt;
+        &lt;/collection&gt;
+    &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre><h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><pre><code>public void findCallTableOfTeacher() {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+
+    List&lt;CallTable&gt; list = sqlSession.selectList(&quot;teacherCallTable.findCallTableOfTeacher&quot;, 101);
+    for (CallTable c : list) {
+        List&lt;Lesson&gt; lessons = c.getLessons();
+        for(Lesson l : lessons){
+            System.out.println(l.getStudents());
+        }
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/07/最小生成树/" rel="next" title="有向图、有向图的遍历算法以及拓扑排序">
+                <i class="fa fa-chevron-left"></i> 有向图、有向图的遍历算法以及拓扑排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/07/SSM系列/Spring学习笔记1/" rel="prev" title="Spring学习笔记1">
+                Spring学习笔记1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis实现的增删改查"><span class="nav-number">1.</span> <span class="nav-text">MyBatis实现的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置开发环境和全局xml"><span class="nav-number">1.1.</span> <span class="nav-text">配置开发环境和全局xml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jar包"><span class="nav-number">1.1.1.</span> <span class="nav-text">jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局文件，全部放在src文件下面"><span class="nav-number">1.1.2.</span> <span class="nav-text">全局文件，全部放在src文件下面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#db-properties文件"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">db.properties文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mybatis-config-xml"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">mybatis-config.xml</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类的编写、实体类xml文件和数据库的配置"><span class="nav-number">1.2.</span> <span class="nav-text">实体类的编写、实体类xml文件和数据库的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实体类"><span class="nav-number">1.2.1.</span> <span class="nav-text">实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实体类Mapping-xml文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">实体类Mapping.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库字段和信息的插入"><span class="nav-number">1.2.3.</span> <span class="nav-text">数据库字段和信息的插入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写测试类"><span class="nav-number">1.3.</span> <span class="nav-text">编写测试类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义UserDao接口"><span class="nav-number">1.3.1.</span> <span class="nav-text">定义UserDao接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserDao的实现"><span class="nav-number">1.3.2.</span> <span class="nav-text">UserDao的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试类-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">编写测试类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis实现的一对一的关系映射查询"><span class="nav-number">2.</span> <span class="nav-text">MyBatis实现的一对一的关系映射查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立数据库"><span class="nav-number">2.1.</span> <span class="nav-text">建立数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立对应的实体类，有五个，普通字段名与表中的列名保持一致"><span class="nav-number">2.1.1.</span> <span class="nav-text">建立对应的实体类，有五个，普通字段名与表中的列名保持一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务：查找学生的card"><span class="nav-number">2.1.2.</span> <span class="nav-text">业务：查找学生的card</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境和上面的一致"><span class="nav-number">2.1.3.</span> <span class="nav-text">环境和上面的一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写实体类"><span class="nav-number">2.1.4.</span> <span class="nav-text">编写实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写Mapper"><span class="nav-number">2.1.5.</span> <span class="nav-text">编写Mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试类"><span class="nav-number">2.1.6.</span> <span class="nav-text">测试类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis实现的一对多的关系映射查询"><span class="nav-number">3.</span> <span class="nav-text">MyBatis实现的一对多的关系映射查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#业务：查找某个老师上的课，是一对多"><span class="nav-number">3.1.</span> <span class="nav-text">业务：查找某个老师上的课，是一对多</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境沿用上面的"><span class="nav-number">3.1.1.</span> <span class="nav-text">环境沿用上面的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写实体类-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">编写实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写mapper"><span class="nav-number">3.1.3.</span> <span class="nav-text">编写mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.1.4.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis实现的多对多的关系映射查询"><span class="nav-number">4.</span> <span class="nav-text">MyBatis实现的多对多的关系映射查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多"><span class="nav-number">4.1.</span> <span class="nav-text">业务：老师打印点名表，一个老师上多门课，每门课有多名学生，因此是多对多</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境沿用上面的-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">环境沿用上面的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写实体类-2"><span class="nav-number">4.1.2.</span> <span class="nav-text">编写实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写mapper-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">编写mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-1"><span class="nav-number">4.1.4.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

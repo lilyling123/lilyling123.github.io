@@ -1,0 +1,644 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MyBatis逆向工程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis逆向工程">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/SSM系列/MyBatis逆向工程/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MyBatis逆向工程">
+<meta property="og:updated_time" content="2017-03-20T14:09:00.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis逆向工程">
+<meta name="twitter:description" content="MyBatis逆向工程">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/SSM系列/MyBatis逆向工程/"/>
+
+
+
+
+
+  <title> MyBatis逆向工程 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/SSM系列/MyBatis逆向工程/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MyBatis逆向工程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-20T22:04:41+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MyBatis逆向工程<br><a id="more"></a> </p>
+<h1 id="MyBatis逆向工程"><a href="#MyBatis逆向工程" class="headerlink" title="MyBatis逆向工程"></a>MyBatis逆向工程</h1><h2 id="什么是逆向工程"><a href="#什么是逆向工程" class="headerlink" title="什么是逆向工程"></a>什么是逆向工程</h2><p>Mybatis提供来一个逆向工程工具，通过逆向工程，可以帮助程序员根据单表来生成po类、mapper映射文件、mapper接口。</p>
+<h2 id="下载逆向工程"><a href="#下载逆向工程" class="headerlink" title="下载逆向工程"></a>下载逆向工程</h2><p><a href="https://github.com/mybatis/generator/releases/tag/mybatis-generator-1.3.2" target="_blank" rel="external">https://github.com/mybatis/generator/releases/tag/mybatis-generator-1.3.2</a><br>可以使用命令 git clone</p>
+<h2 id="创建逆向工程"><a href="#创建逆向工程" class="headerlink" title="创建逆向工程"></a>创建逆向工程</h2><pre><code>public class Generator {
+    public static void main(String[] args) throws Exception {
+        List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
+        boolean overwrite = true;
+        File configFile = new File(&quot;config/generatorConfig.xml&quot;);
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,callback, warnings);
+        myBatisGenerator.generate(null);
+    }
+}
+</code></pre><h2 id="添加generatorConfig-xml"><a href="#添加generatorConfig-xml" class="headerlink" title="添加generatorConfig.xml"></a>添加generatorConfig.xml</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</div><div class="line">&lt;!DOCTYPE generatorConfiguration</div><div class="line">  PUBLIC <span class="string">"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</span></div><div class="line">  <span class="string">"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"</span>&gt;</div><div class="line"></div><div class="line">&lt;generatorConfiguration&gt;</div><div class="line">	&lt;context id=<span class="string">"testTables"</span> targetRuntime=<span class="string">"MyBatis3"</span>&gt;</div><div class="line">		&lt;commentGenerator&gt;</div><div class="line">			&lt;!-- 是否去除自动生成的注释 <span class="literal">true</span>：是 ： <span class="literal">false</span>:否 --&gt;</div><div class="line">			&lt;property name=<span class="string">"suppressAllComments"</span> value=<span class="string">"true"</span> /&gt;</div><div class="line">		&lt;/commentGenerator&gt;</div><div class="line">		&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</div><div class="line">		&lt;jdbcConnection driverClass=<span class="string">"com.mysql.jdbc.Driver"</span></div><div class="line">			connectionURL=<span class="string">"jdbc:mysql://localhost:3306/mybatis"</span> userId=<span class="string">"root"</span></div><div class="line">			password=<span class="string">"root"</span>&gt;</div><div class="line">		&lt;/jdbcConnection&gt;</div><div class="line">		&lt;!-- &lt;jdbcConnection driverClass=<span class="string">"oracle.jdbc.OracleDriver"</span> connectionURL=<span class="string">"jdbc:oracle:thin:@127.0.0.1:1521:yycg"</span> </div><div class="line">			userId=<span class="string">"yycg"</span> password=<span class="string">"yycg"</span>&gt; &lt;/jdbcConnection&gt; --&gt;</div><div class="line"></div><div class="line">		&lt;!-- 默认<span class="literal">false</span>，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 <span class="literal">true</span>时把JDBC DECIMAL </div><div class="line">			和 NUMERIC 类型解析为java.math.BigDecimal --&gt;</div><div class="line">		&lt;javaTypeResolver&gt;</div><div class="line">			&lt;property name=<span class="string">"forceBigDecimals"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">		&lt;/javaTypeResolver&gt;</div><div class="line"></div><div class="line">		&lt;!-- targetProject:生成PO类的位置 --&gt;</div><div class="line">		&lt;javaModelGenerator targetPackage=<span class="string">"com.itheima.ms.po"</span></div><div class="line">			targetProject=<span class="string">".\src"</span>&gt;</div><div class="line">			&lt;!-- <span class="built_in">enable</span>SubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">			&lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">			&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</div><div class="line">			&lt;property name=<span class="string">"trimStrings"</span> value=<span class="string">"true"</span> /&gt;</div><div class="line">		&lt;/javaModelGenerator&gt;</div><div class="line">		&lt;!-- targetProject:mapper映射文件生成的位置 --&gt;</div><div class="line">		&lt;sqlMapGenerator targetPackage=<span class="string">"com.itheima.ms.mapper"</span></div><div class="line">			targetProject=<span class="string">".\src"</span>&gt;</div><div class="line">			&lt;!-- <span class="built_in">enable</span>SubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">			&lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">		&lt;/sqlMapGenerator&gt;</div><div class="line">		&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</div><div class="line">		&lt;javaClientGenerator <span class="built_in">type</span>=<span class="string">"XMLMAPPER"</span></div><div class="line">			targetPackage=<span class="string">"com.itheima.ms.mapper"</span> targetProject=<span class="string">".\src"</span>&gt;</div><div class="line">			&lt;!-- <span class="built_in">enable</span>SubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">			&lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">		&lt;/javaClientGenerator&gt;</div><div class="line">		&lt;!-- 指定数据库表 --&gt;</div><div class="line">		&lt;table tableName=<span class="string">"items"</span>&gt;&lt;/table&gt;</div><div class="line">		&lt;table tableName=<span class="string">"orders"</span>&gt;&lt;/table&gt;</div><div class="line">		&lt;table tableName=<span class="string">"orderdetail"</span>&gt;&lt;/table&gt;</div><div class="line">		&lt;table tableName=<span class="string">"user"</span>&gt;&lt;/table&gt;</div><div class="line">	&lt;/context&gt;</div><div class="line">&lt;/generatorConfiguration&gt;</div></pre></td></tr></table></figure>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>Mapper.xml文件已经存在时，如果进行重新生成则mapper.xml文件时，内容不被覆盖而是进行内容追加，结果导致mybatis解析失败。<br>解决方法：删除原来已经生成的mapper xml文件再进行生成。<br>Mybatis自动生成的po及mapper.java文件不是内容而是直接覆盖没有此问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/20/Hibernate学习笔记1/" rel="next" title="Hibernate学习笔记">
+                <i class="fa fa-chevron-left"></i> Hibernate学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/20/SSM系列/SSM整合思路和配置文件/" rel="prev" title="SSM整合思路">
+                SSM整合思路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis逆向工程"><span class="nav-number">1.</span> <span class="nav-text">MyBatis逆向工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是逆向工程"><span class="nav-number">1.1.</span> <span class="nav-text">什么是逆向工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载逆向工程"><span class="nav-number">1.2.</span> <span class="nav-text">下载逆向工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建逆向工程"><span class="nav-number">1.3.</span> <span class="nav-text">创建逆向工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加generatorConfig-xml"><span class="nav-number">1.4.</span> <span class="nav-text">添加generatorConfig.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.5.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

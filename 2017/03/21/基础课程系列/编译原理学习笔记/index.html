@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="FastBFS入门详解">
+<meta name="description" content="编译原理学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FastBFS入门详解">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/FastBFS入门详解/index.html">
+<meta property="og:title" content="编译原理学习">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/基础课程系列/编译原理学习笔记/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FastBFS入门详解">
-<meta property="og:updated_time" content="2017-03-15T08:17:56.856Z">
+<meta property="og:description" content="编译原理学习">
+<meta property="og:updated_time" content="2017-03-30T09:02:30.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FastBFS入门详解">
-<meta name="twitter:description" content="FastBFS入门详解">
+<meta name="twitter:title" content="编译原理学习">
+<meta name="twitter:description" content="编译原理学习">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/14/FastBFS入门详解/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/21/基础课程系列/编译原理学习笔记/"/>
 
 
 
 
 
-  <title> FastBFS入门详解 | Hexo </title>
+  <title> 编译原理学习 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -240,7 +240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/FastBFS入门详解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/基础课程系列/编译原理学习笔记/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="lily">
@@ -264,7 +264,7 @@
             
             
               
-                FastBFS入门详解
+                编译原理学习
               
             
           </h1>
@@ -279,8 +279,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T23:01:59+08:00">
-                2017-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-21T14:00:50+08:00">
+                2017-03-21
               </time>
             
 
@@ -315,69 +315,60 @@
       
 
       
-        <p>FastBFS入门详解<br><a id="more"></a> </p>
-<h1 id="把fastDFS以及依赖包都上传到linux系统"><a href="#把fastDFS以及依赖包都上传到linux系统" class="headerlink" title="把fastDFS以及依赖包都上传到linux系统"></a>把fastDFS以及依赖包都上传到linux系统</h1><h1 id="安装FastDFS之前，先安装libevent工具包"><a href="#安装FastDFS之前，先安装libevent工具包" class="headerlink" title="安装FastDFS之前，先安装libevent工具包"></a>安装FastDFS之前，先安装libevent工具包</h1><p>apt-get install libevent</p>
-<h1 id="安装libfastcommonV1-0-7工具包"><a href="#安装libfastcommonV1-0-7工具包" class="headerlink" title="安装libfastcommonV1.0.7工具包"></a>安装libfastcommonV1.0.7工具包</h1><ol>
-<li>解压缩:tar -zxf xxx  </li>
-<li>./make.sh  </li>
-<li>./make.sh install  </li>
-<li>把/usr/lib64/libfastcommon.so文件向/usr/lib/下复制一份</li>
-</ol>
-<h1 id="安装Tracker服务"><a href="#安装Tracker服务" class="headerlink" title="安装Tracker服务"></a>安装Tracker服务</h1><ol>
-<li>解压缩  </li>
-<li>./make.sh  </li>
-<li>./make.sh install<br>安装后在/usr/bin/目录下有以fdfs开头的文件都是编译出来的。<br>配置文件都放到/etc/fdfs文件夹</li>
-<li>把/root/FastDFS/conf目录下的所有的配置文件都复制到/etc/fdfs下。  </li>
-<li>配置tracker服务。修改/root/FastDFS/conf/tracker.conf文件:将文件中的base_path换成一个真实存在的路径名。  </li>
-<li>启动tracker: /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf<br>重启使用命令：/usr/bin/fdfs_trackerd  /etc/fdfs/tracker.conf restart</li>
-</ol>
-<h1 id="安装storage服务"><a href="#安装storage服务" class="headerlink" title="安装storage服务"></a>安装storage服务</h1><ol>
-<li>如果是在不同的服务器安装，第四步的1~4需要重新执行。  </li>
-<li>配置storage服务。修改/root/FastDFS/conf/storage.conf文件：将base_path换成一个真实存在的路径名,store_path0也要换成真实存在的路径名,将tracker_server的ip换成服务器的ip地址   </li>
-<li>启动storage服务。<br>/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</li>
-</ol>
-<h1 id="测试服务"><a href="#测试服务" class="headerlink" title="测试服务"></a>测试服务</h1><ol>
-<li>修改配置文件/etc/fdfs/client.conf:将base_path换成一个真实存在的路径名，将tracker_server的ip换成服务器的ip地址  </li>
-<li>测试<br>/usr/bin/fdfs_test /etc/fdfs/client.conf upload anti-steal.jpg</li>
-</ol>
-<h1 id="搭建nginx提供http服务"><a href="#搭建nginx提供http服务" class="headerlink" title="搭建nginx提供http服务"></a>搭建nginx提供http服务</h1><p><strong>可以使用官方提供的nginx插件。要使用nginx插件需要重新编译。fastdfs-nginx-module_v1.16.tar.gz</strong>  </p>
-<ol>
-<li>解压插件压缩包  </li>
-<li>修改/root/fastdfs-nginx-module/src/config文件，把其中的local去掉。  </li>
-<li>对nginx重新config   </li>
-<li>make  </li>
-<li>make install  </li>
-<li>把/root/fastdfs-nginx-module/src/mod_fastdfs.conf文件复制到/etc/fdfs目录下。：将tracker_server的ip换成服务器的ip地址    </li>
-<li>nginx的配置  </li>
-<li>将libfdfsclient.so拷贝至/usr/lib下<br>cp /usr/lib64/libfdfsclient.so /usr/lib/</li>
-<li><p>启动nginx:./</p>
-<pre><code>nginx的配置  
-在nginx的配置文件中添加一个Server：
-server {
-    listen       80;
-    server_name  192.168.101.3;
+        <p>编译原理学习<br><a id="more"></a> </p>
+<h1 id="第一课"><a href="#第一课" class="headerlink" title="第一课"></a>第一课</h1><h2 id="编译器简介"><a href="#编译器简介" class="headerlink" title="编译器简介"></a>编译器简介</h2><h3 id="什么是编译器"><a href="#什么是编译器" class="headerlink" title="什么是编译器"></a>什么是编译器</h3><pre><code>计算设备包括个人计算机、大型机、嵌 入式系统、智能设备等
 
-    location /group1/M00/{
-            #root /home/FastDFS/fdfs_storage/data;
-            ngx_fastdfs_module;
-    }
-}
-对nginx重新config
-./configure \
---prefix=/usr/local/nginx \
---pid-path=/var/run/nginx/nginx.pid \
--lock-path=/var/lock/nginx.lock \
---error-log-path=/var/log/nginx/error.log \
---http-log-path=/var/log/nginx/access.log \
---with-http_gzip_static_module \
---http-client-body-temp-path=/var/temp/nginx/client \
---http-proxy-temp-path=/var/temp/nginx/proxy \
---http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
---http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
---http-scgi-temp-path=/var/temp/nginx/scgi \
---add-module=/root/fastdfs-nginx-module/src
-</code></pre></li>
-</ol>
+核心的问题都是软件的构造
+    而目前绝大部分软件都由高级语言书写
+    成百种高级语言
+
+这些语言写成的程序是如何运行在计算 机上的？
+    编译器
+</code></pre><hr>
+<p>编译器是一个程序<br>核心功能是把源代码翻译成目标代码</p>
+<hr>
+<h3 id="编译器的核心功能"><a href="#编译器的核心功能" class="headerlink" title="编译器的核心功能"></a>编译器的核心功能</h3><p>目标程序和源代码语义相同（通过静态计算保证一致性）<br>目标程序通过动态计算得到计算结果</p>
+<h3 id="编译器和解释器"><a href="#编译器和解释器" class="headerlink" title="编译器和解释器"></a>编译器和解释器</h3><p>解释器也是一类处理程序的程序</p>
+<h2 id="编译器结构"><a href="#编译器结构" class="headerlink" title="编译器结构"></a>编译器结构</h2><h3 id="编译器的高层结构"><a href="#编译器的高层结构" class="headerlink" title="编译器的高层结构"></a>编译器的高层结构</h3><p>编译器具有非常模块化的高层结构<br>前后端结构</p>
+<h3 id="抽象的多个阶段"><a href="#抽象的多个阶段" class="headerlink" title="抽象的多个阶段"></a>抽象的多个阶段</h3><p>编译器可看成多个阶段构成的“流水 线”结构</p>
+<h3 id="一种没有优化的编译器结构"><a href="#一种没有优化的编译器结构" class="headerlink" title="一种没有优化的编译器结构"></a>一种没有优化的编译器结构</h3><pre><code>符号表贯穿所有阶段
+    字符序列
+词法分析
+    记号序列
+语法分析
+    抽象语法树
+语义分析
+    中间代码
+代码生成
+    目标代码
+</code></pre><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><pre><code>编译器由多个阶段组成，每个阶段都要 处理不同的问题
+    使用不同的理论、数据结构和算法
+因此，编译器设计中的重要问题是如何 合理的划分组织各个阶段
+    接口清晰
+    编译器容易实现、维护
+</code></pre><h2 id="简单的编译器实例"><a href="#简单的编译器实例" class="headerlink" title="简单的编译器实例"></a>简单的编译器实例</h2><h3 id="简单的编译器实例-1"><a href="#简单的编译器实例-1" class="headerlink" title="简单的编译器实例"></a>简单的编译器实例</h3><pre><code>源语言：加法表 达式语言Sum
+    两种语法形式
+        整型数字：n
+        加法 ：e1+e2
+
+目标机器：栈式 计算机Stack
+    一个操作数栈
+    两条指令：
+        压栈指令：push n
+        加法 指令：add
+</code></pre><h3 id="栈式计算机Stack"><a href="#栈式计算机Stack" class="headerlink" title="栈式计算机Stack"></a>栈式计算机Stack</h3><pre><code>一个操作数栈
+两条指令：
+    压栈指令：push n
+    加法 指令：add
+</code></pre><h3 id="编译器的阶段"><a href="#编译器的阶段" class="headerlink" title="编译器的阶段"></a>编译器的阶段</h3><pre><code>任务：编译程序1+2+3到栈式计算机
+阶段一：词法语法分析
+    拆分成五个部分
+阶段二：语法树构建
+    这五个部分是否符合Sum的语法规则
+阶段三：代码生成
+    对树的后序遍历补全代码
+阶段四：代码优化（常量折叠优化）
+</code></pre><h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>编译器的结构与编译器的目标是相关的</p>
 
       
     </div>
@@ -404,8 +395,8 @@ server {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/08/SSM系列/spring事务管理/" rel="next" title="Spring事务管理">
-                <i class="fa fa-chevron-left"></i> Spring事务管理
+              <a href="/2017/03/20/SSM系列/SSM整合思路和配置文件/" rel="next" title="SSM整合思路">
+                <i class="fa fa-chevron-left"></i> SSM整合思路
               </a>
             
           </div>
@@ -414,8 +405,8 @@ server {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/redis集群/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/基础课程系列/计算机组成原理/" rel="prev" title="计算机组成">
+                计算机组成 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -525,7 +516,7 @@ server {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#把fastDFS以及依赖包都上传到linux系统"><span class="nav-number">1.</span> <span class="nav-text">把fastDFS以及依赖包都上传到linux系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装FastDFS之前，先安装libevent工具包"><span class="nav-number">2.</span> <span class="nav-text">安装FastDFS之前，先安装libevent工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装libfastcommonV1-0-7工具包"><span class="nav-number">3.</span> <span class="nav-text">安装libfastcommonV1.0.7工具包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Tracker服务"><span class="nav-number">4.</span> <span class="nav-text">安装Tracker服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装storage服务"><span class="nav-number">5.</span> <span class="nav-text">安装storage服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试服务"><span class="nav-number">6.</span> <span class="nav-text">测试服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建nginx提供http服务"><span class="nav-number">7.</span> <span class="nav-text">搭建nginx提供http服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一课"><span class="nav-number">1.</span> <span class="nav-text">第一课</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器简介"><span class="nav-number">1.1.</span> <span class="nav-text">编译器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是编译器"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么是编译器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器的核心功能"><span class="nav-number">1.1.2.</span> <span class="nav-text">编译器的核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器和解释器"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译器和解释器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器结构"><span class="nav-number">1.2.</span> <span class="nav-text">编译器结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器的高层结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">编译器的高层结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象的多个阶段"><span class="nav-number">1.2.2.</span> <span class="nav-text">抽象的多个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一种没有优化的编译器结构"><span class="nav-number">1.2.3.</span> <span class="nav-text">一种没有优化的编译器结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的编译器实例"><span class="nav-number">1.3.</span> <span class="nav-text">简单的编译器实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的编译器实例-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">简单的编译器实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈式计算机Stack"><span class="nav-number">1.3.2.</span> <span class="nav-text">栈式计算机Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器的阶段"><span class="nav-number">1.3.3.</span> <span class="nav-text">编译器的阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结-1"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
             
 
           </div>
