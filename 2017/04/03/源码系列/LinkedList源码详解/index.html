@@ -1,0 +1,1347 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="LinkedList源码详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedList源码详解">
+<meta property="og:url" content="http://yoursite.com/2017/04/03/源码系列/LinkedList源码详解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="LinkedList源码详解">
+<meta property="og:image" content="http://i.imgur.com/h5cgseZ.jpg">
+<meta property="og:image" content="http://i.imgur.com/Dpg228s.jpg">
+<meta property="og:image" content="http://i.imgur.com/etggeEt.jpg">
+<meta property="og:updated_time" content="2017-04-03T12:18:55.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LinkedList源码详解">
+<meta name="twitter:description" content="LinkedList源码详解">
+<meta name="twitter:image" content="http://i.imgur.com/h5cgseZ.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/03/源码系列/LinkedList源码详解/"/>
+
+
+
+
+
+  <title> LinkedList源码详解 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/03/源码系列/LinkedList源码详解/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LinkedList源码详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-03T18:59:53+08:00">
+                2017-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LinkedList源码详解<br><a id="more"></a> </p>
+<h1 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h1><h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://i.imgur.com/h5cgseZ.jpg" alt=""></p>
+<h2 id="已经介绍过的类和接口"><a href="#已经介绍过的类和接口" class="headerlink" title="已经介绍过的类和接口"></a>已经介绍过的类和接口</h2><pre><code>Iterable
+Collection
+List
+AbstractCollection
+AbstractList
+Queue
+Serializable
+Cloneable
+</code></pre><h2 id="未介绍的类和接口"><a href="#未介绍的类和接口" class="headerlink" title="未介绍的类和接口"></a>未介绍的类和接口</h2><h3 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h3><pre><code>Deque 是 Double ended queue (双端队列) 的缩写
+
+Deque 继承自 Queue,直接实现了它的有 LinkedList, ArayDeque, ConcurrentLinkedDeque 等。
+
+Deque 支持容量受限的双端队列，也支持大小不固定的。一般双端队列大小不确定。
+
+Deque 接口定义了一些从头部和尾部访问元素的方法。比如分别在头部、尾部进行插入、删除、获取元素。
+
+和 Queue类似，每个操作都有两种方法，一种在异常情况下直接抛出异常奔溃，另一种则不会抛异常，而是返回特殊的值，比如 false, null …
+</code></pre><p><img src="http://i.imgur.com/Dpg228s.jpg" alt=""></p>
+<h4 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h4><pre><code>//以下均为增加元素，要么在头部增加，要么在尾部增加
+boolean add(E e);
+void addFirst(E e);
+void addLast(E e);
+boolean offer(E e);
+boolean offerFirst(E e);
+boolean offerLast(E e);
+void push(E e);
+</code></pre><hr>
+<pre><code>//以下均为删除元素，要么在头部删除，要么在尾部删除
+//有部分方法还会返回被删除的元素
+E remove();
+boolean remove(Object o);
+E removeFirst();
+boolean removeFirstOccurrence(Object o);
+E removeLast();
+boolean removeLastOccurrence(Object o);
+E poll();
+E pollFirst();
+E pollLast();
+E pop();
+</code></pre><hr>
+<pre><code>//以下均为获得首部元素或者尾部元素，不涉及删除
+//contains为检查是否包含此元素
+//size返回容器规模
+boolean contains(Object o);
+E element();
+E getFirst();
+E getLast();
+E peek();
+E peekFirst();
+E peekLast();
+public int size();
+</code></pre><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><pre><code>//返回一个迭代器
+Iterator&lt;E&gt; iterator();
+//返回一个逆序迭代的迭代器
+Iterator&lt;E&gt; descendingIterator();
+</code></pre><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><pre><code>Deque既可以当做队列使用，也可以当做栈使用
+</code></pre><h3 id="AbstractSquentialList"><a href="#AbstractSquentialList" class="headerlink" title="AbstractSquentialList"></a>AbstractSquentialList</h3><pre><code>继承了AbstractList，是 LinkedList 的父类，是 List 接口 的简化版实现。
+
+简化在哪儿呢？简化在 AbstractSequentialList 只支持按次序访问，而不像 AbstractList 那样支持随机访问。
+
+想要实现一个支持按次序访问的 List的话，只需要继承这个抽象类，然后把指定的抽象方法实现就好了。
+</code></pre><p><img src="http://i.imgur.com/etggeEt.jpg" alt=""></p>
+<h4 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h4><pre><code>获取迭代器：
+public Iterator&lt;E&gt; iterator() {
+    //调用继承自
+    return listIterator();
+}
+</code></pre><hr>
+<pre><code>//继承 AbstractList 的 listIterator()
+public ListIterator&lt;E&gt; listIterator() {
+    return listIterator(0);
+}
+</code></pre><hr>
+<pre><code>//需要实现类实现的方法
+public abstract ListIterator&lt;E&gt; listIterator(int index);
+add(int, E) 添加元素到指定位置，将当前处于该位置（如果有的话）和任何后续元素的元素移到右边（添加一个到它们的索引）：
+</code></pre><hr>
+<pre><code>public void add(int index, E element) {
+    try {
+        //调用 ListIterator.add()
+        listIterator(index).add(element);
+    } catch (NoSuchElementException exc) {
+        throw new IndexOutOfBoundsException(&quot;Index: &quot;+index);
+    }
+}
+如果 Listerator 的实现类没有实现 add() 方法，会报 UnsupportedOperationException 错。
+</code></pre><hr>
+<pre><code>3.addAll(int index, Collection)
+用获取到的 listIterator 逐个添加集合中的元素,这就要考验 ListIterator.add 方法的实现效率了，总不能每次都后移一位吧
+的确在目前集合框架中 AbstractSequentialList 的唯一实现类 LinkedList 实现的 ListIterator 中，由于 LinkedList 的双休链表特性，每次 add 只需要调整指针指向就可以了。
+</code></pre><hr>
+<pre><code>get(int index) 获取指定位置的元素：
+
+public E get(int index) {
+    try {
+        return listIterator(index).next();
+    } catch (NoSuchElementException exc) {
+        throw new IndexOutOfBoundsException(&quot;Index: &quot;+index);
+    }
+}
+</code></pre><hr>
+<pre><code>set(int index, E element) 修改指定位置的元素为新的：
+
+public E set(int index, E element) {
+    try {
+        ListIterator&lt;E&gt; e = listIterator(index);
+        E oldVal = e.next();
+        e.set(element);
+        return oldVal;
+    } catch (NoSuchElementException exc) {
+        throw new IndexOutOfBoundsException(&quot;Index: &quot;+index);
+    }
+}
+</code></pre><hr>
+<pre><code>remove(int index) 删除指定位置的元素：
+
+public E remove(int index) {
+    try {
+        ListIterator&lt;E&gt; e = listIterator(index);
+        E outCast = e.next();
+        e.remove();
+        return outCast;
+    } catch (NoSuchElementException exc) {
+        throw new IndexOutOfBoundsException(&quot;Index: &quot;+index);
+    }
+}
+</code></pre><hr>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><pre><code>可以看到， AbstractSequentialList 把父类 AbstractList 中没有实现或者没有支持的操作都实现了，而且都是调用的 ListIterator 相关方法进行操作。
+
+在 Java 集合深入理解：AbstractList 中我们介绍了 RandomAccess，里面提到，支持 RandomAccess 的对象，遍历时使用 get 比 迭代器更快。
+
+而 AbstractSequentialList 只支持迭代器按顺序 访问，不支持 RandomAccess，所以遍历 AbstractSequentialList 的子类，使用 for 循环 get() 的效率要 &lt;= 迭代器遍历
+</code></pre><h2 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h2><h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><pre><code>只有三个成员变量，分别代表规模、头结点、尾节点
+transient int size = 0;
+transient Node&lt;E&gt; first;
+transient Node&lt;E&gt; last;
+</code></pre><h3 id="内部重要方法"><a href="#内部重要方法" class="headerlink" title="内部重要方法"></a>内部重要方法</h3><pre><code>这些方法只能在内部使用
+
+//插入到头部
+private void linkFirst(E e) {
+    //获取头节点
+    final Node&lt;E&gt; f = first;
+    //新建一个节点，尾部指向之前的 头元素 first
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);
+    //first 指向新建的节点
+    first = newNode;
+    //如果之前是空链表，新建的节点 也是最后一个节点
+    if (f == null)
+        last = newNode;
+    else
+        //原来的第一个节点（现在的第二个）头部指向新建的头结点
+        f.prev = newNode;
+    size++;
+    modCount++;
+}
+</code></pre><hr>
+<pre><code>//插入到尾部
+void linkLast(E e) {
+    //获取尾部节点
+    final Node&lt;E&gt; l = last;
+    //新建一个节点，头部指向之前的 尾节点 last
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);
+    //last 指向新建的节点
+    last = newNode;
+    //如果之前是空链表， 新建的节点也是第一个节点
+    if (l == null)
+        first = newNode;
+    else
+        //原来的尾节点尾部指向新建的尾节点
+        l.next = newNode;
+    size++;
+    modCount++;
+}
+</code></pre><hr>
+<pre><code>//在 指定节点 前插入一个元素，这里假设 指定节点不为 null
+void linkBefore(E e, Node&lt;E&gt; succ) {
+    // 获取指定节点 succ 前面的一个节点
+    final Node&lt;E&gt; pred = succ.prev;
+    //新建一个节点，头部指向 succ 前面的节点，尾部指向 succ 节点，数据为 e
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(pred, e, succ);
+    //让 succ 节点头部指向 新建的节点
+    succ.prev = newNode;
+    //如果 succ 前面的节点为空，说明 succ 就是第一个节点，那现在新建的节点就变成第一个节点了
+    if (pred == null)
+        first = newNode;
+    else
+        //如果前面有节点，让前面的节点
+        pred.next = newNode;
+    size++;
+    modCount++;
+}
+</code></pre><hr>
+<pre><code>//删除头节点并返回该节点上的数据，假设不为 null
+private E unlinkFirst(Node&lt;E&gt; f) {
+    // 获取数据，一会儿返回
+    final E element = f.item;
+    //获取头节点后面一个节点
+    final Node&lt;E&gt; next = f.next;
+    //使头节点上数据为空，尾部指向空
+    f.item = null;
+    f.next = null; // help GC
+    //现在头节点后边的节点变成第一个了
+    first = next;
+    //如果头节点后面的节点为 null，说明移除这个节点后，链表里没节点了
+    if (next == null)
+        last = null;
+    else
+        next.prev = null;
+    size--;
+    modCount++;
+    return element;
+}
+</code></pre><hr>
+<pre><code>//删除尾部节点并返回，假设不为空
+private E unlinkLast(Node&lt;E&gt; l) {
+
+    final E element = l.item;
+    //获取倒数第二个节点
+    final Node&lt;E&gt; prev = l.prev;
+    //尾节点数据、尾指针置为空
+    l.item = null;
+    l.prev = null; // help GC
+    //现在倒数第二变成倒数第一了
+    last = prev;
+    if (prev == null)
+        first = null;
+    else
+        prev.next = null;
+    size--;
+    modCount++;
+    return element;
+}
+</code></pre><hr>
+<pre><code>//删除某个指定节点
+E unlink(Node&lt;E&gt; x) {
+    // 假设 x 不为空
+    final E element = x.item;
+    //获取指定节点前面、后面的节点
+    final Node&lt;E&gt; next = x.next;
+    final Node&lt;E&gt; prev = x.prev;
+
+    //如果前面没有节点，说明 x 是第一个
+    if (prev == null) {
+        first = next;
+    } else {
+        //前面有节点，让前面节点跨过 x 直接指向 x 后面的节点
+        prev.next = next;
+        x.prev = null;
+    }
+
+    //如果后面没有节点，说 x 是最后一个节点
+    if (next == null) {
+        last = prev;
+    } else {
+        //后面有节点，让后面的节点指向 x 前面的
+        next.prev = prev;
+        x.next = null;
+    }
+
+    x.item = null;
+    size--;
+    modCount++;
+    return element;
+}
+</code></pre><hr>
+<pre><code>//获取指定位置的节点
+Node&lt;E&gt; node(int index) {
+    // 假设指定位置有元素
+
+    //二分一下，如果小于 size 的一半，从头开始遍历
+    if (index &lt; (size &gt;&gt; 1)) {
+        Node&lt;E&gt; x = first;
+        for (int i = 0; i &lt; index; i++)
+            x = x.next;
+        return x;
+    } else {
+        //大于 size 一半，从尾部倒着遍历
+        Node&lt;E&gt; x = last;
+        for (int i = size - 1; i &gt; index; i--)
+            x = x.prev;
+        return x;
+    }
+}
+</code></pre><h3 id="公开方法"><a href="#公开方法" class="headerlink" title="公开方法"></a>公开方法</h3><h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><pre><code>//普通的在尾部添加元素
+public boolean add(E e) {
+    linkLast(e);
+    return true;
+}
+
+//在指定位置添加元素
+public void add(int index, E element) {
+    checkPositionIndex(index);
+    //指定位置也有可能是在尾部
+    if (index == size)
+        linkLast(element);
+    else
+        linkBefore(element, node(index));
+}
+
+//添加一个集合的元素
+public boolean addAll(Collection&lt;? extends E&gt; c) {
+    return addAll(size, c);
+}
+
+public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+    checkPositionIndex(index);
+
+    //把 要添加的集合转成一个 数组
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    if (numNew == 0)
+        return false;
+
+    //创建两个节点，分别指向要插入位置前面和后面的节点
+    Node&lt;E&gt; pred, succ;
+    //要添加到尾部
+    if (index == size) {
+        succ = null;
+        pred = last;
+    } else {
+        //要添加到中间， succ 指向 index 位置的节点，pred 指向它前一个
+        succ = node(index);
+        pred = succ.prev;
+    }
+
+    //遍历要添加内容的数组
+    for (Object o : a) {
+        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) o;
+        //创建新节点，头指针指向 pred
+        Node&lt;E&gt; newNode = new Node&lt;&gt;(pred, e, null);
+        //如果 pred 为空，说明新建的这个是头节点
+        if (pred == null)
+            first = newNode;
+        else
+            //pred 指向新建的节点
+            pred.next = newNode;
+        //pred 后移一位
+        pred = newNode;
+    }
+
+    //添加完后需要修改尾指针 last
+    if (succ == null) {
+        //如果 succ 为空，说明要插入的位置就是尾部，现在 pred 已经到最后了
+        last = pred;
+    } else {
+        //否则 pred 指向后面的元素
+        pred.next = succ;
+        succ.prev = pred;
+    }
+
+    //元素个数增加
+    size += numNew;
+    modCount++;
+    return true;
+}
+
+//添加到头部，时间复杂度为 O(1)
+public void addFirst(E e) {
+    linkFirst(e);
+}
+
+//添加到尾部，时间复杂度为 O(1)
+public void addLast(E e) {
+    linkLast(e);
+}
+</code></pre><h4 id="继承来的增加方法"><a href="#继承来的增加方法" class="headerlink" title="继承来的增加方法"></a>继承来的增加方法</h4><pre><code>//入栈，其实就是在头部添加元素
+public void push(E e) {
+    addFirst(e);
+}
+
+//安全的添加操作，在尾部添加
+public boolean offer(E e) {
+    return add(e);
+}
+
+//在头部添加
+public boolean offerFirst(E e) {
+    addFirst(e);
+    return true;
+}
+
+//尾部添加
+public boolean offerLast(E e) {
+    addLast(e);
+    return true;
+}
+</code></pre><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><pre><code>//删除头部节点
+public E remove() {
+    return removeFirst();
+}
+
+//删除指定位置节点
+public E remove(int index) {
+    checkElementIndex(index);
+    return unlink(node(index));
+}
+
+//删除包含指定元素的节点，这就得遍历了
+public boolean remove(Object o) {
+    if (o == null) {
+        //遍历终止条件，不等于 null
+        for (Node&lt;E&gt; x = first; x != null; x = x.next) {
+            if (x.item == null) {
+                unlink(x);
+                return true;
+            }
+        }
+    } else {
+        for (Node&lt;E&gt; x = first; x != null; x = x.next) {
+            if (o.equals(x.item)) {
+                unlink(x);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+//删除头部元素
+public E removeFirst() {
+    final Node&lt;E&gt; f = first;
+    if (f == null)
+        throw new NoSuchElementException();
+    return unlinkFirst(f);
+}
+
+//删除尾部元素
+public E removeLast() {
+    final Node&lt;E&gt; l = last;
+    if (l == null)
+        throw new NoSuchElementException();
+    return unlinkLast(l);
+}
+
+//删除首次出现的指定元素，从头遍历
+public boolean removeFirstOccurrence(Object o) {
+    return remove(o);
+}
+
+//删除最后一次出现的指定元素，倒过来遍历
+public boolean removeLastOccurrence(Object o) {
+    if (o == null) {
+        for (Node&lt;E&gt; x = last; x != null; x = x.prev) {
+            if (x.item == null) {
+                unlink(x);
+                return true;
+            }
+        }
+    } else {
+        for (Node&lt;E&gt; x = last; x != null; x = x.prev) {
+            if (o.equals(x.item)) {
+                unlink(x);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+</code></pre><h4 id="继承来的删除方法"><a href="#继承来的删除方法" class="headerlink" title="继承来的删除方法"></a>继承来的删除方法</h4><pre><code>public E pop() {
+    return removeFirst();
+}
+
+public E pollFirst() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : unlinkFirst(f);
+}
+
+public E pollLast() {
+    final Node&lt;E&gt; l = last;
+    return (l == null) ? null : unlinkLast(l);
+}
+</code></pre><h4 id="清除所有元素"><a href="#清除所有元素" class="headerlink" title="清除所有元素"></a>清除所有元素</h4><pre><code>清除全部元素其实只需要把首尾都置为 null, 这个链表就已经是空的，因为无法访问元素。 
+但是为了有利于gc，故将所有的节点设为null
+public void clear() {
+    for (Node&lt;E&gt; x = first; x != null; ) {
+        Node&lt;E&gt; next = x.next;
+        x.item = null;
+        x.next = null;
+        x.prev = null;
+        x = next;
+    }
+    first = last = null;
+    size = 0;
+    modCount++;
+}
+</code></pre><h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><pre><code>//set 很简单，找到这个节点，替换数据就好了
+public E set(int index, E element) {
+    checkElementIndex(index);
+    Node&lt;E&gt; x = node(index);
+    E oldVal = x.item;
+    x.item = element;
+    return oldVal;
+}
+</code></pre><h4 id="公开的查询方法"><a href="#公开的查询方法" class="headerlink" title="公开的查询方法"></a>公开的查询方法</h4><pre><code>//挨个遍历，获取第一次出现位置
+public int indexOf(Object o) {
+    int index = 0;
+    if (o == null) {
+        for (Node&lt;E&gt; x = first; x != null; x = x.next) {
+            if (x.item == null)
+                return index;
+            index++;
+        }
+    } else {
+        for (Node&lt;E&gt; x = first; x != null; x = x.next) {
+            if (o.equals(x.item))
+                return index;
+            index++;
+        }
+    }
+    return -1;
+}
+
+//倒着遍历，查询最后一次出现的位置
+public int lastIndexOf(Object o) {
+    int index = size;
+    if (o == null) {
+        for (Node&lt;E&gt; x = last; x != null; x = x.prev) {
+            index--;
+            if (x.item == null)
+                return index;
+        }
+    } else {
+        for (Node&lt;E&gt; x = last; x != null; x = x.prev) {
+            index--;
+            if (o.equals(x.item))
+                return index;
+        }
+    }
+    return -1;
+}
+
+//是否包含指定元素
+public boolean contains(Object o) {
+    return indexOf(o) != -1;
+}
+
+//获取指定位置的元素，需要遍历
+public E get(int index) {
+    checkElementIndex(index);
+    return node(index).item;
+}
+
+//获取第一个元素，很快
+public E getFirst() {
+    final Node&lt;E&gt; f = first;
+    if (f == null)
+        throw new NoSuchElementException();
+    return f.item;
+}
+
+//获取第一个，同时删除它
+public E poll() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : unlinkFirst(f);
+}
+
+//也是获取第一个，和 poll 不同的是不删除
+public E peek() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : f.item;
+}
+
+//长得一样嘛
+public E peekFirst() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : f.item;
+ }
+
+//最后一个元素，也很快
+public E getLast() {
+    final Node&lt;E&gt; l = last;
+    if (l == null)
+        throw new NoSuchElementException();
+    return l.item;
+}
+
+public E peekLast() {
+    final Node&lt;E&gt; l = last;
+    return (l == null) ? null : l.item;
+}
+</code></pre><h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><h4 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h4><pre><code>LinkedList内部使用了双量表维护和存储数据
+
+private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre><h4 id="ListItr"><a href="#ListItr" class="headerlink" title="ListItr"></a>ListItr</h4><pre><code>private class ListItr implements ListIterator&lt;E&gt; {
+    private Node&lt;E&gt; lastReturned;
+    private Node&lt;E&gt; next;
+    private int nextIndex;
+    private int expectedModCount = modCount;
+
+    ListItr(int index) {
+        // 二分遍历，指定游标位置
+        next = (index == size) ? null : node(index);
+        nextIndex = index;
+    }
+
+    public boolean hasNext() {
+        return nextIndex &lt; size;
+    }
+
+    public E next() {
+        checkForComodification();
+        if (!hasNext())
+            throw new NoSuchElementException();
+        //很简单，后移一位
+        lastReturned = next;
+        next = next.next;
+        nextIndex++;
+        return lastReturned.item;
+    }
+
+    public boolean hasPrevious() {
+        return nextIndex &gt; 0;
+    }
+
+    public E previous() {
+        checkForComodification();
+        if (!hasPrevious())
+            throw new NoSuchElementException();
+
+        lastReturned = next = (next == null) ? last : 
+     //向前移动一位
+     next.prev;
+        nextIndex--;
+        return lastReturned.item;
+    }
+
+    public int nextIndex() {
+        return nextIndex;
+    }
+
+    public int previousIndex() {
+        return nextIndex - 1;
+    }
+
+    public void remove() {
+        checkForComodification();
+        if (lastReturned == null)
+            throw new IllegalStateException();
+
+        Node&lt;E&gt; lastNext = lastReturned.next;
+        unlink(lastReturned);
+        if (next == lastReturned)
+            next = lastNext;
+        else
+            nextIndex--;
+        lastReturned = null;
+        expectedModCount++;
+    }
+
+    public void set(E e) {
+        if (lastReturned == null)
+            throw new IllegalStateException();
+        checkForComodification();
+        lastReturned.item = e;
+    }
+
+    public void add(E e) {
+        checkForComodification();
+        lastReturned = null;
+        if (next == null)
+            linkLast(e);
+        else
+            linkBefore(e, next);
+        nextIndex++;
+        expectedModCount++;
+    }
+
+    public void forEachRemaining(Consumer&lt;? super E&gt; action) {
+        Objects.requireNonNull(action);
+        while (modCount == expectedModCount &amp;&amp; nextIndex &lt; size) {
+            action.accept(next.item);
+            lastReturned = next;
+            next = next.next;
+            nextIndex++;
+        }
+        checkForComodification();
+    }
+
+    final void checkForComodification() {
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+    }
+}
+</code></pre><h4 id="DescendingIterator"><a href="#DescendingIterator" class="headerlink" title="DescendingIterator"></a>DescendingIterator</h4><pre><code>//无耻的使用了ListItr的倒序遍历方法来实现自己的方法
+private class DescendingIterator implements Iterator&lt;E&gt; {
+    private final ListItr itr = new ListItr(size());
+    public boolean hasNext() {
+        return itr.hasPrevious();
+    }
+    public E next() {
+        return itr.previous();
+    }
+    public void remove() {
+        itr.remove();
+    }
+}
+
+@SuppressWarnings(&quot;unchecked&quot;)
+private LinkedList&lt;E&gt; superClone() {
+    try {
+        return (LinkedList&lt;E&gt;) super.clone();
+    } catch (CloneNotSupportedException e) {
+        throw new InternalError(e);
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/02/源码系列/ArrayList源码详解/" rel="next" title="ArrayList源码详解">
+                <i class="fa fa-chevron-left"></i> ArrayList源码详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/04/源码系列/复习hash、hashCode和hash表/" rel="prev" title="hash、hash函数、hash表">
+                hash、hash函数、hash表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.</span> <span class="nav-text">LinkedList</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">1.1.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已经介绍过的类和接口"><span class="nav-number">1.2.</span> <span class="nav-text">已经介绍过的类和接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未介绍的类和接口"><span class="nav-number">1.3.</span> <span class="nav-text">未介绍的类和接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deque"><span class="nav-number">1.3.1.</span> <span class="nav-text">Deque</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增删改查"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">增删改查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AbstractSquentialList"><span class="nav-number">1.3.2.</span> <span class="nav-text">AbstractSquentialList</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#详情"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">详情</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码详解"><span class="nav-number">1.4.</span> <span class="nav-text">源码详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成员变量"><span class="nav-number">1.4.1.</span> <span class="nav-text">成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部重要方法"><span class="nav-number">1.4.2.</span> <span class="nav-text">内部重要方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公开方法"><span class="nav-number">1.4.3.</span> <span class="nav-text">公开方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承来的增加方法"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">继承来的增加方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承来的删除方法"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">继承来的删除方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除所有元素"><span class="nav-number">1.4.3.5.</span> <span class="nav-text">清除所有元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改"><span class="nav-number">1.4.3.6.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公开的查询方法"><span class="nav-number">1.4.3.7.</span> <span class="nav-text">公开的查询方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部类"><span class="nav-number">1.4.4.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ListItr"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">ListItr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DescendingIterator"><span class="nav-number">1.4.4.3.</span> <span class="nav-text">DescendingIterator</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

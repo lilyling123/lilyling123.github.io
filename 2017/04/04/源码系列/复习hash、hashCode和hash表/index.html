@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="hashhash函数hash表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hash、hash函数、hash表">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/源码系列/复习hash、hashCode和hash表/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="hashhash函数hash表">
+<meta property="og:updated_time" content="2017-04-04T11:15:13.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hash、hash函数、hash表">
+<meta name="twitter:description" content="hashhash函数hash表">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/04/源码系列/复习hash、hashCode和hash表/"/>
+
+
+
+
+
+  <title> hash、hash函数、hash表 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/源码系列/复习hash、hashCode和hash表/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                hash、hash函数、hash表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-04T19:15:13+08:00">
+                2017-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>hash<br>hash函数<br>hash表<br><a id="more"></a> </p>
+<h1 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h1><pre><code>Hash（哈希），又称“散列”。
+
+散列（hash）英文原意是“混杂”、“拼凑”、“重新表述”的意思。
+
+在某种程度上，散列是与排序相反的一种操作，排序是将集合中的元素按照某种方式比如字典顺序排列在一起，而散列通过计算哈希值，打破元素之间原有的关系，使集合中的元素按照散列函数的分类进行排列。
+
+在介绍一些集合时，我们总强调需要重写某个类的 equlas() 方法和 hashCode() 方法，确保唯一性。这里的 hashCode() 表示的是对当前对象的唯一标示。计算 hashCode 的过程就称作 哈希。
+</code></pre><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><pre><code>哈希 其实是随机存储的一种优化，先进行分类，然后查找时按照这个对象的分类去找。
+
+因为hashCode计算的速度是非常快的，那么找到这个元素对应的位置也自然在O(1)时间就完成了
+</code></pre><h1 id="hash函数"><a href="#hash函数" class="headerlink" title="hash函数"></a>hash函数</h1><pre><code>哈希的过程中需要使用哈希函数进行计算。
+
+哈希函数是一种映射关系，根据数据的关键词 key ，通过一定的函数关系，计算出该元素存储位置的函数。
+
+表示为：
+
+address = H [key]
+
+几种常见的哈希函数（散列函数）构造方法
+</code></pre><h2 id="常见的方法"><a href="#常见的方法" class="headerlink" title="常见的方法"></a>常见的方法</h2><pre><code>直接定址法 
+    取关键字或关键字的某个线性函数值为散列地址。
+    即 H(key) = key 或 H(key) = a*key + b，其中a和b为常数。
+
+除留余数法 
+    取关键字被某个不大于散列表长度 m 的数 p 求余，得到的作为散列地址。
+    即 H(key) = key % p, p &lt; m。
+
+数字分析法 
+    当关键字的位数大于地址的位数，对关键字的各位分布进行分析，选出分布均匀的任意几位作为散列地址。
+    仅适用于所有关键字都已知的情况下，根据实际应用确定要选取的部分，尽量避免发生冲突。
+
+平方取中法 
+    先计算出关键字值的平方，然后取平方值中间几位作为散列地址。
+    随机分布的关键字，得到的散列地址也是随机分布的。
+
+折叠法（叠加法） 
+    将关键字分为位数相同的几部分，然后取这几部分的叠加和（舍去进位）作为散列地址。
+    用于关键字位数较多，并且关键字中每一位上数字分布大致均匀。
+
+随机数法 
+    选择一个随机函数，把关键字的随机函数值作为它的哈希值。
+    通常当关键字的长度不等时用这种方法。
+</code></pre><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><pre><code>构造哈希函数的方法很多，实际工作中要根据不同的情况选择合适的方法，总的原则是尽可能少的产生冲突。
+
+通常考虑的因素有关键字的长度和分布情况、哈希值的范围等。
+</code></pre><h3 id="哈希冲突的解决"><a href="#哈希冲突的解决" class="headerlink" title="哈希冲突的解决"></a>哈希冲突的解决</h3><pre><code>选用哈希函数计算哈希值时，可能不同的 key 会得到相同的结果，一个地址怎么存放多个数据呢？这就是冲突。
+</code></pre><hr>
+<pre><code>1.链接法（拉链法）
+
+拉链法解决冲突的做法是： 
+将所有关键字为同义词的结点链接在同一个单链表中。
+
+2.开放定址法
+
+用开放定址法解决冲突的做法是：
+
+用开放定址法解决冲突的做法是：当冲突发生时，使用某种探测技术在散列表中形成一个探测序列。沿此序列逐个单元地查找，直到找到给定的关键字，或者碰到一个开放的地址（即该地址单元为空）为止（若要插入，在探查到开放的地址，则可将待插入的新结点存人该地址单元）。查找时探测到开放的地址则表明表中无待查的关键字，即查找失败。
+简单的说：当冲突发生时，使用某种探查(亦称探测)技术在散列表中寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到。
+
+按照形成探查序列的方法不同，可将开放定址法区分为线性探查法、二次探查法、双重散列法等。
+
+a.线性探查法
+
+hi=(h(key)+i) ％ m ，0 ≤ i ≤ m-1
+
+基本思想是： 
+探查时从地址 d 开始，首先探查 T[d]，然后依次探查 T[d+1]，…，直到 T[m-1]，此后又循环到 T[0]，T[1]，…，直到探查到 有空余地址 或者到 T[d-1]为止。
+
+b.二次探查法
+
+hi=(h(key)+i*i) ％ m，0 ≤ i ≤ m-1
+
+基本思想是： 
+探查时从地址 d 开始，首先探查 T[d]，然后依次探查 T[d+1^2]，T[d+2^2]，T[d+3^2],…，等，直到探查到 有空余地址 或者到 T[d-1]为止。
+
+缺点是无法探查到整个散列空间。
+
+c.双重散列法
+
+hi=(h(key)+i*h1(key)) ％ m，0 ≤ i ≤ m-1
+
+基本思想是： 
+探查时从地址 d 开始，首先探查 T[d]，然后依次探查 T[d+h1(d)], T[d + 2*h1(d)]，…，等。
+
+该方法使用了两个散列函数 h(key) 和 h1(key)，故也称为双散列函数探查法。
+该方法是开放定址法中最好的方法之一。
+定义 h1(key) 的方法较多，但无论采用什么方法定义，都必须使 h1(key) 的值和 m 互素，才能使发生冲突的同义词地址均匀地分布在整个表中，否则可能造成同义词地址的循环计算。
+</code></pre><h1 id="hash表"><a href="#hash表" class="headerlink" title="hash表"></a>hash表</h1><pre><code>哈希表（hash table）是哈希函数最主要的应用。
+
+哈希表是实现关联数组（associative array）的一种数据结构，广泛应用于实现数据的快速查找。
+
+用哈希函数计算关键字的哈希值（hash value）,通过哈希值这个索引就可以找到关键字的存储位置，即桶（bucket）。哈希表不同于二叉树、栈、序列的数据结构一般情况下，在哈希表上的插入、查找、删除等操作的时间复杂度是 O(1)。
+
+查找过程中，关键字的比较次数，取决于产生冲突的多少，产生的冲突少，查找效率就高，产生的冲突多，查找效率就低。因此，影响产生冲突多少的因素，也就是影响查找效率的因素。 
+影响产生冲突多少有以下三个因素：
+
+哈希函数是否均匀；
+处理冲突的方法；
+哈希表的加载因子。
+哈希表的加载因子和容量决定了在什么时候桶数（存储位置）不够，需要重新哈希。
+
+加载因子太大的话桶太多，遍历时效率变低；太大的话频繁 rehash，导致性能降低。所以加载因子的大小需要结合时间和空间效率考虑。
+
+在 HashMap 中的加载因子为 0.75，即四分之三。
+</code></pre><h2 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h2><blockquote>
+<p>网络环境下的分布式缓存系统一般基于一致性哈希（Consistent hashing）。简单的说，一致性哈希将哈希值取值空间组织成一个虚拟的环，各个服务器与数据关键字K使用相同的哈希函数映射到这个环上，数据会存储在它顺时针“游走”遇到的第一个服务器。可以使每个服务器节点的负载相对均衡，很大程度上避免资源的浪费。</p>
+<p>在动态分布式缓存系统中，哈希算法的设计是关键点。使用分布更合理的算法可以使得多个服务节点间的负载相对均衡，可以很大程度上避免资源的浪费以及部分服务器过载。 使用带虚拟节点的一致性哈希算法，可以有效地降低服务硬件环境变化带来的数据迁移代价和风险，从而使分布式缓存系统更加高效稳定。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/03/源码系列/LinkedList源码详解/" rel="next" title="LinkedList源码详解">
+                <i class="fa fa-chevron-left"></i> LinkedList源码详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/04/源码系列/AbstractMap源码探索/" rel="prev" title="AbstractMap源码探索">
+                AbstractMap源码探索 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hash"><span class="nav-number">1.</span> <span class="nav-text">hash</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用"><span class="nav-number">1.1.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash函数"><span class="nav-number">2.</span> <span class="nav-text">hash函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的方法"><span class="nav-number">2.1.</span> <span class="nav-text">常见的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希冲突的解决"><span class="nav-number">2.1.2.</span> <span class="nav-text">哈希冲突的解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash表"><span class="nav-number">3.</span> <span class="nav-text">hash表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式缓存"><span class="nav-number">3.1.</span> <span class="nav-text">分布式缓存</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

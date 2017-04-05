@@ -1,0 +1,1102 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="HashMap源码探索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap源码探索">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/源码系列/HashMap/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HashMap源码探索">
+<meta property="og:image" content="http://i.imgur.com/22QQSql.jpg">
+<meta property="og:updated_time" content="2017-04-04T13:38:35.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap源码探索">
+<meta name="twitter:description" content="HashMap源码探索">
+<meta name="twitter:image" content="http://i.imgur.com/22QQSql.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/04/源码系列/HashMap/"/>
+
+
+
+
+
+  <title> HashMap源码探索 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/源码系列/HashMap/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HashMap源码探索
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-04T20:32:59+08:00">
+                2017-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>HashMap源码探索<br><a id="more"></a> </p>
+<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><pre><code>HashMap 是一个采用哈希表实现的键值对集合，继承自 AbstractMap，实现了 Map 接口 。 
+HashMap 的特殊存储结构使得在获取指定元素前需要经过哈希运算，得到目标元素在哈希表中的位置，然后再进行少量比较即可得到元素，这使得 HashMap 的查找效率贼高。
+
+当发生 哈希冲突（碰撞）的时候，HashMap 采用 拉链法 进行解决
+</code></pre><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><pre><code>结合平时使用，可以了解到 HashMap 大概具有以下特点：
+
+    底层实现是 链表数组，JDK 8 后又加了 红黑树
+
+    实现了 Map 全部的方法
+
+    key 用 Set 存放，所以想做到 key 不允许重复，key 对应的类需要重写 hashCode 和 equals 方法
+
+    允许空键和空值（但空键只有一个，且放在第一位，下面会介绍）
+
+    元素是无序的，而且顺序会不定时改变
+
+    插入、获取的时间复杂度基本是 O(1)（前提是有适当的哈希函数，让元素分布在均匀的位置）
+
+    遍历整个 Map 需要的时间与 桶(数组) 的长度成正比（因此初始化时 HashMap 的容量不宜太大）
+
+    两个关键因子：初始容量、加载因子
+</code></pre><h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://i.imgur.com/22QQSql.jpg" alt=""></p>
+<h2 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h2><h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h3><pre><code>默认初始容量：16，必须是 2 的整数次方
+
+static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; 
+
+默认加载因子的大小：0.75，可不是随便的，结合时间和空间效率考虑得到的
+
+static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+最大容量： 2^ 30 次方
+
+static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;
+
+当前 HashMap 修改的次数，这个变量用来保证 fail-fast 机制
+
+transient int modCount;
+
+阈值，下次需要扩容时的值，等于 容量*加载因子
+
+int threshold;
+
+树形阈值：JDK 1.8 新增的，当使用 树 而不是列表来作为桶时使用。必须比 2 大
+
+static final int TREEIFY_THRESHOLD = 8;
+
+非树形阈值：也是 1.8 新增的，扩容时分裂一个树形桶的阈值（？不是很懂 - -），要比 TREEIFY_THRESHOLD 小
+
+static final int UNTREEIFY_THRESHOLD = 6;
+
+树形最小容量：桶可能是树的哈希表的最小容量。至少是 TREEIFY_THRESHOLD 的 4 倍，这样能避免扩容时的冲突
+
+static final int MIN_TREEIFY_CAPACITY = 64;
+
+缓存的 键值对集合（另外两个视图：keySet 和 values 是在 AbstractMap 中声明的）
+
+transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+
+哈希表中的链表数组
+
+transient Node&lt;K,V&gt;[] table;
+
+键值对的数量
+
+transient int size;
+
+哈希表的加载因子
+
+final float loadFactor;
+</code></pre><h4 id="关于HashMap-的初始容量和加载因子"><a href="#关于HashMap-的初始容量和加载因子" class="headerlink" title="关于HashMap 的初始容量和加载因子"></a>关于HashMap 的初始容量和加载因子</h4><pre><code>由于 HashMap 扩容开销很大（需要创建新数组、重新哈希、分配等等），因此与扩容相关的两个因素：
+
+    容量：数组的数量
+    加载因子：决定了 HashMap 中的元素占有多少比例时扩容
+成为了 HashMap 最重要的部分之一，它们决定了 HashMap 什么时候扩容。
+
+HashMap 的默认加载因子为 0.75，这是在时间、空间两方面均衡考虑下的结果：
+
+加载因子太大的话发生冲突的可能就会大，查找的效率反而变低
+太小的话频繁 rehash，导致性能降低
+当设置初始容量时，需要提前考虑 Map 中可能有多少对键值对，设计合理的加载因子，尽可能避免进行扩容。
+
+如果存储的键值对很多，干脆设置个大点的容量，这样可以少扩容几次。
+</code></pre><h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="HashMap-的-4-个构造方法"><a href="#HashMap-的-4-个构造方法" class="headerlink" title="HashMap 的 4 个构造方法"></a>HashMap 的 4 个构造方法</h4><pre><code>//创建一个空的哈希表，初始容量为 16，加载因子为 0.75
+public HashMap() {
+    this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
+}
+
+//创建一个空的哈希表，指定容量，使用默认的加载因子
+public HashMap(int initialCapacity) {
+    this(initialCapacity, DEFAULT_LOAD_FACTOR);
+}
+
+//创建一个空的哈希表，指定容量和加载因子
+public HashMap(int initialCapacity, float loadFactor) {
+    if (initialCapacity &lt; 0)
+        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
+                                           initialCapacity);
+    if (initialCapacity &gt; MAXIMUM_CAPACITY)
+        initialCapacity = MAXIMUM_CAPACITY;
+    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
+        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +
+                                           loadFactor);
+    this.loadFactor = loadFactor;
+    //根据指定容量设置阈值
+    this.threshold = tableSizeFor(initialCapacity);
+}
+
+//创建一个内容为参数 m 的内容的哈希表
+public HashMap(Map&lt;? extends K, ? extends V&gt; m) {
+    this.loadFactor = DEFAULT_LOAD_FACTOR;
+    putMapEntries(m, false);
+}
+其中第三种构造方法调用了 tableSizeFor(int) 来根据指定的容量设置阈值，这个方法经过若干次无符号右移、求异运算，得出最接近指定参数 cap 的 2 的 N 次方容量。假如你传入的是 5，返回的初始容量为 8 。
+
+static final int tableSizeFor(int cap) {
+    int n = cap - 1;
+    n |= n &gt;&gt;&gt; 1;
+    n |= n &gt;&gt;&gt; 2;
+    n |= n &gt;&gt;&gt; 4;
+    n |= n &gt;&gt;&gt; 8;
+    n |= n &gt;&gt;&gt; 16;
+    return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}
+第四种构造方法调用了 putMapEntries()，这个方法用于向哈希表中添加整个集合：
+
+final void putMapEntries(Map&lt;? extends K, ? extends V&gt; m, boolean evict) {
+    int s = m.size();
+    if (s &gt; 0) {
+        //数组还是空，初始化参数
+        if (table == null) { 
+            float ft = ((float)s / loadFactor) + 1.0F;
+            int t = ((ft &lt; (float)MAXIMUM_CAPACITY) ?
+                     (int)ft : MAXIMUM_CAPACITY);
+            if (t &gt; threshold)
+                threshold = tableSizeFor(t);
+        }
+        //数组不为空，超过阈值就扩容
+        else if (s &gt; threshold)
+            resize();
+        for (Map.Entry&lt;? extends K, ? extends V&gt; e : m.entrySet()) {
+            K key = e.getKey();
+            V value = e.getValue();
+            //先经过 hash() 计算位置，然后复制指定 map 的内容
+            putVal(hash(key), key, value, false, evict);
+        }
+    }
+}
+</code></pre><h4 id="HashMap-中的链表节点"><a href="#HashMap-中的链表节点" class="headerlink" title="HashMap 中的链表节点"></a>HashMap 中的链表节点</h4><pre><code>前面提到，HashMap 的底层数据结构之一（JDK 1.8 前单纯是）就是链表数组：
+
+transient Node&lt;K,V&gt;[] table;
+
+//实现了 Map.Entry 接口
+static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+    //哈希值，就是位置
+    final int hash;
+    //键
+    final K key;
+    //值
+    V value;
+    //指向下一个几点的指针
+    Node&lt;K,V&gt; next;
+
+    Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        this.hash = hash;
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+
+    public final K getKey()        { return key; }
+    public final V getValue()      { return value; }
+    public final String toString() { return key + &quot;=&quot; + value; }
+
+    public final int hashCode() {
+        return Objects.hashCode(key) ^ Objects.hashCode(value);
+    }
+
+    public final V setValue(V newValue) {
+        V oldValue = value;
+        value = newValue;
+        return oldValue;
+    }
+
+    public final boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (o instanceof Map.Entry) {
+            //Map.Entry 相等的条件：键相等、值相等、个数相等、顺序相等
+            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
+            if (Objects.equals(key, e.getKey()) &amp;&amp;
+                Objects.equals(value, e.getValue()))
+                return true;
+        }
+        return false;
+    }
+}
+</code></pre><h4 id="HashMap-中的添加操作"><a href="#HashMap-中的添加操作" class="headerlink" title="HashMap 中的添加操作"></a>HashMap 中的添加操作</h4><pre><code>//添加指定的键值对到 Map 中，如果已经存在，就替换
+public V put(K key, V value) {
+    //先调用 hash() 方法计算位置
+    return putVal(hash(key), key, value, false, true);
+}
+
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+               boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    //如果当前 哈希表内容为空，新建，n 指向最后一个桶的位置，tab 为哈希表另一个引用
+    //resize() 后续介绍
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    //如果要插入的位置没有元素，新建个节点并放进去
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = new Node(hash, key, value, null);
+    else {
+        //如果要插入的桶已经有元素，替换
+        // e 指向被替换的元素
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+        //p 指向要插入的桶第一个 元素的位置，如果 p 的哈希值、键、值和要添加的一样，就停止找，e 指向 p
+            e = p;
+        else if (p instanceof TreeNode)
+        //如果不一样，而且当前采用的还是 JDK 8 以后的树形节点，调用 putTreeVal 插入
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+        //否则还是从传统的链表数组查找、替换
+
+            //遍历这个桶所有的元素
+            for (int binCount = 0; ; ++binCount) {
+                //没有更多了，就把要添加的元素插到后面得了
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    //当这个桶内链表个数大于等于 8，就要树形化
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                //如果找到要替换的节点，就停止，此时 e 已经指向要被替换的节点
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        //存在要替换的节点
+        if (e != null) {
+            V oldValue = e.value;
+            //替换，返回
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    //如果超出阈值，就得扩容
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre><hr>
+<pre><code>根据代码可以总结插入逻辑如下:
+
+先调用 hash() 方法计算哈希值
+
+然后调用 putVal() 方法中根据哈希值进行相关操作
+
+如果当前 哈希表内容为空，新建一个哈希表
+
+如果要插入的桶中没有元素，新建个节点并放进去
+
+否则从桶中第一个元素开始查找哈希值对应位置 
+
+    如果桶中第一个元素的哈希值和要添加的一样，替换，结束查找
+    如果第一个元素不一样，而且当前采用的还是 JDK 8 以后的树形节点，调用 putTreeVal() 进行插入
+    否则还是从传统的链表数组中查找、替换，结束查找
+
+当这个桶内链表个数大于等于 8，就要调用 treeifyBin() 方法进行树形化
+
+最后检查是否需要扩容
+</code></pre><h4 id="HashMap-中的哈希函数-hash"><a href="#HashMap-中的哈希函数-hash" class="headerlink" title="HashMap 中的哈希函数 hash()"></a>HashMap 中的哈希函数 hash()</h4><pre><code>HashMap 中通过将传入键的 hashCode 进行无符号右移 16 位，然后进行按位异或，得到这个键的哈希值。
+
+static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre><h4 id="HashMap-中的初始化-扩容方法-resize"><a href="#HashMap-中的初始化-扩容方法-resize" class="headerlink" title="HashMap 中的初始化/扩容方法 resize()"></a>HashMap 中的初始化/扩容方法 resize()</h4><pre><code>final Node&lt;K,V&gt;[] resize() {
+    //复制一份当前的数据
+    Node&lt;K,V&gt;[] oldTab = table;
+    //保存旧的元素个数、阈值
+    int oldCap = (oldTab == null) ? 0 : oldTab.length;
+    int oldThr = threshold;
+    int newCap, newThr = 0;
+    if (oldCap &gt; 0) {
+        if (oldCap &gt;= MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return oldTab;
+        }
+        //新的容量为旧的两倍
+        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+            //如果旧容量小于等于 16，新的阈值就是旧阈值的两倍
+            newThr = oldThr &lt;&lt; 1; // double threshold
+    }
+    //如果旧容量为 0 ，并且旧阈值&gt;0，说明之前创建了哈希表但没有添加元素，初始化容量等于阈值
+    else if (oldThr &gt; 0) // initial capacity was placed in threshold
+        newCap = oldThr;
+    else {               // zero initial threshold signifies using defaults
+        //旧容量、旧阈值都是0，说明还没创建哈希表，容量为默认容量，阈值为 容量*加载因子
+        newCap = DEFAULT_INITIAL_CAPACITY;
+        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+    }
+    //如果新的阈值为 0 ，就得用 新容量*加载因子 重计算一次
+    if (newThr == 0) {
+        float ft = (float)newCap * loadFactor;
+        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
+                  (int)ft : Integer.MAX_VALUE);
+    }
+    //更新阈值
+    threshold = newThr;
+    //创建新链表数组，容量是原来的两倍
+    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+    table = newTab;
+    //接下来就得遍历复制了
+    if (oldTab != null) {
+        for (int j = 0; j &lt; oldCap; ++j) {
+            Node&lt;K,V&gt; e;
+            if ((e = oldTab[j]) != null) {
+                //旧的桶置为空
+                oldTab[j] = null;
+                //当前 桶只有一个元素，直接赋值给对应位置
+                if (e.next == null)
+                    newTab[e.hash &amp; (newCap - 1)] = e;
+                else if (e instanceof TreeNode)
+                    //如果旧哈希表中这个位置的桶是树形结构，就要把新哈希表里当前桶也变成树形结构
+                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
+                else { //保留旧哈希表桶中链表的顺序
+                    Node&lt;K,V&gt; loHead = null, loTail = null;
+                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
+                    Node&lt;K,V&gt; next;
+                    //do-while 循环赋值给新哈希表
+                    do {
+                        next = e.next;
+                        //oldCap的值为2的整数次幂
+                        //可以根据e.hash值均匀的重新分配元素到桶中
+                        //原因是因为同一个条链上的hash值于oldCap-1的值必然相等，那么就可以根据oldCap的1位来决定元素分配在哪一个桶里面
+                        if ((e.hash &amp; oldCap) == 0) {
+                            if (loTail == null)
+                                loHead = e;
+                            else
+                                loTail.next = e;
+                            loTail = e;
+                        }
+                        else {
+                            if (hiTail == null)
+                                hiHead = e;
+                            else
+                                hiTail.next = e;
+                            hiTail = e;
+                        }
+                    } while ((e = next) != null);
+            //非常巧妙地重新分配了桶子，佩服
+                    if (loTail != null) {
+                        loTail.next = null;
+                        newTab[j] = loHead;
+                    }
+                    if (hiTail != null) {
+                        hiTail.next = null;
+                        newTab[j + oldCap] = hiHead;
+                    }
+                }
+            }
+        }
+    }
+    return newTab;
+}
+</code></pre><hr>
+<pre><code>扩容过程中几个关键的点：
+
+新初始化哈希表时，容量为默认容量，阈值为 容量*加载因子
+已有哈希表扩容时，容量、阈值均翻倍
+如果之前这个桶的节点类型是树，需要把新哈希表里当前桶也变成树形结构
+复制给新哈希表中需要重新索引（rehash），这里采用的计算方法是 
+e.hash &amp; (newCap - 1)，等价于 e.hash % newCap
+
+结合扩容源码可以发现扩容的确开销很大，需要迭代所有的元素，rehash、赋值，还得保留原来的数据结构。
+
+所以在使用的时候，最好在初始化的时候就指定好 HashMap 的长度，尽量避免频繁 resize()。
+</code></pre><h4 id="HashMap-的获取方法-get"><a href="#HashMap-的获取方法-get" class="headerlink" title="HashMap 的获取方法 get()"></a>HashMap 的获取方法 get()</h4><pre><code>HashMap 另外一个经常使用的方法就是 get(key)，返回键对应的值:
+
+如果 HashMap 中包含一个键值对 k-v 满足：
+
+(key == null ? k == null : key.equals(k))
+就返回值 v，否则返回 null;
+
+public V get(Object key) {
+    Node&lt;K,V&gt; e;
+    //还是先计算 哈希值
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+
+final Node&lt;K,V&gt; getNode(int hash, Object key) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+    //tab 指向哈希表，n 为哈希表的长度，first 为 (n - 1) &amp; hash 位置处的桶中的头一个节点
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (first = tab[(n - 1) &amp; hash]) != null) {
+        //如果桶里第一个元素就相等，直接返回
+        if (first.hash == hash &amp;&amp;
+            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+            return first;
+        //否则就得慢慢遍历找
+        if ((e = first.next) != null) {
+            if (first instanceof TreeNode)
+                //如果是树形节点，就调用树形节点的 get 方法
+                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+            do {
+                //do-while 遍历链表的所有节点
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}
+</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="HashMap缺点"><a href="#HashMap缺点" class="headerlink" title="HashMap缺点"></a>HashMap缺点</h4><pre><code>当多线程并发访问一个 哈希表时，需要在外部进行同步操作，否则会引发数据不同步问题。
+
+你可以选择加锁，也可以考虑用 Collections.synchronizedMap 包一层，变成个线程安全的 Map：
+
+Map m = Collections.synchronizedMap(new HashMap(...));
+最好在初始化时就这么做。
+</code></pre><h4 id="其他要注意的点"><a href="#其他要注意的点" class="headerlink" title="其他要注意的点"></a>其他要注意的点</h4><pre><code>HashMap 三个视图返回的迭代器都是 fail-fast 的：如果在迭代时使用非迭代器方法修改了 map 的内容、结构，迭代器就会报 ConcurrentModificationException 的错。
+
+当 HashMap 中有大量的元素都存放到同一个桶中时，这时候哈希表里只有一个桶，这个桶下有一条长长的链表，这个时候 HashMap 就相当于一个单链表，假如单链表有 n 个元素，遍历的时间复杂度就是 O(n)，完全失去了它的优势。
+
+针对这种情况，JDK 1.8 中引用了 红黑树（时间复杂度为 O(logn)） 优化这个问题。
+
+为什么哈希表的容量一定要是 2的整数次幂?
+
+首先，capacity 为 2的整数次幂的话，计算桶的位置 h&amp;(length-1) 就相当于对 length 取模，提升了计算效率；
+
+其次，capacity 为 2 的整数次幂的话，为偶数，这样 capacity-1 为奇数，奇数的最后一位是 1，这样便保证了 h&amp;(capacity-1) 的最后一位可能为 0，也可能为 1（这取决于h的值），即与后的结果可能为偶数，也可能为奇数，这样便可以保证散列的均匀性；
+
+而如果 capacity 为奇数的话，很明显 capacity-1 为偶数，它的最后一位是 0，这样 h&amp;(capacity-1) 的最后一位肯定为 0，即只能为偶数，这样任何 hash 值都只会被散列到数组的偶数下标位置上，这便浪费了近一半的空间。
+
+因此，哈希表容量取 2 的整数次幂，有以下 2 点好处：
+
+    使用减法替代取模，提升计算效率；
+    为了使不同 hash 值发生碰撞的概率更小，尽可能促使元素在哈希表中均匀地散列。
+
+HashMap 允许 key, value 为 null，同时他们都保存在第一个桶中。
+
+看代码，添加时先调用 hash()：
+
+    public V put(K key, V value) {
+        //先调用 hash() 方法计算位置
+        return putVal(hash(key), key, value, false, true);
+    }
+而在计算哈希值时，如果为 null 就直接返回 0 ，说明了这一点：
+
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+    }
+HashMap 中 equals() 和 hashCode() 有什么作用？
+
+HashMap 的添加、获取时需要通过 key 的 hashCode() 进行 hash()，然后计算下标 ( n-1 &amp; hash)，从而获得要找的同的位置。
+
+当发生冲突（碰撞）时，利用 key.equals() 方法去链表或树中去查找对应的节点。
+
+你知道 hash 的实现吗？为什么要这样实现？
+
+    在 JDK 1.8 的实现中，是通过 hashCode() 的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)。
+
+    主要是从速度、功效、质量 来考虑的，这么做可以在桶的 n 比较小的时候，保证高低 bit 都参与到 hash 的计算中，同时位运算不会有太大的开销。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/04/源码系列/AbstractMap源码探索/" rel="next" title="AbstractMap源码探索">
+                <i class="fa fa-chevron-left"></i> AbstractMap源码探索
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap"><span class="nav-number">1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">1.2.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码详解"><span class="nav-number">1.3.</span> <span class="nav-text">源码详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段"><span class="nav-number">1.3.1.</span> <span class="nav-text">字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于HashMap-的初始容量和加载因子"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">关于HashMap 的初始容量和加载因子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-的-4-个构造方法"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">HashMap 的 4 个构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-中的链表节点"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">HashMap 中的链表节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-中的添加操作"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">HashMap 中的添加操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-中的哈希函数-hash"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">HashMap 中的哈希函数 hash()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-中的初始化-扩容方法-resize"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">HashMap 中的初始化/扩容方法 resize()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-的获取方法-get"><span class="nav-number">1.3.2.6.</span> <span class="nav-text">HashMap 的获取方法 get()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap缺点"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">HashMap缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他要注意的点"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">其他要注意的点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
