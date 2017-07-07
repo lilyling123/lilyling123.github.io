@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="HashMap源码探索">
+<meta name="description" content="AbstractSet源码探索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap源码探索">
+<meta property="og:title" content="AbstractSet源码探索">
 <meta property="og:url" content="http://yoursite.com/2017/07/07/源码系列/AbstractSet源码探索/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="HashMap源码探索">
-<meta property="og:updated_time" content="2017-07-07T10:23:38.492Z">
+<meta property="og:description" content="AbstractSet源码探索">
+<meta property="og:updated_time" content="2017-07-07T11:21:17.763Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HashMap源码探索">
-<meta name="twitter:description" content="HashMap源码探索">
+<meta name="twitter:title" content="AbstractSet源码探索">
+<meta name="twitter:description" content="AbstractSet源码探索">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title> HashMap源码探索 | Hexo </title>
+  <title> AbstractSet源码探索 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -264,7 +264,7 @@
             
             
               
-                HashMap源码探索
+                AbstractSet源码探索
               
             
           </h1>
@@ -315,7 +315,7 @@
       
 
       
-        <p>HashMap源码探索<br><a id="more"></a> </p>
+        <p> AbstractSet源码探索<br><a id="more"></a> </p>
 <h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>是HashSet、TreeSet以及LinkedHashSet等众多Set集合类的顶层接口</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">//返回Set集合元素数量</div><div class="line">int size();</div><div class="line">//返回Set集合是否含有元素</div><div class="line">boolean isEmpty();</div><div class="line">//返回Set集合是否包含元素o</div><div class="line">boolean contains(Object o);</div><div class="line">//返回一个迭代器</div><div class="line">Iterator&lt;E&gt; iterator();</div><div class="line">//返回包含Set中所有元素的数组</div><div class="line">Object[] toArray();</div><div class="line">//返回a类型的数组</div><div class="line">&lt;T&gt; T[] toArray(T[] a);</div><div class="line">//添加一个元素e，可能成功，可能失败</div><div class="line">boolean add(E e);</div><div class="line">//移除一个元素o</div><div class="line">boolean remove(Object o);</div><div class="line">//是否包含集合c中的全部元素</div><div class="line">boolean containsAll(Collection&lt;?&gt; c);</div><div class="line">//添加集合c中的全部袁旭</div><div class="line">boolean addAll(Collection&lt;? extends E&gt; c);</div><div class="line">//保留Set和c中共有的元素</div><div class="line">boolean retainAll(Collection&lt;?&gt; c);</div><div class="line">//移除set中包含的集合c中的元素</div><div class="line">boolean removeAll(Collection&lt;?&gt; c);</div><div class="line">//清空Set集合</div><div class="line">void clear();</div><div class="line">//判断相等</div><div class="line">boolean equals(Object o);</div><div class="line">//hashcode方法</div><div class="line">int hashCode();</div></pre></td></tr></table></figure>
 <hr>
@@ -356,8 +356,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/07/源码系列/HashSet/" rel="prev" title="HashMap源码探索">
-                HashMap源码探索 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/07/源码系列/HashSet/" rel="prev" title="HashSet源码探索">
+                HashSet源码探索 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
