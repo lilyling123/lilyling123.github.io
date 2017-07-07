@@ -84,19 +84,18 @@
 
 
 
-<meta name="description" content="./redis-trib.rb create –replicas 1 192.168.25.133:7001 192.168.25.133:7002 192.168.25.133:7003 192.168.25.133:7004 192.168.25.133:7005 192.168.25.133:7006  
-redis01/redis-cli -p 7001 -c">
+<meta name="description" content="HashMap源码探索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2017/03/15/redis集群/index.html">
+<meta property="og:title" content="HashMap源码探索">
+<meta property="og:url" content="http://yoursite.com/2017/07/07/源码系列/HashSet/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="./redis-trib.rb create –replicas 1 192.168.25.133:7001 192.168.25.133:7002 192.168.25.133:7003 192.168.25.133:7004 192.168.25.133:7005 192.168.25.133:7006  
-redis01/redis-cli -p 7001 -c">
-<meta property="og:updated_time" content="2017-03-15T11:14:53.833Z">
+<meta property="og:description" content="HashMap源码探索">
+<meta property="og:image" content="http://i.imgur.com/XPHOwjt.jpg">
+<meta property="og:updated_time" content="2017-07-07T10:56:45.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="./redis-trib.rb create –replicas 1 192.168.25.133:7001 192.168.25.133:7002 192.168.25.133:7003 192.168.25.133:7004 192.168.25.133:7005 192.168.25.133:7006  
-redis01/redis-cli -p 7001 -c">
+<meta name="twitter:title" content="HashMap源码探索">
+<meta name="twitter:description" content="HashMap源码探索">
+<meta name="twitter:image" content="http://i.imgur.com/XPHOwjt.jpg">
 
 
 
@@ -124,13 +123,13 @@ redis01/redis-cli -p 7001 -c">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/15/redis集群/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/07/源码系列/HashSet/"/>
 
 
 
 
 
-  <title>  | Hexo </title>
+  <title> HashMap源码探索 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -243,7 +242,7 @@ redis01/redis-cli -p 7001 -c">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/redis集群/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/源码系列/HashSet/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="lily">
@@ -267,7 +266,7 @@ redis01/redis-cli -p 7001 -c">
             
             
               
-                
+                HashMap源码探索
               
             
           </h1>
@@ -282,8 +281,8 @@ redis01/redis-cli -p 7001 -c">
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T19:10:02+08:00">
-                2017-03-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-07T18:24:40+08:00">
+                2017-07-07
               </time>
             
 
@@ -318,9 +317,73 @@ redis01/redis-cli -p 7001 -c">
       
 
       
-        <p>./redis-trib.rb create –replicas 1 192.168.25.133:7001 192.168.25.133:7002 192.168.25.133:7003 192.168.25.133:7004 192.168.25.133:7005 192.168.25.133:7006  </p>
-<p>redis01/redis-cli -p 7001 -c</p>
+        <p>HashMap源码探索<br><a id="more"></a> </p>
+<h1 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h1><p>HashSet的特点是不会出现重复的元素，因此需要存入HashSet中的元素需要重新实现equals方法和hashcode方法，并且HashSet底层实现是一个HashMap</p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://i.imgur.com/XPHOwjt.jpg" alt=""></p>
+<h2 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h2><h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h3><pre><code>//借助于此map实现所有方法
+private transient HashMap&lt;E,Object&gt; map;
+</code></pre><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre><code>//比较简单没什么好介绍的
+public HashSet() {
+    map = new HashMap&lt;&gt;();
+}
+//首先调用AbstractCollection的addAll方法，在此方法中会调用子类重写的add方法将元素一一加入到集合中
+public HashSet(Collection&lt;? extends E&gt; c) {
+    map = new HashMap&lt;&gt;(Math.max((int) (c.size()/.75f) + 1, 16));
+    addAll(c);
+}
+//比较简单没什么好介绍的
+public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+//比较简单没什么好介绍的
+public HashSet(int initialCapacity) {
+    map = new HashMap&lt;&gt;(initialCapacity);
+}
+//只在LinkedHashSet中使用
+HashSet(int initialCapacity, float loadFactor, boolean dummy) {
+    map = new LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+</code></pre><h3 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h3><pre><code>//方法都很简单，没什么可以介绍的，可以看出来都是利用map作为底层实现的所有方法
 
+public Iterator&lt;E&gt; iterator() {
+    return map.keySet().iterator();
+}
+
+public int size() {
+    return map.size();
+}
+
+public boolean isEmpty() {
+    return map.isEmpty();
+}
+
+public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+
+public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
+}
+
+public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
+}
+
+public void clear() {
+    map.clear();
+}
+
+@SuppressWarnings(&quot;unchecked&quot;)
+public Object clone() {
+    try {
+        HashSet&lt;E&gt; newSet = (HashSet&lt;E&gt;) super.clone();
+        newSet.map = (HashMap&lt;E, Object&gt;) map.clone();
+        return newSet;
+    } catch (CloneNotSupportedException e) {
+        throw new InternalError(e);
+    }
+}
+</code></pre>
       
     </div>
 
@@ -346,8 +409,8 @@ redis01/redis-cli -p 7001 -c">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/14/FastBFS入门详解/" rel="next" title="FastBFS入门详解">
-                <i class="fa fa-chevron-left"></i> FastBFS入门详解
+              <a href="/2017/07/07/源码系列/AbstractSet源码探索/" rel="next" title="HashMap源码探索">
+                <i class="fa fa-chevron-left"></i> HashMap源码探索
               </a>
             
           </div>
@@ -355,10 +418,6 @@ redis01/redis-cli -p 7001 -c">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/20/Hibernate学习笔记1/" rel="prev" title="Hibernate学习笔记">
-                Hibernate学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,8 +464,17 @@ redis01/redis-cli -p 7001 -c">
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -448,6 +516,22 @@ redis01/redis-cli -p 7001 -c">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashSet"><span class="nav-number">1.</span> <span class="nav-text">HashSet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">1.1.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码详解"><span class="nav-number">1.2.</span> <span class="nav-text">源码详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段"><span class="nav-number">1.2.1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">1.2.2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">主要方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

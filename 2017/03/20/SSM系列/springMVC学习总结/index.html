@@ -1,0 +1,982 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="简要入门创建工程，导入jar包创建web工程，jar包括spring的全部jar包和spring-webmvc的jar包
+配置web.xml&amp;lt;servlet&amp;gt;
+    &amp;lt;servlet-name&amp;gt;springmvc&amp;lt;/servlet-name&amp;gt;
+    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.Di">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springMVC学习总结">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/SSM系列/springMVC学习总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简要入门创建工程，导入jar包创建web工程，jar包括spring的全部jar包和spring-webmvc的jar包
+配置web.xml&amp;lt;servlet&amp;gt;
+    &amp;lt;servlet-name&amp;gt;springmvc&amp;lt;/servlet-name&amp;gt;
+    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.Di">
+<meta property="og:updated_time" content="2017-06-29T11:30:05.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springMVC学习总结">
+<meta name="twitter:description" content="简要入门创建工程，导入jar包创建web工程，jar包括spring的全部jar包和spring-webmvc的jar包
+配置web.xml&amp;lt;servlet&amp;gt;
+    &amp;lt;servlet-name&amp;gt;springmvc&amp;lt;/servlet-name&amp;gt;
+    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.Di">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/SSM系列/springMVC学习总结/"/>
+
+
+
+
+
+  <title> springMVC学习总结 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/SSM系列/springMVC学习总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lily">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                springMVC学习总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-20T20:23:39+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简要入门"><a href="#简要入门" class="headerlink" title="简要入门"></a>简要入门</h1><h2 id="创建工程，导入jar包"><a href="#创建工程，导入jar包" class="headerlink" title="创建工程，导入jar包"></a>创建工程，导入jar包</h2><p>创建web工程，jar包括spring的全部jar包和spring-webmvc的jar包</p>
+<h2 id="配置web-xml"><a href="#配置web-xml" class="headerlink" title="配置web.xml"></a>配置web.xml</h2><pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatchServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><h2 id="配置springmvc-xml"><a href="#配置springmvc-xml" class="headerlink" title="配置springmvc.xml"></a>配置springmvc.xml</h2><p>文件命名为springmvc-servlet.xml<br>必须放在WEB-INF的根路径下  </p>
+<pre><code>&lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;&gt;&lt;/bean&gt;
+
+&lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;&gt;&lt;/bean&gt;
+
+&lt;bean name=&quot;/hello.do class=&quot;com.lily.controller.MyController&quot;&gt;&lt;/bean&gt;
+
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="自定义controller"><a href="#自定义controller" class="headerlink" title="自定义controller"></a>自定义controller</h2><p>需要继承自org.springframework.web.servlet.mvc.Controller接口;</p>
+<pre><code>public class MyController implements Controller{
+
+    public ModelAndView handleRequest(HttpServletRequest arg0,
+            HttpServletResponse arg1) throws Exception {
+        // 接受请求，接受参数，验证参数
+        //封装参数，调用业务方法
+        //返回视图
+        ModelAndView mv = new ModelAndView();
+        //设置页面回显数据
+        mv.addObject(&quot;hello&quot;, &quot;欢迎学习springmvc！&quot;);
+
+        //指定跳转的视图
+        //返回物理视图
+        //mv.setViewName(&quot;/WEB-INF/jsps/index.jsp&quot;);
+        //返回逻辑视图
+        mv.setViewName(&quot;index&quot;);
+        return mv;
+    }
+}
+</code></pre><h2 id="定义视图"><a href="#定义视图" class="headerlink" title="定义视图"></a>定义视图</h2><p>根据视图解析路径：WEB-INF/jsps/index.jsp </p>
+<h1 id="处理器映射器"><a href="#处理器映射器" class="headerlink" title="处理器映射器"></a>处理器映射器</h1><h2 id="BeanNameUrlHandlerMapping"><a href="#BeanNameUrlHandlerMapping" class="headerlink" title="BeanNameUrlHandlerMapping"></a>BeanNameUrlHandlerMapping</h2><p>功能：寻找Controller，根据url请求去匹配bean的name属性url，从而获取Controller<br>简单入门的案例就是这样的</p>
+<h2 id="SimpleUrlHandlerMaping"><a href="#SimpleUrlHandlerMaping" class="headerlink" title="SimpleUrlHandlerMaping"></a>SimpleUrlHandlerMaping</h2><p>功能：寻找Controller，根据浏览器url匹配简单url的key，key又Controller的id找到Controller<br>下面的SimpleUrlHandlerMapping注入了mappings，里面的属性设置了key和value，key为url，value为映射的类名</p>
+<pre><code>&lt;bean class=&quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping&quot;&gt;
+    &lt;property name=&quot;mappings&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;/abc.do&quot;&gt;myController&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+&lt;bean id=&quot;myController&quot; name=&quot;/hello.do&quot; class=&quot;cn.itcast.controller.MyController&quot;&gt;&lt;/bean&gt;
+</code></pre><h2 id="ControllerClassNameHandlerMapping"><a href="#ControllerClassNameHandlerMapping" class="headerlink" title="ControllerClassNameHandlerMapping"></a>ControllerClassNameHandlerMapping</h2><p>功能：寻找Controller,根据类名（MyController）类名.do来访问,类名首字母小写</p>
+<pre><code>&lt;!-- 定义通过: 类名.do 形式来访问controller --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping&quot;&gt;&lt;/bean&gt;
+</code></pre><h2 id="三个映射器之间可以共存"><a href="#三个映射器之间可以共存" class="headerlink" title="三个映射器之间可以共存"></a>三个映射器之间可以共存</h2><h1 id="处理器适配器"><a href="#处理器适配器" class="headerlink" title="处理器适配器"></a>处理器适配器</h1><h2 id="SimpleControllerHandlerAdapter"><a href="#SimpleControllerHandlerAdapter" class="headerlink" title="SimpleControllerHandlerAdapter"></a>SimpleControllerHandlerAdapter</h2><p>功能：执行controller， 调用controller里面方法，返回modelAndView。</p>
+<pre><code>&lt;!-- 配置处理器映射器,springmvc默认的处理器映射器
+    BeanNameUrlHandlerMapping：根据bean(自定义Controler)的name属性的url去寻找hanler(Action:Controller)
+     --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;&gt;&lt;/bean&gt;
+</code></pre><h2 id="HttpRequestHandlerAdapter"><a href="#HttpRequestHandlerAdapter" class="headerlink" title="HttpRequestHandlerAdapter"></a>HttpRequestHandlerAdapter</h2><p>功能：执行controller</p>
+<pre><code>&lt;!-- HttpRequestHandlerAdapter负责执行实现接口HttpRequestHandler的后端
+         控制器。
+     --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter&quot;&gt;&lt;/bean&gt;
+</code></pre><h2 id="两个处理器适配器可以共存"><a href="#两个处理器适配器可以共存" class="headerlink" title="两个处理器适配器可以共存"></a>两个处理器适配器可以共存</h2><h1 id="命令控制器"><a href="#命令控制器" class="headerlink" title="命令控制器"></a>命令控制器</h1><p>Springmvc通过命令设计模式接受页面参数。</p>
+<h2 id="自定义命令控制器"><a href="#自定义命令控制器" class="headerlink" title="自定义命令控制器"></a>自定义命令控制器</h2><pre><code>public class CommandController extends AbstractCommandController {
+
+    //指定参数绑定到那个javaBean
+    public CommandController() {
+
+        this.setCommandClass(User.class);
+
+    }
+
+    @Override
+    protected ModelAndView handle(HttpServletRequest request,
+                                  HttpServletResponse response, Object command, BindException errors)
+            throws Exception {
+        //把命令对象强转成User对象
+        System.out.println(request.getMethod());
+        User user = (User) command;
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject(&quot;user&quot;, user);
+
+        mv.setViewName(&quot;index&quot;);
+
+        return mv;
+    }
+}
+</code></pre><h2 id="定义javabean"><a href="#定义javabean" class="headerlink" title="定义javabean"></a>定义javabean</h2><pre><code>public class User {
+
+    private Integer id;
+    private String username;
+    private Date birthday;
+    private String sex;
+    private String address;
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public Date getBirthday() {
+        return birthday;
+    }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+}
+</code></pre><h2 id="页面请求参数"><a href="#页面请求参数" class="headerlink" title="页面请求参数"></a>页面请求参数</h2><p>name值必须与javabean的name值对应</p>
+<pre><code>&lt;form action=&quot;${pageContext.request.contextPath }/command.do&quot; method=&quot;get&quot;&gt;
+    姓名：&lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;
+    生日：&lt;input type=&quot;text&quot; name=&quot;birthday&quot; id=&quot;birthday&quot;&gt;
+    性别：&lt;input type=&quot;text&quot; name=&quot;sex&quot; id=&quot;sex&quot;&gt;
+    地址：&lt;input type=&quot;text&quot; name=&quot;address&quot; id=&quot;address&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+</code></pre><h2 id="跳转到add页面"><a href="#跳转到add页面" class="headerlink" title="跳转到add页面"></a>跳转到add页面</h2><p>由于add页面在WEB-INF下面不能直接访问，需要通过Controller来访问。</p>
+<pre><code>public class ToAddController implements Controller{
+
+    public ModelAndView handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        //调转到add添加页面视图
+        mv.setViewName(&quot;add&quot;);
+        return mv;
+    }
+}
+</code></pre><h2 id="在springMVC中配置bean"><a href="#在springMVC中配置bean" class="headerlink" title="在springMVC中配置bean"></a>在springMVC中配置bean</h2><pre><code> &lt;bean name=&quot;/command.do&quot; class=&quot;cn.itcast.controller.CommandController&quot;&gt;&lt;/bean&gt;
+
+&lt;bean name=&quot;/toAdd.do&quot; class=&quot;cn.itcast.controller.ToAddController&quot;&gt;&lt;/bean&gt;
+</code></pre><h2 id="时间类型转换"><a href="#时间类型转换" class="headerlink" title="时间类型转换"></a>时间类型转换</h2><p>我也不知道这个干啥的</p>
+<pre><code>@Override
+protected void initBinder(HttpServletRequest request,
+                          ServletRequestDataBinder binder) throws Exception {
+    String str = request.getParameter(&quot;birthday&quot;);
+
+    if (str.contains(&quot;/&quot;)) {
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat(&quot;yyyy/MM/dd&quot;), true));
+    } else {
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat(&quot;yyyy-MM-dd&quot;), true));
+    }
+}
+</code></pre><h1 id="注解开发入门"><a href="#注解开发入门" class="headerlink" title="注解开发入门"></a>注解开发入门</h1><h2 id="创建工程，导入jar包-1"><a href="#创建工程，导入jar包-1" class="headerlink" title="创建工程，导入jar包"></a>创建工程，导入jar包</h2><p>与之前的一样，加上一个jstl包</p>
+<h2 id="配置web-xml-1"><a href="#配置web-xml-1" class="headerlink" title="配置web.xml"></a>配置web.xml</h2><pre><code>&lt;filter&gt;
+  &lt;filter-name&gt;characterEncoding&lt;/filter-name&gt;
+  &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+  &lt;init-param&gt;
+  &lt;param-name&gt;encoding&lt;/param-name&gt;
+  &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+  &lt;/init-param&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;characterEncoding&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+
+&lt;servlet&gt;
+  &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;!-- 默认加载方式
+         默认加载必须规范：
+         * 文件命名：servlet-name-servlet.xml====springmvc-servlet.xml
+         * 路径规范：必须在WEB-INF目录下面
+   --&gt;
+   &lt;init-param&gt;
+   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+   &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;   
+   &lt;/init-param&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><h2 id="配置springmvc"><a href="#配置springmvc" class="headerlink" title="配置springmvc"></a>配置springmvc</h2><p>路径务必放在/WEB-INF</p>
+<pre><code>&lt;!--头文件--&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd&quot;&gt;
+</code></pre><hr>
+<pre><code>&lt;!--注解扫描--&gt;
+&lt;context:component-scan base-package=&quot;com.lily&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;!-- 配置注解处理器映射器 
+    功能：寻找执行类Controller
+--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;&gt;&lt;/bean&gt;
+
+&lt;!-- 配置注解处理器适配器 
+    功能：调用controller方法，执行controller
+--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;&gt;&lt;/bean&gt;
+
+&lt;!-- 配置sprigmvc视图解析器：解析逻辑试图 
+     后台返回逻辑试图：index
+    视图解析器解析出真正物理视图：前缀+逻辑试图+后缀====/WEB-INF/jsps/index.jsp
+--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsps/&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;        
+&lt;/bean&gt;
+</code></pre><h2 id="自定义Controller类"><a href="#自定义Controller类" class="headerlink" title="自定义Controller类"></a>自定义Controller类</h2><p>注解会被自动扫描，无需配置&lt;bean name=”/hello.do class=”com.lily.controller.MyController”&gt;</p>
+<pre><code>@Controller
+public class UserController {
+    @RequestMapping(&quot;/hello&quot;)
+    public String hello() {
+        return &quot;index&quot;;
+    }
+}
+</code></pre><h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="RequestMapping"></a>RequestMapping</h2><p>定义了handler的访问路径、访问方法等</p>
+<h2 id="封装参数"><a href="#封装参数" class="headerlink" title="封装参数"></a>封装参数</h2><p>普通参数name值与handler中参数名一样就可以接受了，pojo对象必须参数的name值与handler中的pojo对象的字段名一致，才能自动生成pojo<br>包装类如UserCustom中包含一个User，那么传递过来的参数名必须为user.username，user与handler中的包装类中的字段名保持一致<br>集合类如UserCustom中包含一个List<user>，那么传递过来的参数名必须为userList[0].username，userList与handler中的包装类中的字段名保持一致<br>Map类如UserCustom中包含一个Map，那么传递过来的参数名必须为maps[‘username’]，maps与handler中的包装类中的字段名保持一致</user></p>
+<h2 id="Restfull风格设计"><a href="#Restfull风格设计" class="headerlink" title="Restfull风格设计"></a>Restfull风格设计</h2><p>使用@PathVarible注解，同时url为/xxx/${id}即可实现Restfull风格设计</p>
+<h2 id="转发和重定向"><a href="#转发和重定向" class="headerlink" title="转发和重定向"></a>转发和重定向</h2><h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>关键字：forward<br>本类进行转发：<br>本类方法与方法之间进行forward<br>转发方式：<br>方式一：return ”forward：list.do“；  </p>
+<p>方式二：return ”forward：/user/list.do“；<br>跨类进行转发：<br>转发方式：return ”forward：/items/list.do“；  </p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>关键字：redirect<br>本类进行重定向：<br>本类方法与方法之间进行redirect<br>重定向方式：<br>方式一：return ”redirect：list.do“；  </p>
+<p>方式二：return ”redirect：/user/list.do“；<br>跨类进行重定向：<br>转发方式：return ”redirect：/items/list.do“；  </p>
+<h2 id="ResponseBody和-RequestBody"><a href="#ResponseBody和-RequestBody" class="headerlink" title="@ResponseBody和@RequestBody"></a>@ResponseBody和@RequestBody</h2><p>@ResponseBody把后台pojo转换json对象，返回到页面。<br>@RequestBody接受前台json数据，把json数据自动封装javaBean。<br>需要jacksonjar包的支持  </p>
+<h3 id="修改springmvc"><a href="#修改springmvc" class="headerlink" title="修改springmvc"></a>修改springmvc</h3><pre><code>&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;&gt;
+    &lt;property name=&quot;messageConverters&quot;&gt;
+        &lt;bean class=&quot;org.springframework.http.converter.json.MappingJacksonHttpMessageConverter&quot;&gt;&lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h1 id="Springmvc多视图"><a href="#Springmvc多视图" class="headerlink" title="Springmvc多视图"></a>Springmvc多视图</h1><h2 id="导入xml格式支持jar"><a href="#导入xml格式支持jar" class="headerlink" title="导入xml格式支持jar"></a>导入xml格式支持jar</h2><p>spring-oxm</p>
+<h2 id="配置springmvc支持多视图"><a href="#配置springmvc支持多视图" class="headerlink" title="配置springmvc支持多视图"></a>配置springmvc支持多视图</h2><pre><code>&lt;bean class=&quot;org.springframework.web.servlet.view.ContentNegotiatingViewResolver&quot;&gt;
+    &lt;!-- 配置支持媒体类型 --&gt;
+    &lt;property name=&quot;contentNegotiationManager&quot;&gt;
+        &lt;bean class=&quot;org.springframework.web.accept.ContentNegotiationManagerFactoryBean&quot;&gt;
+            &lt;property name=&quot;mediaTypes&quot;&gt;
+                &lt;map&gt;
+                    &lt;entry key=&quot;json&quot; value=&quot;application/json&quot;&gt;&lt;/entry&gt;
+                    &lt;entry key=&quot;xml&quot; value=&quot;application/xml&quot;&gt;&lt;/entry&gt;        
+                &lt;/map&gt;        
+            &lt;/property&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定默认视图 --&gt;
+    &lt;property name=&quot;defaultViews&quot;&gt;
+    &lt;!-- 支持多个视图 --&gt;
+        &lt;list&gt;
+    &lt;!-- 对josn格式视图支持 --&gt;
+            &lt;bean class=&quot;org.springframework.web.servlet.view.json.MappingJacksonJsonView&quot;&gt;&lt;/bean&gt;
+
+    &lt;!-- xml格式视图支持 --&gt;
+            &lt;bean class=&quot;org.springframework.web.servlet.view.xml.MarshallingView&quot;&gt;
+                &lt;constructor-arg&gt;
+                    &lt;bean class=&quot;org.springframework.oxm.jaxb.Jaxb2Marshaller&quot;&gt;
+                        &lt;property name=&quot;classesToBeBound&quot;&gt;
+                            &lt;list&gt;
+                                &lt;value&gt;cn.itcast.domain.User&lt;/value&gt;
+                            &lt;/list&gt;
+                        &lt;/property&gt;
+                    &lt;/bean&gt;
+                &lt;/constructor-arg&gt;
+             &lt;/bean&gt;
+         &lt;/list&gt;
+      &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>约定rest目录下所有以json和xml扩展名都支持相应的视图</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><mvc:annotation-driven></mvc:annotation-driven></h2><p><mvc:annotation-driven>默认创建注解处理器映射器，注解处理器适配器。提供json格式支持。<br>但是注意：javaBean不能添加@XmlRootElement。<br>@XmlRootElement提供对xml视图支持。  </mvc:annotation-driven></p>
+<h1 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h1><h2 id="局部拦截器"><a href="#局部拦截器" class="headerlink" title="局部拦截器"></a>局部拦截器</h2><p>针对单个处理器映射器，就叫局部拦截器。</p>
+<h2 id="全局拦截器"><a href="#全局拦截器" class="headerlink" title="全局拦截器"></a>全局拦截器</h2><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>第一个拦截器放行，第二个拦截器也放行：  </p>
+<p>这是第一个拦截器Interceptor1。。。preHandle<br>这是第二个拦截器Interceptor2。。。preHandle<br>这是第二个拦截器Interceptor2。。。postHandle<br>这是第一个拦截器Interceptor1。。。postHandle<br>这是第二个拦截器Interceptor2。。。afterCompletion<br>这是第一个拦截器Interceptor1。。。afterCompletion  </p>
+<p>第一个拦截器放行，第二个不放行：  </p>
+<p>Springmvc规定：凡是preHandle返回true，afterCompletion必须执行。  </p>
+<p>这是第一个拦截器Interceptor1。。。preHandle<br>这是第二个拦截器Interceptor2。。。preHandle<br>这是第一个拦截器Interceptor1。。。afterCompletion  </p>
+<hr>
+<pre><code>public class Interceptor1 implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        return false;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+
+    }
+}
+</code></pre><h1 id="Springmvc的freemarker支持"><a href="#Springmvc的freemarker支持" class="headerlink" title="Springmvc的freemarker支持"></a>Springmvc的freemarker支持</h1><p>Freemarker的jar，context-support.jar</p>
+<h2 id="配置freemarker视图支持"><a href="#配置freemarker视图支持" class="headerlink" title="配置freemarker视图支持"></a>配置freemarker视图支持</h2><pre><code>&lt;mvc:annotation-driven/&gt;
+&lt;!-- 配置freemarker模版文件前缀，模版文件编码 --&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer&quot;&gt;
+    &lt;property name=&quot;templateLoaderPath&quot; value=&quot;/WEB-INF/jsps/&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot;&gt;&lt;/property&gt;    
+    &lt;/bean&gt;
+    &lt;!-- 配置freemarker视图解析后缀，页面显示视图编码 --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver&quot;&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.ftl&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;contentType&quot; value=&quot;text/html;charset=utf-8&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="编写freemarker页面"><a href="#编写freemarker页面" class="headerlink" title="编写freemarker页面"></a>编写freemarker页面</h2><p>${}可以取到设置到Model中的值</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;${hello}&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/20/Hibernate学习笔记1/" rel="next" title="Hibernate学习笔记">
+                <i class="fa fa-chevron-left"></i> Hibernate学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/20/SSM系列/MyBatis逆向工程/" rel="prev" title="MyBatis逆向工程">
+                MyBatis逆向工程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="lily" />
+          <p class="site-author-name" itemprop="name">lily</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简要入门"><span class="nav-number">1.</span> <span class="nav-text">简要入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建工程，导入jar包"><span class="nav-number">1.1.</span> <span class="nav-text">创建工程，导入jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置web-xml"><span class="nav-number">1.2.</span> <span class="nav-text">配置web.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置springmvc-xml"><span class="nav-number">1.3.</span> <span class="nav-text">配置springmvc.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义controller"><span class="nav-number">1.4.</span> <span class="nav-text">自定义controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义视图"><span class="nav-number">1.5.</span> <span class="nav-text">定义视图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器映射器"><span class="nav-number">2.</span> <span class="nav-text">处理器映射器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanNameUrlHandlerMapping"><span class="nav-number">2.1.</span> <span class="nav-text">BeanNameUrlHandlerMapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleUrlHandlerMaping"><span class="nav-number">2.2.</span> <span class="nav-text">SimpleUrlHandlerMaping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ControllerClassNameHandlerMapping"><span class="nav-number">2.3.</span> <span class="nav-text">ControllerClassNameHandlerMapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个映射器之间可以共存"><span class="nav-number">2.4.</span> <span class="nav-text">三个映射器之间可以共存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器适配器"><span class="nav-number">3.</span> <span class="nav-text">处理器适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleControllerHandlerAdapter"><span class="nav-number">3.1.</span> <span class="nav-text">SimpleControllerHandlerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpRequestHandlerAdapter"><span class="nav-number">3.2.</span> <span class="nav-text">HttpRequestHandlerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个处理器适配器可以共存"><span class="nav-number">3.3.</span> <span class="nav-text">两个处理器适配器可以共存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令控制器"><span class="nav-number">4.</span> <span class="nav-text">命令控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义命令控制器"><span class="nav-number">4.1.</span> <span class="nav-text">自定义命令控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义javabean"><span class="nav-number">4.2.</span> <span class="nav-text">定义javabean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面请求参数"><span class="nav-number">4.3.</span> <span class="nav-text">页面请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跳转到add页面"><span class="nav-number">4.4.</span> <span class="nav-text">跳转到add页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在springMVC中配置bean"><span class="nav-number">4.5.</span> <span class="nav-text">在springMVC中配置bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间类型转换"><span class="nav-number">4.6.</span> <span class="nav-text">时间类型转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注解开发入门"><span class="nav-number">5.</span> <span class="nav-text">注解开发入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建工程，导入jar包-1"><span class="nav-number">5.1.</span> <span class="nav-text">创建工程，导入jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置web-xml-1"><span class="nav-number">5.2.</span> <span class="nav-text">配置web.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置springmvc"><span class="nav-number">5.3.</span> <span class="nav-text">配置springmvc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Controller类"><span class="nav-number">5.4.</span> <span class="nav-text">自定义Controller类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注解"><span class="nav-number">6.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RequestMapping"><span class="nav-number">6.1.</span> <span class="nav-text">RequestMapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装参数"><span class="nav-number">6.2.</span> <span class="nav-text">封装参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Restfull风格设计"><span class="nav-number">6.3.</span> <span class="nav-text">Restfull风格设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转发和重定向"><span class="nav-number">6.4.</span> <span class="nav-text">转发和重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转发"><span class="nav-number">6.4.1.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">6.4.2.</span> <span class="nav-text">重定向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResponseBody和-RequestBody"><span class="nav-number">6.5.</span> <span class="nav-text">@ResponseBody和@RequestBody</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改springmvc"><span class="nav-number">6.5.1.</span> <span class="nav-text">修改springmvc</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Springmvc多视图"><span class="nav-number">7.</span> <span class="nav-text">Springmvc多视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入xml格式支持jar"><span class="nav-number">7.1.</span> <span class="nav-text">导入xml格式支持jar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置springmvc支持多视图"><span class="nav-number">7.2.</span> <span class="nav-text">配置springmvc支持多视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问"><span class="nav-number">7.3.</span> <span class="nav-text">访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">7.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截器"><span class="nav-number">8.</span> <span class="nav-text">拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#局部拦截器"><span class="nav-number">8.1.</span> <span class="nav-text">局部拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局拦截器"><span class="nav-number">8.2.</span> <span class="nav-text">全局拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">8.3.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Springmvc的freemarker支持"><span class="nav-number">9.</span> <span class="nav-text">Springmvc的freemarker支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置freemarker视图支持"><span class="nav-number">9.1.</span> <span class="nav-text">配置freemarker视图支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写freemarker页面"><span class="nav-number">9.2.</span> <span class="nav-text">编写freemarker页面</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lily</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
